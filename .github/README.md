@@ -1,4 +1,5 @@
 # Java Project
+![](https://raw.githubusercontent.com/nguyenletientrien/MineQuizzServer/main/.github/screenshot.png)
 
 ### Introduction
 - Design Pattern: Three-layer
