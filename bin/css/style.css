@@ -1,0 +1,17 @@
+.main_background {
+    -fx-background-image:url('/images/background.jpg');
+    /*-fx-background-image:url('/images/background.png');*/
+	-fx-background-repeat:no-repeat;
+	-fx-background-size:cover;
+}
+
+.main_menu_btn{
+	-fx-background-color: #000000, #303030, #9e9e9e, #b0b0b0, #434343, #b1b1b1, #9e9e9e, #6f6f6f;
+    -fx-background-insets: -2, 1, 1 2 2 1, 1 2 2 2, 2, 2 3 3 2, 2 3 3 3, 3;
+    -fx-background-radius: 0;
+}
+.main_menu_btn:hover{
+	-fx-background-color: #ffffff, #303030, #9e9e9e, #b0b0b0, #434343, #b1b1b1, #9e9e9e, #6f6f6f;
+    -fx-background-insets: -3, 1, 1 2 2 1, 1 2 2 2, 2, 2 3 3 2, 2 3 3 3, 3;
+    -fx-background-radius: 0;
+}
