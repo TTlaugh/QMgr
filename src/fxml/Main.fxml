@@ -4,90 +4,85 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="932.0" prefWidth="1310.0" styleClass="main_background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <BorderPane layoutX="440.0" layoutY="262.0" prefHeight="893.0" prefWidth="1310.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <center>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="1310.0" spacing="20.0" BorderPane.alignment="CENTER">
+<BorderPane prefHeight="893.0" prefWidth="1310.0" styleClass="main_background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="1310.0" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="700.0" styleClass="main_menu_btn" text="HEHEHEHEHEHEHEHE" textFill="WHITE">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="700.0" styleClass="main_menu_btn" text="HEHEHEHEHEHEHEHE" textFill="WHITE">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="700.0" styleClass="main_menu_btn" text="HEHEHEHEHEHEHEHE" textFill="WHITE">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="700.0" styleClass="main_menu_btn" text="HEHEHEHEHEHEHEHE" textFill="WHITE">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="120.0" prefWidth="1310.0" spacing="14.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="700.0" styleClass="main_menu_btn" text="HEHEHEHEHEHEHEHE" textFill="WHITE">
+                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="main_menu_btn" text="L" textFill="WHITE">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="343.0" styleClass="main_menu_btn" text="HEHEHE" textFill="WHITE">
                      <font>
                         <Font size="30.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="700.0" styleClass="main_menu_btn" text="HEHEHEHEHEHEHEHE" textFill="WHITE">
+                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="343.0" styleClass="main_menu_btn" text="HEHEHE" textFill="WHITE">
                      <font>
                         <Font size="30.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="700.0" styleClass="main_menu_btn" text="HEHEHEHEHEHEHEHE" textFill="WHITE">
+                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="main_menu_btn" text="A" textFill="WHITE">
                      <font>
-                        <Font size="30.0" />
+                        <Font size="22.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="700.0" styleClass="main_menu_btn" text="HEHEHEHEHEHEHEHE" textFill="WHITE">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Button>
-                  <HBox alignment="BOTTOM_CENTER" prefHeight="120.0" prefWidth="1310.0" spacing="14.0">
-                     <children>
-                        <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="main_menu_btn" text="L" textFill="WHITE">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="343.0" styleClass="main_menu_btn" text="HEHEHE" textFill="WHITE">
-                           <font>
-                              <Font size="30.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="343.0" styleClass="main_menu_btn" text="HEHEHE" textFill="WHITE">
-                           <font>
-                              <Font size="30.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="main_menu_btn" text="A" textFill="WHITE">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </HBox>
                </children>
-            </VBox>
-         </center>
-         <bottom>
-            <BorderPane prefHeight="72.0" prefWidth="1310.0" BorderPane.alignment="CENTER">
-               <left>
-                  <Label prefHeight="45.0" text="MineQuizz 1.0" textFill="WHITE" BorderPane.alignment="BOTTOM_LEFT">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Label>
-               </left>
-               <right>
-                  <Label prefHeight="45.0" text="Copyright HEHE. Do not distribute!" textFill="WHITE" BorderPane.alignment="BOTTOM_RIGHT">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Label>
-               </right>
-            </BorderPane>
-         </bottom>
-         <top>
-            <ImageView fitHeight="371.0" fitWidth="1223.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-               <image>
-                  <Image url="@../images/title.png" />
-               </image>
-            </ImageView>
-         </top>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <BorderPane prefHeight="72.0" prefWidth="1310.0" BorderPane.alignment="CENTER">
+         <left>
+            <Label prefHeight="45.0" text="MineQuizz 1.0" textFill="WHITE" BorderPane.alignment="BOTTOM_LEFT">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </left>
+         <right>
+            <Label prefHeight="45.0" text="Copyright HEHE. Do not distribute!" textFill="WHITE" BorderPane.alignment="BOTTOM_RIGHT">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </right>
       </BorderPane>
-   </children>
-</AnchorPane>
+   </bottom>
+   <top>
+      <ImageView fitHeight="371.0" fitWidth="1223.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../images/title.png" />
+         </image>
+      </ImageView>
+   </top>
+</BorderPane>
