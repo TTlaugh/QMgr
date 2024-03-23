@@ -1,3 +1,21 @@
+.scroll-bar {
+  -fx-background-color: transparent;
+}
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button,
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+	  visibility: hidden;
+}
+
+.text-field {
+	-fx-background-color: black;
+	-fx-border-color: grey;
+	-fx-border-width: 2;
+	-fx-border-style: solid;
+	-fx-text-fill: white;
+}
+
 .main_background {
     -fx-background-image:url('/images/background.jpg');
     /*-fx-background-image:url('/images/background.png');*/
@@ -14,4 +32,26 @@
 	-fx-background-color: #ffffff, #303030, #9e9e9e, #b0b0b0, #434343, #b1b1b1, #9e9e9e, #6f6f6f;
     -fx-background-insets: -3, 1, 1 2 2 1, 1 2 2 2, 2, 2 3 3 2, 2 3 3 3, 3;
     -fx-background-radius: 0;
+}
+.main_menu_btn:pressed{
+	-fx-background-color: #ffffff, #303030, #9e9e9e, #b0b0b0, #434343, #b1b1b1, #9e9e9e, #808080;
+    -fx-background-insets: -3, 1, 1 2 2 1, 1 2 2 2, 2, 2 3 3 2, 2 3 3 3, 3;
+    -fx-background-radius: 0;
+}
+
+.startServer_background{
+	-fx-background-image:url('/images/dirtbackground.png');
+	-fx-background-repeat:no-repeat;
+	-fx-background-size:cover;
+}
+
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.startServer_ConnectedClient_label:hover {
+	-fx-underline: true;
+}
+.startServer_ConnectedClient_label:pressed {
+	-fx-background-color: rgba(128, 128, 128, 0.5);
 }

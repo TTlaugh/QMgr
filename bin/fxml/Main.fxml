@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="893.0" prefWidth="1310.0" styleClass="main_background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="900.0" prefWidth="1300.0" styleClass="main_background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.MainController">
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="1310.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="700.0" styleClass="main_menu_btn" text="HEHEHEHEHEHEHEHE" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#startServerMenu" prefHeight="70.0" prefWidth="700.0" styleClass="main_menu_btn" text="Start Server" textFill="WHITE">
                <font>
                   <Font size="30.0" />
                </font>
@@ -45,7 +45,7 @@
                         <Font size="30.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="343.0" styleClass="main_menu_btn" text="HEHEHE" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#quit" prefHeight="70.0" prefWidth="343.0" styleClass="main_menu_btn" text="Quit" textFill="WHITE">
                      <font>
                         <Font size="30.0" />
                      </font>
