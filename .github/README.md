@@ -7,6 +7,9 @@
 - GUI libraries - framework: javafx
 - Database: MySQL
 
+#### Database table relationship
+![](https://raw.githubusercontent.com/nguyenletientrien/MineQuizzServer/main/.github/MineQuizzERD.png)
+
 #### Project structure
 ```
       src
