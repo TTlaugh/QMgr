@@ -11,8 +11,9 @@
 ![](https://raw.githubusercontent.com/nguyenletientrien/MineQuizzServer/main/.github/MineQuizzERD.png)
 
 #### Project structure
+##### Current process
 ```
-      src
+    src .
         ├── bus
         │   └── Bussiness_Layer
         ├── css
@@ -22,12 +23,29 @@
         ├── dto
         │   └── Data_Transfer_Objects
         ├── fxml
-        │   └── Main.fxml
+        │   ├── MainController.java
+        │   ├── Main.fxml
+        │   ├── QuizRepoController.java
+        │   ├── QuizRepo.fxml
+        │   ├── StartServerController.java
+        │   ├── StartServer.fxml
+        │   └── Test.java
         ├── images
+        │   ├── addicon.png
         │   ├── background.jpg
         │   ├── background.png
+        │   ├── checkicon.png
+        │   ├── detailicon.png
+        │   ├── dirtbackground.png
+        │   ├── editicon.png
         │   ├── icon.png
+        │   ├── playicon.png
+        │   ├── removeicon.png
+        │   ├── searchicon.png
         │   └── title.png
-        └── ui
-            └── Main.java
+        ├── ui
+        │   └── Main.java
+        └── utils
+            ├── Constant.java
+            └── KeyEventFunction.java
 ```
