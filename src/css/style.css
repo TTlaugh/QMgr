@@ -1,3 +1,9 @@
+/*************
+ * General
+ *************/
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
 .scroll-bar {
   -fx-background-color: transparent;
 }
@@ -9,12 +15,20 @@
 }
 
 .text-field {
-	-fx-background-color: black;
+	-fx-background-color: rgba(0, 0, 0, 0.3);
 	-fx-border-color: grey;
 	-fx-border-width: 2;
 	-fx-border-style: solid;
 	-fx-text-fill: white;
 }
+
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-color: transparent;
+}
+
+/*************
+ * Main Menu
+ *************/
 
 .main_background {
     -fx-background-image:url('/images/background.jpg');
@@ -39,14 +53,14 @@
     -fx-background-radius: 0;
 }
 
+/********************
+ * Start Server Menu
+ ********************/
+
 .startServer_background{
 	-fx-background-image:url('/images/dirtbackground.png');
 	-fx-background-repeat:no-repeat;
 	-fx-background-size:cover;
-}
-
-.scroll-pane > .viewport {
-   -fx-background-color: transparent;
 }
 
 .startServer_ConnectedClient_label:hover {
@@ -54,4 +68,81 @@
 }
 .startServer_ConnectedClient_label:pressed {
 	-fx-background-color: rgba(128, 128, 128, 0.5);
+}
+
+/**********************
+ * Quiz Repository Menu
+ **********************/
+.quizRepo_background{
+	-fx-background-image:url('/images/dirtbackground.png');
+	-fx-background-repeat:no-repeat;
+	-fx-background-size:cover;
+}
+
+.quizTabPane:top *.tab-header-background {
+	-fx-background-image:url('/images/dirtbackground.png');
+	-fx-background-repeat:no-repeat;
+	-fx-background-size:cover;
+}
+.quizTabPane .tab {
+	-fx-pref-width: 350;
+	-fx-pref-height: 60;
+	-fx-background-color: #434343;
+    -fx-background-insets: 0 5 0 5,0,0;
+    -fx-background-radius: 0;
+}
+.quizTabPane .tab:selected {
+	-fx-background-color: #000000, #303030, #9e9e9e, #b0b0b0, #434343, #b1b1b1, #9e9e9e, #6f6f6f;
+    -fx-background-insets: -3, 1, 1 2 2 1, 1 2 2 2, 2, 2 3 3 2, 2 3 3 3, 3;
+    -fx-background-radius: 0;
+}
+.quizTabPane .tab .tab-label {
+	-fx-pref-width: 350;
+    -fx-alignment: CENTER;
+    -fx-text-fill: grey;
+    -fx-font-size: 20px;
+}
+.quizTabPane .tab:selected .tab-label {
+    -fx-text-fill: white;
+}
+
+.table-view{
+   -fx-background-color: rgba(0, 0, 0, 0.5);
+}
+
+.table-view .column-header-background{
+	-fx-background-color: #000000, #303030, #9e9e9e, #b0b0b0, #434343, #b1b1b1, #9e9e9e, #6f6f6f;
+    -fx-background-insets: -2, 1, 1 2 2 1, 1 2 2 2, 2, 2 3 3 2, 2 3 3 3, 3;
+    -fx-padding: 5 0 5 0;
+}
+
+.table-view .column-header-background .label{
+	-fx-font-size: 20px;
+    -fx-text-fill: white;
+}
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+}
+.table-view .corner {
+    -fx-background-color: transparent;
+}
+.table-view .table-cell{
+	-fx-alignment: CENTER-LEFT;
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
+}
+.table-row-cell{
+    -fx-background-color: transparent;
+    -fx-cell-size: 70px;
+	-fx-font-size: 30px;
+}
+.table-row-cell:selected {
+	-fx-background-color: #000000, #303030, #9e9e9e, #b0b0b0, #434343, #b1b1b1, #9e9e9e, #6f6f6f;
+    -fx-background-insets: -2, 1, 1 2 2 1, 1 2 2 2, 2, 2 3 3 2, 2 3 3 3, 3;
+}
+.table-row-cell:hover {
+	-fx-font-weight: bold;
 }

@@ -14,6 +14,10 @@ public class MainController {
 		Parent root = (Parent) FXMLLoader.load(getClass().getResource("/fxml/StartServer.fxml"));
 		((Node) event.getSource()).getScene().setRoot(root);;
 	}
+	public void quizRepoMenu(ActionEvent event) throws IOException {
+		Parent root = (Parent) FXMLLoader.load(getClass().getResource("/fxml/QuizRepo.fxml"));
+		((Node) event.getSource()).getScene().setRoot(root);;
+	}
 	
 	public void quit(ActionEvent event) {
 		((Stage) ((Node) event.getSource()).getScene().getWindow() ).close();

@@ -9,6 +9,7 @@ import utils.KeyEventFunction;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCombination;
 
 public class Main extends Application {
 
@@ -25,8 +26,10 @@ public class Main extends Application {
 			Parent root = (Parent) loader.load();
 			Scene scene = new Scene(root, Constant.ScreenSize.WIDTH, Constant.ScreenSize.HEIGHT);
 
+			primaryStage.setMinWidth(1300);
+			primaryStage.setMinHeight(900);
 			primaryStage.setScene(scene);
-			primaryStage.setFullScreenExitHint("");
+			primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 			primaryStage.setFullScreen(true);
 
 			scene.setOnKeyPressed(KeyEventFunction.toggleFullScreen(primaryStage));

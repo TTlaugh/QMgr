@@ -16,7 +16,7 @@
 
 <AnchorPane prefHeight="900.0" prefWidth="1300.0" styleClass="startServer_background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.StartServerController">
    <children>
-      <ToggleButton layoutX="50.0" layoutY="33.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="90.0" styleClass="main_menu_btn" text="ON" textFill="WHITE" AnchorPane.leftAnchor="50.0">
+      <ToggleButton layoutX="222.0" layoutY="28.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="100.0" styleClass="main_menu_btn" text="OFF" textFill="WHITE" AnchorPane.leftAnchor="250.0">
          <font>
             <Font size="30.0" />
          </font>
@@ -26,7 +26,7 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <TextField layoutX="1098.0" layoutY="38.0" prefWidth="150.0" promptText="port:" AnchorPane.rightAnchor="170.0">
+      <TextField layoutX="55.0" layoutY="33.0" prefWidth="150.0" promptText="port:" AnchorPane.leftAnchor="50.0">
          <font>
             <Font size="30.0" />
          </font>
