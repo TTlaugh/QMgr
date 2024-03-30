@@ -20,7 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.IntegerStringConverter;
 
-public class QuizRepoController implements Initializable{
+public class ExamManagerController implements Initializable{
 	
 	@FXML
 	private TableView<Test> table;
@@ -41,7 +41,24 @@ public class QuizRepoController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		testList = FXCollections.observableArrayList(
 				new Test("123456789", "Phan tich thiet ke he thong thong tin", "31/12/2020", 120, "Bai kiem tra giua ki hehe"),
-				new Test("12345678", "Co so du lieu", "31/12/2020", 120, "Thi rot roi")
+				new Test("123456789", "Phan tich thiet ke he thong thong tin", "31/12/2020", 120, "Bai kiem tra giua ki hehe"),
+				new Test("123456789", "Phan tich thiet ke he thong thong tin", "31/12/2020", 120, "Bai kiem tra giua ki hehe"),
+				new Test("123456789", "Phan tich thiet ke he thong thong tin", "31/12/2020", 120, "Bai kiem tra giua ki hehe"),
+				new Test("123456789", "Phan tich thiet ke he thong thong tin", "31/12/2020", 120, "Bai kiem tra giua ki hehe"),
+				new Test("123456789", "Phan tich thiet ke he thong thong tin", "31/12/2020", 120, "Bai kiem tra giua ki hehe"),
+				new Test("123456789", "Phan tich thiet ke he thong thong tin", "31/12/2020", 120, "Bai kiem tra giua ki hehe"),
+				new Test("123456789", "Phan tich thiet ke he thong thong tin", "31/12/2020", 120, "Bai kiem tra giua ki hehe"),
+				new Test("123456789", "Phan tich thiet ke he thong thong tin", "31/12/2020", 120, "Bai kiem tra giua ki hehe"),
+				new Test("123456789", "Phan tich thiet ke he thong thong tin", "31/12/2020", 120, "Bai kiem tra giua ki hehe"),
+				new Test("123456789", "Phan tich thiet ke he thong thong tin", "31/12/2020", 120, "Bai kiem tra giua ki hehe"),
+				new Test("123456789", "Phan tich thiet ke he thong thong tin", "31/12/2020", 120, "Bai kiem tra giua ki hehe"),
+				new Test("123456789", "Phan tich thiet ke he thong thong tin", "31/12/2020", 120, "Bai kiem tra giua ki hehe"),
+				new Test("123456789", "Phan tich thiet ke he thong thong tin", "31/12/2020", 120, "Bai kiem tra giua ki hehe"),
+				new Test("123456789", "Phan tich thiet ke he thong thong tin", "31/12/2020", 120, "Bai kiem tra giua ki hehe"),
+				new Test("123456789", "Phan tich thiet ke he thong thong tin", "31/12/2020", 120, "Bai kiem tra giua ki hehe"),
+				new Test("123456789", "Phan tich thiet ke he thong thong tin", "31/12/2020", 120, "Bai kiem tra giua ki hehe"),
+				new Test("123456789", "Phan tich thiet ke he thong thong tin", "31/12/2020", 120, "Bai kiem tra giua ki hehe"),
+				new Test("12345678", "Co so du lieu", "31/12/2020 22:22", 120, "Thi rot roi")
 				);
 		idCol.setCellValueFactory(new PropertyValueFactory<Test, String>("id"));
 		idCol.setCellFactory(TextFieldTableCell.forTableColumn());

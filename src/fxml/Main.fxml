@@ -18,7 +18,7 @@
                   <Font size="30.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#quizRepoMenu" prefHeight="70.0" prefWidth="700.0" styleClass="main_menu_btn" text="Quiz Repository" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#examManagerMenu" prefHeight="70.0" prefWidth="700.0" styleClass="main_menu_btn" text="Exam Manager" textFill="WHITE">
                <font>
                   <Font size="30.0" />
                </font>

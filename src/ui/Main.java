@@ -27,7 +27,7 @@ public class Main extends Application {
 			Scene scene = new Scene(root, Constant.ScreenSize.WIDTH, Constant.ScreenSize.HEIGHT);
 
 			primaryStage.setMinWidth(1300);
-			primaryStage.setMinHeight(900);
+			primaryStage.setMinHeight(950);
 			primaryStage.setScene(scene);
 			primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 			primaryStage.setFullScreen(true);
