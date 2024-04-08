@@ -10,7 +10,7 @@ public class KeyEventFunction {
 		return new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent e) {
-				if (Constant.FullScreenKey.match(e)) {
+				if (Constant.KeyMap.FullScreenKey.match(e)) {
 					stage.setFullScreen(!stage.isFullScreen());
 					stage.setMaximized(!stage.isFullScreen());
 				}

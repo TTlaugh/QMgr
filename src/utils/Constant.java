@@ -11,6 +11,8 @@ public class Constant {
 		public static final double HEIGHT = Screen.getPrimary().getVisualBounds().getHeight();
 	}
 
-	public static final KeyCodeCombination FullScreenKey = new KeyCodeCombination(KeyCode.F11);
+	public class KeyMap {
+		public static final KeyCodeCombination FullScreenKey = new KeyCodeCombination(KeyCode.F11);
+	}
 
 }

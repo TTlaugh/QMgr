@@ -1,5 +1,5 @@
 # Java Project
-![](https://raw.githubusercontent.com/nguyenletientrien/MineQuizzServer/main/.github/screenshot.png)
+![](https://raw.githubusercontent.com/nguyenletientrien/QuizzServer/main/.github/img.png)
 
 ### Introduction
 - Design Pattern: Three-layer
@@ -8,44 +8,20 @@
 - Database: MySQL
 
 #### Database table relationship
-![](https://raw.githubusercontent.com/nguyenletientrien/MineQuizzServer/main/.github/MineQuizzERD.png)
+![](https://raw.githubusercontent.com/nguyenletientrien/QuizzServer/main/.github/QuizzServerERD.png)
 
 #### Project structure
-##### Current process
 ```
-    src .
-        ├── bus
-        │   └── Bussiness_Layer
-        ├── css
-        │   └── style.css
-        ├── dao
-        │   └── Data_Access_Logic_Components
-        ├── dto
-        │   └── Data_Transfer_Objects
-        ├── fxml
-        │   ├── MainController.java
-        │   ├── Main.fxml
-        │   ├── QuizRepoController.java
-        │   ├── QuizRepo.fxml
-        │   ├── StartServerController.java
-        │   ├── StartServer.fxml
-        │   └── Test.java
-        ├── images
-        │   ├── addicon.png
-        │   ├── background.jpg
-        │   ├── background.png
-        │   ├── checkicon.png
-        │   ├── detailicon.png
-        │   ├── dirtbackground.png
-        │   ├── editicon.png
-        │   ├── icon.png
-        │   ├── playicon.png
-        │   ├── removeicon.png
-        │   ├── searchicon.png
-        │   └── title.png
-        ├── ui
-        │   └── Main.java
-        └── utils
-            ├── Constant.java
-            └── KeyEventFunction.java
+src .
+    ├── application         -> Contain Main function [Chua ham Main]
+    ├── images              -> All images of project [Chua file anh cua du an]
+    ├── model               -> Data Access Layer [Tang data]
+    │   ├── DAO                 -> Data Access Oject (CRUD directly with database) [Them,sua,xoa truc tiep voi db]
+    │   └── DTO                 -> Data Transfer Object (Objects to convert one row from table) [doi tuong de luu tung dong cua cac bang]
+    ├── services            -> Business Logic Layer [Tang xu li nghiep vu]
+    ├── utils               -> Utilities [Cac phuong thuc, thuoc tinh ho tro tu dinh nghia]
+    └── view                -> Presentation Layer [Tang giao dien]
+        ├── controller          -> UI controller [Dieu khien giao dien]
+        ├── css                 -> css style sheet
+        └── fxml                -> fxml for scenebuilder
 ```
