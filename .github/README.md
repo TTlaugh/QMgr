@@ -1,5 +1,5 @@
 # Java Project
-![](https://raw.githubusercontent.com/nguyenletientrien/QuizzServer/main/.github/img.png)
+![](https://raw.githubusercontent.com/nguyenletientrien/QuizzServer/main/.github/img.jpg)
 
 ### Introduction
 - Design Pattern: Three-layer
