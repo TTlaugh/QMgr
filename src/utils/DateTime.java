@@ -2,43 +2,47 @@ package utils;
 
 public class DateTime {
 
-	private String day;
-	private String month;
 	private String year;
+	private String month;
+	private String day;
 	private String hour;
 	private String minute;
+	private String second;
 
-	public DateTime(String day, String month, String year, String hour, String minute) {
-		this.day = day;
-		this.month = month;
+	public DateTime(String year, String month, String day, String hour, String minute, String second) {
 		this.year = year;
+		this.month = month;
+		this.day = day;
 		this.hour = hour;
 		this.minute = minute;
+		this.second = second;
 	}
 
 	public DateTime(String datetime) {
-		// dd-mm-yyyy hh:mm
-		this.day = datetime.substring(0, 2);
-		this.month = datetime.substring(3, 5);
+		// yyyy-mm-dd hh:mm:ss
 		this.year = datetime.substring(6, 10);
+		this.month = datetime.substring(3, 5);
+		this.day = datetime.substring(0, 2);
 		this.hour = datetime.substring(11, 13);
 		this.minute = datetime.substring(14, 16);
+		this.second = datetime.substring(17, 19);
 	}
 
 	public DateTime() {
-		this.day = null;
-		this.month = null;
 		this.year = null;
+		this.month = null;
+		this.day = null;
 		this.hour = null;
 		this.minute = null;
+		this.second = null;
 	}
 
-	public String getDay() {
-		return day;
+	public String getYear() {
+		return year;
 	}
 
-	public void setDay(String day) {
-		this.day = day;
+	public void setYear(String year) {
+		this.year = year;
 	}
 
 	public String getMonth() {
@@ -49,12 +53,12 @@ public class DateTime {
 		this.month = month;
 	}
 
-	public String getYear() {
-		return year;
+	public String getDay() {
+		return day;
 	}
 
-	public void setYear(String year) {
-		this.year = year;
+	public void setDay(String day) {
+		this.day = day;
 	}
 
 	public String getHour() {
@@ -72,10 +76,18 @@ public class DateTime {
 	public void setMinute(String minute) {
 		this.minute = minute;
 	}
+	
+	public String getSecond() {
+		return second;
+	}
+
+	public void setSecond(String second) {
+		this.second = second;
+	}
 
 	@Override
 	public String toString() {
-		return day + "/" + month + "/" + year + " " + hour + ":" + minute;
+		return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
 	}
 
 }
