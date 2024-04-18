@@ -17,12 +17,27 @@ public class MainController {
 		private Parent root = null;
 		@FXML
 		private AnchorPane Anchor_Layout;
+		@FXML
+		private AnchorPane Anchor_Regester;
+		@FXML
+		private AnchorPane Anchor_SignIn;
 		
 		public void LogOut_Quizz(ActionEvent event) throws IOException {
 			root = (Parent) FXMLLoader.load(getClass().getResource("/view/fxml/Login.fxml"));
 			Stage stage = new Stage();
 			stage.setScene(new Scene(root));
 			stage.show();
+		}
+		public void Sign_In(ActionEvent event) throws IOException {
+			Back_Test(event);
+		}
+		public void Sign_Up_Tranfer(ActionEvent event) throws IOException {
+			(Anchor_SignIn).setVisible(false);
+			(Anchor_Regester).setVisible(true);
+		}
+		public void Sign_In_Tranfer(ActionEvent event) throws IOException {
+			(Anchor_Regester).setVisible(false);
+			(Anchor_SignIn).setVisible(true);
 		}
 		
 		public void Start_Test(ActionEvent event) throws IOException {
@@ -36,6 +51,7 @@ public class MainController {
 		}
 
 		public void Exam_Quizz(ActionEvent event) throws IOException {
+			
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Exam.fxml"));
 			Node content = loader.load();
 			(Anchor_Layout).getChildren().clear();
@@ -47,7 +63,8 @@ public class MainController {
 		}
 
 		public void Submission_Quizz(ActionEvent event) throws IOException {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Submit.fxml"));
+			System.out.println("test");
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Submiss.fxml"));
 			Node content = loader.load();
 			(Anchor_Layout).getChildren().clear();
 			(Anchor_Layout).getChildren().add(content);

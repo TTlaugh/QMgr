@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controller.MainController">
    <children>
-      <AnchorPane layoutX="413.0" layoutY="238.0" prefHeight="424.0" prefWidth="475.0" style="-fx-border-color: white;">
+      <AnchorPane fx:id="Anchor_SignIn" layoutX="413.0" layoutY="238.0" prefHeight="424.0" prefWidth="475.0" style="-fx-border-color: white;">
          <styleClass>
             <String fx:value="white-background" />
             <String fx:value="round-layout" />
@@ -62,7 +62,7 @@
                   </PasswordField>
                </children>
             </HBox>
-            <Button layoutX="178.0" layoutY="267.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="120.0" text="Sign In" textFill="WHITE" AnchorPane.bottomAnchor="118.0">
+            <Button layoutX="178.0" layoutY="267.0" mnemonicParsing="false" onAction="#Sign_In" prefHeight="38.0" prefWidth="120.0" text="Sign In" textFill="WHITE" AnchorPane.bottomAnchor="118.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -72,14 +72,14 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button layoutX="283.0" layoutY="367.0" mnemonicParsing="false" styleClass="button-in-login" text="Sign Up">
+            <Button layoutX="283.0" layoutY="367.0" mnemonicParsing="false" onAction="#Sign_Up_Tranfer" styleClass="button-in-login" text="Sign Up">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="413.0" layoutY="238.0" prefHeight="424.0" prefWidth="475.0" style="-fx-border-color: white;" visible="false">
+      <AnchorPane fx:id="Anchor_Regester" layoutX="413.0" layoutY="238.0" prefHeight="424.0" prefWidth="475.0" style="-fx-border-color: white;" visible="false">
          <styleClass>
             <String fx:value="white-background" />
             <String fx:value="round-layout" />
@@ -195,7 +195,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button layoutX="298.0" layoutY="367.0" mnemonicParsing="false" styleClass="button-in-login" text="Sign In">
+            <Button layoutX="298.0" layoutY="367.0" mnemonicParsing="false" onAction="#Sign_In_Tranfer" styleClass="button-in-login" text="Sign In">
                <font>
                   <Font size="14.0" />
                </font>
