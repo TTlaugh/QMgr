@@ -1,6 +1,8 @@
-package data.DTO;
+package data.DataTransferObj;
 
-import java.util.ArrayList;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 
 import utils.DateTime;
 
@@ -13,12 +15,11 @@ public class Exam {
 	private double maxScore;
 	private String name;
 	private String description;
-	private boolean isShuffle;
-	private ArrayList<Question> questions;
+	private boolean isShuffled;
+	private List<Question> questions;
 	
 	public Exam(DateTime examID, Subject subject, DateTime dateTime, int timeLimit, double maxScore, String name,
-			String note, boolean isShuffle, ArrayList<Question> questions) {
-		super();
+			String note, boolean isShuffled, List<Question> questions) {
 		this.examID = examID;
 		this.subject = subject;
 		this.startDateTime = dateTime;
@@ -26,8 +27,24 @@ public class Exam {
 		this.maxScore = maxScore;
 		this.name = name;
 		this.description = note;
-		this.isShuffle = isShuffle;
+		this.isShuffled = isShuffled;
 		this.questions = questions;
+	}
+	
+	public Exam(ResultSet rs) throws SQLException {
+		this.examID = new DateTime(rs.getString("ExamID"));
+		this.subject = new Subject(
+				rs.getString("SubjectID"),
+				null,
+				rs.getString("SubjectName")
+				);
+		this.startDateTime = new DateTime(rs.getString("StartDateTime"));
+		this.timeLimit = rs.getInt("TimeLimit");
+		this.maxScore = rs.getDouble("MaxScore");
+		this.name = rs.getString("Name");
+		this.description = rs.getString("Description");
+		this.isShuffled = rs.getBoolean("IsShuffled");
+		this.questions = null;
 	}
 
 	public DateTime getExamID() {
@@ -72,17 +89,24 @@ public class Exam {
 	public void setDescription(String note) {
 		this.description = note;
 	}
-	public boolean isShuffle() {
-		return isShuffle;
+	public boolean isShuffled() {
+		return isShuffled;
 	}
-	public void setShuffle(boolean isShuffle) {
-		this.isShuffle = isShuffle;
+	public void setShuffled(boolean isShuffled) {
+		this.isShuffled = isShuffled;
 	}
-	public ArrayList<Question> getQuestions() {
+	public List<Question> getQuestions() {
 		return questions;
 	}
-	public void setQuestions(ArrayList<Question> questions) {
+	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
 
+	@Override
+	public String toString() {
+		return "Exam [examID=" + examID + ", subject=" + subject + ", startDateTime=" + startDateTime + ", timeLimit="
+				+ timeLimit + ", maxScore=" + maxScore + ", name=" + name + ", description=" + description
+				+ ", isShuffled=" + isShuffled + ", questionIDs=" + questions + "]";
+	}
+	
 }

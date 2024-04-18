@@ -1,4 +1,7 @@
-package data.DTO;
+package data.DataTransferObj;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Subject {
 
@@ -10,6 +13,12 @@ public class Subject {
 		this.subjectID = subjectID;
 		this.teacher = teacher;
 		this.subjectName = subjectName;
+	}
+	
+	public Subject(ResultSet rs) throws SQLException {
+		this.subjectID = rs.getString("SubjectID");
+		this.teacher = null;
+		this.subjectName = rs.getString("SubjectName");
 	}
 
 	public String getSubjectID() {
@@ -34,6 +43,11 @@ public class Subject {
 
 	public void setSubjectName(String subjectName) {
 		this.subjectName = subjectName;
+	}
+
+	@Override
+	public String toString() {
+		return "Subject [subjectID=" + subjectID + ", teacher=" + teacher + ", subjectName=" + subjectName + "]";
 	}
 	
 }

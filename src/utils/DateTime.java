@@ -18,14 +18,27 @@ public class DateTime {
 		this.second = second;
 	}
 
+	public DateTime(String year, String month, String day, String hour, String minute) {
+		this.year = year;
+		this.month = month;
+		this.day = day;
+		this.hour = hour;
+		this.minute = minute;
+		this.second = "00";
+	}
+
 	public DateTime(String datetime) {
 		// yyyy-mm-dd hh:mm:ss
-		this.year = datetime.substring(6, 10);
-		this.month = datetime.substring(3, 5);
-		this.day = datetime.substring(0, 2);
+		this.year = datetime.substring(0, 4);
+		this.month = datetime.substring(5, 7);
+		this.day = datetime.substring(8, 10);
 		this.hour = datetime.substring(11, 13);
 		this.minute = datetime.substring(14, 16);
-		this.second = datetime.substring(17, 19);
+		try {
+			this.second = datetime.substring(17, 19);
+		} catch(IndexOutOfBoundsException e) {
+			this.second = "00";
+		}
 	}
 
 	public DateTime() {

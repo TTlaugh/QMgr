@@ -1,4 +1,4 @@
-package data.DTO;
+package data.DataTransferObj;
 
 public class Person {
 
@@ -9,7 +9,6 @@ public class Person {
 	private String phone;
 	
 	public Person(String personID, String firstName, String lastName, String email, String phone) {
-		super();
 		this.personID = personID;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -55,6 +54,12 @@ public class Person {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	@Override
+	public String toString() {
+		return "Person [personID=" + personID + ", firstName=" + firstName + ", lastName=" + lastName + ", email="
+				+ email + ", phone=" + phone + "]";
 	}
 	
 }
