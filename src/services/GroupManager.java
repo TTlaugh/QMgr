@@ -9,7 +9,7 @@ import data.DataTransferObj.Group;
 import utils.SQLUtils;
 
 public class GroupManager {
-	
+
 	private DataAccess<Group> dataAccess = null;
 
 	public List<Group> getGroups() {
