@@ -12,9 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class MainController {
-	// private String haha = "view.controller.MainController";
-	private Stage stage;
-	private Scene scene;
+
 	private Parent root = null;
 	@FXML
 	private AnchorPane Anchor_Layout;
@@ -64,6 +62,8 @@ public class MainController {
 		Stage stage = new Stage();
 		stage.setScene(new Scene(root));
 		stage.show();
+		
+	
 	}
 
 	public void Submission_Quizz(ActionEvent event) throws IOException {
@@ -100,14 +100,13 @@ public class MainController {
 	}
 
 	public void Exam_Tranfer_ExamAdd_Quizz(ActionEvent event) throws IOException {
-		System.out.println("test");
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Exam_add.fxml"));
-		Node content = loader.load();
-		(Anchor_Layout).getChildren().clear();
-		(Anchor_Layout).getChildren().add(content);
-		Parent parentNode = root;
-		Stage stage = new Stage();
-		stage.setScene(new Scene(root));
-		stage.show();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Exam_add.fxml"));
+			Node content = loader.load();
+			(Anchor_Layout).getChildren().clear();
+			(Anchor_Layout).getChildren().add(content);
+			Parent parentNode = root;
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root));
+			stage.show();
 	}
 }
