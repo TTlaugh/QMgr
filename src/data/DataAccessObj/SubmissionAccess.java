@@ -5,12 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import data.DataTransferObj.SelectedQuestion;
 import data.DataTransferObj.Submission;
 import utils.DataSourceFactory;
 
-public class SubmissionDAO implements DataAccess<Submission> {
+public class SubmissionAccess implements DataAccess<Submission> {
 	
 	private Connection connection;
 	
@@ -59,9 +60,14 @@ public class SubmissionDAO implements DataAccess<Submission> {
 		return i;
 	}
 	
-	public List<SelectedQuestion> getSelectedQuestions() {
+	public List<SelectedQuestion> getSelectedQuestions(Submission submission) throws SQLException {
 		List<SelectedQuestion> selectedQuestions = new ArrayList<SelectedQuestion>();
-
+		Map<String, List<Integer>> answerSelectedsMap = submission.getAnswerSelectedsMap();
+		QuestionAccess questionAccess = new QuestionAccess();
+		for (Map.Entry<String, List<Integer>> entry : answerSelectedsMap.entrySet())
+			selectedQuestions.add(new SelectedQuestion(
+							questionAccess.getOnly(entry.getKey()),
+							entry.getValue()));
 		return selectedQuestions;
 	}
 
