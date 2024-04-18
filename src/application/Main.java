@@ -44,6 +44,7 @@ package application;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
@@ -57,25 +58,25 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        ComboBox<User> combo = new ComboBox<User>();
-        combo.setConverter(new StringConverter<User>() {
-            @Override
-            public String toString(User usr) {
-                return usr == null ? "" : usr.getName();
-            }
-
-            @Override
-            public User fromString(String s) {
-                User usr = new User(s, "haslo");
-                return usr;
-            }
-		});
-        combo.getItems().addAll(
-        		new User("hehe", "123"),
-        		new User("huhu", "123"),
-        		new User("hihi", "123"),
-        		new User("haha", "123")
-        		);
+//        ComboBox<User> combo = new ComboBox<User>();
+//        combo.setConverter(new StringConverter<User>() {
+//            @Override
+//            public String toString(User usr) {
+//                return usr == null ? "" : usr.getName();
+//            }
+//
+//            @Override
+//            public User fromString(String s) {
+//                User usr = new User(s, "haslo");
+//                return usr;
+//            }
+//		});
+//        combo.getItems().addAll(
+//        		new User("hehe", "123"),
+//        		new User("huhu", "123"),
+//        		new User("hihi", "123"),
+//        		new User("haha", "123")
+//        		);
 //        combo.setCellFactory(lv -> {
 //            ListCell<String> cell = new ListCell<String>() {
 //                @Override
@@ -109,9 +110,10 @@ public class Main extends Application {
 //            return cell ;
 //        });
 
-        BorderPane root = new BorderPane();
-        root.setTop(combo);
-        Scene scene = new Scene(root, 400, 400);
+//        BorderPane root = new BorderPane();
+//        root.setTop(combo);
+    	Parent root =  (Parent) FXMLLoader.load(getClass().getResource("/view/fxml/Login.fxml"));
+        Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
