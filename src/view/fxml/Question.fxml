@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1050.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1050.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controller.MainController">
    <children>
       <Label alignment="CENTER" layoutX="420.0" prefHeight="75.0" prefWidth="165.0" text="Question" textFill="#ff6d97" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <font>
@@ -114,7 +114,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <Button layoutX="931.0" layoutY="759.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="89.0" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="36.0" AnchorPane.rightAnchor="30.0">
+      <Button layoutX="931.0" layoutY="759.0" mnemonicParsing="false" onAction="#Question_Tranfer_QuestionAdd_Quizz" prefHeight="35.0" prefWidth="89.0" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="36.0" AnchorPane.rightAnchor="30.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -126,7 +126,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="831.0" layoutY="759.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="89.0" text="View" textFill="WHITE" AnchorPane.bottomAnchor="36.0" AnchorPane.rightAnchor="130.0">
+      <Button layoutX="831.0" layoutY="759.0" mnemonicParsing="false" onAction="#Question_Tranfer_QuestionView_Quizz" prefHeight="35.0" prefWidth="89.0" text="View" textFill="WHITE" AnchorPane.bottomAnchor="36.0" AnchorPane.rightAnchor="130.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

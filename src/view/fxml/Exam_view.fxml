@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="830.0" prefWidth="1050.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="830.0" prefWidth="1050.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controller.MainController">
    <children>
       <ScrollPane fitToWidth="true" hbarPolicy="NEVER" hmax="0.0" layoutX="240.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="570.0" styleClass="transparent" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="30.0">
          <content>
@@ -91,7 +91,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Button contentDisplay="RIGHT" layoutX="449.0" layoutY="16.0" mnemonicParsing="false" styleClass="button-back" text="Back" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="16.0">
+                  <Button contentDisplay="RIGHT" layoutX="449.0" layoutY="16.0" mnemonicParsing="false" onAction="#Back_Exam" styleClass="button-back" text="Back" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="16.0">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>

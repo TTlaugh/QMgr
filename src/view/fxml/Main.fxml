@@ -57,7 +57,7 @@
             <Insets left="40.0" />
          </padding>
       </Button>
-      <Button layoutY="314.0" mnemonicParsing="false" onAction="#Exam_Quizz" prefHeight="55.0" prefWidth="250.0" text="Exam">
+      <Button layoutY="314.0" mnemonicParsing="false" onAction="#Back_Exam" prefHeight="55.0" prefWidth="250.0" text="Exam">
          <styleClass>
             <String fx:value="button-in-main" />
             <String fx:value="button_hover" />
@@ -76,7 +76,7 @@
             <Insets left="40.0" />
          </padding>
       </Button>
-      <Button layoutY="369.0" mnemonicParsing="false" onAction="#Submission_Quizz" prefHeight="55.0" prefWidth="250.0" text="Submission">
+      <Button layoutY="369.0" mnemonicParsing="false" onAction="#Back_Submission" prefHeight="55.0" prefWidth="250.0" text="Submission">
          <styleClass>
             <String fx:value="button-in-main" />
             <String fx:value="button_hover" />
@@ -95,7 +95,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutY="424.0" mnemonicParsing="false" onAction="#Question_Quizz" prefHeight="55.0" prefWidth="250.0" text="Question">
+      <Button layoutY="424.0" mnemonicParsing="false" onAction="#Back_Question" prefHeight="55.0" prefWidth="250.0" text="Question">
          <styleClass>
             <String fx:value="button-in-main" />
             <String fx:value="button_hover" />
@@ -114,7 +114,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutY="479.0" mnemonicParsing="false" onAction="#Group_Quizz" prefHeight="55.0" prefWidth="250.0" text="Group">
+      <Button layoutY="479.0" mnemonicParsing="false" onAction="#Back_Group" prefHeight="55.0" prefWidth="250.0" text="Group">
          <styleClass>
             <String fx:value="button-in-main" />
             <String fx:value="button_hover" />

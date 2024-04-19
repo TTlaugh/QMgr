@@ -12,7 +12,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class MainController {
-
+	private Scene scene = null;
+	private Stage stage = null;
 	private Parent root = null;
 	@FXML
 	private AnchorPane Anchor_Layout;
@@ -23,9 +24,7 @@ public class MainController {
 
 	public void LogOut_Quizz(ActionEvent event) throws IOException {
 		root = (Parent) FXMLLoader.load(getClass().getResource("/view/fxml/Login.fxml"));
-		Stage stage = new Stage();
-		stage.setScene(new Scene(root));
-		stage.show();
+		((Node) event.getSource()).getScene().setRoot(root);
 	}
 
 	public void Sign_In(ActionEvent event) throws IOException {
@@ -52,61 +51,84 @@ public class MainController {
 		((Node) event.getSource()).getScene().setRoot(root);
 	}
 
-	public void Exam_Quizz(ActionEvent event) throws IOException {
-
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Exam.fxml"));
-		Node content = loader.load();
-		(Anchor_Layout).getChildren().clear();
-		(Anchor_Layout).getChildren().add(content);
-		Parent parentNode = root;
-		Stage stage = new Stage();
-		stage.setScene(new Scene(root));
-		stage.show();
-		
-	
-	}
-
-	public void Submission_Quizz(ActionEvent event) throws IOException {
+	public void Back_Submission(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Submiss.fxml"));
-		Node content = loader.load();
-		(Anchor_Layout).getChildren().clear();
-		(Anchor_Layout).getChildren().add(content);
-		Parent parentNode = root;
-		Stage stage = new Stage();
-		stage.setScene(new Scene(root));
-		stage.show();
-	}
-
-	public void Group_Quizz(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Group.fxml"));
-		Node content = loader.load();
-		(Anchor_Layout).getChildren().clear();
-		(Anchor_Layout).getChildren().add(content);
-		Parent parentNode = root;
-		Stage stage = new Stage();
-		stage.setScene(new Scene(root));
-		stage.show();
-	}
-
-	public void Question_Quizz(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Question.fxml"));
-		Node content = loader.load();
-		(Anchor_Layout).getChildren().clear();
-		(Anchor_Layout).getChildren().add(content);
-		Parent parentNode = root;
-		Stage stage = new Stage();
-		stage.setScene(new Scene(root));
-		stage.show();
+		scene = (Scene) ((Node) event.getSource()).getScene();
+		AnchorPane myAnchorPane = (AnchorPane) scene.lookup("#Anchor_Layout");
+		myAnchorPane.getChildren().clear();
+		myAnchorPane.getChildren().add(loader.load());
 	}
 
 	public void Exam_Tranfer_ExamAdd_Quizz(ActionEvent event) throws IOException {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Exam_add.fxml"));
-			Node content = loader.load();
-			(Anchor_Layout).getChildren().clear();
-			(Anchor_Layout).getChildren().add(content);
-			Parent parentNode = root;
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
-			stage.show();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Exam_add.fxml"));
+		scene = (Scene) ((Node) event.getSource()).getScene();
+		AnchorPane myAnchorPane = (AnchorPane) scene.lookup("#Anchor_Layout");
+		myAnchorPane.getChildren().clear();
+		myAnchorPane.getChildren().add(loader.load());
 	}
+
+	public void Exam_Tranfer_ExamView_Quizz(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Exam_view.fxml"));
+		scene = (Scene) ((Node) event.getSource()).getScene();
+		AnchorPane myAnchorPane = (AnchorPane) scene.lookup("#Anchor_Layout");
+		myAnchorPane.getChildren().clear();
+		myAnchorPane.getChildren().add(loader.load());
+	}
+
+	public void Back_Exam(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Exam.fxml"));
+		scene = (Scene) ((Node) event.getSource()).getScene();
+		AnchorPane myAnchorPane = (AnchorPane) scene.lookup("#Anchor_Layout");
+		myAnchorPane.getChildren().clear();
+		myAnchorPane.getChildren().add(loader.load());
+	}
+
+	public void Question_Tranfer_QuestionView_Quizz(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Question_view.fxml"));
+		scene = (Scene) ((Node) event.getSource()).getScene();
+		AnchorPane myAnchorPane = (AnchorPane) scene.lookup("#Anchor_Layout");
+		myAnchorPane.getChildren().clear();
+		myAnchorPane.getChildren().add(loader.load());
+	}
+
+	public void Question_Tranfer_QuestionAdd_Quizz(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Question_add.fxml"));
+		scene = (Scene) ((Node) event.getSource()).getScene();
+		AnchorPane myAnchorPane = (AnchorPane) scene.lookup("#Anchor_Layout");
+		myAnchorPane.getChildren().clear();
+		myAnchorPane.getChildren().add(loader.load());
+	}
+
+	public void Back_Question(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Question.fxml"));
+		scene = (Scene) ((Node) event.getSource()).getScene();
+		AnchorPane myAnchorPane = (AnchorPane) scene.lookup("#Anchor_Layout");
+		myAnchorPane.getChildren().clear();
+		myAnchorPane.getChildren().add(loader.load());
+	}
+
+	public void Group_Tranfer_GroupAdd_Quizz(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Group_add.fxml"));
+		scene = (Scene) ((Node) event.getSource()).getScene();
+		AnchorPane myAnchorPane = (AnchorPane) scene.lookup("#Anchor_Layout");
+		myAnchorPane.getChildren().clear();
+		myAnchorPane.getChildren().add(loader.load());
+	}
+
+	public void Group_Tranfer_GroupView_Quizz(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Group_view.fxml"));
+		scene = (Scene) ((Node) event.getSource()).getScene();
+		AnchorPane myAnchorPane = (AnchorPane) scene.lookup("#Anchor_Layout");
+		myAnchorPane.getChildren().clear();
+		myAnchorPane.getChildren().add(loader.load());
+	}
+
+	public void Back_Group(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Group.fxml"));
+		scene = (Scene) ((Node) event.getSource()).getScene();
+		AnchorPane myAnchorPane = (AnchorPane) scene.lookup("#Anchor_Layout");
+		myAnchorPane.getChildren().clear();
+		myAnchorPane.getChildren().add(loader.load());
+	}
+
 }

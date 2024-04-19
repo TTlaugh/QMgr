@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1050.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1050.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controller.MainController">
    <children>
       <AnchorPane layoutX="325.0" layoutY="199.0" prefHeight="433.0" prefWidth="400.0" AnchorPane.bottomAnchor="198.0" AnchorPane.leftAnchor="325.0" AnchorPane.rightAnchor="325.0" AnchorPane.topAnchor="199.0">
          <styleClass>
@@ -17,7 +17,7 @@
             <String fx:value="round-layout" />
          </styleClass>
          <children>
-            <Button layoutX="14.0" layoutY="12.0" mnemonicParsing="false" styleClass="button-back" text="Back" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <Button layoutX="14.0" layoutY="12.0" mnemonicParsing="false" onAction="#Back_Group" styleClass="button-back" text="Back" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
