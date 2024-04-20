@@ -9,8 +9,8 @@ import java.util.List;
 
 import data.DataTransferObj.Exam;
 import data.DataTransferObj.Teacher;
-import utils.DataSourceFactory;
 import utils.JsonUtils;
+import utils.SQLUtils;
 
 public class ExamAccess implements DataAccess<Exam> {
 
@@ -18,7 +18,7 @@ public class ExamAccess implements DataAccess<Exam> {
 
 	@Override
 	public boolean insert(Exam exam) throws SQLException {
-		connection = DataSourceFactory.getConnection();
+		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement = connection.prepareStatement("INSERT INTO Exams VALUES (?,?,?,?,?,?,?,?,?)");
 		pStatement.setString (1, exam.getExamID().toString());
 		pStatement.setString (2, exam.getSubject().getSubjectID());
@@ -30,13 +30,13 @@ public class ExamAccess implements DataAccess<Exam> {
 		pStatement.setBoolean(8, exam.isShuffled());
 		pStatement.setString (9, exam.getQuestions().toString());
 		boolean i = pStatement.executeUpdate() >= 1;
-		DataSourceFactory.closeConnection(connection);
+		SQLUtils.closeConnection(connection);
 		return i;
 	}
 
 	@Override
 	public boolean update(Exam exam) throws SQLException {
-		connection = DataSourceFactory.getConnection();
+		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement = connection.prepareStatement(
 				"UPDATE Exams SET"
 						+ "SubjectID=?,"
@@ -58,21 +58,21 @@ public class ExamAccess implements DataAccess<Exam> {
 		pStatement.setString (8, exam.getQuestions().toString());
 		pStatement.setString (9, exam.getExamID().toString());
 		boolean i = pStatement.executeUpdate() >= 1;
-		DataSourceFactory.closeConnection(connection);
+		SQLUtils.closeConnection(connection);
 		return i;
 	}
 
 	@Override
 	public boolean delete(String... primaryKeyValues) throws SQLException {
-		connection = DataSourceFactory.getConnection();
+		connection = SQLUtils.getConnection();
 		boolean i = connection.createStatement().executeUpdate(
 				"DELETE FROM Exams WHERE ExamID='" + primaryKeyValues[0] + "'") >= 1;
-		DataSourceFactory.closeConnection(connection);
+		SQLUtils.closeConnection(connection);
 		return i;
 	}
 
-	public static void getTeacher(Exam exam) throws SQLException {
-		exam.getSubject().setTeacher(DataAccess.get(Teacher.class,
+	public void getTeacher(Exam exam) throws SQLException {
+		exam.getSubject().setTeacher(get(Teacher.class,
 				"SELECT Teachers.TeacherID, Person.* FROM Exams"
 				+ " INNER JOIN Subjects ON Exams.SubjectID = Subjects.SubjectID"
 				+ " INNER JOIN Teachers ON Subjects.TeacherID = Teachers.TeacherID"
@@ -80,8 +80,8 @@ public class ExamAccess implements DataAccess<Exam> {
 				+ "Exams.ExamID", exam.getExamID().toString()));
 	}
 	
-	public static void getQuestions(Exam exam) throws SQLException {
-		Connection connection = DataSourceFactory.getConnection();
+	public void getQuestions(Exam exam) throws SQLException {
+		Connection connection = SQLUtils.getConnection();
 		ResultSet rs = connection.createStatement().executeQuery(
 				"SECLECT QuestionIDs FROM Exams WHERE ExamID='"+exam.getExamID()+"'");
 		List<Integer> questionIDsList = null;
@@ -91,12 +91,12 @@ public class ExamAccess implements DataAccess<Exam> {
 		QuestionAccess questionAccess = new QuestionAccess();
 		for (Integer questionID : questionIDsList)
 			exam.getQuestions().add(questionAccess.getOnly(questionID.toString()));
-		DataSourceFactory.closeConnection(connection);
+		SQLUtils.closeConnection(connection);
 	}
 
 	@Override
 	public Exam getOnly(String... primaryKeyValues) throws SQLException {
-		return DataAccess.get(Exam.class,
+		return get(Exam.class,
 					"SELECT * FROM Exams"
 					+ " INNER JOIN Subjects ON Exams.SubjectID = Subjects.SubjectID",
 					"Exams.ExamID", primaryKeyValues[0]);
@@ -106,14 +106,14 @@ public class ExamAccess implements DataAccess<Exam> {
 	public List<Exam> getAll(String... columnName_values) throws SQLException {
 		String selectFrom = "SELECT * FROM Exams"
 					+ " INNER JOIN Subjects ON Exams.SubjectID = Subjects.SubjectID";
-		return DataAccess.getList(Exam.class, selectFrom, columnName_values);
+		return getList(Exam.class, selectFrom, columnName_values);
 	}
 
 	@Override
 	public List<Exam> getLimit(int offset, int limit, String... columnName_values) throws SQLException {
 		String selectFrom = "SELECT * FROM Exams LIMIT " + offset + ", " + limit
 					+ " INNER JOIN Subjects ON Exams.SubjectID = Subjects.SubjectID";
-		return DataAccess.getList(Exam.class, selectFrom, columnName_values);
+		return getList(Exam.class, selectFrom, columnName_values);
 	}
 
 }

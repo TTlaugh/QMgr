@@ -1,27 +1,51 @@
 package utils;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import javax.sql.DataSource;
+
+import com.mysql.cj.jdbc.MysqlDataSource;
+
+import data.DataTransferObj.Person;
+
 public class SQLUtils {
-	
-	public static boolean ignoreSQLException(String sqlState) {
-		if (sqlState == null) {
-			System.out.println("The SQL state is not defined!");
-			return false;
+
+	public static DataSource getDataSource() {
+		MysqlDataSource mysqlDS = new MysqlDataSource();
+		mysqlDS.setURL(Constant.MySQLProperties.URL);
+		mysqlDS.setUser(Constant.MySQLProperties.USERNAME);
+		mysqlDS.setPassword(Constant.MySQLProperties.PASSWORD);
+		mysqlDS.setDatabaseName("QuizzServer");
+		return mysqlDS;
+	}
+
+	public static Connection getConnection() {
+		Connection connection = null;
+		try {
+			connection = getDataSource().getConnection();
+		} catch (SQLException e) {
+			printSQLException(e);
 		}
-		// X0Y32: Jar file already exists in schema
-		if (sqlState.equalsIgnoreCase("X0Y32"))
-			return true;
-		// 42Y55: Table already exists in schema
-		if (sqlState.equalsIgnoreCase("42Y55"))
-			return true;
-		return false;
+		return connection;
+	}
+
+	public static void closeConnection(Connection connection) {
+		System.out.println("Releasing all open resources ...");
+		try {
+			if (connection != null) {
+				connection.close();
+				connection = null;
+			}
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
 	}
 
 	public static void printSQLException(SQLException ex) {
 		for (Throwable e : ex) {
 			if (e instanceof SQLException) {
-//				if (ignoreSQLException(((SQLException)e).getSQLState()) == true) return;
 				e.printStackTrace(System.err);
 				System.err.println("SQLState: " + ((SQLException)e).getSQLState());
 				System.err.println("Error Code: " + ((SQLException)e).getErrorCode());
@@ -32,6 +56,27 @@ public class SQLUtils {
 					t = t.getCause();
 				}
 			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		testDataSource();
+	}
+	private static void testDataSource() {
+		Connection connection = SQLUtils.getConnection();
+		Person person = new Person("123", "Nguyen Van", "hehe", "a@mail", "0123");
+		try {
+			PreparedStatement pStatement = connection.prepareStatement(
+					"INSERT INTO Person VALUES (?,?,?,?,?)");
+			pStatement.setString(1, person.getPersonID());
+			pStatement.setString(2, person.getFirstName());
+			pStatement.setString(3, person.getLastName());
+			pStatement.setString(4, person.getEmail());
+			pStatement.setString(5, person.getPhone());
+			pStatement.executeUpdate();
+			SQLUtils.closeConnection(connection);
+		} catch (SQLException e) {
+			SQLUtils.printSQLException(e);
 		}
 	}
 }

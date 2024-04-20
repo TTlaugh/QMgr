@@ -6,14 +6,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import utils.DataSourceFactory;
- 
+import utils.SQLUtils;
+
 public interface DataAccess<T> {
- 
+
     boolean insert(T t) throws SQLException;
- 
+
     boolean update(T t) throws SQLException;
- 
+
     boolean delete(String... primaryKeyValues) throws SQLException;
 
 	T getOnly(String... primaryKeyValues) throws SQLException;
@@ -22,7 +22,7 @@ public interface DataAccess<T> {
 
 	List<T> getLimit(int offset, int limit, String... columnName_values) throws SQLException;
 
-	private static String where(String... conditions) {
+	private String where(String... conditions) {
 		int size = conditions.length;
 		if (size < 2 || size % 2 != 0) return "";
 		String where = " WHERE ";
@@ -37,28 +37,28 @@ public interface DataAccess<T> {
 		return where==" WHERE " ? "" : where;
 	}
 	
-	static <T> T get(Class<T> c, String selectFrom, String... where) throws SQLException {
-		Connection connection = DataSourceFactory.getConnection();
+	default <E> E get(Class<E> c, String selectFrom, String... where) throws SQLException {
+		Connection connection = SQLUtils.getConnection();
 		String query = selectFrom;
 		query += where(where);
 		ResultSet rs = connection.createStatement().executeQuery(query);
-		T t = null;
+		E data = null;
 		if (rs.next())
 			try {
-				t = c.getConstructor(ResultSet.class).newInstance(rs);
+				data = c.getConstructor(ResultSet.class).newInstance(rs);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		DataSourceFactory.closeConnection(connection);
-		return t;
+		SQLUtils.closeConnection(connection);
+		return data;
 	}
 
-	static <T> List<T> getList(Class<T> c, String selectFrom, String... where) throws SQLException {
-		Connection connection = DataSourceFactory.getConnection();
+	default <E> List<E> getList(Class<E> c, String selectFrom, String... where) throws SQLException {
+		Connection connection = SQLUtils.getConnection();
 		String query = selectFrom;
 		query += where(where);
 		ResultSet rs = connection.createStatement().executeQuery(query);
-		List<T> dataList = new ArrayList<T>();
+		List<E> dataList = new ArrayList<E>();
 		while(rs.next()) {
 			try {
 				dataList.add(c.getConstructor(ResultSet.class).newInstance(rs));
@@ -66,7 +66,7 @@ public interface DataAccess<T> {
 				e.printStackTrace();
 			}
 		}
-		DataSourceFactory.closeConnection(connection);
+		SQLUtils.closeConnection(connection);
 		return dataList;
 	}
 
