@@ -7,7 +7,7 @@ import java.util.List;
 
 import data.DataTransferObj.Question;
 import data.DataTransferObj.Teacher;
-import utils.DataSourceFactory;
+import utils.SQLUtils;
 
 public class QuestionAccess implements DataAccess<Question> {
 
@@ -15,7 +15,7 @@ public class QuestionAccess implements DataAccess<Question> {
 
 	@Override
 	public boolean insert(Question question) throws SQLException {
-		connection = DataSourceFactory.getConnection();
+		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement = connection.prepareStatement(
 				"INSERT INTO Questions VALUES (?,?,?,?,?,?,?,?,?,?)");
 		pStatement.setString(1, question.getQuestionID());
@@ -29,13 +29,13 @@ public class QuestionAccess implements DataAccess<Question> {
 		pStatement.setString(9, question.getAnswers()[4]);
 		pStatement.setString(10,question.getCorrectAnswers().toString());
 		boolean i = pStatement.executeUpdate() >= 1;
-		DataSourceFactory.closeConnection(connection);
+		SQLUtils.closeConnection(connection);
 		return i;
 	}
 
 	@Override
 	public boolean update(Question question) throws SQLException {
-		connection = DataSourceFactory.getConnection();
+		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement = connection.prepareStatement(
 				"UPDATE Questions SET"
 						+ "SubjectID=?,"
@@ -59,21 +59,21 @@ public class QuestionAccess implements DataAccess<Question> {
 		pStatement.setString(9, question.getCorrectAnswers().toString());
 		pStatement.setString(10, question.getQuestionID());
 		boolean i = pStatement.executeUpdate() >= 1;
-		DataSourceFactory.closeConnection(connection);
+		SQLUtils.closeConnection(connection);
 		return i;
 	}
 
 	@Override
 	public boolean delete(String... primaryKeyValues) throws SQLException {
-		connection = DataSourceFactory.getConnection();
+		connection = SQLUtils.getConnection();
 		boolean i = connection.createStatement().executeUpdate(
 				"DELETE FROM Questions WHERE QuestionID='" + primaryKeyValues[0] + "'") >= 1;
-		DataSourceFactory.closeConnection(connection);
+		SQLUtils.closeConnection(connection);
 		return i;
 	}
 
-	public static void getTeacher(Question question) throws SQLException {
-		question.getSubject().setTeacher(DataAccess.get(Teacher.class,
+	public void getTeacher(Question question) throws SQLException {
+		question.getSubject().setTeacher(get(Teacher.class,
 				"SELECT Teachers.TeacherID, Person.* FROM Questions"
 				+ " INNER JOIN Subjects ON Questions.SubjectID = Subjects.SubjectID"
 				+ " INNER JOIN Teachers ON Subjects.TeacherID = Teachers.TeacherID"
@@ -83,7 +83,7 @@ public class QuestionAccess implements DataAccess<Question> {
 
 	@Override
 	public Question getOnly(String... primaryKeyValues) throws SQLException {
-		return DataAccess.get(Question.class,
+		return get(Question.class,
 				"SELECT * FROM Questions"
 				+ " INNER JOIN Subjects ON Questions.SubjectID = Subjects.SubjectID",
 				"Questions.QuestionID", primaryKeyValues[0]);
@@ -93,14 +93,14 @@ public class QuestionAccess implements DataAccess<Question> {
 	public List<Question> getAll(String... columnName_values) throws SQLException {
 		String selectFrom = "SELECT * FROM Questions"
 				+ " INNER JOIN Subjects ON Questions.SubjectID = Subjects.SubjectID";
-		return DataAccess.getList(Question.class, selectFrom, columnName_values);
+		return getList(Question.class, selectFrom, columnName_values);
 	}
 
 	@Override
 	public List<Question> getLimit(int offset, int limit, String... columnName_values) throws SQLException {
 		String selectFrom = "SELECT * FROM Questions LIMIT " + offset + ", " + limit
 				+ " INNER JOIN Subjects ON Questions.SubjectID = Subjects.SubjectID";
-		return DataAccess.getList(Question.class, selectFrom, columnName_values);
+		return getList(Question.class, selectFrom, columnName_values);
 	}
 
 }

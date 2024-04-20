@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import data.DataTransferObj.Score;
 import data.DataTransferObj.SelectedQuestion;
+import data.DataTransferObj.Student;
 import data.DataTransferObj.Submission;
-import utils.DataSourceFactory;
+import utils.SQLUtils;
 
 public class SubmissionAccess implements DataAccess<Submission> {
 	
@@ -17,7 +19,7 @@ public class SubmissionAccess implements DataAccess<Submission> {
 	
 	@Override
 	public boolean insert(Submission submission) throws SQLException {
-		connection = DataSourceFactory.getConnection();
+		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement = connection.prepareStatement("INSERT INTO Submissions VALUES (?,?,?,?,?)");
 		pStatement.setString(1, submission.getExam().getExamID().toString());
 		pStatement.setString(2, submission.getStudent().getStudentID());
@@ -25,13 +27,13 @@ public class SubmissionAccess implements DataAccess<Submission> {
 		pStatement.setDouble(4, submission.getScore());
 		pStatement.setString(5, submission.getAnswerSelectedsJSON());
 		boolean i = pStatement.executeUpdate() >= 1;
-		DataSourceFactory.closeConnection(connection);
+		SQLUtils.closeConnection(connection);
 		return i;
 	}
 
 	@Override
 	public boolean update(Submission submission) throws SQLException {
-		connection = DataSourceFactory.getConnection();
+		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement = connection.prepareStatement(
 				"UPDATE Submissions SET"
 						+ "TimeTaken=?,"
@@ -44,36 +46,25 @@ public class SubmissionAccess implements DataAccess<Submission> {
 		pStatement.setString(4, submission.getExam().getExamID().toString());
 		pStatement.setString(5, submission.getStudent().getStudentID());
 		boolean i = pStatement.executeUpdate() >= 1;
-		DataSourceFactory.closeConnection(connection);
+		SQLUtils.closeConnection(connection);
 		return i;
 	}
 
 	@Override
 	public boolean delete(String... primaryKeyValues) throws SQLException {
-		connection = DataSourceFactory.getConnection();
+		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement = connection.prepareStatement(
 				"DELETE FROM Submissions WHERE ExamID=? AND StudentID=?");
 		pStatement.setString(1, primaryKeyValues[0]);
 		pStatement.setString(2, primaryKeyValues[1]);
 		boolean i = pStatement.executeUpdate() >= 1;
-		DataSourceFactory.closeConnection(connection);
+		SQLUtils.closeConnection(connection);
 		return i;
 	}
 	
-	public List<SelectedQuestion> getSelectedQuestions(Submission submission) throws SQLException {
-		List<SelectedQuestion> selectedQuestions = new ArrayList<SelectedQuestion>();
-		Map<String, List<Integer>> answerSelectedsMap = submission.getAnswerSelectedsMap();
-		QuestionAccess questionAccess = new QuestionAccess();
-		for (Map.Entry<String, List<Integer>> entry : answerSelectedsMap.entrySet())
-			selectedQuestions.add(new SelectedQuestion(
-							questionAccess.getOnly(entry.getKey()),
-							entry.getValue()));
-		return selectedQuestions;
-	}
-
 	@Override
 	public Submission getOnly(String... primaryKeyValues) throws SQLException {
-		return DataAccess.get(Submission.class,
+		return get(Submission.class,
 					"SELECT * FROM Submissions"
 					+ " INNER JOIN Exams ON Submissions.ExamID = Exams.ExamID"
 					+ " INNER JOIN Students ON Submissions.StudentID = Students.StudentID"
@@ -90,7 +81,7 @@ public class SubmissionAccess implements DataAccess<Submission> {
 					+ " INNER JOIN Students ON Submissions.StudentID = Students.StudentID"
 					+ " INNER JOIN Subjects ON Exams.SubjectID = Subjects.SubjectID"
 					+ " INNER JOIN Person ON Students.PersonID = Person.PersonID";
-		return DataAccess.getList(Submission.class, selectFrom, columnName_values);
+		return getList(Submission.class, selectFrom, columnName_values);
 	}
 
 	@Override
@@ -100,7 +91,24 @@ public class SubmissionAccess implements DataAccess<Submission> {
 					+ " INNER JOIN Students ON Submissions.StudentID = Students.StudentID"
 					+ " INNER JOIN Subjects ON Exams.SubjectID = Subjects.SubjectID"
 					+ " INNER JOIN Person ON Students.PersonID = Person.PersonID";
-		return DataAccess.getList(Submission.class, selectFrom, columnName_values);
+		return getList(Submission.class, selectFrom, columnName_values);
+	}
+
+	public List<SelectedQuestion> getSelectedQuestions(Submission submission) throws SQLException {
+		List<SelectedQuestion> selectedQuestions = new ArrayList<SelectedQuestion>();
+		Map<String, List<Integer>> answerSelectedsMap = submission.getAnswerSelectedsMap();
+		QuestionAccess questionAccess = new QuestionAccess();
+		for (Map.Entry<String, List<Integer>> entry : answerSelectedsMap.entrySet())
+			selectedQuestions.add(new SelectedQuestion(
+							questionAccess.getOnly(entry.getKey()),
+							entry.getValue()));
+		return selectedQuestions;
+	}
+	
+	public List<Score> getStudentScores(Student student) throws SQLException {
+		return getList(Score.class,
+				"SELECT ExamID, Score FROM Submissions",
+				"StudentID", student.getStudentID());
 	}
 
 }

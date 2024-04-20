@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import data.DataTransferObj.Account;
-import utils.DataSourceFactory;
+import utils.SQLUtils;
 
 public class AccountAccess implements DataAccess<Account> {
 	
@@ -14,19 +14,19 @@ public class AccountAccess implements DataAccess<Account> {
 	
 	@Override
 	public boolean insert(Account account) throws SQLException {
-		connection = DataSourceFactory.getConnection();
+		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement = connection.prepareStatement(
 				"INSERT INTO Accounts VALUES (?,?)");
 		pStatement.setString(1, account.getPersonID());
 		pStatement.setString(2, account.getPassword());
 		boolean i = pStatement.executeUpdate() >= 1;
-		DataSourceFactory.closeConnection(connection);
+		SQLUtils.closeConnection(connection);
 		return i;
 	}
 
 	@Override
 	public boolean update(Account account) throws SQLException {
-		connection = DataSourceFactory.getConnection();
+		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement = connection.prepareStatement(
 				"UPDATE Accounts SET"
 						+ "Password=?"
@@ -34,22 +34,22 @@ public class AccountAccess implements DataAccess<Account> {
 		pStatement.setString(1, account.getPassword());
 		pStatement.setString(2, account.getPersonID());
 		boolean i = pStatement.executeUpdate() >= 1;
-		DataSourceFactory.closeConnection(connection);
+		SQLUtils.closeConnection(connection);
 		return i;
 	}
 
 	@Override
 	public boolean delete(String... primaryKeyValues) throws SQLException {
-		connection = DataSourceFactory.getConnection();
+		connection = SQLUtils.getConnection();
 		boolean i = connection.createStatement().executeUpdate(
 				"DELETE FROM Person WHERE PersonID = '" + primaryKeyValues[0] + "'") >= 1;
-		DataSourceFactory.closeConnection(connection);
+		SQLUtils.closeConnection(connection);
 		return i;
 	}
 
 	@Override
 	public Account getOnly(String... primaryKeyValues) throws SQLException {
-		return DataAccess.get(Account.class,
+		return get(Account.class,
 					"SELECT * FROM Accounts",
 					"PersonID", primaryKeyValues[0]);
 	}
@@ -57,13 +57,13 @@ public class AccountAccess implements DataAccess<Account> {
 	@Override
 	public List<Account> getAll(String... columnName_values) throws SQLException {
 		String selectFrom = "SELECT * FROM Accounts";
-		return DataAccess.getList(Account.class, selectFrom, columnName_values);
+		return getList(Account.class, selectFrom, columnName_values);
 	}
 
 	@Override
 	public List<Account> getLimit(int offset, int limit, String... columnName_values) throws SQLException {
 		String selectFrom = "SELECT * FROM Accounts LIMIT " + offset + ", " + limit;
-		return DataAccess.getList(Account.class, selectFrom, columnName_values);
+		return getList(Account.class, selectFrom, columnName_values);
 	}
 
 }

@@ -174,7 +174,7 @@ INSERT INTO SGroupStudents VALUES
 ('T00505', 'S007'),
 ('T00707', 'S008'),
 ('T00909', 'S009'),
-('T01010', 'S010');
+('T01010', 'S001');
 
 INSERT INTO Subjects VALUES
 ('T001S01', 'T001', 'Sinh'),
