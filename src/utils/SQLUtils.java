@@ -65,6 +65,9 @@ public class SQLUtils {
 	private static void testDataSource() {
 		Connection connection = SQLUtils.getConnection();
 		Person person = new Person("123", "Nguyen Van", "hehe", "a@mail", "0123");
+		if (connection != null) {
+			System.out.println("Connected to the database!");
+		}
 		try {
 			PreparedStatement pStatement = connection.prepareStatement(
 					"INSERT INTO Person VALUES (?,?,?,?,?)");

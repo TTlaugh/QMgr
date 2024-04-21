@@ -13,13 +13,14 @@ import javafx.scene.input.KeyCombination;
 public class Main extends Application {
 
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) throws Exception {
 		try {
+			System.out.println("hello");
 			// primaryStage.getIcons().add(new Image("/images/icon.png"));
 			primaryStage.setTitle("Quizz Server - HEHE");
 			primaryStage.show();
 
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Main.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Login.fxml"));
 			Parent root = (Parent) loader.load();
 			Scene scene = new Scene(root, Constant.ScreenSize.WIDTH, Constant.ScreenSize.HEIGHT);
 
@@ -29,7 +30,7 @@ public class Main extends Application {
 			primaryStage.setMaximized(true);
 			primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 
-			scene.setOnKeyPressed(KeyEventFunction.toggleFullScreen(primaryStage));
+//			scene.setOnKeyPressed(KeyEventFunction.toggleFullScreen(primaryStage));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

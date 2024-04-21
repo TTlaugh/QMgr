@@ -8,6 +8,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="900.0" prefWidth="1300.0" styleClass="white-background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controller.MainController">
@@ -152,6 +153,6 @@
             </ImageView>
          </graphic>
       </Button>
-      <AnchorPane fx:id="Anchor_Layout" layoutX="250.0" layoutY="74.0" prefHeight="825.0" prefWidth="1049.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="74.0" />
+      <StackPane fx:id="StackPane_Layout" layoutX="283.0" layoutY="110.0" prefHeight="830.0" prefWidth="1050.0" style="-fx-background-color: #9999;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
    </children>
 </AnchorPane>

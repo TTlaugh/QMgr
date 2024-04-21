@@ -14,6 +14,7 @@ import utils.SQLUtils;
 
 public class GroupManager {
 
+	// choose a Group
 	public List<Group> getGroups() {
 		try {
 			return new GroupAccess().getAll();
@@ -22,7 +23,8 @@ public class GroupManager {
 		}
 		return null;
 	}
-
+	
+	// new Group
 	public boolean addGroup(Group newGroup) {
 		try {
 			return new GroupAccess().insert(newGroup);

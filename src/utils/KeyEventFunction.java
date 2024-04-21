@@ -5,7 +5,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class KeyEventFunction {
-	
 	public static EventHandler<KeyEvent> toggleFullScreen (Stage stage) {
 		return new EventHandler<KeyEvent>() {
 			@Override
