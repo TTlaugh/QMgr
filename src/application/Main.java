@@ -15,8 +15,12 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		try {
+<<<<<<< HEAD:src/application/Main.java
 			System.out.println("hello");
 			// primaryStage.getIcons().add(new Image("/images/icon.png"));
+=======
+			primaryStage.getIcons().add(new Image("/imgs/icon.png"));
+>>>>>>> 20ef9c0 (add app icon to Main):src/main/java/application/Main.java
 			primaryStage.setTitle("Quizz Server - HEHE");
 			primaryStage.show();
 
