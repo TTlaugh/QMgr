@@ -15,7 +15,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-//			primaryStage.getIcons().add(new Image("/images/icon.png"));
+			primaryStage.getIcons().add(new Image("/imgs/icon.png"));
 			primaryStage.setTitle("Quizz Server - HEHE");
 			primaryStage.show();
 
