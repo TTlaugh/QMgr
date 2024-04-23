@@ -1,4 +1,4 @@
-package business.model;
+package main.java.business.model;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import utils.JsonUtils;
+import main.java.utils.JsonUtils;
 
 public class Question {
 
@@ -18,7 +18,8 @@ public class Question {
 	private List<String> answers;
 	private List<Integer> correctAnswers;
 
-	public Question(String questionID, Subject subject, int chapter, int difficulty, String content, List<String> answers,
+	public Question(String questionID, Subject subject, int chapter, int difficulty, String content,
+			List<String> answers,
 			List<Integer> correctAnswers) {
 		this.questionID = questionID;
 		this.subject = subject;
@@ -28,14 +29,13 @@ public class Question {
 		this.answers = answers;
 		this.correctAnswers = correctAnswers;
 	}
-	
+
 	public Question(ResultSet rs) throws SQLException {
 		this.questionID = rs.getString("QuestionID");
 		this.subject = new Subject(
 				rs.getString("SubjectID"),
 				null,
-				rs.getString("SubjectName")
-				);
+				rs.getString("SubjectName"));
 		this.chapter = rs.getInt("Chapter");
 		this.difficulty = rs.getInt("Difficulty");
 		this.content = rs.getString("Content");
@@ -58,48 +58,61 @@ public class Question {
 		this.answers = new ArrayList<>();
 		this.correctAnswers = new ArrayList<>();
 	}
-	
+
 	public String getQuestionID() {
 		return questionID;
 	}
+
 	public void setQuestionID(String questionID) {
 		this.questionID = questionID;
 	}
+
 	public Subject getSubject() {
 		return subject;
 	}
+
 	public void setSubject(Subject subject) {
 		this.subject = subject;
 	}
+
 	public int getChapter() {
 		return chapter;
 	}
+
 	public void setChapter(int chapter) {
 		this.chapter = chapter;
 	}
+
 	public int getDifficulty() {
 		return difficulty;
 	}
+
 	public void setDifficulty(int difficulty) {
 		this.difficulty = difficulty;
 	}
+
 	public String getContent() {
 		return content;
 	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}
+
 	public List<String> getAnswers() {
 		return answers;
 	}
+
 	public void setAnswers(List<String> answers) {
 		this.answers = answers;
 	}
+
 	public List<Integer> getCorrectAnswers() {
 		return correctAnswers;
 	}
+
 	public void setCorrectAnswers(List<Integer> correctAnswers) {
 		this.correctAnswers = correctAnswers;
 	}
-	
+
 }

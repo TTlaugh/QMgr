@@ -1,4 +1,4 @@
-package view.controller;
+package main.java.controller;
 
 import java.io.IOException;
 
@@ -22,11 +22,12 @@ public class LoginController {
 		(Anchor_SignIn).setVisible(false);
 		(Anchor_Regester).setVisible(true);
 	}
-	
+
 	public void Sign_In_Tranfer(ActionEvent event) throws IOException {
 		(Anchor_Regester).setVisible(false);
 		(Anchor_SignIn).setVisible(true);
 	}
+
 	public void Sign_In(ActionEvent event) throws IOException {
 		root = (Parent) FXMLLoader.load(getClass().getResource("/view/fxml/Main.fxml"));
 		((Node) event.getSource()).getScene().setRoot(root);

@@ -1,4 +1,4 @@
-package business.model;
+package main.java.business.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,7 +9,7 @@ public class Student extends Person {
 
 	private String studentID;
 	private List<Score> scores;
-	
+
 	public Student(String personID, String firstName, String lastName, String phone, String email, String studentID,
 			List<Score> scores) {
 		super(personID, firstName, lastName, phone, email);
@@ -22,15 +22,14 @@ public class Student extends Person {
 		this.studentID = null;
 		this.scores = new ArrayList<>();
 	}
-	
+
 	public Student(ResultSet rs) throws SQLException {
 		super(
 				rs.getString("PersonID"),
 				rs.getString("FirstName"),
 				rs.getString("LastName"),
 				rs.getString("Phone"),
-				rs.getString("Email")
-				);
+				rs.getString("Email"));
 		this.studentID = rs.getString("StudentID");
 		this.scores = new ArrayList<>();
 	}

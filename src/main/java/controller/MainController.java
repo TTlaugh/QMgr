@@ -1,4 +1,4 @@
-package controller;
+package main.java.controller;
 
 import java.io.IOException;
 
@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 public class MainController {
 	private Parent root = null;
-	
+
 	@FXML
 	private StackPane StackPane_Layout;
 
@@ -27,6 +27,7 @@ public class MainController {
 		root = (Parent) FXMLLoader.load(getClass().getResource("/view/fxml/Start_test.fxml"));
 		((Node) event.getSource()).getScene().setRoot(root);
 	}
+
 	public void Back_Exam(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Exam.fxml"));
 		StackPane_Layout.getChildren().clear();
@@ -44,6 +45,7 @@ public class MainController {
 		StackPane_Layout.getChildren().clear();
 		StackPane_Layout.getChildren().add(loader.load());
 	}
+
 	public void Back_Group(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Group.fxml"));
 		StackPane_Layout.getChildren().clear();

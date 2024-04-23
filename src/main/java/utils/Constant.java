@@ -1,11 +1,11 @@
-package utils;
+package main.java.utils;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.stage.Screen;
 
 public final class Constant {
-	
+
 	public final class MySQLProperties {
 		public static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 		public static final String URL = "jdbc:mysql://localhost:3306/quizzserver";

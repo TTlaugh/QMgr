@@ -1,16 +1,16 @@
-package data;
+package main.java.data;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import business.model.Account;
-import utils.SQLUtils;
+import main.java.business.model.Account;
+import main.java.utils.SQLUtils;
 
 public class AccountAccess implements DataAccess<Account> {
-	
+
 	private Connection connection;
-	
+
 	@Override
 	public boolean insert(Account account) throws SQLException {
 		connection = SQLUtils.getConnection();
@@ -49,8 +49,8 @@ public class AccountAccess implements DataAccess<Account> {
 	@Override
 	public Account get(String... primaryKeyValues) throws SQLException {
 		return get(Account.class,
-					"SELECT * FROM Accounts",
-					"PersonID", primaryKeyValues[0]);
+				"SELECT * FROM Accounts",
+				"PersonID", primaryKeyValues[0]);
 	}
 
 }

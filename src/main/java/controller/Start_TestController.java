@@ -1,4 +1,4 @@
-package view.controller;
+package main.java.controller;
 
 import java.io.IOException;
 
@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 public class Start_TestController {
 	private Parent root = null;
+
 	public void Back_Test(ActionEvent event) throws IOException {
 		root = (Parent) FXMLLoader.load(getClass().getResource("/view/fxml/Main.fxml"));
 		((Node) event.getSource()).getScene().setRoot(root);

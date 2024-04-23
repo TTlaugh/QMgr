@@ -1,13 +1,13 @@
-package data;
+package main.java.data;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import business.model.Subject;
-import business.model.Teacher;
-import utils.SQLUtils;
+import main.java.business.model.Subject;
+import main.java.business.model.Teacher;
+import main.java.utils.SQLUtils;
 
 public class SubjectAccess implements DataAccess<Subject> {
 
@@ -52,26 +52,26 @@ public class SubjectAccess implements DataAccess<Subject> {
 		SQLUtils.closeConnection(connection);
 		return i;
 	}
-	
+
 	@Override
 	public Subject get(String... primaryKeyValues) throws SQLException {
 		return get(Subject.class,
 				"SELECT * FROM Subjects"
-				+ " INNER JOIN Teachers ON Subjects.TeacherID = Teachers.TeacherID",
+						+ " INNER JOIN Teachers ON Subjects.TeacherID = Teachers.TeacherID",
 				"Subjects.SubjectID", primaryKeyValues[0]);
 	}
-	
+
 	public List<Subject> getAll() throws SQLException {
 		return getList(Subject.class,
 				"SELECT * FROM Subjects"
-				+ " INNER JOIN Teachers ON Subjects.TeacherID = Teachers.TeacherID");
+						+ " INNER JOIN Teachers ON Subjects.TeacherID = Teachers.TeacherID");
 	}
 
 	public void getTeacher(Subject subject) throws SQLException {
 		subject.setTeacher(get(Teacher.class,
 				"SELECT Teachers.TeacherID, Person.* FROM Subjects"
-				+ " INNER JOIN Teachers ON Subjects.TeacherID = Teachers.TeacherID"
-				+ " INNER JOIN Person ON Teachers.PersonID = Person.PersonID",
+						+ " INNER JOIN Teachers ON Subjects.TeacherID = Teachers.TeacherID"
+						+ " INNER JOIN Person ON Teachers.PersonID = Person.PersonID",
 				"Subjects.SubjectID", subject.getSubjectID()));
 	}
 

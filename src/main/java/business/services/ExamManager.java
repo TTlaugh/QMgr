@@ -1,13 +1,13 @@
-package business.services;
+package main.java.business.services;
 
 import java.sql.SQLException;
 import java.util.List;
 
 import com.mysql.cj.exceptions.MysqlErrorNumbers;
 
-import business.model.Exam;
-import data.ExamAccess;
-import utils.SQLUtils;
+import main.java.business.model.Exam;
+import main.java.data.ExamAccess;
+import main.java.utils.SQLUtils;
 
 public class ExamManager {
 
@@ -19,19 +19,14 @@ public class ExamManager {
 		}
 		return null;
 	}
-<<<<<<< HEAD
 
-	public boolean addExam(Exam newExam) {
-=======
-	
 	public boolean addExam(Exam newExam) throws SQLException {
->>>>>>> main
 		try {
 			return new ExamAccess().insert(newExam);
 		} catch (SQLException e) {
 			SQLUtils.printSQLException(e);
 			if (e.getErrorCode() == MysqlErrorNumbers.ER_DUP_ENTRY)
-				throw new SQLException("ExamID: '"+newExam.getExamID()+"' already exists", e);
+				throw new SQLException("ExamID: '" + newExam.getExamID() + "' already exists", e);
 		}
 		return false;
 	}

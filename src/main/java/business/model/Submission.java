@@ -1,4 +1,4 @@
-package business.model;
+package main.java.business.model;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import utils.JsonUtils;
+import main.java.utils.JsonUtils;
 
 public class Submission {
 
@@ -15,7 +15,7 @@ public class Submission {
 	private int timeTaken;
 	private double score;
 	private String answerSelectedsJSON;
-	
+
 	public Submission(Exam exam, Student student, int timeTaken, double score, String answerSelecteds) {
 		this.exam = exam;
 		this.student = student;
@@ -23,7 +23,7 @@ public class Submission {
 		this.score = score;
 		this.answerSelectedsJSON = answerSelecteds;
 	}
-	
+
 	public Submission(ResultSet rs) throws SQLException {
 		this.exam = new Exam(rs);
 		this.student = new Student(rs);
@@ -80,7 +80,7 @@ public class Submission {
 			return null;
 		}
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Submission [exam=" + exam + ", student=" + student + ", timeTaken=" + timeTaken + ", score=" + score

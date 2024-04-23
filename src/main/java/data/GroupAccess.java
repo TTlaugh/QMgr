@@ -1,18 +1,18 @@
-package data;
+package main.java.data;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import business.model.Group;
-import business.model.Student;
-import utils.SQLUtils;
+import main.java.business.model.Group;
+import main.java.business.model.Student;
+import main.java.utils.SQLUtils;
 
 public class GroupAccess implements DataAccess<Group> {
 
 	private Connection connection;
-	
+
 	@Override
 	public boolean insert(Group group) throws SQLException {
 		connection = SQLUtils.getConnection();
@@ -30,10 +30,10 @@ public class GroupAccess implements DataAccess<Group> {
 		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement = connection.prepareStatement(
 				"UPDATE SGroups SET"
-				+ "SGroupID=?,"
-				+ "TeacherID=?,"
-				+ "SGroupName=?"
-				+ "WHERE SGroupID=?");
+						+ "SGroupID=?,"
+						+ "TeacherID=?,"
+						+ "SGroupName=?"
+						+ "WHERE SGroupID=?");
 		pStatement.setString(1, group.getTeacher().getTeacherID());
 		pStatement.setString(2, group.getGroupName());
 		pStatement.setString(3, group.getGroupID());
@@ -50,27 +50,27 @@ public class GroupAccess implements DataAccess<Group> {
 		SQLUtils.closeConnection(connection);
 		return i;
 	}
-	
+
 	@Override
 	public Group get(String... primaryKeyValues) throws SQLException {
 		return get(Group.class,
 				"SELECT * FROM SGroups"
-				+ " INNER JOIN Teachers ON SGroups.TeacherID = Teachers.TeacherID",
+						+ " INNER JOIN Teachers ON SGroups.TeacherID = Teachers.TeacherID",
 				"SGroups.SGroupID", primaryKeyValues[0]);
 	}
 
 	public List<Group> getAll() throws SQLException {
 		return getList(Group.class,
 				"SELECT * FROM SGroups"
-				+ " INNER JOIN Teachers ON SGroups.TeacherID = Teachers.TeacherID");
+						+ " INNER JOIN Teachers ON SGroups.TeacherID = Teachers.TeacherID");
 	}
 
 	public void getStudents(Group group) throws SQLException {
 		group.setStudents(getList(Student.class,
 				"SELECT Students.StudentID, Person.* FROM SGroups"
-				+ " INNER JOIN SGroupStudents ON SGroups.SGroupID = SGroupStudents.SGroupID"
-				+ " INNER JOIN Students ON SGroupStudents.StudentID = Students.StudentID"
-				+ " INNER JOIN Person ON Students.PersonID = Person.PersonID",
+						+ " INNER JOIN SGroupStudents ON SGroups.SGroupID = SGroupStudents.SGroupID"
+						+ " INNER JOIN Students ON SGroupStudents.StudentID = Students.StudentID"
+						+ " INNER JOIN Person ON Students.PersonID = Person.PersonID",
 				"SGroups.SGroupID", group.getGroupID()));
 	}
 

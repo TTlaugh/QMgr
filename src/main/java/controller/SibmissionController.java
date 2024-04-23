@@ -1,4 +1,4 @@
-package view.controller;
+package main.java.controller;
 
 public class SibmissionController {
 

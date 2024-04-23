@@ -1,4 +1,4 @@
-package utils;
+package main.java.utils;
 
 public class DateTime {
 
@@ -36,7 +36,7 @@ public class DateTime {
 		this.minute = datetime.substring(14, 16);
 		try {
 			this.second = datetime.substring(17, 19);
-		} catch(IndexOutOfBoundsException e) {
+		} catch (IndexOutOfBoundsException e) {
 			this.second = "00";
 		}
 	}
@@ -89,7 +89,7 @@ public class DateTime {
 	public void setMinute(String minute) {
 		this.minute = minute;
 	}
-	
+
 	public String getSecond() {
 		return second;
 	}

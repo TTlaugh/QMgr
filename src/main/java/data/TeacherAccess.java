@@ -1,10 +1,10 @@
-package data;
+package main.java.data;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import business.model.Teacher;
-import utils.SQLUtils;
+import main.java.business.model.Teacher;
+import main.java.utils.SQLUtils;
 
 public class TeacherAccess implements DataAccess<Teacher> {
 
@@ -65,7 +65,7 @@ public class TeacherAccess implements DataAccess<Teacher> {
 	public Teacher get(String... primaryKeyValues) throws SQLException {
 		return get(Teacher.class,
 				"SELECT Teachers.TeacherID, Person.* FROM Teachers"
-				+ " INNER JOIN Person ON Teachers.PersonID = Person.PersonID",
+						+ " INNER JOIN Person ON Teachers.PersonID = Person.PersonID",
 				"Teachers.TeacherID", primaryKeyValues[0]);
 	}
 

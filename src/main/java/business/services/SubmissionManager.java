@@ -1,15 +1,15 @@
-package business.services;
+package main.java.business.services;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import business.model.SelectedQuestion;
-import business.model.Submission;
-import data.SubmissionAccess;
-import utils.SQLUtils;
+import main.java.business.model.SelectedQuestion;
+import main.java.business.model.Submission;
+import main.java.data.SubmissionAccess;
+import main.java.utils.SQLUtils;
 
 public class SubmissionManager {
-	
+
 	public List<Submission> getSubmissions() {
 		try {
 			return new SubmissionAccess().getAll();
@@ -18,7 +18,7 @@ public class SubmissionManager {
 		}
 		return null;
 	}
-	
+
 	public boolean deleteSubmission(String submissionID) {
 		try {
 			return new SubmissionAccess().delete(submissionID);
@@ -27,7 +27,7 @@ public class SubmissionManager {
 		}
 		return false;
 	}
-	
+
 	public List<SelectedQuestion> getSelectedQuestions(Submission submission) {
 		try {
 			return new SubmissionAccess().getSelectedQuestions(submission);

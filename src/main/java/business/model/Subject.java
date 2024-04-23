@@ -1,4 +1,4 @@
-package business.model;
+package main.java.business.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,13 +8,13 @@ public class Subject {
 	private String subjectID;
 	private Teacher teacher;
 	private String subjectName;
-	
+
 	public Subject(String subjectID, Teacher teacher, String subjectName) {
 		this.subjectID = subjectID;
 		this.teacher = teacher;
 		this.subjectName = subjectName;
 	}
-	
+
 	public Subject(ResultSet rs) throws SQLException {
 		this.subjectID = rs.getString("SubjectID");
 		this.teacher = null;
@@ -49,5 +49,5 @@ public class Subject {
 	public String toString() {
 		return "Subject [subjectID=" + subjectID + ", teacher=" + teacher + ", subjectName=" + subjectName + "]";
 	}
-	
+
 }

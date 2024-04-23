@@ -1,4 +1,4 @@
-package business.model;
+package main.java.business.model;
 
 public class Person {
 
@@ -7,7 +7,7 @@ public class Person {
 	private String lastName;
 	private String phone;
 	private String email;
-	
+
 	public Person(String personID, String firstName, String lastName, String phone, String email) {
 		this.personID = personID;
 		this.firstName = firstName;
@@ -15,6 +15,7 @@ public class Person {
 		this.phone = phone;
 		this.email = email;
 	}
+
 	public Person() {
 		this.personID = null;
 		this.firstName = null;
@@ -68,5 +69,5 @@ public class Person {
 		return "Person [personID=" + personID + ", firstName=" + firstName + ", lastName=" + lastName + ", phone="
 				+ phone + ", email=" + email + "]";
 	}
-	
+
 }

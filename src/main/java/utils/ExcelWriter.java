@@ -1,4 +1,4 @@
-package utils;
+package main.java.utils;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,7 +17,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public abstract class ExcelWriter {
-	
+
 	public <T> void writeExcel(String sheetName, List<T> dataList, String excelFilePath) throws IOException {
 		Workbook workbook = getWorkbook(excelFilePath);
 		Sheet sheet = workbook.createSheet(sheetName);
@@ -51,15 +51,17 @@ public abstract class ExcelWriter {
 		return workbook;
 	}
 
-	public void writeHeader(Sheet sheet, int rowIndex) { }
+	public void writeHeader(Sheet sheet, int rowIndex) {
+	}
 
 	public abstract <T> void writeData(T data, Row row);
 
-	public void writeFooter(Sheet sheet, int rowIndex) { }
+	public void writeFooter(Sheet sheet, int rowIndex) {
+	}
 
 	public static CellStyle createStyleForHeader(Sheet sheet) {
 		Font font = sheet.getWorkbook().createFont();
-		font.setFontName("Arial"); 
+		font.setFontName("Arial");
 		font.setBold(true);
 		font.setFontHeightInPoints((short) 14);
 		font.setColor(IndexedColors.WHITE.getIndex());

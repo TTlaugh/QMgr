@@ -1,4 +1,4 @@
-package business.controller;
+package main.java.controller;
 
 import java.io.IOException;
 

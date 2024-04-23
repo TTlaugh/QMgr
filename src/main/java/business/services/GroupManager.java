@@ -1,25 +1,20 @@
-package business.services;
+package main.java.business.services;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-
 import com.mysql.cj.exceptions.MysqlErrorNumbers;
 
-import business.model.Group;
-import business.model.Score;
-import business.model.Student;
-import data.GroupAccess;
-import data.GroupStudentAccess;
-import data.StudentAccess;
-import utils.ExcelReader;
-import utils.ExcelWriter;
-import utils.SQLUtils;
+import main.java.business.model.Group;
+import main.java.business.model.Score;
+import main.java.business.model.Student;
+import main.java.data.GroupAccess;
+import main.java.data.GroupStudentAccess;
+import main.java.data.StudentAccess;
+import main.java.utils.ExcelReader;
+import main.java.utils.ExcelWriter;
+import main.java.utils.SQLUtils;
 
 public class GroupManager {
 
@@ -33,18 +28,18 @@ public class GroupManager {
 		return null;
 	}
 
-<<<<<<< HEAD
 	// new Group
-	public boolean addGroup(Group newGroup) {
-=======
+	public boolean btnaddGroup(Group newGroup) {
+		return true;
+	}
+
 	public boolean addGroup(Group newGroup) throws SQLException {
->>>>>>> main
 		try {
 			return new GroupAccess().insert(newGroup);
 		} catch (SQLException e) {
 			SQLUtils.printSQLException(e);
 			if (e.getErrorCode() == MysqlErrorNumbers.ER_DUP_ENTRY)
-				throw new SQLException("GroupID: '"+newGroup.getGroupID()+"' already exists", e);
+				throw new SQLException("GroupID: '" + newGroup.getGroupID() + "' already exists", e);
 		}
 		return false;
 	}
@@ -74,20 +69,20 @@ public class GroupManager {
 			SQLUtils.printSQLException(e);
 		}
 	}
-<<<<<<< HEAD
 
-	public boolean addStudentToGroup(Group group, Student student) {
-=======
-	
+	public boolean btnaddStudentToGroup(Group group, Student student) throws SQLException {
+		return true;
+	}
+
 	public boolean addStudentToGroup(Group group, Student student) throws SQLException {
->>>>>>> main
+
 		try {
 			new StudentAccess().insert(student);
 			new GroupStudentAccess().addStudent(group.getGroupID(), student.getStudentID());
 		} catch (SQLException e) {
 			SQLUtils.printSQLException(e);
 			if (e.getErrorCode() == MysqlErrorNumbers.ER_DUP_ENTRY)
-				throw new SQLException("StudentID: '"+student.getStudentID()+"' already exists", e);
+				throw new SQLException("StudentID: '" + student.getStudentID() + "' already exists", e);
 		}
 		return false;
 	}
@@ -112,13 +107,12 @@ public class GroupManager {
 		return false;
 
 	}
-<<<<<<< HEAD
 
-	public List<Score> getStudentScores(Student student) {
-=======
-	
+	// public List<Score> getStudentScores(Student student) {
+	// }
+
 	public boolean importStudent(Group group, String excelFilePath) throws SQLException {
->>>>>>> main
+
 		try {
 			List<Student> students = new StudentExcelReader().readExcel(excelFilePath);
 			for (Student student : students) {
@@ -189,25 +183,44 @@ class StudentExcelWriter extends ExcelWriter {
 		CellStyle cellStyle = createStyleForHeader(sheet);
 		Row row = sheet.createRow(rowIndex);
 		Cell cell = null;
-		cell = row.createCell(0); cell.setCellStyle(cellStyle); cell.setCellValue("ID");
-		cell = row.createCell(1); cell.setCellStyle(cellStyle); cell.setCellValue("First Name");
-		cell = row.createCell(2); cell.setCellStyle(cellStyle); cell.setCellValue("Last Name");
-		cell = row.createCell(3); cell.setCellStyle(cellStyle); cell.setCellValue("Phone");
-		cell = row.createCell(4); cell.setCellStyle(cellStyle); cell.setCellValue("Email");
-		cell = row.createCell(5); cell.setCellStyle(cellStyle); cell.setCellValue("Scores");
+		cell = row.createCell(0);
+		cell.setCellStyle(cellStyle);
+		cell.setCellValue("ID");
+		cell = row.createCell(1);
+		cell.setCellStyle(cellStyle);
+		cell.setCellValue("First Name");
+		cell = row.createCell(2);
+		cell.setCellStyle(cellStyle);
+		cell.setCellValue("Last Name");
+		cell = row.createCell(3);
+		cell.setCellStyle(cellStyle);
+		cell.setCellValue("Phone");
+		cell = row.createCell(4);
+		cell.setCellStyle(cellStyle);
+		cell.setCellValue("Email");
+		cell = row.createCell(5);
+		cell.setCellStyle(cellStyle);
+		cell.setCellValue("Scores");
 	}
 
 	@Override
 	public <T> void writeData(T data, Row row) {
 		Student student = (Student) data;
-		Cell cell = null; int colIndex = 0;
-		cell = row.createCell(colIndex++); cell.setCellValue(student.getStudentID());
-		cell = row.createCell(colIndex++); cell.setCellValue(student.getFirstName());
-		cell = row.createCell(colIndex++); cell.setCellValue(student.getLastName());
-		cell = row.createCell(colIndex++); cell.setCellValue(student.getPhone());
-		cell = row.createCell(colIndex++); cell.setCellValue(student.getEmail());
+		Cell cell = null;
+		int colIndex = 0;
+		cell = row.createCell(colIndex++);
+		cell.setCellValue(student.getStudentID());
+		cell = row.createCell(colIndex++);
+		cell.setCellValue(student.getFirstName());
+		cell = row.createCell(colIndex++);
+		cell.setCellValue(student.getLastName());
+		cell = row.createCell(colIndex++);
+		cell.setCellValue(student.getPhone());
+		cell = row.createCell(colIndex++);
+		cell.setCellValue(student.getEmail());
 		for (Score score : student.getScores()) {
-			cell = row.createCell(colIndex++); cell.setCellValue(score.getScore());
+			cell = row.createCell(colIndex++);
+			cell.setCellValue(score.getScore());
 		}
 	}
 }

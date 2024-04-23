@@ -1,4 +1,4 @@
-package view.controller;
+package main.java.controller;
 
 import java.io.IOException;
 
@@ -12,7 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
-import services.GroupManager;
+import main.java.business.services.GroupManager;
 
 public class GroupController {
 	private Scene scene = null;

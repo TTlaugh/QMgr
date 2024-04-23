@@ -1,11 +1,11 @@
-package business.model;
+package main.java.business.model;
 
 import java.util.List;
 
 public class SelectedQuestion extends Question {
-	
+
 	private List<Integer> selectedAnswers;
-	
+
 	public SelectedQuestion(Question question, List<Integer> selectedAnswers) {
 		super(
 				question.getQuestionID(),
@@ -14,8 +14,7 @@ public class SelectedQuestion extends Question {
 				question.getDifficulty(),
 				question.getContent(),
 				question.getAnswers(),
-				question.getCorrectAnswers()
-				);
+				question.getCorrectAnswers());
 		this.selectedAnswers = selectedAnswers;
 	}
 
