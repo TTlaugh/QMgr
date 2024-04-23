@@ -1,9 +1,5 @@
 package application;
-<<<<<<< HEAD:src/application/Main.java
 
-=======
-	
->>>>>>> 5e8e4ffabfdbebdf84185c65e8014c172afd3dda:src/main/java/application/Main.java
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -19,24 +15,22 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		try {
-<<<<<<< HEAD:src/application/Main.java
-<<<<<<< HEAD:src/application/Main.java
 			System.out.println("hello");
 			// primaryStage.getIcons().add(new Image("/images/icon.png"));
-=======
+
 			primaryStage.getIcons().add(new Image("/imgs/icon.png"));
->>>>>>> 20ef9c0 (add app icon to Main):src/main/java/application/Main.java
+
 			primaryStage.setTitle("Quizz Server - HEHE");
 			primaryStage.show();
 
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Login.fxml"));
-=======
+
 			primaryStage.getIcons().add(new Image("/imgs/icon.png"));
 			primaryStage.setTitle("Quizz Server - HEHE");
 			primaryStage.show();
 
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
->>>>>>> 5e8e4ffabfdbebdf84185c65e8014c172afd3dda:src/main/java/application/Main.java
+
 			Parent root = (Parent) loader.load();
 			Scene scene = new Scene(root, Constant.ScreenSize.WIDTH, Constant.ScreenSize.HEIGHT);
 
@@ -46,7 +40,7 @@ public class Main extends Application {
 			primaryStage.setMaximized(true);
 			primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 
-//			scene.setOnKeyPressed(KeyEventFunction.toggleFullScreen(primaryStage));
+			// scene.setOnKeyPressed(KeyEventFunction.toggleFullScreen(primaryStage));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

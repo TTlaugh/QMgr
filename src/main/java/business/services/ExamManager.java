@@ -8,7 +8,7 @@ import data.ExamAccess;
 import utils.SQLUtils;
 
 public class ExamManager {
-	
+
 	public List<Exam> getExams() {
 		try {
 			return new ExamAccess().getAll();
@@ -17,7 +17,7 @@ public class ExamManager {
 		}
 		return null;
 	}
-	
+
 	public boolean addExam(Exam newExam) {
 		try {
 			return new ExamAccess().insert(newExam);
@@ -26,7 +26,7 @@ public class ExamManager {
 		}
 		return false;
 	}
-	
+
 	public boolean editExam(Exam newExam) {
 		try {
 			return new ExamAccess().update(newExam);
@@ -35,7 +35,7 @@ public class ExamManager {
 		}
 		return false;
 	}
-	
+
 	public boolean deleteExam(String examID) {
 		try {
 			return new ExamAccess().delete(examID);

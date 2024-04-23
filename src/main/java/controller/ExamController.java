@@ -1,4 +1,4 @@
-package view.controller;
+package business.controller;
 
 import java.io.IOException;
 
@@ -8,11 +8,10 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 
-
 public class ExamController {
 
 	private Scene scene = null;
-	
+
 	public void Exam_Tranfer_ExamAdd_Quizz(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Exam_add.fxml"));
 		scene = (Scene) ((Node) event.getSource()).getScene();
@@ -28,7 +27,7 @@ public class ExamController {
 		myStackPane.getChildren().clear();
 		myStackPane.getChildren().add(loader.load());
 	}
-	
+
 	public void Back_Exam(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Exam.fxml"));
 		scene = (Scene) ((Node) event.getSource()).getScene();

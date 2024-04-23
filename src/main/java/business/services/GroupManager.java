@@ -23,7 +23,7 @@ public class GroupManager {
 		}
 		return null;
 	}
-	
+
 	// new Group
 	public boolean addGroup(Group newGroup) {
 		try {
@@ -59,7 +59,7 @@ public class GroupManager {
 			SQLUtils.printSQLException(e);
 		}
 	}
-	
+
 	public boolean addStudentToGroup(Group group, Student student) {
 		try {
 			new StudentAccess().insert(student);
@@ -69,7 +69,7 @@ public class GroupManager {
 		}
 		return false;
 	}
-	
+
 	public boolean removeStudentFromGroup(Group group, Student student) {
 		try {
 			new GroupStudentAccess().removeStudent(group.getGroupID(), student.getStudentID());
@@ -80,7 +80,7 @@ public class GroupManager {
 		}
 		return false;
 	}
-	
+
 	public boolean editStudent(Student student) {
 		try {
 			return new StudentAccess().update(student);
@@ -88,9 +88,9 @@ public class GroupManager {
 			SQLUtils.printSQLException(e);
 		}
 		return false;
-		
+
 	}
-	
+
 	public List<Score> getStudentScores(Student student) {
 		try {
 			return new SubmissionAccess().getStudentScores(student);

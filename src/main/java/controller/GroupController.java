@@ -1,4 +1,4 @@
- package view.controller;
+package view.controller;
 
 import java.io.IOException;
 
@@ -20,21 +20,24 @@ public class GroupController {
 	private TextField textField_GroupID;
 	@FXML
 	private TextField textField_Name;
-	@FXML 
+	@FXML
 	private Button button_Save;
 	@FXML
 	private ComboBox<String> comboBox_Group;
-	
-	private  GroupManager groupManager = new GroupManager();
-	public  void loadComboBox_Group() {
-		
+
+	private GroupManager groupManager = new GroupManager();
+
+	public void loadComboBox_Group() {
+
 	}
-	public void addNewGroup()throws IOException  {
+
+	public void addNewGroup() throws IOException {
 		textField_GroupID.setDisable(false);
 		textField_Name.setDisable(false);
 		button_Save.setDisable(false);
 		System.out.println(groupManager.getGroups());
 	}
+
 	public void Group_Tranfer_GroupAdd_Quizz(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Group_add.fxml"));
 		scene = (Scene) ((Node) event.getSource()).getScene();
