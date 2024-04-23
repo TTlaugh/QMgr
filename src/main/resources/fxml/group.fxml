@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1050.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controller.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1050.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controller.GroupController">
    <children>
       <HBox alignment="CENTER" fillHeight="false" layoutX="30.0" layoutY="751.0" maxHeight="-Infinity" prefHeight="35.0" prefWidth="267.0" styleClass="round-layout" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="30.0">
          <children>
@@ -41,13 +41,13 @@
             </ImageView>
          </children>
       </HBox>
-      <ComboBox layoutX="30.0" layoutY="88.0" prefHeight="35.0" prefWidth="195.0" promptText="Chose a group" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="88.0">
+      <ComboBox fx:id="ComboBox_Group" layoutX="30.0" layoutY="88.0" prefHeight="35.0" prefWidth="195.0" promptText="Chose a group" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="88.0">
          <styleClass>
             <String fx:value="transparent" />
             <String fx:value="round-layout" />
          </styleClass>
       </ComboBox>
-      <TextField layoutX="350.0" layoutY="88.0" prefHeight="35.0" prefWidth="165.0" promptText="Group ID" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="88.0">
+      <TextField fx:id="textField_GroupID" disable="true" layoutX="350.0" layoutY="88.0" prefHeight="35.0" prefWidth="165.0" promptText="Group ID" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="88.0">
          <styleClass>
             <String fx:value="transparent" />
             <String fx:value="round-layout" />
@@ -56,7 +56,7 @@
             <Font size="15.0" />
          </font>
       </TextField>
-      <TextField layoutX="522.0" layoutY="88.0" prefHeight="35.0" prefWidth="234.0" promptText="Name" AnchorPane.leftAnchor="522.0" AnchorPane.topAnchor="88.0">
+      <TextField fx:id="textField_Name" disable="true" layoutX="522.0" layoutY="88.0" prefHeight="35.0" prefWidth="234.0" promptText="Name" AnchorPane.leftAnchor="522.0" AnchorPane.topAnchor="88.0">
          <styleClass>
             <String fx:value="transparent" />
             <String fx:value="round-layout" />
@@ -87,12 +87,12 @@
             <Font name="Kristen ITC" size="47.0" />
          </font>
       </Label>
-      <Button layoutX="231.0" layoutY="88.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="111.0" text="New Group" textFill="WHITE" AnchorPane.leftAnchor="231.0" AnchorPane.topAnchor="88.0">
+      <Button layoutX="231.0" layoutY="88.0" mnemonicParsing="false" onAction="#addNewGroup" prefHeight="35.0" prefWidth="111.0" text="New Group" textFill="WHITE" AnchorPane.leftAnchor="231.0" AnchorPane.topAnchor="88.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
-      <Button layoutX="764.0" layoutY="88.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="66.0" text="Save" textFill="WHITE" AnchorPane.leftAnchor="764.0">
+      <Button fx:id="button_Save" disable="true" layoutX="764.0" layoutY="88.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="66.0" text="Save" textFill="WHITE" AnchorPane.leftAnchor="764.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
