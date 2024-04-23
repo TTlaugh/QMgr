@@ -5,15 +5,22 @@ public class Person {
 	private String personID;
 	private String firstName;
 	private String lastName;
-	private String email;
 	private String phone;
+	private String email;
 	
-	public Person(String personID, String firstName, String lastName, String email, String phone) {
+	public Person(String personID, String firstName, String lastName, String phone, String email) {
 		this.personID = personID;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.email = email;
 		this.phone = phone;
+		this.email = email;
+	}
+	public Person() {
+		this.personID = null;
+		this.firstName = null;
+		this.lastName = null;
+		this.phone = null;
+		this.email = null;
 	}
 
 	public String getPersonID() {
@@ -40,14 +47,6 @@ public class Person {
 		this.lastName = lastName;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getPhone() {
 		return phone;
 	}
@@ -56,10 +55,18 @@ public class Person {
 		this.phone = phone;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@Override
 	public String toString() {
-		return "Person [personID=" + personID + ", firstName=" + firstName + ", lastName=" + lastName + ", email="
-				+ email + ", phone=" + phone + "]";
+		return "Person [personID=" + personID + ", firstName=" + firstName + ", lastName=" + lastName + ", phone="
+				+ phone + ", email=" + email + "]";
 	}
 	
 }

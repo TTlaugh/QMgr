@@ -3,6 +3,7 @@ package business.model;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import utils.JsonUtils;
@@ -14,10 +15,10 @@ public class Question {
 	private int chapter;
 	private int difficulty;
 	private String content;
-	private String answers[];
+	private List<String> answers;
 	private List<Integer> correctAnswers;
 
-	public Question(String questionID, Subject subject, int chapter, int difficulty, String content, String[] answers,
+	public Question(String questionID, Subject subject, int chapter, int difficulty, String content, List<String> answers,
 			List<Integer> correctAnswers) {
 		this.questionID = questionID;
 		this.subject = subject;
@@ -38,8 +39,9 @@ public class Question {
 		this.chapter = rs.getInt("Chapter");
 		this.difficulty = rs.getInt("Difficulty");
 		this.content = rs.getString("Content");
-		for (int i = 0; i < 4; i++)
-			this.answers[i] = rs.getString("Answer" + (i+1));
+		this.answers = new ArrayList<>();
+		for (int i = 1; i <= 4; i++)
+			this.answers.add(rs.getString("Answer" + i));
 		try {
 			this.correctAnswers = JsonUtils.jsonToList(rs.getString("CorrectAnswers"), Integer.class);
 		} catch (IOException e) {
@@ -47,6 +49,16 @@ public class Question {
 		}
 	}
 
+	public Question() {
+		this.questionID = null;
+		this.subject = null;
+		this.chapter = 0;
+		this.difficulty = 0;
+		this.content = null;
+		this.answers = new ArrayList<>();
+		this.correctAnswers = new ArrayList<>();
+	}
+	
 	public String getQuestionID() {
 		return questionID;
 	}
@@ -77,10 +89,10 @@ public class Question {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String[] getAnswers() {
+	public List<String> getAnswers() {
 		return answers;
 	}
-	public void setAnswers(String[] answers) {
+	public void setAnswers(List<String> answers) {
 		this.answers = answers;
 	}
 	public List<Integer> getCorrectAnswers() {

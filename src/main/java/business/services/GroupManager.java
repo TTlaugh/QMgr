@@ -1,7 +1,15 @@
 package business.services;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+
+import com.mysql.cj.exceptions.MysqlErrorNumbers;
 
 import business.model.Group;
 import business.model.Score;
@@ -9,7 +17,8 @@ import business.model.Student;
 import data.GroupAccess;
 import data.GroupStudentAccess;
 import data.StudentAccess;
-import data.SubmissionAccess;
+import utils.ExcelReader;
+import utils.ExcelWriter;
 import utils.SQLUtils;
 
 public class GroupManager {
@@ -23,11 +32,13 @@ public class GroupManager {
 		return null;
 	}
 
-	public boolean addGroup(Group newGroup) {
+	public boolean addGroup(Group newGroup) throws SQLException {
 		try {
 			return new GroupAccess().insert(newGroup);
 		} catch (SQLException e) {
 			SQLUtils.printSQLException(e);
+			if (e.getErrorCode() == MysqlErrorNumbers.ER_DUP_ENTRY)
+				throw new SQLException("GroupID: '"+newGroup.getGroupID()+"' already exists", e);
 		}
 		return false;
 	}
@@ -58,12 +69,14 @@ public class GroupManager {
 		}
 	}
 	
-	public boolean addStudentToGroup(Group group, Student student) {
+	public boolean addStudentToGroup(Group group, Student student) throws SQLException {
 		try {
 			new StudentAccess().insert(student);
 			new GroupStudentAccess().addStudent(group.getGroupID(), student.getStudentID());
 		} catch (SQLException e) {
 			SQLUtils.printSQLException(e);
+			if (e.getErrorCode() == MysqlErrorNumbers.ER_DUP_ENTRY)
+				throw new SQLException("StudentID: '"+student.getStudentID()+"' already exists", e);
 		}
 		return false;
 	}
@@ -89,13 +102,96 @@ public class GroupManager {
 		
 	}
 	
-	public List<Score> getStudentScores(Student student) {
+	public boolean importStudent(Group group, String excelFilePath) throws SQLException {
 		try {
-			return new SubmissionAccess().getStudentScores(student);
-		} catch (SQLException e) {
-			SQLUtils.printSQLException(e);
+			List<Student> students = new StudentExcelReader().readExcel(excelFilePath);
+			for (Student student : students) {
+				addStudentToGroup(group, student);
+			}
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		return null;
+		return false;
 	}
 
+	public boolean exportStudent(Group group, String excelFilePath) {
+		if (group.getStudents() == null || group.getStudents().isEmpty())
+			return false;
+		try {
+			new StudentExcelWriter().writeExcel(
+					group.getGroupID() + " | " + group.getGroupName(),
+					group.getStudents(),
+					excelFilePath);
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+}
+
+class StudentExcelReader extends ExcelReader {
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> T getData(Row row) {
+		Student student = new Student();
+		for (Cell cell : row) {
+			Object cellValue = getCellValue(cell);
+			if (cellValue == null || cellValue.toString().isEmpty())
+				continue;
+			int columnIndex = cell.getColumnIndex();
+			switch (columnIndex) {
+				case 0:
+					student.setStudentID((String) getCellValue(cell));
+					break;
+				case 1:
+					student.setFirstName((String) getCellValue(cell));
+					break;
+				case 2:
+					student.setLastName((String) getCellValue(cell));
+					break;
+				case 3:
+					student.setPhone((String) getCellValue(cell));
+					break;
+				case 4:
+					student.setEmail((String) getCellValue(cell));
+					break;
+				default:
+					break;
+			}
+		}
+		return (T) student;
+	}
+}
+
+class StudentExcelWriter extends ExcelWriter {
+	@Override
+	public void writeHeader(Sheet sheet, int rowIndex) {
+		CellStyle cellStyle = createStyleForHeader(sheet);
+		Row row = sheet.createRow(rowIndex);
+		Cell cell = null;
+		cell = row.createCell(0); cell.setCellStyle(cellStyle); cell.setCellValue("ID");
+		cell = row.createCell(1); cell.setCellStyle(cellStyle); cell.setCellValue("First Name");
+		cell = row.createCell(2); cell.setCellStyle(cellStyle); cell.setCellValue("Last Name");
+		cell = row.createCell(3); cell.setCellStyle(cellStyle); cell.setCellValue("Phone");
+		cell = row.createCell(4); cell.setCellStyle(cellStyle); cell.setCellValue("Email");
+		cell = row.createCell(5); cell.setCellStyle(cellStyle); cell.setCellValue("Scores");
+	}
+
+	@Override
+	public <T> void writeData(T data, Row row) {
+		Student student = (Student) data;
+		Cell cell = null; int colIndex = 0;
+		cell = row.createCell(colIndex++); cell.setCellValue(student.getStudentID());
+		cell = row.createCell(colIndex++); cell.setCellValue(student.getFirstName());
+		cell = row.createCell(colIndex++); cell.setCellValue(student.getLastName());
+		cell = row.createCell(colIndex++); cell.setCellValue(student.getPhone());
+		cell = row.createCell(colIndex++); cell.setCellValue(student.getEmail());
+		for (Score score : student.getScores()) {
+			cell = row.createCell(colIndex++); cell.setCellValue(score.getScore());
+		}
+	}
 }
