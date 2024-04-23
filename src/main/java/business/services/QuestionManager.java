@@ -12,6 +12,8 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
+import com.mysql.cj.exceptions.MysqlErrorNumbers;
+
 import business.model.Question;
 import business.model.Subject;
 import data.QuestionAccess;
@@ -31,11 +33,13 @@ public class QuestionManager {
 		return null;
 	}
 	
-	public boolean addSubject(Subject newSubject) {
+	public boolean addSubject(Subject newSubject) throws SQLException {
 		try {
 			return new SubjectAccess().insert(newSubject);
 		} catch (SQLException e) {
 			SQLUtils.printSQLException(e);
+			if (e.getErrorCode() == MysqlErrorNumbers.ER_DUP_ENTRY)
+				throw new SQLException("SubjectID: '"+newSubject.getSubjectID()+"' already exists", e);
 		}
 		return false;
 	}
@@ -67,11 +71,13 @@ public class QuestionManager {
 		return null;
 	}
 	
-	public boolean addQuestion(Question newQuestion) {
+	public boolean addQuestion(Question newQuestion) throws SQLException {
 		try {
 			return new QuestionAccess().insert(newQuestion);
 		} catch (SQLException e) {
 			SQLUtils.printSQLException(e);
+			if (e.getErrorCode() == MysqlErrorNumbers.ER_DUP_ENTRY)
+				throw new SQLException("QuestionID: '"+newQuestion.getQuestionID()+"' already exists", e);
 		}
 		return false;
 	}
@@ -94,7 +100,7 @@ public class QuestionManager {
 		return false;
 	}
 	
-	public boolean importQuestions(Subject subject, String excelFilePath) {
+	public boolean importQuestions(Subject subject, String excelFilePath) throws SQLException {
 		try {
 			List<Question> questions = new QuestionExcelReader().readExcel(excelFilePath);
 			for (Question question : questions) {
