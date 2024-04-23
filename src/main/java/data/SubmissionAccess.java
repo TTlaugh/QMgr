@@ -7,9 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import business.model.Score;
 import business.model.SelectedQuestion;
-import business.model.Student;
 import business.model.Submission;
 import utils.SQLUtils;
 
@@ -94,10 +92,4 @@ public class SubmissionAccess implements DataAccess<Submission> {
 		return selectedQuestions;
 	}
 	
-	public List<Score> getStudentScores(Student student) throws SQLException {
-		return getList(Score.class,
-				"SELECT ExamID, Score FROM Submissions",
-				"StudentID", student.getStudentID());
-	}
-
 }

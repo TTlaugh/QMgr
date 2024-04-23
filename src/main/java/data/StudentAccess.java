@@ -3,6 +3,7 @@ package data;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import business.model.Score;
 import business.model.Student;
 import utils.SQLUtils;
 
@@ -17,14 +18,14 @@ public class StudentAccess implements DataAccess<Student> {
 		String personID = "ST" + id;
 		String firstName = student.getFirstName();
 		String lastName = student.getLastName();
-		String email = student.getEmail();
 		String phone = student.getPhone();
+		String email = student.getEmail();
 		String sql = "INSERT INTO Person VALUES ('"
 				+ personID + "','"
 				+ firstName + "','"
 				+ lastName + "','"
-				+ email + "','"
-				+ phone + "');"
+				+ phone + "','"
+				+ email + "');"
 				+ "INSERT INTO Students VALUES ('"
 				+ id + "','"
 				+ personID + "');";
@@ -39,13 +40,13 @@ public class StudentAccess implements DataAccess<Student> {
 		String personID = "ST" + student.getStudentID();
 		String firstName = student.getFirstName();
 		String lastName = student.getLastName();
-		String email = student.getEmail();
 		String phone = student.getPhone();
+		String email = student.getEmail();
 		String sql = "UPDATE Person SET "
 				+ "FirstName = '" + firstName + "', "
 				+ "LastName = '" + lastName + "', "
-				+ "Email = '" + email + "', "
-				+ "Phone = '" + phone + "' "
+				+ "Phone = '" + phone + "', "
+				+ "Email = '" + email + "' "
 				+ "WHERE PersonID = '" + personID + "'";
 		boolean i = connection.createStatement().executeUpdate(sql) >= 1;
 		SQLUtils.closeConnection(connection);
@@ -63,10 +64,14 @@ public class StudentAccess implements DataAccess<Student> {
 
 	@Override
 	public Student get(String... primaryKeyValues) throws SQLException {
-		return get(Student.class,
+		Student student = get(Student.class,
 				"SELECT Students.StudentID, Person.* FROM Students"
 				+ " INNER JOIN Person ON Students.PersonID = Person.PersonID",
 				"Students.StudentID", primaryKeyValues[0]);
+		student.setScores(getList(Score.class,
+				"SELECT ExamID, Score FROM Submissions",
+				"StudentID", student.getStudentID()));
+		return student;
 	}
 
 }

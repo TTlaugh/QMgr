@@ -17,14 +17,14 @@ public class TeacherAccess implements DataAccess<Teacher> {
 		String personID = "TC" + id;
 		String firstName = teacher.getFirstName();
 		String lastName = teacher.getLastName();
-		String email = teacher.getEmail();
 		String phone = teacher.getPhone();
+		String email = teacher.getEmail();
 		String sql = "INSERT INTO Person VALUES ('"
 				+ personID + "','"
 				+ firstName + "','"
 				+ lastName + "','"
-				+ email + "','"
-				+ phone + "');"
+				+ phone + "','"
+				+ email + "');"
 				+ "INSERT INTO Teachers VALUES ('"
 				+ id + "','"
 				+ personID + "');";
@@ -39,13 +39,13 @@ public class TeacherAccess implements DataAccess<Teacher> {
 		String personID = "TC" + teacher.getTeacherID();
 		String firstName = teacher.getFirstName();
 		String lastName = teacher.getLastName();
-		String email = teacher.getEmail();
 		String phone = teacher.getPhone();
+		String email = teacher.getEmail();
 		String sql = "UPDATE Person SET "
 				+ "FirstName = '" + firstName + "', "
 				+ "LastName = '" + lastName + "', "
-				+ "Email = '" + email + "', "
-				+ "Phone = '" + phone + "' "
+				+ "Phone = '" + phone + "', "
+				+ "Email = '" + email + "' "
 				+ "WHERE PersonID = '" + personID + "'";
 		boolean i = connection.createStatement().executeUpdate(sql) >= 1;
 		SQLUtils.closeConnection(connection);
