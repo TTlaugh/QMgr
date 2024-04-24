@@ -23,13 +23,13 @@ public class Main extends Application {
 			primaryStage.setTitle("Quizz Server - HEHE");
 			primaryStage.show();
 
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("src/main/resources/fxml/login.fxml"));
+			// FXMLLoader loader = new
+			// FXMLLoader(getClass().getResource("/resources/fxml/login.fxml"));
 
 			// primaryStage.getIcons().add(new Image("/imgs/icon.png"));
 			primaryStage.setTitle("Quizz Server - HEHE");
 
-			// FXMLLoader loader = new
-			// FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/Main.fxml"));
 
 			Parent root = (Parent) loader.load();
 			Scene scene = new Scene(root, Constant.ScreenSize.WIDTH, Constant.ScreenSize.HEIGHT);

@@ -9,56 +9,21 @@
             "name": "Main",
             "request": "launch",
             "mainClass": "main.java.application.Main",
+            "projectName": "QuizzServer_2c72cc9b"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": " main.java.application.Main",
             "projectName": "QuizzServer_2c72cc9b",
             "vmArgs": "--module-path \"C:/javafx-sdk-22/lib\" --add-modules javafx.controls,javafx.fxml"
-        },
-        {
-            "type": "java",
-            "name": "Launcher",
-            "request": "launch",
-            "mainClass": "main.java.application.Launcher",
-            "projectName": "QuizzServer_2c72cc9b"
-        },
-        {
-            "type": "java",
-            "name": "App",
-            "request": "launch",
-            "mainClass": "demo.src.main.java.com.example.App",
-            "projectName": "QuizzServer_2c72cc9b"
         },
         {
             "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
-        },
-        {
-            "type": "java",
-            "name": "Main",
-            "request": "launch",
-            "mainClass": "application.Main",
-            "projectName": "QuizzServer_2c72cc9b"
-        },
-        {
-            "type": "java",
-            "name": "DataSourceFactory",
-            "request": "launch",
-            "mainClass": "utils.DataSourceFactory",
-            "projectName": "QuizzServer_2c72cc9b"
-        },
-        {
-            "type": "java",
-            "name": "Main(1)",
-            "request": "launch",
-            "mainClass": "application.Main",
-            "projectName": "QuizzServer"
-        },
-        {
-            "type": "java",
-            "name": "DataSourceFactory(1)",
-            "request": "launch",
-            "mainClass": "utils.DataSourceFactory",
-            "projectName": "QuizzServer"
         }
     ]
 }
