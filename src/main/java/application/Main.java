@@ -29,7 +29,7 @@ public class Main extends Application {
 			// primaryStage.getIcons().add(new Image("/imgs/icon.png"));
 			primaryStage.setTitle("Quizz Server - HEHE");
 
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/Main.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/resources/fxml/Main.fxml"));
 
 			Parent root = (Parent) loader.load();
 			Scene scene = new Scene(root, Constant.ScreenSize.WIDTH, Constant.ScreenSize.HEIGHT);
