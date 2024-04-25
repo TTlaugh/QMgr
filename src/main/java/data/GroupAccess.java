@@ -55,14 +55,16 @@ public class GroupAccess implements DataAccess<Group> {
 	public Group get(String... primaryKeyValues) throws SQLException {
 		return get(Group.class,
 				"SELECT * FROM SGroups"
-				+ " INNER JOIN Teachers ON SGroups.TeacherID = Teachers.TeacherID",
+				+ " INNER JOIN Teachers ON SGroups.TeacherID = Teachers.TeacherID"
+				+ " INNER JOIN Person ON Teachers.PersonID = Person.PersonID",
 				"SGroups.SGroupID", primaryKeyValues[0]);
 	}
 
 	public List<Group> getAll() throws SQLException {
 		return getList(Group.class,
 				"SELECT * FROM SGroups"
-				+ " INNER JOIN Teachers ON SGroups.TeacherID = Teachers.TeacherID");
+				+ " INNER JOIN Teachers ON SGroups.TeacherID = Teachers.TeacherID"
+				+ " INNER JOIN Person ON Teachers.PersonID = Person.PersonID");
 	}
 
 	public void getStudents(Group group) throws SQLException {
