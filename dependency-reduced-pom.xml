@@ -39,7 +39,7 @@
             <configuration>
               <shadedArtifactAttached>true</shadedArtifactAttached>
               <shadedClassifierName>project-classifier</shadedClassifierName>
-              <outputFile>shade\${project.artifactId}.jar</outputFile>
+              <outputFile>bin\${project.artifactId}.jar</outputFile>
               <transformers>
                 <transformer>
                   <mainClass>${class.launcher}</mainClass>
@@ -53,8 +53,8 @@
   </build>
   <properties>
     <maven.compiler.source>17</maven.compiler.source>
-    <classclass.main>application.Main</classclass.main>
     <maven.compiler.target>17</maven.compiler.target>
+    <class.main>application.Main</class.main>
     <class.launcher>application.Launcher</class.launcher>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.path>/usr/lib/jvm/java-1.17.0-openjdk-amd64/bin/java</java.path>
