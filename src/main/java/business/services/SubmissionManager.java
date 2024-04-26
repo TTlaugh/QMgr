@@ -1,12 +1,12 @@
-package main.java.business.services;
+package business.services;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import main.java.business.model.SelectedQuestion;
-import main.java.business.model.Submission;
-import main.java.data.SubmissionAccess;
-import main.java.utils.SQLUtils;
+import business.model.SelectedQuestion;
+import business.model.Submission;
+import data.SubmissionAccess;
+import utils.SQLUtils;
 
 public class SubmissionManager {
 

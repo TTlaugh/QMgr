@@ -49,7 +49,7 @@
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
                <image>
-                  <Image url="@../images/delete.png" />
+                  <Image url="@../imgs/delete.png" />
                </image>
             </ImageView>
          </graphic>
@@ -73,7 +73,7 @@
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
                <image>
-                  <Image url="@../images/search1.png" />
+                  <Image url="@../imgs/search1.png" />
                </image>
             </ImageView>
          </graphic>

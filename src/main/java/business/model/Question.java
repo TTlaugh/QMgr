@@ -1,4 +1,4 @@
-package main.java.business.model;
+package business.model;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.java.utils.JsonUtils;
+import utils.JsonUtils;
 
 public class Question {
 

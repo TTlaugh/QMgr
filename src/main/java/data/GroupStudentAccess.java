@@ -1,10 +1,10 @@
-package main.java.data;
+package data;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import main.java.utils.SQLUtils;
+import utils.SQLUtils;
 
 public class GroupStudentAccess {
 

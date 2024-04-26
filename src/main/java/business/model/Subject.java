@@ -1,4 +1,4 @@
-package main.java.business.model;
+package business.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

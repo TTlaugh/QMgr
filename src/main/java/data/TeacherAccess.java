@@ -1,10 +1,10 @@
-package main.java.data;
+package data;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import main.java.business.model.Teacher;
-import main.java.utils.SQLUtils;
+import business.model.Teacher;
+import utils.SQLUtils;
 
 public class TeacherAccess implements DataAccess<Teacher> {
 

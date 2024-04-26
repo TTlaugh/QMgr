@@ -1,11 +1,11 @@
-package main.java.data;
+package data;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import main.java.business.model.Account;
-import main.java.utils.SQLUtils;
+import business.model.Account;
+import utils.SQLUtils;
 
 public class AccountAccess implements DataAccess<Account> {
 

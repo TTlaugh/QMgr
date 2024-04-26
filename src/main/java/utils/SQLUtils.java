@@ -1,4 +1,4 @@
-package main.java.utils;
+package utils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,7 @@ import javax.sql.DataSource;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 
-import main.java.business.model.Person;
+import business.model.Person;
 
 public class SQLUtils {
 

@@ -1,13 +1,13 @@
-package main.java.data;
+package data;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import main.java.business.model.Subject;
-import main.java.business.model.Teacher;
-import main.java.utils.SQLUtils;
+import business.model.Subject;
+import business.model.Teacher;
+import utils.SQLUtils;
 
 public class SubjectAccess implements DataAccess<Subject> {
 

@@ -1,4 +1,4 @@
-package main.java.business.services;
+package business.services;
 
 public class GeneralFunction {
 

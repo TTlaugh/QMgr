@@ -1,4 +1,4 @@
-package main.java.controller;
+package controller;
 
 import java.io.IOException;
 
@@ -14,28 +14,37 @@ import javafx.stage.Stage;
 
 public class QuestionController {
 	private Scene scene = null;
-
+	private AnchorPane anchor;
 	public void Question_Tranfer_QuestionView_Quizz(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Question_view.fxml"));
+		AnchorPane insidePane = new FXMLLoader(getClass().getResource("/fxml/Question_view.fxml")).load();
+		setAnchor(insidePane);
 		scene = (Scene) ((Node) event.getSource()).getScene();
-		StackPane myStackPane = (StackPane) scene.lookup("#StackPane_Layout");
-		myStackPane.getChildren().clear();
-		myStackPane.getChildren().add(loader.load());
+		anchor = (AnchorPane) scene.lookup("#AnchorPaneLayout");
+		anchor.getChildren().clear();
+		anchor.getChildren().add(insidePane);
 	}
 
 	public void Question_Tranfer_QuestionAdd_Quizz(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Question_add.fxml"));
+		AnchorPane insidePane = new FXMLLoader(getClass().getResource("/fxml/Question_add.fxml")).load();
+		setAnchor(insidePane);
 		scene = (Scene) ((Node) event.getSource()).getScene();
-		StackPane myStackPane = (StackPane) scene.lookup("#StackPane_Layout");
-		myStackPane.getChildren().clear();
-		myStackPane.getChildren().add(loader.load());
+		anchor = (AnchorPane) scene.lookup("#AnchorPaneLayout");
+		anchor.getChildren().clear();
+		anchor.getChildren().add(insidePane);
 	}
 
 	public void Back_Question(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/Question.fxml"));
+		AnchorPane insidePane = new FXMLLoader(getClass().getResource("/fxml/Question.fxml")).load();
+		setAnchor(insidePane);
 		scene = (Scene) ((Node) event.getSource()).getScene();
-		StackPane myStackPane = (StackPane) scene.lookup("#StackPane_Layout");
-		myStackPane.getChildren().clear();
-		myStackPane.getChildren().add(loader.load());
+		anchor = (AnchorPane) scene.lookup("#AnchorPaneLayout");
+		anchor.getChildren().clear();
+		anchor.getChildren().add(insidePane);
+	}
+	private void setAnchor(AnchorPane insidePane) {
+		AnchorPane.setTopAnchor(insidePane, 0.0);
+		AnchorPane.setBottomAnchor(insidePane, 0.0);
+		AnchorPane.setRightAnchor(insidePane, 0.0);
+		AnchorPane.setLeftAnchor(insidePane, 0.0);
 	}
 }

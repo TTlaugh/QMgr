@@ -73,7 +73,7 @@
 
 .table-view .table-cell{
 	-fx-alignment: CENTER-LEFT;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-border-color: transparent;
 }
 

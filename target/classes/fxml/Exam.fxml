@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1050.0" style="-fx-background-color: white;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controller.ExamController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1050.0" style="-fx-background-color: white;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ExamController">
    <children>
       <Label layoutX="60.0" layoutY="14.0" prefHeight="75.0" prefWidth="133.0" text="Exam" textFill="#ff6d97" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="14.0">
          <font>
@@ -36,7 +36,7 @@
             </TextField>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
                <image>
-                  <Image url="@../images/search2.png" />
+                  <Image url="@../imgs/search2.png" />
                </image>
                <HBox.margin>
                   <Insets right="10.0" />
@@ -74,7 +74,7 @@
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
                <image>
-                  <Image url="@../images/add.png" />
+                  <Image url="@../imgs/add.png" />
                </image>
             </ImageView>
          </graphic>
@@ -83,7 +83,7 @@
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
                <image>
-                  <Image url="@../images/view.png" />
+                  <Image url="@../imgs/view.png" />
                </image>
             </ImageView>
          </graphic>
@@ -92,7 +92,7 @@
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
                <image>
-                  <Image url="@../images/delete.png" />
+                  <Image url="@../imgs/delete.png" />
                </image>
             </ImageView>
          </graphic>

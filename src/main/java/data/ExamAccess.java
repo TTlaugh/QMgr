@@ -1,4 +1,4 @@
-package main.java.data;
+package data;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -7,10 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import main.java.business.model.Exam;
-import main.java.business.model.Teacher;
-import main.java.utils.JsonUtils;
-import main.java.utils.SQLUtils;
+import business.model.Exam;
+import business.model.Teacher;
+import utils.JsonUtils;
+import utils.SQLUtils;
 
 public class ExamAccess implements DataAccess<Exam> {
 

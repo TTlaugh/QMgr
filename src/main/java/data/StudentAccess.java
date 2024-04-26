@@ -1,11 +1,11 @@
-package main.java.data;
+package data;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import main.java.business.model.Score;
-import main.java.business.model.Student;
-import main.java.utils.SQLUtils;
+import business.model.Score;
+import business.model.Student;
+import utils.SQLUtils;
 
 public class StudentAccess implements DataAccess<Student> {
 

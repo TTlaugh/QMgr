@@ -108,7 +108,7 @@
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true">
                            <image>
-                              <Image url="@../images/leftarrow.png" />
+                              <Image url="@../imgs/leftarrow.png" />
                            </image>
                         </ImageView>
                      </graphic>

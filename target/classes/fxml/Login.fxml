@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controller.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
       <AnchorPane fx:id="Anchor_SignIn" layoutX="413.0" layoutY="238.0" prefHeight="424.0" prefWidth="475.0" style="-fx-border-color: white;">
          <styleClass>
@@ -29,7 +29,7 @@
                <children>
                   <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../images/person.png" />
+                        <Image url="@../imgs/person.png" />
                      </image>
                      <HBox.margin>
                         <Insets />
@@ -49,7 +49,7 @@
                <children>
                   <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../images/password.png" />
+                        <Image url="@../imgs/password.png" />
                      </image>
                      <HBox.margin>
                         <Insets />
@@ -89,7 +89,7 @@
                <children>
                   <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../images/person.png" />
+                        <Image url="@../imgs/person.png" />
                      </image>
                      <HBox.margin>
                         <Insets />
@@ -114,7 +114,7 @@
                <children>
                   <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../images/person.png" />
+                        <Image url="@../imgs/person.png" />
                      </image>
                      <HBox.margin>
                         <Insets />
@@ -134,7 +134,7 @@
                <children>
                   <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../images/person.png" />
+                        <Image url="@../imgs/person.png" />
                      </image>
                      <HBox.margin>
                         <Insets />
@@ -154,7 +154,7 @@
                <children>
                   <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../images/email.png" />
+                        <Image url="@../imgs/email.png" />
                      </image>
                      <HBox.margin>
                         <Insets />
@@ -174,7 +174,7 @@
                <children>
                   <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../images/phone.png" />
+                        <Image url="@../imgs/phone.png" />
                      </image>
                      <HBox.margin>
                         <Insets />
@@ -204,7 +204,7 @@
                <children>
                   <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../images/password.png" />
+                        <Image url="@../imgs/password.png" />
                      </image>
                      <HBox.margin>
                         <Insets />

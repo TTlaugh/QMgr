@@ -1,13 +1,15 @@
-package main.java.utils;
+package utils;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-//import com.fasterxml.jackson.core.type.TypeReference;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.fasterxml.jackson.databind.type.CollectionType;
-//import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 
 public class JsonUtils {
     public static Map<String, List<Integer>> jsonToMap_String_List(String jsonString) throws IOException {
@@ -17,9 +19,9 @@ public class JsonUtils {
     }
 
     public static <T> List<T> jsonToList(String jsonString, Class<T> c) throws IOException {
-        // // ObjectMapper mapper = new ObjectMapper();
-        // // CollectionType typeReference =
-        // // TypeFactory.defaultInstance().constructCollectionType(List.class, c);
-        // return mapper.readValue(jsonString, typeReference);
+          ObjectMapper mapper = new ObjectMapper();
+          CollectionType typeReference =
+          TypeFactory.defaultInstance().constructCollectionType(List.class, c);
+         return mapper.readValue(jsonString, typeReference);
     }
 }

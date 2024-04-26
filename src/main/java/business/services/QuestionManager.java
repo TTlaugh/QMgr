@@ -1,4 +1,4 @@
-package main.java.business.services;
+package business.services;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -7,13 +7,23 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import main.java.business.model.Question;
-import main.java.utils.ExcelReader;
-import main.java.utils.ExcelWriter;
-import main.java.utils.SQLUtils;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+
+import com.mysql.cj.exceptions.MysqlErrorNumbers;
+
+import business.model.Question;
+import business.model.Subject;
+import data.QuestionAccess;
+import data.SubjectAccess;
+import utils.ExcelReader;
+import utils.ExcelWriter;
+import utils.SQLUtils;
 
 public class QuestionManager {
-
+	
 	public List<Subject> getSubjects() {
 		try {
 			return new SubjectAccess().getAll();
@@ -22,14 +32,14 @@ public class QuestionManager {
 		}
 		return null;
 	}
-
+	
 	public boolean addSubject(Subject newSubject) throws SQLException {
 		try {
 			return new SubjectAccess().insert(newSubject);
 		} catch (SQLException e) {
 			SQLUtils.printSQLException(e);
 			if (e.getErrorCode() == MysqlErrorNumbers.ER_DUP_ENTRY)
-				throw new SQLException("SubjectID: '" + newSubject.getSubjectID() + "' already exists", e);
+				throw new SQLException("SubjectID: '"+newSubject.getSubjectID()+"' already exists", e);
 		}
 		return false;
 	}
@@ -60,18 +70,18 @@ public class QuestionManager {
 		}
 		return null;
 	}
-
+	
 	public boolean addQuestion(Question newQuestion) throws SQLException {
 		try {
 			return new QuestionAccess().insert(newQuestion);
 		} catch (SQLException e) {
 			SQLUtils.printSQLException(e);
 			if (e.getErrorCode() == MysqlErrorNumbers.ER_DUP_ENTRY)
-				throw new SQLException("QuestionID: '" + newQuestion.getQuestionID() + "' already exists", e);
+				throw new SQLException("QuestionID: '"+newQuestion.getQuestionID()+"' already exists", e);
 		}
 		return false;
 	}
-
+	
 	public boolean editQuestion(Question newQuestion) {
 		try {
 			return new QuestionAccess().update(newQuestion);
@@ -80,7 +90,7 @@ public class QuestionManager {
 		}
 		return false;
 	}
-
+	
 	public boolean deleteQuestion(String questionID) {
 		try {
 			return new QuestionAccess().delete(questionID);
@@ -89,7 +99,7 @@ public class QuestionManager {
 		}
 		return false;
 	}
-
+	
 	public boolean importQuestions(Subject subject, String excelFilePath) throws SQLException {
 		try {
 			List<Question> questions = new QuestionExcelReader().readExcel(excelFilePath);
@@ -103,7 +113,7 @@ public class QuestionManager {
 		}
 		return false;
 	}
-
+	
 	public boolean exportQuestions(Subject subject, String excelFilePath) {
 		try {
 			new QuestionExcelWriter().writeExcel(
@@ -149,7 +159,8 @@ class QuestionExcelReader extends ExcelReader {
 				case 7:
 					String strValue = ((String) getCellValue(cell));
 					strValue = strValue.substring(1, strValue.length() - 1);
-					List<Integer> correctAnswers = Arrays.stream(strValue.split("[\\s,]+"))
+					List<Integer> correctAnswers =
+							Arrays.stream(strValue.split("[\\s,]+"))
 							.map(Integer::valueOf)
 							.collect(Collectors.toList());
 					question.setCorrectAnswers(correctAnswers);
@@ -168,52 +179,27 @@ class QuestionExcelWriter extends ExcelWriter {
 		CellStyle cellStyle = createStyleForHeader(sheet);
 		Row row = sheet.createRow(rowIndex);
 		Cell cell = null;
-		cell = row.createCell(0);
-		cell.setCellStyle(cellStyle);
-		cell.setCellValue("Chapter");
-		cell = row.createCell(1);
-		cell.setCellStyle(cellStyle);
-		cell.setCellValue("Difficulty");
-		cell = row.createCell(2);
-		cell.setCellStyle(cellStyle);
-		cell.setCellValue("Content");
-		cell = row.createCell(3);
-		cell.setCellStyle(cellStyle);
-		cell.setCellValue("Answer1");
-		cell = row.createCell(4);
-		cell.setCellStyle(cellStyle);
-		cell.setCellValue("Answer2");
-		cell = row.createCell(5);
-		cell.setCellStyle(cellStyle);
-		cell.setCellValue("Answer3");
-		cell = row.createCell(6);
-		cell.setCellStyle(cellStyle);
-		cell.setCellValue("Answer4");
-		cell = row.createCell(7);
-		cell.setCellStyle(cellStyle);
-		cell.setCellValue("Correct Answer");
+		cell = row.createCell(0); cell.setCellStyle(cellStyle); cell.setCellValue("Chapter");
+		cell = row.createCell(1); cell.setCellStyle(cellStyle); cell.setCellValue("Difficulty");
+		cell = row.createCell(2); cell.setCellStyle(cellStyle); cell.setCellValue("Content");
+		cell = row.createCell(3); cell.setCellStyle(cellStyle); cell.setCellValue("Answer1");
+		cell = row.createCell(4); cell.setCellStyle(cellStyle); cell.setCellValue("Answer2");
+		cell = row.createCell(5); cell.setCellStyle(cellStyle); cell.setCellValue("Answer3");
+		cell = row.createCell(6); cell.setCellStyle(cellStyle); cell.setCellValue("Answer4");
+		cell = row.createCell(7); cell.setCellStyle(cellStyle); cell.setCellValue("Correct Answer");
 	}
 
 	@Override
 	public <T> void writeData(T data, Row row) {
 		Question question = (Question) data;
-		Cell cell = null;
-		int colIndex = 0;
-		cell = row.createCell(colIndex++);
-		cell.setCellValue(question.getChapter());
-		cell = row.createCell(colIndex++);
-		cell.setCellValue(question.getDifficulty());
-		cell = row.createCell(colIndex++);
-		cell.setCellValue(question.getContent());
-		cell = row.createCell(colIndex++);
-		cell.setCellValue(question.getAnswers().get(0));
-		cell = row.createCell(colIndex++);
-		cell.setCellValue(question.getAnswers().get(1));
-		cell = row.createCell(colIndex++);
-		cell.setCellValue(question.getAnswers().get(2));
-		cell = row.createCell(colIndex++);
-		cell.setCellValue(question.getAnswers().get(3));
-		cell = row.createCell(colIndex++);
-		cell.setCellValue(question.getCorrectAnswers().toString());
+		Cell cell = null; int colIndex = 0;
+		cell = row.createCell(colIndex++); cell.setCellValue(question.getChapter());
+		cell = row.createCell(colIndex++); cell.setCellValue(question.getDifficulty());
+		cell = row.createCell(colIndex++); cell.setCellValue(question.getContent());
+		cell = row.createCell(colIndex++); cell.setCellValue(question.getAnswers().get(0));
+		cell = row.createCell(colIndex++); cell.setCellValue(question.getAnswers().get(1));
+		cell = row.createCell(colIndex++); cell.setCellValue(question.getAnswers().get(2));
+		cell = row.createCell(colIndex++); cell.setCellValue(question.getAnswers().get(3));
+		cell = row.createCell(colIndex++); cell.setCellValue(question.getCorrectAnswers().toString());
 	}
 }

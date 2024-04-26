@@ -1,10 +1,10 @@
-package main.java.business.model;
+package business.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import main.java.utils.DateTime;
+import utils.DateTime;
 
 public class Exam {
 

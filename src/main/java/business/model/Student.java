@@ -1,9 +1,11 @@
-package main.java.business.model;
+package business.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class Student extends Person {
 
@@ -16,7 +18,7 @@ public class Student extends Person {
 		this.studentID = studentID;
 		this.scores = scores;
 	}
-
+	
 	public Student() {
 		super();
 		this.studentID = null;
@@ -33,7 +35,16 @@ public class Student extends Person {
 		this.studentID = rs.getString("StudentID");
 		this.scores = new ArrayList<>();
 	}
-
+	public String getFirstName() {
+		return super.getFirstName();
+	}
+	public String getLastName() {
+		return super.getLastName();
+	}
+	public StringProperty getFullName() {
+		StringProperty fullName = new SimpleStringProperty(super.getFirstName() + " " + super.getLastName());
+		return fullName;
+	}
 	public String getStudentID() {
 		return studentID;
 	}

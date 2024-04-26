@@ -1,13 +1,13 @@
-package main.java.business.services;
+package business.services;
 
 import java.sql.SQLException;
 import java.util.List;
 
 import com.mysql.cj.exceptions.MysqlErrorNumbers;
 
-import main.java.business.model.Exam;
-import main.java.data.ExamAccess;
-import main.java.utils.SQLUtils;
+import business.model.Exam;
+import data.ExamAccess;
+import utils.SQLUtils;
 
 public class ExamManager {
 

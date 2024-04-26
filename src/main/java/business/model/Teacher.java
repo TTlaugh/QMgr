@@ -1,4 +1,4 @@
-package main.java.business.model;
+package business.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,6 +21,7 @@ public class Teacher extends Person {
 				rs.getString("Email"));
 		this.teacherID = rs.getString("TeacherID");
 	}
+	
 
 	public String getTeacherID() {
 		return teacherID;

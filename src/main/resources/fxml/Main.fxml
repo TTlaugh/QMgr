@@ -8,10 +8,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1300.0" styleClass="white-background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controller.MainController">
+<AnchorPane prefHeight="900.0" prefWidth="1300.0" styleClass="white-background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
    <children>
       <Label alignment="CENTER" prefHeight="60.0" prefWidth="250.0" text="MINEQUIZ" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0">
          <font>
@@ -47,7 +46,7 @@
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true">
                <image>
-                  <Image url="@../images/statistics.png" />
+                  <Image url="@../imgs/statistics.png" />
                </image>
             </ImageView>
          </graphic>
@@ -69,7 +68,7 @@
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true">
                <image>
-                  <Image url="@../images/test.png" />
+                  <Image url="@../imgs/test.png" />
                </image>
             </ImageView>
          </graphic>
@@ -91,7 +90,7 @@
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true">
                <image>
-                  <Image url="@../images/assessment.png" />
+                  <Image url="@../imgs/assessment.png" />
                </image>
             </ImageView>
          </graphic>
@@ -110,7 +109,7 @@
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true">
                <image>
-                  <Image url="@../images/ballot.png" />
+                  <Image url="@../imgs/ballot.png" />
                </image>
             </ImageView>
          </graphic>
@@ -129,7 +128,7 @@
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true">
                <image>
-                  <Image url="@../images/users.png" />
+                  <Image url="@../imgs/users.png" />
                </image>
             </ImageView>
          </graphic>
@@ -148,11 +147,11 @@
          <graphic>
             <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true">
                <image>
-                  <Image url="@../images/logout.png" />
+                  <Image url="@../imgs/logout.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <StackPane fx:id="StackPane_Layout" layoutX="283.0" layoutY="110.0" prefHeight="830.0" prefWidth="1050.0" style="-fx-background-color: #9999;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
+      <AnchorPane fx:id="AnchorPaneLayout" layoutX="271.0" layoutY="160.0" prefHeight="830.0" prefWidth="1050.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
    </children>
 </AnchorPane>

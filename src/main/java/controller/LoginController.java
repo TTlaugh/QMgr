@@ -1,4 +1,4 @@
-package main.java.controller;
+package controller;
 
 import java.io.IOException;
 
@@ -29,7 +29,7 @@ public class LoginController {
 	}
 
 	public void Sign_In(ActionEvent event) throws IOException {
-		root = (Parent) FXMLLoader.load(getClass().getResource("/view/fxml/Main.fxml"));
+		root = (Parent) FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
 		((Node) event.getSource()).getScene().setRoot(root);
 	}
 

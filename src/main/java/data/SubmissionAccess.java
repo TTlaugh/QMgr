@@ -1,4 +1,4 @@
-package main.java.data;
+package data;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import main.java.business.model.SelectedQuestion;
-import main.java.business.model.Submission;
-import main.java.utils.SQLUtils;
+import business.model.SelectedQuestion;
+import business.model.Submission;
+import utils.SQLUtils;
 
 public class SubmissionAccess implements DataAccess<Submission> {
 

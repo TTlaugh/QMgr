@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" styleClass="white-background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controller.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" styleClass="white-background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
    <children>
       <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="60.0" prefWidth="250.0" text="MINEQUIZ" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0">
          <font>
@@ -38,7 +38,7 @@
       </Label>
       <ImageView fitHeight="77.0" fitWidth="85.0" layoutX="821.0" layoutY="115.0" pickOnBounds="true" rotate="14.0" AnchorPane.rightAnchor="394.0">
          <image>
-            <Image url="@../images/tulip.png" />
+            <Image url="@../imgs/tulip.png" />
          </image>
       </ImageView>
       <TextField layoutX="489.0" layoutY="188.0" prefHeight="42.0" prefWidth="171.0" promptText="Port:" AnchorPane.leftAnchor="489.0" AnchorPane.rightAnchor="640.0">
@@ -79,7 +79,7 @@
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../images/person.png" />
+                                    <Image url="@../imgs/person.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -91,7 +91,7 @@
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../images/person.png" />
+                                    <Image url="@../imgs/person.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -103,7 +103,7 @@
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../images/person.png" />
+                                    <Image url="@../imgs/person.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -115,7 +115,7 @@
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../images/person.png" />
+                                    <Image url="@../imgs/person.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -127,7 +127,7 @@
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../images/person.png" />
+                                    <Image url="@../imgs/person.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -139,7 +139,7 @@
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../images/person.png" />
+                                    <Image url="@../imgs/person.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -151,7 +151,7 @@
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../images/person.png" />
+                                    <Image url="@../imgs/person.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -163,7 +163,7 @@
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../images/person.png" />
+                                    <Image url="@../imgs/person.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -175,7 +175,7 @@
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../images/person.png" />
+                                    <Image url="@../imgs/person.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -187,7 +187,7 @@
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../images/person.png" />
+                                    <Image url="@../imgs/person.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -204,7 +204,7 @@
       </ScrollPane>
       <ImageView fitHeight="115.0" fitWidth="128.0" layoutX="1146.0" layoutY="785.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="26.0">
          <image>
-            <Image url="@../images/start.png" />
+            <Image url="@../imgs/start.png" />
          </image>
          <effect>
             <ColorAdjust contrast="0.43" hue="-0.87" />
@@ -215,7 +215,7 @@
       </ImageView>
       <ImageView fitHeight="130.0" fitWidth="130.0" layoutY="770.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
          <image>
-            <Image url="@../images/stopserver.png" />
+            <Image url="@../imgs/stopserver.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -228,7 +228,7 @@
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true">
                <image>
-                  <Image url="@../images/leftarrow.png" />
+                  <Image url="@../imgs/leftarrow.png" />
                </image>
             </ImageView>
          </graphic>

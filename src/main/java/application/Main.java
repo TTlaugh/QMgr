@@ -1,10 +1,11 @@
-package main.java.application;
+package application;
 
+import controller.GroupController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-import main.java.utils.Constant;
-import main.java.utils.KeyEventFunction;
+import utils.Constant;
+import utils.KeyEventFunction;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -26,11 +27,11 @@ public class Main extends Application {
 			// FXMLLoader loader = new
 			// FXMLLoader(getClass().getResource("/resources/fxml/login.fxml"));
 
-			// primaryStage.getIcons().add(new Image("/imgs/icon.png"));
+			 primaryStage.getIcons().add(new Image("/imgs/icon.png"));
 			primaryStage.setTitle("Quizz Server - HEHE");
 
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/resources/fxml/Main.fxml"));
-
+			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
 			Parent root = (Parent) loader.load();
 			Scene scene = new Scene(root, Constant.ScreenSize.WIDTH, Constant.ScreenSize.HEIGHT);
 
@@ -42,6 +43,8 @@ public class Main extends Application {
 
 			scene.setOnKeyPressed(KeyEventFunction.toggleFullScreen(primaryStage));
 			primaryStage.show();
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

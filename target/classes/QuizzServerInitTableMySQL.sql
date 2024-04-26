@@ -7,8 +7,8 @@ CREATE TABLE Person (
     PersonID VARCHAR(20) PRIMARY KEY NOT NULL,
     FirstName VARCHAR(40) NOT NULL,
     LastName VARCHAR(10) NOT NULL,
-    Email VARCHAR(70),
     Phone VARCHAR(15) NOT NULL,
+    Email VARCHAR(70),
     INDEX FIRSTNAME (FirstName ASC),
     INDEX LASTNAME (LastName ASC)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -54,7 +54,7 @@ CREATE TABLE Subjects (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE Questions (
-    QuestionID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    QuestionID BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     SubjectID VARCHAR(30) NOT NULL,
     Chapter INT NOT NULL,
     Difficulty INT NOT NULL,
@@ -95,26 +95,26 @@ CREATE TABLE Submissions (
 
 
 INSERT INTO Person VALUES
-('TCT001', 'Lê Thị', 'Hòa', 'hoa123@gmail.com ', '0911111110'),
-('TCT006', 'Nguyễn Văn', 'Luận', 'luan1@gmail.com', '0922222220'),
-('STS001', 'Trần Hoàng', 'Văn', 'van2@gmail.com', '0933333330'),
-('TCT007', 'Lê Văn', 'Luân', 'luan2@gmail.com', '0944444440'),
-('STS002', 'Nguyễn Lê', 'Lan', 'lan@gmail.com', '0955555550'),
-('TCT002', 'Nguyễn Hoàng', 'Anh', 'anh@gmail.com', '0966666660'),
-('STS004', 'Bùi Hoàng', 'Lam', 'lam@gmail.com', '0977777770'),
-('STS005', 'Mai Ánh', 'Tuyết ', 'tuyet@gmail.com', '0988888880'),
-('STS003', 'Hoàng Trần Văn', 'Đức', 'duc@gmail.com', '0999999990'),
-('TCT009', 'Nguyễn Trung', 'Tín', 'tin@gmail.com', '0391111110'),
-('TCT004', 'Nguyễn Văn', 'Thuận ', 'thuan@gmail.com', '0392222222'),
-('STS010', 'Nguyễn Thị', 'Nhi', 'nhi@gmail.com', '0393333333'),
-('STS008', 'Nguyễn Minh', 'Nhật', 'nhat@gmail.com', '0394444444'),
-('STS007', 'Nguyễn Thu', 'Minh', 'minh@gmail.com', '0395555555'),
-('TCT003', 'Trần Duy', 'Phương', 'phuong@gmail.com ', '0395555555'),
-('TCT008', 'Mai Trúc', 'Lan', 'lan1@gmail.com', '0396666666'),
-('TCT010', 'Mai Bích', 'Ngọc', 'ngoc@gmail.com', '0397777777'),
-('STS009', 'Lê Như', 'Minh', 'minh1@gmail.com', '0398888888'),
-('STS006', 'Lê Thị Bích', 'Tuyền ', 'tuyen@gmail.com', '0399999999'),
-('TCT005', 'Hoàng Văn', 'Thụ', 'thu@gmail.com', '0339999999');
+('TCT001', 'Lê Thị'        , 'Hòa'   , '0911111110', 'hoa123@gmail.com' ),
+('TCT006', 'Nguyễn Văn'    , 'Luận'  , '0922222220', 'luan1@gmail.com'  ),
+('STS001', 'Trần Hoàng'    , 'Văn'   , '0933333330', 'van2@gmail.com'   ),
+('TCT007', 'Lê Văn'        , 'Luân'  , '0944444440', 'luan2@gmail.com'  ),
+('STS002', 'Nguyễn Lê'     , 'Lan'   , '0955555550', 'lan@gmail.com'    ),
+('TCT002', 'Nguyễn Hoàng'  , 'Anh'   , '0966666660', 'anh@gmail.com'    ),
+('STS004', 'Bùi Hoàng'     , 'Lam'   , '0977777770', 'lam@gmail.com'    ),
+('STS005', 'Mai Ánh'       , 'Tuyết' , '0988888880', 'tuyet@gmail.com'  ),
+('STS003', 'Hoàng Trần Văn', 'Đức'   , '0999999990', 'duc@gmail.com'    ),
+('TCT009', 'Nguyễn Trung'  , 'Tín'   , '0391111110', 'tin@gmail.com'    ),
+('TCT004', 'Nguyễn Văn'    , 'Thuận' , '0392222222', 'thuan@gmail.com'  ),
+('STS010', 'Nguyễn Thị'    , 'Nhi'   , '0393333333', 'nhi@gmail.com'    ),
+('STS008', 'Nguyễn Minh'   , 'Nhật'  , '0394444444', 'nhat@gmail.com'   ),
+('STS007', 'Nguyễn Thu'    , 'Minh'  , '0395555555', 'minh@gmail.com'   ),
+('TCT003', 'Trần Duy'      , 'Phương', '0395555555', 'phuong@gmail.com' ),
+('TCT008', 'Mai Trúc'      , 'Lan'   , '0396666666', 'lan1@gmail.com'   ),
+('TCT010', 'Mai Bích'      , 'Ngọc'  , '0397777777', 'ngoc@gmail.com'   ),
+('STS009', 'Lê Như'        , 'Minh'  , '0398888888', 'minh1@gmail.com'  ),
+('STS006', 'Lê Thị Bích'   , 'Tuyền' , '0399999999', 'tuyen@gmail.com'  ),
+('TCT005', 'Hoàng Văn'     , 'Thụ'   , '0339999999', 'thu@gmail.com'    );
 
 INSERT INTO Students VALUES
 ('S001', 'STS001'),

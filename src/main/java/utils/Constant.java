@@ -1,4 +1,4 @@
-package main.java.utils;
+package utils;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
