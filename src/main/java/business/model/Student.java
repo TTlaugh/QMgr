@@ -10,11 +10,17 @@ public class Student extends Person {
 	private String studentID;
 	private List<Score> scores;
 	
-	public Student(String personID, String firstName, String lastName, String phone, String email, String studentID,
+	public Student(String studentID, String personID, String firstName, String lastName, String phone, String email,
 			List<Score> scores) {
 		super(personID, firstName, lastName, phone, email);
 		this.studentID = studentID;
 		this.scores = scores;
+	}
+
+	public Student(String studentID, String personID, String firstName, String lastName, String phone, String email) {
+		super(personID, firstName, lastName, phone, email);
+		this.studentID = studentID;
+		this.scores = null;
 	}
 
 	public Student() {

@@ -1,6 +1,7 @@
 package data;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import business.model.Score;
@@ -14,24 +15,21 @@ public class StudentAccess implements DataAccess<Student> {
 	@Override
 	public boolean insert(Student student) throws SQLException {
 		connection = SQLUtils.getConnection();
-		String id = student.getStudentID();
-		String personID = "ST" + id;
-		String firstName = student.getFirstName();
-		String lastName = student.getLastName();
-		String phone = student.getPhone();
-		String email = student.getEmail();
-		String sql = "INSERT INTO Person VALUES ('"
-				+ personID + "','"
-				+ firstName + "','"
-				+ lastName + "','"
-				+ phone + "','"
-				+ email + "');"
-				+ "INSERT INTO Students VALUES ('"
-				+ id + "','"
-				+ personID + "');";
-		boolean i = connection.createStatement().executeUpdate(sql) >= 1;
+		PreparedStatement pStatement1 = connection.prepareStatement(
+				"INSERT INTO Person VALUES (?,?,?,?,?)");
+		pStatement1.setString(1, "ST" + student.getStudentID());
+		pStatement1.setString(2, student.getFirstName());
+		pStatement1.setString(3, student.getLastName());
+		pStatement1.setString(4, student.getPhone());
+		pStatement1.setString(5, student.getEmail());
+		boolean a = pStatement1.executeUpdate() >= 1;
+		PreparedStatement pStatement2 = connection.prepareStatement(
+				"INSERT INTO Students VALUES (?,?)");
+		pStatement2.setString(1, student.getStudentID());
+		pStatement2.setString(2, "ST" + student.getStudentID());
+		boolean b = pStatement2.executeUpdate() >= 1;
 		SQLUtils.closeConnection(connection);
-		return i;
+		return a && b;
 	}
 
 	@Override

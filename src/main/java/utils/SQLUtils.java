@@ -7,6 +7,9 @@ import javax.sql.DataSource;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 
+import business.model.Student;
+import data.StudentAccess;
+
 public class SQLUtils {
 
 	public static DataSource getDataSource() {
@@ -60,20 +63,10 @@ public class SQLUtils {
 		testDataSource();
 	}
 	private static void testDataSource() {
-//		Connection connection = SQLUtils.getConnection();
-//		Person person = new Person("123", "Nguyen Van", "hehe", "a@mail", "0123");
-//		try {
-//			PreparedStatement pStatement = connection.prepareStatement(
-//					"INSERT INTO Person VALUES (?,?,?,?,?)");
-//			pStatement.setString(1, person.getPersonID());
-//			pStatement.setString(2, person.getFirstName());
-//			pStatement.setString(3, person.getLastName());
-//			pStatement.setString(4, person.getEmail());
-//			pStatement.setString(5, person.getPhone());
-//			pStatement.executeUpdate();
-//			SQLUtils.closeConnection(connection);
-//		} catch (SQLException e) {
-//			SQLUtils.printSQLException(e);
-//		}
+		try {
+			new StudentAccess().insert(new Student("S011", "STS011", "John", "Doe", "1234567890", "w9wP3@example.com"));
+		} catch (SQLException e) {
+			SQLUtils.printSQLException(e);
+		}
 	}
 }
