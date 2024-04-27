@@ -12,13 +12,19 @@ public class Student extends Person {
 	private String studentID;
 	private List<Score> scores;
 
-	public Student(String personID, String firstName, String lastName, String phone, String email, String studentID,
+	public Student(String studentID, String personID, String firstName, String lastName, String phone, String email,
 			List<Score> scores) {
 		super(personID, firstName, lastName, phone, email);
 		this.studentID = studentID;
 		this.scores = scores;
 	}
-	
+
+	public Student(String studentID, String personID, String firstName, String lastName, String phone, String email) {
+		super(personID, firstName, lastName, phone, email);
+		this.studentID = studentID;
+		this.scores = null;
+	}
+
 	public Student() {
 		super();
 		this.studentID = null;
@@ -35,16 +41,20 @@ public class Student extends Person {
 		this.studentID = rs.getString("StudentID");
 		this.scores = new ArrayList<>();
 	}
+
 	public String getFirstName() {
 		return super.getFirstName();
 	}
+
 	public String getLastName() {
 		return super.getLastName();
 	}
+
 	public StringProperty getFullName() {
 		StringProperty fullName = new SimpleStringProperty(super.getFirstName() + " " + super.getLastName());
 		return fullName;
 	}
+
 	public String getStudentID() {
 		return studentID;
 	}

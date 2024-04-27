@@ -18,8 +18,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionModel;
 import javafx.scene.control.TableColumn;
@@ -38,6 +41,8 @@ public class GroupController implements Initializable{
 	
 	private AnchorPane anchor;
 	
+	private Dialog<String> dialog = new Dialog<String>();
+	 
 	@FXML
 	private TextField textField_GroupID;
 	@FXML
@@ -71,21 +76,21 @@ public class GroupController implements Initializable{
     private Button btnViewStudent_Group=new Button();
     
     @FXML
-    private TextField textFile_EmailAdd_Group;
+    private TextField textField_EmailAdd_GroupAdd;
 
     @FXML
-    private TextField textFile_FirstNameAdd_Group;
+    private TextField textField_FirstNameAdd_GroupAdd;
 
     @FXML
-    private TextField textFile_IdAdd_Group;
+    private TextField textField_IdAdd_GroupAdd;
 
     @FXML
-    private TextField textFile_LastNameAdd_Group;
+    private TextField textField_LastNameAdd_GroupAdd;
 
     @FXML
-    private TextField textFile_PhoneAdd_Group;
+    private TextField textField_PhoneAdd_GroupAdd;
     
-	ObservableList<Student> observableList ;
+	private ObservableList<Student> observableList ;
 	
 	private List<Student> studentList;
 	
@@ -107,7 +112,7 @@ public class GroupController implements Initializable{
 	    ComboBoxGroup.setConverter(new StringConverter<Group>() {
             @Override
             public String toString(Group gr) {
-                return gr == null ? "" : gr.getGroupID();
+                return gr == null ? "" : gr.getGroupName();
             }
 
             @Override
@@ -120,6 +125,7 @@ public class GroupController implements Initializable{
 	    ComboBoxGroup.setOnAction(envent -> {   	
 		    Group Group_Current=ComboBoxGroup.getValue();
 	    	gr.getStudentsForGroup(Group_Current);
+	    	group_Current_Layout=Group_Current;
 	    	studentList = Group_Current.getStudents();
 	    	tableView_Group.setItems(loadStudent_tableView(studentList));
 	    	setVisibleButton_Add_Del_View(true);
@@ -196,33 +202,39 @@ public class GroupController implements Initializable{
     @FXML
     void saveStudent_Group(ActionEvent event) {
     	try {
-    		if( textFile_IdAdd_Group.getText() != null && textFile_IdAdd_Group.getText() != "" && 
-    			textFile_FirstNameAdd_Group.getText() !=null && textFile_FirstNameAdd_Group.getText() != "" && 
-    			textFile_LastNameAdd_Group.getText()!=null &&textFile_IdAdd_Group.getText() != "") 
+    		if(textField_IdAdd_GroupAdd.getText() != null &&
+    			textField_IdAdd_GroupAdd.getText() != "" && 
+    			textField_FirstNameAdd_GroupAdd.getText() !=null && 
+    			textField_FirstNameAdd_GroupAdd.getText() != "" && 
+    			textField_LastNameAdd_GroupAdd.getText()!=null &&
+    			textField_IdAdd_GroupAdd.getText() != "" &&
+				textField_PhoneAdd_GroupAdd.getText()!=null &&
+				textField_PhoneAdd_GroupAdd.getText() != "" &&
+				textField_EmailAdd_GroupAdd.getText()!=null &&
+				textField_EmailAdd_GroupAdd.getText() != "")
     		{	
-    			System.out.println(textFile_IdAdd_Group.getText());
-    			if(!gr.addStudentToGroup(group_Current_Layout,new Student(
-	    					null,
-	    					textFile_FirstNameAdd_Group.getText(),
-	    					textFile_LastNameAdd_Group.getText(),
-	    					textFile_PhoneAdd_Group.getText(),
-	    					textFile_EmailAdd_Group.getText(),
-	    					textFile_IdAdd_Group.getText(),
-	    					null))) 
+    			if(!gr.addStudentToGroup(group_Current_Layout,
+    			new Student(textField_IdAdd_GroupAdd.getText(),
+    					null,textField_FirstNameAdd_GroupAdd.getText(),
+    					textField_LastNameAdd_GroupAdd.getText(),
+    					textField_PhoneAdd_GroupAdd.getText(),
+    					textField_EmailAdd_GroupAdd.getText())))
     			{
-    				System.out.println("Them That bai \n");
-				}
-    			else {
-    				System.out.println("Them thanh cong \n");
+    				DialogNotification(AlertType.NONE, "Successful notification!", "The student was  added!","Successful!");
     			}
+				else {
+					DialogNotification(AlertType.WARNING, "Unsuccessful notification!", "The student was added!","Unsuccessful!");
+				}
     		}
     		else {    			
-    			System.out.println("Dien day du thong tin \n");
+				DialogNotification(AlertType.NONE, "Unsuccessful notification!", "Please try again!","Error!");
     		}
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			dialog.setTitle("Error code :)))");
+			dialog.setContentText("Please try again!");
+			dialog.showAndWait();
 		}
 
     }
@@ -232,7 +244,18 @@ public class GroupController implements Initializable{
 		AnchorPane.setRightAnchor(insidePane, 0.0);
 		AnchorPane.setLeftAnchor(insidePane, 0.0);
 	}
+	private void DialogNotification(AlertType type,String title,String content,String header) {
+		Alert alert = new Alert(type);
+		alert.setTitle(title);
+		alert.setHeaderText(header);
+		alert.setContentText(content);
 
-	
+		Button okButton = new Button("Cancel");
 
+		okButton.setOnAction(event -> {
+		    alert.hide();
+		});
+
+		alert.showAndWait();
+	}
 }

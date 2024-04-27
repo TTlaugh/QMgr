@@ -9,7 +9,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <!--Variables-->
-        <classclass.main>application.Main</classclass.main>
+        <class.main>application.Main</class.main>
         <class.launcher>application.Launcher</class.launcher>
         <java.path>/usr/lib/jvm/java-1.17.0-openjdk-amd64/bin/java</java.path>
     </properties>
@@ -96,7 +96,7 @@
                         <configuration>
                             <shadedArtifactAttached>true</shadedArtifactAttached>
                             <shadedClassifierName>project-classifier</shadedClassifierName>
-                            <outputFile>shade\${project.artifactId}.jar</outputFile>
+                            <outputFile>bin\${project.artifactId}.jar</outputFile>
                             <transformers>
                                 <transformer implementation=
                                     "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">

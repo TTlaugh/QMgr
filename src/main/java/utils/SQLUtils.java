@@ -8,8 +8,6 @@ import javax.sql.DataSource;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 
-import business.model.Person;
-
 public class SQLUtils {
 
 	public static DataSource getDataSource() {
@@ -64,25 +62,6 @@ public class SQLUtils {
 	}
 
 	private static void testDataSource() {
-		Connection connection = SQLUtils.getConnection();
-		Person person = new Person("123", "Nguyen Van", "hehe", "a@mail", "0123");
-		if (connection != null) {
-			System.out.println("Connected to the database!");
-		}
-		try {
-			PreparedStatement pStatement = connection.prepareStatement(
-					"INSERT INTO Person VALUES (?,?,?,?,?)");
-			pStatement.setString(1, person.getPersonID());
-			pStatement.setString(2, person.getFirstName());
-			pStatement.setString(3, person.getLastName());
-			pStatement.setString(4, person.getEmail());
-			pStatement.setString(5, person.getPhone());
-			pStatement.executeUpdate();
-			SQLUtils.closeConnection(connection);
-		} catch (SQLException e) {
-			SQLUtils.printSQLException(e);
-		}
-
 		// Connection connection = SQLUtils.getConnection();
 		// Person person = new Person("123", "Nguyen Van", "hehe", "a@mail", "0123");
 		// try {
@@ -98,6 +77,5 @@ public class SQLUtils {
 		// } catch (SQLException e) {
 		// SQLUtils.printSQLException(e);
 		// }
-
 	}
 }

@@ -8,8 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1050.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GroupController">
+AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1050.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GroupController">
    <children>
       <AnchorPane layoutX="325.0" layoutY="199.0" prefHeight="433.0" prefWidth="400.0" AnchorPane.bottomAnchor="198.0" AnchorPane.leftAnchor="325.0" AnchorPane.rightAnchor="325.0" AnchorPane.topAnchor="199.0">
          <styleClass>
@@ -44,7 +43,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="textFile_FirstNameAdd_Group" layoutX="136.0" layoutY="200.0" prefHeight="33.0" prefWidth="234.0" promptText="First Name" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="30.0">
+            <TextField fx:id="textField_FirstNameAdd_GroupAdd" layoutX="136.0" layoutY="200.0" prefHeight="33.0" prefWidth="234.0" promptText="First Name" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="30.0">
                <styleClass>
                   <String fx:value="transparent" />
                   <String fx:value="round-layout" />
@@ -58,7 +57,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="textFile_LastNameAdd_Group" layoutX="136.0" layoutY="242.0" prefHeight="33.0" prefWidth="234.0" promptText="Last Name" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="30.0">
+            <TextField fx:id="textField_LastNameAdd_GroupAdd" layoutX="136.0" layoutY="242.0" prefHeight="33.0" prefWidth="234.0" promptText="Last Name" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="30.0">
                <styleClass>
                   <String fx:value="transparent" />
                   <String fx:value="round-layout" />
@@ -67,7 +66,7 @@
                   <Font size="15.0" />
                </font>
             </TextField>
-            <TextField fx:id="textFile_PhoneAdd_Group" layoutX="136.0" layoutY="284.0" prefHeight="33.0" prefWidth="234.0" promptText="Phone" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="30.0">
+            <TextField fx:id="textField_PhoneAdd_GroupAdd" layoutX="136.0" layoutY="284.0" prefHeight="33.0" prefWidth="234.0" promptText="Phone" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="30.0">
                <styleClass>
                   <String fx:value="transparent" />
                   <String fx:value="round-layout" />
@@ -76,7 +75,7 @@
                   <Font size="15.0" />
                </font>
             </TextField>
-            <TextField fx:id="textFile_EmailAdd_Group" layoutX="136.0" layoutY="326.0" prefHeight="33.0" prefWidth="234.0" promptText="Email" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="30.0">
+            <TextField fx:id="textField_EmailAdd_GroupAdd" layoutX="136.0" layoutY="326.0" prefHeight="33.0" prefWidth="234.0" promptText="Email" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="30.0">
                <styleClass>
                   <String fx:value="transparent" />
                   <String fx:value="round-layout" />
@@ -100,7 +99,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-            <TextField fx:id="textFile_IdAdd_Group" layoutX="136.0" layoutY="158.0" prefHeight="33.0" prefWidth="234.0" promptText="ID(Ex: S007)" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="30.0">
+            <TextField fx:id="textField_IdAdd_GroupAdd" layoutX="136.0" layoutY="158.0" prefHeight="33.0" prefWidth="234.0" promptText="ID(Ex: S007)" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="30.0">
                <styleClass>
                   <String fx:value="transparent" />
                   <String fx:value="round-layout" />
