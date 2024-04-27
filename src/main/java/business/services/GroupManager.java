@@ -69,7 +69,7 @@ public class GroupManager {
 		}
 	}
 	
-	public boolean addStudentToGroup(Group group, Student student) throws SQLException {
+	public boolean addStudent(Group group, Student student) throws SQLException {
 		try {
 			new StudentAccess().insert(student);
 			new GroupStudentAccess().addStudent(group.getGroupID(), student.getStudentID());
@@ -77,6 +77,17 @@ public class GroupManager {
 			SQLUtils.printSQLException(e);
 			if (e.getErrorCode() == MysqlErrorNumbers.ER_DUP_ENTRY)
 				throw new SQLException("StudentID: '"+student.getStudentID()+"' already exists", e);
+		}
+		return false;
+	}
+
+	public boolean addStudentToGroup(Group group, Student student) throws SQLException {
+		try {
+			new GroupStudentAccess().addStudent(group.getGroupID(), student.getStudentID());
+		} catch (SQLException e) {
+			SQLUtils.printSQLException(e);
+			if (e.getErrorCode() == MysqlErrorNumbers.ER_DUP_ENTRY)
+				throw new SQLException("StudentID: '"+student.getStudentID()+"' already exists in Group(ID): '"+group.getGroupID()+"'", e);
 		}
 		return false;
 	}
