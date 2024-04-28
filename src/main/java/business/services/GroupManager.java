@@ -71,7 +71,7 @@ public class GroupManager {
 	
 	public boolean addStudent(Group group, Student student) throws SQLException {
 		try {
-			new StudentAccess().insert(student);
+			return new StudentAccess().insert(student) &&
 			new GroupStudentAccess().addStudent(group.getGroupID(), student.getStudentID());
 		} catch (SQLException e) {
 			SQLUtils.printSQLException(e);
@@ -83,7 +83,7 @@ public class GroupManager {
 
 	public boolean addStudentToGroup(Group group, Student student) throws SQLException {
 		try {
-			new GroupStudentAccess().addStudent(group.getGroupID(), student.getStudentID());
+			return new GroupStudentAccess().addStudent(group.getGroupID(), student.getStudentID());
 		} catch (SQLException e) {
 			SQLUtils.printSQLException(e);
 			if (e.getErrorCode() == MysqlErrorNumbers.ER_DUP_ENTRY)
@@ -96,7 +96,8 @@ public class GroupManager {
 		try {
 			new GroupStudentAccess().removeStudent(group.getGroupID(), student.getStudentID());
 			if (new GroupStudentAccess().countClassesOfStudent(student.getStudentID()) == 0)
-				new StudentAccess().delete(student.getStudentID());
+				return new StudentAccess().delete(student.getStudentID());
+			return true;
 		} catch (SQLException e) {
 			SQLUtils.printSQLException(e);
 		}
