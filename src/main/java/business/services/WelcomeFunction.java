@@ -13,7 +13,7 @@ public class WelcomeFunction {
 		Teacher teacher = null;
 		try {
 			teacher = new TeacherAccess().get(teacherID);
-			if (new AccountAccess().get(teacher.getPersonID()).getPassword().equals(password))
+			if (!new AccountAccess().get(teacher.getPersonID()).getPassword().equals(password))
 				teacher = null;
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 import com.mysql.cj.jdbc.MysqlDataSource;
 
 import business.model.Student;
+import business.services.WelcomeFunction;
 import data.StudentAccess;
 
 public class SQLUtils {
@@ -63,10 +64,7 @@ public class SQLUtils {
 		testDataSource();
 	}
 	private static void testDataSource() {
-		try {
-			new StudentAccess().insert(new Student("S011", "STS011", "John", "Doe", "1234567890", "w9wP3@example.com"));
-		} catch (SQLException e) {
-			SQLUtils.printSQLException(e);
-		}
+		WelcomeFunction welcomeFunction = new WelcomeFunction();
+		System.out.println(welcomeFunction.signIn("T001", "tttt"));
 	}
 }
