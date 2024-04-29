@@ -96,6 +96,6 @@ public class QuestionAccess implements DataAccess<Question> {
 		return getList(Question.class,
 				"SELECT * FROM Questions"
 				+ " INNER JOIN Subjects ON Questions.SubjectID = Subjects.SubjectID",
-				"SubjectID", subject.getSubjectID());
+				"Subjects.SubjectID", subject.getSubjectID());
 	}
 }
