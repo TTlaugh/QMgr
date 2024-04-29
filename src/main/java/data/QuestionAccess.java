@@ -94,7 +94,8 @@ public class QuestionAccess implements DataAccess<Question> {
 	
 	public List<Question> getQuestionsOfSubject(Subject subject) throws SQLException {
 		return getList(Question.class,
-				"SELECT * FROM Questions",
+				"SELECT * FROM Questions"
+				+ " INNER JOIN Subjects ON Questions.SubjectID = Subjects.SubjectID",
 				"SubjectID", subject.getSubjectID());
 	}
 }
