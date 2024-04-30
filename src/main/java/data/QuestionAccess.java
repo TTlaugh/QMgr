@@ -40,16 +40,16 @@ public class QuestionAccess implements DataAccess<Question> {
 		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement = connection.prepareStatement(
 				"UPDATE Questions SET"
-						+ "SubjectID=?,"
-						+ "Chapter=?,"
-						+ "Difficulty=?,"
-						+ "Content=?,"
-						+ "Answer1=?,"
-						+ "Answer2=?,"
-						+ "Answer3=?,"
-						+ "Answer4=?,"
-						+ "CorrectAnswers=?"
-						+ "WHERE QuestionID=?");
+						+ " SubjectID=?,"
+						+ " Chapter=?,"
+						+ " Difficulty=?,"
+						+ " Content=?,"
+						+ " Answer1=?,"
+						+ " Answer2=?,"
+						+ " Answer3=?,"
+						+ " Answer4=?,"
+						+ " CorrectAnswers=?"
+						+ " WHERE QuestionID=?");
 		pStatement.setString(1, question.getSubject().getSubjectID());
 		pStatement.setInt   (2, question.getChapter());
 		pStatement.setInt   (3, question.getDifficulty());
@@ -91,7 +91,7 @@ public class QuestionAccess implements DataAccess<Question> {
 				+ " INNER JOIN Person ON Teachers.PersonID = Person.PersonID",
 				"Questions.QuestionID", question.getQuestionID()));
 	}
-	
+
 	public List<Question> getQuestionsOfSubject(Subject subject) throws SQLException {
 		return getList(Question.class,
 				"SELECT * FROM Questions"

@@ -28,8 +28,8 @@ public class AccountAccess implements DataAccess<Account> {
 		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement = connection.prepareStatement(
 				"UPDATE Accounts SET"
-						+ "Password=?"
-						+ "WHERE PersonID=?");
+						+ " Password=?"
+						+ " WHERE PersonID=?");
 		pStatement.setString(1, account.getPassword());
 		pStatement.setString(2, account.getPersonID());
 		boolean i = pStatement.executeUpdate() >= 1;

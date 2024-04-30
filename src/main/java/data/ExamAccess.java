@@ -39,15 +39,15 @@ public class ExamAccess implements DataAccess<Exam> {
 		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement = connection.prepareStatement(
 				"UPDATE Exams SET"
-						+ "SubjectID=?,"
-						+ "StartDateTime=?,"
-						+ "TimeLimit=?,"
-						+ "MaxScore=?,"
-						+ "Name=?,"
-						+ "Description=?,"
-						+ "IsShuffle=?,"
-						+ "Questions=?"
-						+ "WHERE ExamID=?");
+						+ " SubjectID=?,"
+						+ " StartDateTime=?,"
+						+ " TimeLimit=?,"
+						+ " MaxScore=?,"
+						+ " Name=?,"
+						+ " Description=?,"
+						+ " IsShuffle=?,"
+						+ " Questions=?"
+						+ " WHERE ExamID=?");
 		pStatement.setString (1, exam.getSubject().getSubjectID());
 		pStatement.setString (2, exam.getStartDateTime().toString());
 		pStatement.setInt    (3, exam.getTimeLimit());
@@ -79,7 +79,7 @@ public class ExamAccess implements DataAccess<Exam> {
 				+ " INNER JOIN Person ON Teachers.PersonID = Person.PersonID"
 				+ "Exams.ExamID", exam.getExamID().toString()));
 	}
-	
+
 	public void getQuestions(Exam exam) throws SQLException {
 		Connection connection = SQLUtils.getConnection();
 		ResultSet rs = connection.createStatement().executeQuery(

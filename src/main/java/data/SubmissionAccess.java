@@ -12,9 +12,9 @@ import business.model.Submission;
 import utils.SQLUtils;
 
 public class SubmissionAccess implements DataAccess<Submission> {
-	
+
 	private Connection connection;
-	
+
 	@Override
 	public boolean insert(Submission submission) throws SQLException {
 		connection = SQLUtils.getConnection();
@@ -34,10 +34,10 @@ public class SubmissionAccess implements DataAccess<Submission> {
 		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement = connection.prepareStatement(
 				"UPDATE Submissions SET"
-						+ "TimeTaken=?,"
-						+ "Score=?,"
-						+ "AnswerSelecteds=?"
-						+ "WHERE ExamID=? AND StudentID=?");
+						+ " TimeTaken=?,"
+						+ " Score=?,"
+						+ " AnswerSelecteds=?"
+						+ " WHERE ExamID=? AND StudentID=?");
 		pStatement.setInt   (1, submission.getTimeTaken());
 		pStatement.setDouble(2, submission.getScore());
 		pStatement.setString(3, submission.getAnswerSelectedsJSON());
@@ -59,7 +59,7 @@ public class SubmissionAccess implements DataAccess<Submission> {
 		SQLUtils.closeConnection(connection);
 		return i;
 	}
-	
+
 	@Override
 	public Submission get(String... primaryKeyValues) throws SQLException {
 		return get(Submission.class,
@@ -71,7 +71,7 @@ public class SubmissionAccess implements DataAccess<Submission> {
 					"Submissions.ExamID", primaryKeyValues[0],
 					"Submissions.StudentID", primaryKeyValues[1]);
 	}
-	
+
 	public List<Submission> getAll() throws SQLException {
 		return getList(Submission.class,
 				"SELECT * FROM Submissions"
@@ -91,5 +91,5 @@ public class SubmissionAccess implements DataAccess<Submission> {
 							entry.getValue()));
 		return selectedQuestions;
 	}
-	
+
 }

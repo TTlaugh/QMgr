@@ -12,7 +12,7 @@ import utils.SQLUtils;
 public class GroupAccess implements DataAccess<Group> {
 
 	private Connection connection;
-	
+
 	@Override
 	public boolean insert(Group group) throws SQLException {
 		connection = SQLUtils.getConnection();
@@ -30,10 +30,10 @@ public class GroupAccess implements DataAccess<Group> {
 		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement = connection.prepareStatement(
 				"UPDATE SGroups SET"
-				+ "SGroupID=?,"
-				+ "TeacherID=?,"
-				+ "SGroupName=?"
-				+ "WHERE SGroupID=?");
+				+ " SGroupID=?,"
+				+ " TeacherID=?,"
+				+ " SGroupName=?"
+				+ " WHERE SGroupID=?");
 		pStatement.setString(1, group.getTeacher().getTeacherID());
 		pStatement.setString(2, group.getGroupName());
 		pStatement.setString(3, group.getGroupID());
@@ -50,7 +50,7 @@ public class GroupAccess implements DataAccess<Group> {
 		SQLUtils.closeConnection(connection);
 		return i;
 	}
-	
+
 	@Override
 	public Group get(String... primaryKeyValues) throws SQLException {
 		return get(Group.class,

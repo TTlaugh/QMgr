@@ -9,9 +9,9 @@ import business.model.Student;
 import utils.SQLUtils;
 
 public class StudentAccess implements DataAccess<Student> {
-	
+
 	private Connection connection;
-	
+
 	@Override
 	public boolean insert(Student student) throws SQLException {
 		connection = SQLUtils.getConnection();
@@ -40,12 +40,12 @@ public class StudentAccess implements DataAccess<Student> {
 		String lastName = student.getLastName();
 		String phone = student.getPhone();
 		String email = student.getEmail();
-		String sql = "UPDATE Person SET "
-				+ "FirstName = '" + firstName + "', "
-				+ "LastName = '" + lastName + "', "
-				+ "Phone = '" + phone + "', "
-				+ "Email = '" + email + "' "
-				+ "WHERE PersonID = '" + personID + "'";
+		String sql = "UPDATE Person SET"
+				+ " FirstName = '" + firstName + "',"
+				+ " LastName = '" + lastName + "',"
+				+ " Phone = '" + phone + "',"
+				+ " Email = '" + email + "'"
+				+ " WHERE PersonID = '" + personID + "'";
 		boolean i = connection.createStatement().executeUpdate(sql) >= 1;
 		SQLUtils.closeConnection(connection);
 		return i;

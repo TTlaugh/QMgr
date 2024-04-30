@@ -39,12 +39,12 @@ public class TeacherAccess implements DataAccess<Teacher> {
 		String lastName = teacher.getLastName();
 		String phone = teacher.getPhone();
 		String email = teacher.getEmail();
-		String sql = "UPDATE Person SET "
-				+ "FirstName = '" + firstName + "', "
-				+ "LastName = '" + lastName + "', "
-				+ "Phone = '" + phone + "', "
-				+ "Email = '" + email + "' "
-				+ "WHERE PersonID = '" + personID + "'";
+		String sql = "UPDATE Person SET"
+				+ " FirstName = '" + firstName + "',"
+				+ " LastName = '" + lastName + "',"
+				+ " Phone = '" + phone + "',"
+				+ " Email = '" + email + "'"
+				+ " WHERE PersonID = '" + personID + "'";
 		boolean i = connection.createStatement().executeUpdate(sql) >= 1;
 		SQLUtils.closeConnection(connection);
 		return i;
