@@ -102,10 +102,11 @@ public class ExamAccess implements DataAccess<Exam> {
 					"Exams.ExamID", primaryKeyValues[0]);
 	}
 
-	public List<Exam> getAll() throws SQLException {
+	public List<Exam> getAll(String teacherID) throws SQLException {
 		return getList(Exam.class,
 				"SELECT * FROM Exams"
-				+ " INNER JOIN Subjects ON Exams.SubjectID = Subjects.SubjectID");
+				+ " INNER JOIN Subjects ON Exams.SubjectID = Subjects.SubjectID",
+				"Subjects.TeacherID", teacherID);
 	}
 
 }

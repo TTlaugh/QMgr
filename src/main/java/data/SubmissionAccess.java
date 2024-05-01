@@ -72,13 +72,14 @@ public class SubmissionAccess implements DataAccess<Submission> {
 					"Submissions.StudentID", primaryKeyValues[1]);
 	}
 
-	public List<Submission> getAll() throws SQLException {
+	public List<Submission> getAll(String teacherID) throws SQLException {
 		return getList(Submission.class,
 				"SELECT * FROM Submissions"
 				+ " INNER JOIN Exams ON Submissions.ExamID = Exams.ExamID"
 				+ " INNER JOIN Students ON Submissions.StudentID = Students.StudentID"
 				+ " INNER JOIN Subjects ON Exams.SubjectID = Subjects.SubjectID"
-				+ " INNER JOIN Person ON Students.PersonID = Person.PersonID");
+				+ " INNER JOIN Person ON Students.PersonID = Person.PersonID",
+				"Subjects.TeacherID", teacherID);
 	}
 
 	public List<SelectedQuestion> getSelectedQuestions(Submission submission) throws SQLException {

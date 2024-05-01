@@ -5,14 +5,15 @@ import java.util.List;
 
 import business.model.SelectedQuestion;
 import business.model.Submission;
+import business.model.Teacher;
 import data.SubmissionAccess;
 import utils.SQLUtils;
 
 public class SubmissionManager {
 	
-	public List<Submission> getSubmissions() {
+	public List<Submission> getSubmissions(Teacher teacher) {
 		try {
-			return new SubmissionAccess().getAll();
+			return new SubmissionAccess().getAll(teacher.getTeacherID());
 		} catch (SQLException e) {
 			SQLUtils.printSQLException(e);
 		}
