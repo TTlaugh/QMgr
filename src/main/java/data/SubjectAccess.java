@@ -61,10 +61,11 @@ public class SubjectAccess implements DataAccess<Subject> {
 				"Subjects.SubjectID", primaryKeyValues[0]);
 	}
 
-	public List<Subject> getAll() throws SQLException {
+	public List<Subject> getAll(String teacherID) throws SQLException {
 		return getList(Subject.class,
 				"SELECT * FROM Subjects"
-				+ " INNER JOIN Teachers ON Subjects.TeacherID = Teachers.TeacherID");
+				+ " INNER JOIN Teachers ON Subjects.TeacherID = Teachers.TeacherID",
+				"Teachers.TeacherID", teacherID);
 	}
 
 	public void getTeacher(Subject subject) throws SQLException {

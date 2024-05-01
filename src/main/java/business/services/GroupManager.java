@@ -14,6 +14,7 @@ import com.mysql.cj.exceptions.MysqlErrorNumbers;
 import business.model.Group;
 import business.model.Score;
 import business.model.Student;
+import business.model.Teacher;
 import data.GroupAccess;
 import data.GroupStudentAccess;
 import data.StudentAccess;
@@ -23,9 +24,9 @@ import utils.SQLUtils;
 
 public class GroupManager {
 
-	public List<Group> getGroups() {
+	public List<Group> getGroups(Teacher teacher) {
 		try {
-			return new GroupAccess().getAll();
+			return new GroupAccess().getAll(teacher.getTeacherID());
 		} catch (SQLException e) {
 			SQLUtils.printSQLException(e);
 		}

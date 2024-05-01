@@ -16,6 +16,7 @@ import com.mysql.cj.exceptions.MysqlErrorNumbers;
 
 import business.model.Question;
 import business.model.Subject;
+import business.model.Teacher;
 import data.QuestionAccess;
 import data.SubjectAccess;
 import utils.ExcelReader;
@@ -24,9 +25,9 @@ import utils.SQLUtils;
 
 public class QuestionManager {
 	
-	public List<Subject> getSubjects() {
+	public List<Subject> getSubjects(Teacher teacher) {
 		try {
-			return new SubjectAccess().getAll();
+			return new SubjectAccess().getAll(teacher.getTeacherID());
 		} catch (SQLException e) {
 			SQLUtils.printSQLException(e);
 		}
