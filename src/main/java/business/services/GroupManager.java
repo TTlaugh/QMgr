@@ -115,16 +115,17 @@ public class GroupManager {
 	}
 	
 	public boolean importStudent(Group group, String excelFilePath) throws IOException {
-		try {
-			List<Student> students = new StudentExcelReader().readExcel(excelFilePath);
-			for (Student student : students) {
+		boolean stat = true;
+		List<Student> students = new StudentExcelReader().readExcel(excelFilePath);
+		for (Student student : students) {
+			try {
 				addStudent(group, student);
+			} catch (SQLException e) {
+				SQLUtils.printSQLException(e);
+				stat = false;
 			}
-			return true;
-		} catch (SQLException e) {
-			SQLUtils.printSQLException(e);
 		}
-		return false;
+		return stat;
 	}
 
 	public boolean exportStudent(Group group, String excelFilePath) {
