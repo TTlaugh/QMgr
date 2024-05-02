@@ -3,6 +3,9 @@ package business.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Subject {
 
 	private String subjectID;
@@ -43,6 +46,10 @@ public class Subject {
 
 	public void setSubjectName(String subjectName) {
 		this.subjectName = subjectName;
+	}
+	public StringProperty getSubjectNameStringProperty() {
+		StringProperty name = new SimpleStringProperty(getSubjectName());
+		return name;
 	}
 
 	@Override

@@ -9,11 +9,11 @@ import data.TeacherAccess;
 
 public class WelcomeFunction {
 
-	public Teacher signUp(String teacherID, String password) {
+	public Teacher signIn(String teacherID, String password) {
 		Teacher teacher = null;
 		try {
 			teacher = new TeacherAccess().get(teacherID);
-			if (new AccountAccess().get(teacher.getPersonID()).getPassword().equals(password))
+			if (!new AccountAccess().get(teacher.getPersonID()).getPassword().equals(password))
 				teacher = null;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -22,13 +22,13 @@ public class WelcomeFunction {
 		return teacher;
 	}
 	
-	public boolean signIn(Teacher teacher, String password) {
+	public boolean signUp(Teacher teacher, String password) {
 		try {
 			new TeacherAccess().insert(teacher);
 			new AccountAccess().insert(new Account(teacher.getPersonID(), password));
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
 		}
 		return false;
 	}

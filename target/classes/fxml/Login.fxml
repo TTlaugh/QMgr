@@ -35,7 +35,7 @@
                         <Insets />
                      </HBox.margin>
                   </ImageView>
-                  <TextField prefHeight="31.0" prefWidth="307.0" promptText="User" styleClass="transparent">
+                  <TextField fx:id="textField_User_Login" prefHeight="31.0" prefWidth="307.0" promptText="User" styleClass="transparent">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -55,7 +55,7 @@
                         <Insets />
                      </HBox.margin>
                   </ImageView>
-                  <PasswordField prefHeight="31.0" prefWidth="307.0" promptText="Password" styleClass="transparent">
+                  <PasswordField fx:id="textField_Password_Login" prefHeight="31.0" prefWidth="307.0" promptText="Password" styleClass="transparent">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -95,7 +95,7 @@
                         <Insets />
                      </HBox.margin>
                   </ImageView>
-                  <TextField prefHeight="31.0" prefWidth="307.0" promptText="User" styleClass="transparent">
+                  <TextField fx:id="textField_USer_SignUp_Login" prefHeight="31.0" prefWidth="307.0" promptText="User" styleClass="transparent">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -105,7 +105,7 @@
                   </TextField>
                </children>
             </HBox>
-            <Button layoutX="178.0" layoutY="324.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="120.0" text="Sign Up" textFill="WHITE">
+            <Button layoutX="178.0" layoutY="324.0" mnemonicParsing="false" onAction="#SignUp_Login" prefHeight="38.0" prefWidth="120.0" text="Sign Up" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -120,7 +120,7 @@
                         <Insets />
                      </HBox.margin>
                   </ImageView>
-                  <TextField prefHeight="31.0" prefWidth="307.0" promptText="First Name" styleClass="transparent">
+                  <TextField fx:id="textField_FirstName_SignUp_Login" prefHeight="31.0" prefWidth="307.0" promptText="First Name" styleClass="transparent">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -140,7 +140,7 @@
                         <Insets />
                      </HBox.margin>
                   </ImageView>
-                  <TextField prefHeight="31.0" prefWidth="307.0" promptText="Last Name" styleClass="transparent">
+                  <TextField fx:id="textField_LastName_SignUp_Login" prefHeight="31.0" prefWidth="307.0" promptText="Last Name" styleClass="transparent">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -160,7 +160,7 @@
                         <Insets />
                      </HBox.margin>
                   </ImageView>
-                  <TextField prefHeight="31.0" prefWidth="307.0" promptText="Email" styleClass="transparent">
+                  <TextField fx:id="textField_Email_SignUp_Login" prefHeight="31.0" prefWidth="307.0" promptText="Email" styleClass="transparent">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -180,7 +180,7 @@
                         <Insets />
                      </HBox.margin>
                   </ImageView>
-                  <TextField prefHeight="31.0" prefWidth="307.0" promptText="Phone Number" styleClass="transparent">
+                  <TextField fx:id="textField_Phone_SignUp_Login" prefHeight="31.0" prefWidth="307.0" promptText="Phone Number" styleClass="transparent">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -210,7 +210,7 @@
                         <Insets />
                      </HBox.margin>
                   </ImageView>
-                  <PasswordField prefHeight="31.0" prefWidth="307.0" promptText="Password" styleClass="transparent">
+                  <PasswordField fx:id="textField_Password_SignUp_Login" prefHeight="31.0" prefWidth="307.0" promptText="Password" styleClass="transparent">
                      <font>
                         <Font size="15.0" />
                      </font>

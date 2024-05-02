@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import utils.JsonUtils;
 
 public class Submission {
@@ -35,6 +37,7 @@ public class Submission {
 	public Exam getExam() {
 		return exam;
 	}
+
 
 	public void setExam(Exam exam) {
 		this.exam = exam;
@@ -85,6 +88,16 @@ public class Submission {
 	public String toString() {
 		return "Submission [exam=" + exam + ", student=" + student + ", timeTaken=" + timeTaken + ", score=" + score
 				+ ", answerSelectedsJSON=" + answerSelectedsJSON + "]";
+	}
+
+	public StringProperty getStudentID() {
+		StringProperty id = new SimpleStringProperty(student.getStudentID());
+		return id;
+	}
+	
+	public StringProperty getExamID() {
+		StringProperty exam_ID = new SimpleStringProperty(getExam().getExamID().toString());
+		return exam_ID;
 	}
 
 }

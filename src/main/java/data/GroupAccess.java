@@ -30,10 +30,10 @@ public class GroupAccess implements DataAccess<Group> {
 		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement = connection.prepareStatement(
 				"UPDATE SGroups SET"
-						+ "SGroupID=?,"
-						+ "TeacherID=?,"
-						+ "SGroupName=?"
-						+ "WHERE SGroupID=?");
+				+ " SGroupID=?,"
+				+ " TeacherID=?,"
+				+ " SGroupName=?"
+				+ " WHERE SGroupID=?");
 		pStatement.setString(1, group.getTeacher().getTeacherID());
 		pStatement.setString(2, group.getGroupName());
 		pStatement.setString(3, group.getGroupID());
@@ -55,25 +55,25 @@ public class GroupAccess implements DataAccess<Group> {
 	public Group get(String... primaryKeyValues) throws SQLException {
 		return get(Group.class,
 				"SELECT * FROM SGroups"
-
-						+ " INNER JOIN Teachers ON SGroups.TeacherID = Teachers.TeacherID"
-						+ " INNER JOIN Person ON Teachers.PersonID = Person.PersonID",
+				+ " INNER JOIN Teachers ON SGroups.TeacherID = Teachers.TeacherID"
+				+ " INNER JOIN Person ON Teachers.PersonID = Person.PersonID",
 				"SGroups.SGroupID", primaryKeyValues[0]);
 	}
 
-	public List<Group> getAll() throws SQLException {
+	public List<Group> getAll(String teacherID) throws SQLException {
 		return getList(Group.class,
 				"SELECT * FROM SGroups"
-						+ " INNER JOIN Teachers ON SGroups.TeacherID = Teachers.TeacherID"
-						+ " INNER JOIN Person ON Teachers.PersonID = Person.PersonID");
+				+ " INNER JOIN Teachers ON SGroups.TeacherID = Teachers.TeacherID"
+				+ " INNER JOIN Person ON Teachers.PersonID = Person.PersonID",
+				"Teachers.TeacherID", teacherID);
 	}
 
 	public void getStudents(Group group) throws SQLException {
 		group.setStudents(getList(Student.class,
 				"SELECT Students.StudentID, Person.* FROM SGroups"
-						+ " INNER JOIN SGroupStudents ON SGroups.SGroupID = SGroupStudents.SGroupID"
-						+ " INNER JOIN Students ON SGroupStudents.StudentID = Students.StudentID"
-						+ " INNER JOIN Person ON Students.PersonID = Person.PersonID",
+				+ " INNER JOIN SGroupStudents ON SGroups.SGroupID = SGroupStudents.SGroupID"
+				+ " INNER JOIN Students ON SGroupStudents.StudentID = Students.StudentID"
+				+ " INNER JOIN Person ON Students.PersonID = Person.PersonID",
 				"SGroups.SGroupID", group.getGroupID()));
 	}
 

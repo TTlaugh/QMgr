@@ -26,7 +26,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="110.0" layoutY="76.0" text="19091999" AnchorPane.leftAnchor="110.0">
+                  <Label fx:id="Date_ExamView" layoutX="110.0" layoutY="76.0" text="19091999" AnchorPane.leftAnchor="110.0">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -34,27 +34,27 @@
                   <VBox layoutX="31.0" layoutY="194.0" prefHeight="733.0" prefWidth="513.0" AnchorPane.bottomAnchor="-109.0" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="194.0">
                      <children>
                         <Separator prefHeight="10.0" prefWidth="510.0" />
-                        <Label text="Question : Phương Trâm có đẹp gái không ? " wrapText="true">
+                        <Label fx:id="Question_ExamView" text="Question : Phương Trâm có đẹp gái không ? " wrapText="true">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <Label text="A: Co">
+                        <Label fx:id="Label_A_ExamView" text="A: Co">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label text="B: Co">
+                        <Label fx:id="Label_B_ExamView" text="B: Co">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label text="C: Co">
+                        <Label fx:id="Label_C_ExamView" text="C: Co">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label text="D: Co">
+                        <Label fx:id="Label_D_ExamView" text="D: Co">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -71,12 +71,12 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="110.0" layoutY="103.0" text="90" AnchorPane.leftAnchor="110.0">
+                  <Label fx:id="TimeLimit_ExamView" layoutX="110.0" layoutY="103.0" text="90" AnchorPane.leftAnchor="110.0">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="110.0" layoutY="130.0" text="100" AnchorPane.leftAnchor="110.0">
+                  <Label fx:id="Score_ExamView" layoutX="110.0" layoutY="130.0" text="100" AnchorPane.leftAnchor="110.0">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -86,7 +86,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="110.0" layoutY="49.0" text="Math" AnchorPane.leftAnchor="110.0">
+                  <Label fx:id="Subject_ExamView" layoutX="110.0" layoutY="49.0" text="Math" AnchorPane.leftAnchor="110.0">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -108,7 +108,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="111.0" layoutY="23.0" text="HEHE" AnchorPane.leftAnchor="110.0">
+                  <Label fx:id="Name_ExamView" layoutX="111.0" layoutY="23.0" text="HEHE" AnchorPane.leftAnchor="110.0">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -118,7 +118,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="106.0" layoutY="157.0" text="No tai lieu" AnchorPane.leftAnchor="110.0">
+                  <Label fx:id="Desc_ExamView" layoutX="106.0" layoutY="157.0" text="No tai lieu" AnchorPane.leftAnchor="110.0">
                      <font>
                         <Font size="18.0" />
                      </font>

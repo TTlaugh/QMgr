@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import utils.DateTime;
 
 public class Exam {
@@ -136,5 +138,7 @@ public class Exam {
 				+ timeLimit + ", maxScore=" + maxScore + ", name=" + name + ", description=" + description
 				+ ", isShuffled=" + isShuffled + ", questionIDs=" + questions + "]";
 	}
+	
+
 
 }

@@ -115,4 +115,8 @@ public class Question {
 		this.correctAnswers = correctAnswers;
 	}
 
+	@Override
+	public String toString() {
+		return "Question [questionID=" + questionID + ", subject=" + subject + ", chapter=" + chapter;
+	}
 }

@@ -14,6 +14,7 @@ import com.mysql.cj.exceptions.MysqlErrorNumbers;
 import business.model.Group;
 import business.model.Score;
 import business.model.Student;
+import business.model.Teacher;
 import data.GroupAccess;
 import data.GroupStudentAccess;
 import data.StudentAccess;
@@ -23,9 +24,9 @@ import utils.SQLUtils;
 
 public class GroupManager {
 
-	public List<Group> getGroups() {
+	public List<Group> getGroups(Teacher teacher) {
 		try {
-			return new GroupAccess().getAll();
+			return new GroupAccess().getAll(teacher.getTeacherID());
 		} catch (SQLException e) {
 			SQLUtils.printSQLException(e);
 		}
@@ -71,7 +72,7 @@ public class GroupManager {
 	
 	public boolean addStudent(Group group, Student student) throws SQLException {
 		try {
-			new StudentAccess().insert(student);
+			return new StudentAccess().insert(student) &&
 			new GroupStudentAccess().addStudent(group.getGroupID(), student.getStudentID());
 		} catch (SQLException e) {
 			SQLUtils.printSQLException(e);
@@ -81,13 +82,13 @@ public class GroupManager {
 		return false;
 	}
 
-	public boolean addStudentToGroup(Group group, Student student) throws SQLException {
+	public boolean addStudentToGroup(String groupID, String studentID) throws SQLException {
 		try {
-			new GroupStudentAccess().addStudent(group.getGroupID(), student.getStudentID());
+			return new GroupStudentAccess().addStudent(groupID, studentID);
 		} catch (SQLException e) {
 			SQLUtils.printSQLException(e);
 			if (e.getErrorCode() == MysqlErrorNumbers.ER_DUP_ENTRY)
-				throw new SQLException("StudentID: '"+student.getStudentID()+"' already exists in Group(ID): '"+group.getGroupID()+"'", e);
+				throw new SQLException("StudentID: '"+studentID+"' already exists in Group(ID): '"+groupID+"'", e);
 		}
 		return false;
 	}
@@ -96,7 +97,8 @@ public class GroupManager {
 		try {
 			new GroupStudentAccess().removeStudent(group.getGroupID(), student.getStudentID());
 			if (new GroupStudentAccess().countClassesOfStudent(student.getStudentID()) == 0)
-				new StudentAccess().delete(student.getStudentID());
+				return new StudentAccess().delete(student.getStudentID());
+			return true;
 		} catch (SQLException e) {
 			SQLUtils.printSQLException(e);
 		}
@@ -110,20 +112,20 @@ public class GroupManager {
 			SQLUtils.printSQLException(e);
 		}
 		return false;
-		
 	}
 	
-	public boolean importStudent(Group group, String excelFilePath) throws SQLException {
-		try {
-			List<Student> students = new StudentExcelReader().readExcel(excelFilePath);
-			for (Student student : students) {
-				addStudentToGroup(group, student);
+	public boolean importStudent(Group group, String excelFilePath) throws IOException {
+		boolean stat = true;
+		List<Student> students = new StudentExcelReader().readExcel(excelFilePath);
+		for (Student student : students) {
+			try {
+				addStudent(group, student);
+			} catch (SQLException e) {
+				SQLUtils.printSQLException(e);
+				stat = false;
 			}
-			return true;
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
-		return false;
+		return stat;
 	}
 
 	public boolean exportStudent(Group group, String excelFilePath) {

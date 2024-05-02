@@ -40,12 +40,12 @@ public class StudentAccess implements DataAccess<Student> {
 		String lastName = student.getLastName();
 		String phone = student.getPhone();
 		String email = student.getEmail();
-		String sql = "UPDATE Person SET "
-				+ "FirstName = '" + firstName + "', "
-				+ "LastName = '" + lastName + "', "
-				+ "Phone = '" + phone + "', "
-				+ "Email = '" + email + "' "
-				+ "WHERE PersonID = '" + personID + "'";
+		String sql = "UPDATE Person SET"
+				+ " FirstName = '" + firstName + "',"
+				+ " LastName = '" + lastName + "',"
+				+ " Phone = '" + phone + "',"
+				+ " Email = '" + email + "'"
+				+ " WHERE PersonID = '" + personID + "'";
 		boolean i = connection.createStatement().executeUpdate(sql) >= 1;
 		SQLUtils.closeConnection(connection);
 		return i;
@@ -55,7 +55,7 @@ public class StudentAccess implements DataAccess<Student> {
 	public boolean delete(String... primaryKeyValues) throws SQLException {
 		connection = SQLUtils.getConnection();
 		boolean i = connection.createStatement().executeUpdate(
-				"DELETE FROM Person WHERE PersonID = 'ST" + primaryKeyValues[0] + "'") >= 1;
+					"DELETE FROM Person WHERE PersonID = 'ST" + primaryKeyValues[0] + "'") >= 1;
 		SQLUtils.closeConnection(connection);
 		return i;
 	}
@@ -64,7 +64,7 @@ public class StudentAccess implements DataAccess<Student> {
 	public Student get(String... primaryKeyValues) throws SQLException {
 		Student student = get(Student.class,
 				"SELECT Students.StudentID, Person.* FROM Students"
-						+ " INNER JOIN Person ON Students.PersonID = Person.PersonID",
+				+ " INNER JOIN Person ON Students.PersonID = Person.PersonID",
 				"Students.StudentID", primaryKeyValues[0]);
 		student.setScores(getList(Score.class,
 				"SELECT ExamID, Score FROM Submissions",

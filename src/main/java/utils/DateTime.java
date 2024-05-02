@@ -102,5 +102,4 @@ public class DateTime {
 	public String toString() {
 		return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
 	}
-
 }

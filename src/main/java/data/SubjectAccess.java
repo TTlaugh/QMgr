@@ -31,10 +31,10 @@ public class SubjectAccess implements DataAccess<Subject> {
 		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement = connection.prepareStatement(
 				"UPDATE Subjects SET"
-						+ "SubjectID=?,"
-						+ "TeacherID=?,"
-						+ "SubjectName=?"
-						+ "WHERE SubjectID=?");
+						+ " SubjectID=?,"
+						+ " TeacherID=?,"
+						+ " SubjectName=?"
+						+ " WHERE SubjectID=?");
 		pStatement.setString(1, subject.getSubjectID());
 		pStatement.setString(2, subject.getTeacher().getTeacherID());
 		pStatement.setString(3, subject.getSubjectName());
@@ -57,21 +57,22 @@ public class SubjectAccess implements DataAccess<Subject> {
 	public Subject get(String... primaryKeyValues) throws SQLException {
 		return get(Subject.class,
 				"SELECT * FROM Subjects"
-						+ " INNER JOIN Teachers ON Subjects.TeacherID = Teachers.TeacherID",
+				+ " INNER JOIN Teachers ON Subjects.TeacherID = Teachers.TeacherID",
 				"Subjects.SubjectID", primaryKeyValues[0]);
 	}
 
-	public List<Subject> getAll() throws SQLException {
+	public List<Subject> getAll(String teacherID) throws SQLException {
 		return getList(Subject.class,
 				"SELECT * FROM Subjects"
-						+ " INNER JOIN Teachers ON Subjects.TeacherID = Teachers.TeacherID");
+				+ " INNER JOIN Teachers ON Subjects.TeacherID = Teachers.TeacherID",
+				"Teachers.TeacherID", teacherID);
 	}
 
 	public void getTeacher(Subject subject) throws SQLException {
 		subject.setTeacher(get(Teacher.class,
 				"SELECT Teachers.TeacherID, Person.* FROM Subjects"
-						+ " INNER JOIN Teachers ON Subjects.TeacherID = Teachers.TeacherID"
-						+ " INNER JOIN Person ON Teachers.PersonID = Person.PersonID",
+				+ " INNER JOIN Teachers ON Subjects.TeacherID = Teachers.TeacherID"
+				+ " INNER JOIN Person ON Teachers.PersonID = Person.PersonID",
 				"Subjects.SubjectID", subject.getSubjectID()));
 	}
 

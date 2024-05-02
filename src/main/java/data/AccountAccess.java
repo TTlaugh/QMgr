@@ -8,9 +8,9 @@ import business.model.Account;
 import utils.SQLUtils;
 
 public class AccountAccess implements DataAccess<Account> {
-
+	
 	private Connection connection;
-
+	
 	@Override
 	public boolean insert(Account account) throws SQLException {
 		connection = SQLUtils.getConnection();
@@ -28,8 +28,8 @@ public class AccountAccess implements DataAccess<Account> {
 		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement = connection.prepareStatement(
 				"UPDATE Accounts SET"
-						+ "Password=?"
-						+ "WHERE PersonID=?");
+						+ " Password=?"
+						+ " WHERE PersonID=?");
 		pStatement.setString(1, account.getPassword());
 		pStatement.setString(2, account.getPersonID());
 		boolean i = pStatement.executeUpdate() >= 1;
@@ -49,8 +49,8 @@ public class AccountAccess implements DataAccess<Account> {
 	@Override
 	public Account get(String... primaryKeyValues) throws SQLException {
 		return get(Account.class,
-				"SELECT * FROM Accounts",
-				"PersonID", primaryKeyValues[0]);
+					"SELECT * FROM Accounts",
+					"PersonID", primaryKeyValues[0]);
 	}
 
 }
