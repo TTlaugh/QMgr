@@ -82,13 +82,13 @@ public class GroupManager {
 		return false;
 	}
 
-	public boolean addStudentToGroup(Group group, Student student) throws SQLException {
+	public boolean addStudentToGroup(String groupID, String studentID) throws SQLException {
 		try {
-			return new GroupStudentAccess().addStudent(group.getGroupID(), student.getStudentID());
+			return new GroupStudentAccess().addStudent(groupID, studentID);
 		} catch (SQLException e) {
 			SQLUtils.printSQLException(e);
 			if (e.getErrorCode() == MysqlErrorNumbers.ER_DUP_ENTRY)
-				throw new SQLException("StudentID: '"+student.getStudentID()+"' already exists in Group(ID): '"+group.getGroupID()+"'", e);
+				throw new SQLException("StudentID: '"+studentID+"' already exists in Group(ID): '"+groupID+"'", e);
 		}
 		return false;
 	}
