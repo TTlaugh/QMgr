@@ -123,14 +123,12 @@ public class GroupManager {
 			} catch (SQLException e) {
 				SQLUtils.printSQLException(e);
 				if (useExist) {
-					if (e.getErrorCode() == MysqlErrorNumbers.ER_DUP_ENTRY)
-						try {
-							addStudentToGroup(group.getGroupID(), student.getStudentID());
-						} catch (SQLException e1) {
-							SQLUtils.printSQLException(e1);
-							stat = false;
-						}
-					else stat = false;
+					try {
+						addStudentToGroup(group.getGroupID(), student.getStudentID());
+					} catch (SQLException e1) {
+						SQLUtils.printSQLException(e1);
+						stat = false;
+					}
 				}
 				else stat = false;
 			}
