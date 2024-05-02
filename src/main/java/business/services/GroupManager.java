@@ -114,7 +114,7 @@ public class GroupManager {
 		return false;
 	}
 	
-	public boolean importStudent(Group group, String excelFilePath, boolean replace) throws IOException {
+	public boolean importStudent(Group group, String excelFilePath, boolean useExist) throws IOException {
 		boolean stat = true;
 		List<Student> students = new StudentExcelReader().readExcel(excelFilePath);
 		for (Student student : students) {
@@ -122,7 +122,7 @@ public class GroupManager {
 				addStudent(group, student);
 			} catch (SQLException e) {
 				SQLUtils.printSQLException(e);
-				if (replace) {
+				if (useExist) {
 					if (e.getErrorCode() == MysqlErrorNumbers.ER_DUP_ENTRY)
 						try {
 							addStudentToGroup(group.getGroupID(), student.getStudentID());
