@@ -114,6 +114,10 @@ public class Exam {
 		this.questions = questions;
 	}
 
+	public String getQuestionIDs() {
+		return questions.stream().map(q -> q.getQuestionID()).toList().toString();
+	}
+
 	@Override
 	public String toString() {
 		return "Exam [examID=" + examID + ", subject=" + subject + ", startDateTime=" + startDateTime + ", timeLimit="

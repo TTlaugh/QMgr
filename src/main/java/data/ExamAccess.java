@@ -28,7 +28,7 @@ public class ExamAccess implements DataAccess<Exam> {
 		pStatement.setString (6, exam.getName());
 		pStatement.setString (7, exam.getDescription());
 		pStatement.setBoolean(8, exam.isShuffled());
-		pStatement.setString (9, exam.getQuestions().toString());
+		pStatement.setString (9, exam.getQuestionIDs());
 		boolean i = pStatement.executeUpdate() >= 1;
 		SQLUtils.closeConnection(connection);
 		return i;
