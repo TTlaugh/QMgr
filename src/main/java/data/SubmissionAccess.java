@@ -7,16 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import business.model.Score;
 import business.model.SelectedQuestion;
-import business.model.Student;
 import business.model.Submission;
 import utils.SQLUtils;
 
 public class SubmissionAccess implements DataAccess<Submission> {
-	
+
 	private Connection connection;
-	
+
 	@Override
 	public boolean insert(Submission submission) throws SQLException {
 		connection = SQLUtils.getConnection();
@@ -36,10 +34,10 @@ public class SubmissionAccess implements DataAccess<Submission> {
 		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement = connection.prepareStatement(
 				"UPDATE Submissions SET"
-						+ "TimeTaken=?,"
-						+ "Score=?,"
-						+ "AnswerSelecteds=?"
-						+ "WHERE ExamID=? AND StudentID=?");
+						+ " TimeTaken=?,"
+						+ " Score=?,"
+						+ " AnswerSelecteds=?"
+						+ " WHERE ExamID=? AND StudentID=?");
 		pStatement.setInt   (1, submission.getTimeTaken());
 		pStatement.setDouble(2, submission.getScore());
 		pStatement.setString(3, submission.getAnswerSelectedsJSON());
@@ -61,7 +59,7 @@ public class SubmissionAccess implements DataAccess<Submission> {
 		SQLUtils.closeConnection(connection);
 		return i;
 	}
-	
+
 	@Override
 	public Submission get(String... primaryKeyValues) throws SQLException {
 		return get(Submission.class,
@@ -73,14 +71,15 @@ public class SubmissionAccess implements DataAccess<Submission> {
 					"Submissions.ExamID", primaryKeyValues[0],
 					"Submissions.StudentID", primaryKeyValues[1]);
 	}
-	
-	public List<Submission> getAll() throws SQLException {
+
+	public List<Submission> getAll(String teacherID) throws SQLException {
 		return getList(Submission.class,
 				"SELECT * FROM Submissions"
 				+ " INNER JOIN Exams ON Submissions.ExamID = Exams.ExamID"
 				+ " INNER JOIN Students ON Submissions.StudentID = Students.StudentID"
 				+ " INNER JOIN Subjects ON Exams.SubjectID = Subjects.SubjectID"
-				+ " INNER JOIN Person ON Students.PersonID = Person.PersonID");
+				+ " INNER JOIN Person ON Students.PersonID = Person.PersonID",
+				"Subjects.TeacherID", teacherID);
 	}
 
 	public List<SelectedQuestion> getSelectedQuestions(Submission submission) throws SQLException {
@@ -92,12 +91,6 @@ public class SubmissionAccess implements DataAccess<Submission> {
 							questionAccess.get(entry.getKey()),
 							entry.getValue()));
 		return selectedQuestions;
-	}
-	
-	public List<Score> getStudentScores(Student student) throws SQLException {
-		return getList(Score.class,
-				"SELECT ExamID, Score FROM Submissions",
-				"StudentID", student.getStudentID());
 	}
 
 }

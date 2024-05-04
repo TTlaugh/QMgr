@@ -46,6 +46,18 @@ public class Exam {
 		this.isShuffled = rs.getBoolean("IsShuffled");
 		this.questions = null;
 	}
+	
+	public Exam(Exam exam) {
+		this.examID = exam.getExamID();
+		this.subject = exam.getSubject();
+		this.startDateTime = exam.getStartDateTime();
+		this.timeLimit = exam.getTimeLimit();
+		this.maxScore = exam.getMaxScore();
+		this.name = exam.getName();
+		this.description = exam.getDescription();
+		this.isShuffled = exam.isShuffled();
+		this.questions = exam.getQuestions();
+	}
 
 	public DateTime getExamID() {
 		return examID;
@@ -100,6 +112,10 @@ public class Exam {
 	}
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
+	}
+
+	public String getQuestionIDs() {
+		return questions.stream().map(q -> q.getQuestionID()).toList().toString();
 	}
 
 	@Override

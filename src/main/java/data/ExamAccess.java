@@ -28,7 +28,7 @@ public class ExamAccess implements DataAccess<Exam> {
 		pStatement.setString (6, exam.getName());
 		pStatement.setString (7, exam.getDescription());
 		pStatement.setBoolean(8, exam.isShuffled());
-		pStatement.setString (9, exam.getQuestions().toString());
+		pStatement.setString (9, exam.getQuestionIDs());
 		boolean i = pStatement.executeUpdate() >= 1;
 		SQLUtils.closeConnection(connection);
 		return i;
@@ -39,15 +39,15 @@ public class ExamAccess implements DataAccess<Exam> {
 		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement = connection.prepareStatement(
 				"UPDATE Exams SET"
-						+ "SubjectID=?,"
-						+ "StartDateTime=?,"
-						+ "TimeLimit=?,"
-						+ "MaxScore=?,"
-						+ "Name=?,"
-						+ "Description=?,"
-						+ "IsShuffle=?,"
-						+ "Questions=?"
-						+ "WHERE ExamID=?");
+						+ " SubjectID=?,"
+						+ " StartDateTime=?,"
+						+ " TimeLimit=?,"
+						+ " MaxScore=?,"
+						+ " Name=?,"
+						+ " Description=?,"
+						+ " IsShuffle=?,"
+						+ " Questions=?"
+						+ " WHERE ExamID=?");
 		pStatement.setString (1, exam.getSubject().getSubjectID());
 		pStatement.setString (2, exam.getStartDateTime().toString());
 		pStatement.setInt    (3, exam.getTimeLimit());
@@ -79,7 +79,7 @@ public class ExamAccess implements DataAccess<Exam> {
 				+ " INNER JOIN Person ON Teachers.PersonID = Person.PersonID"
 				+ "Exams.ExamID", exam.getExamID().toString()));
 	}
-	
+
 	public void getQuestions(Exam exam) throws SQLException {
 		Connection connection = SQLUtils.getConnection();
 		ResultSet rs = connection.createStatement().executeQuery(
@@ -102,10 +102,11 @@ public class ExamAccess implements DataAccess<Exam> {
 					"Exams.ExamID", primaryKeyValues[0]);
 	}
 
-	public List<Exam> getAll() throws SQLException {
+	public List<Exam> getAll(String teacherID) throws SQLException {
 		return getList(Exam.class,
 				"SELECT * FROM Exams"
-				+ " INNER JOIN Subjects ON Exams.SubjectID = Subjects.SubjectID");
+				+ " INNER JOIN Subjects ON Exams.SubjectID = Subjects.SubjectID",
+				"Subjects.TeacherID", teacherID);
 	}
 
 }

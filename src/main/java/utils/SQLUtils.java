@@ -2,10 +2,18 @@ package utils;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
+
+import business.model.Exam;
+import business.model.Question;
+import business.model.Student;
+import business.model.Subject;
+import business.services.WelcomeFunction;
+import data.StudentAccess;
 
 public class SQLUtils {
 
@@ -60,20 +68,23 @@ public class SQLUtils {
 		testDataSource();
 	}
 	private static void testDataSource() {
-//		Connection connection = SQLUtils.getConnection();
-//		Person person = new Person("123", "Nguyen Van", "hehe", "a@mail", "0123");
-//		try {
-//			PreparedStatement pStatement = connection.prepareStatement(
-//					"INSERT INTO Person VALUES (?,?,?,?,?)");
-//			pStatement.setString(1, person.getPersonID());
-//			pStatement.setString(2, person.getFirstName());
-//			pStatement.setString(3, person.getLastName());
-//			pStatement.setString(4, person.getEmail());
-//			pStatement.setString(5, person.getPhone());
-//			pStatement.executeUpdate();
-//			SQLUtils.closeConnection(connection);
-//		} catch (SQLException e) {
-//			SQLUtils.printSQLException(e);
-//		}
+		ArrayList<Question> questions = new ArrayList<>();
+		questions.add(new Question("1", null, 0, 0, null, null, null));
+		questions.add(new Question("2", null, 0, 0, null, null, null));
+		questions.add(new Question("3", null, 0, 0, null, null, null));
+		questions.add(new Question("4", null, 0, 0, null, null, null));
+		questions.add(new Question("5", null, 0, 0, null, null, null));
+		Exam exam = new Exam(
+				null,
+				null,
+				null,
+				0,
+				0,
+				null,
+				null,
+				false,
+				questions
+				);
+		System.out.println(exam.getQuestionIDs());
 	}
 }

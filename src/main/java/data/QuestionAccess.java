@@ -18,17 +18,18 @@ public class QuestionAccess implements DataAccess<Question> {
 	public boolean insert(Question question) throws SQLException {
 		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement = connection.prepareStatement(
-				"INSERT INTO Questions VALUES (?,?,?,?,?,?,?,?,?,?)");
-		pStatement.setString(1, question.getQuestionID());
-		pStatement.setString(2, question.getSubject().getSubjectID());
-		pStatement.setInt   (3, question.getChapter());
-		pStatement.setInt   (4, question.getDifficulty());
-		pStatement.setString(5, question.getContent());
-		pStatement.setString(6, question.getAnswers()[0]);
-		pStatement.setString(7, question.getAnswers()[2]);
-		pStatement.setString(8, question.getAnswers()[3]);
-		pStatement.setString(9, question.getAnswers()[4]);
-		pStatement.setString(10,question.getCorrectAnswers().toString());
+				"INSERT INTO Questions"
+				+ " (SubjectID, Chapter, Difficulty, Content, Answer1, Answer2, Answer3, Answer4, CorrectAnswers)"
+				+ " VALUES (?,?,?,?,?,?,?,?,?)");
+		pStatement.setString(1, question.getSubject().getSubjectID());
+		pStatement.setInt   (2, question.getChapter());
+		pStatement.setInt   (3, question.getDifficulty());
+		pStatement.setString(4, question.getContent());
+		pStatement.setString(5, question.getAnswers().get(0));
+		pStatement.setString(6, question.getAnswers().get(1));
+		pStatement.setString(7, question.getAnswers().get(2));
+		pStatement.setString(8, question.getAnswers().get(3));
+		pStatement.setString(9, question.getCorrectAnswers().toString());
 		boolean i = pStatement.executeUpdate() >= 1;
 		SQLUtils.closeConnection(connection);
 		return i;
@@ -39,24 +40,24 @@ public class QuestionAccess implements DataAccess<Question> {
 		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement = connection.prepareStatement(
 				"UPDATE Questions SET"
-						+ "SubjectID=?,"
-						+ "Chapter=?,"
-						+ "Difficulty=?,"
-						+ "Content=?,"
-						+ "Answer1=?,"
-						+ "Answer2=?,"
-						+ "Answer3=?,"
-						+ "Answer4=?,"
-						+ "CorrectAnswers=?"
-						+ "WHERE QuestionID=?");
+						+ " SubjectID=?,"
+						+ " Chapter=?,"
+						+ " Difficulty=?,"
+						+ " Content=?,"
+						+ " Answer1=?,"
+						+ " Answer2=?,"
+						+ " Answer3=?,"
+						+ " Answer4=?,"
+						+ " CorrectAnswers=?"
+						+ " WHERE QuestionID=?");
 		pStatement.setString(1, question.getSubject().getSubjectID());
 		pStatement.setInt   (2, question.getChapter());
 		pStatement.setInt   (3, question.getDifficulty());
 		pStatement.setString(4, question.getContent());
-		pStatement.setString(5, question.getAnswers()[0]);
-		pStatement.setString(6, question.getAnswers()[2]);
-		pStatement.setString(7, question.getAnswers()[3]);
-		pStatement.setString(8, question.getAnswers()[4]);
+		pStatement.setString(5, question.getAnswers().get(0));
+		pStatement.setString(6, question.getAnswers().get(1));
+		pStatement.setString(7, question.getAnswers().get(2));
+		pStatement.setString(8, question.getAnswers().get(3));
 		pStatement.setString(9, question.getCorrectAnswers().toString());
 		pStatement.setString(10, question.getQuestionID());
 		boolean i = pStatement.executeUpdate() >= 1;
@@ -90,10 +91,11 @@ public class QuestionAccess implements DataAccess<Question> {
 				+ " INNER JOIN Person ON Teachers.PersonID = Person.PersonID",
 				"Questions.QuestionID", question.getQuestionID()));
 	}
-	
+
 	public List<Question> getQuestionsOfSubject(Subject subject) throws SQLException {
 		return getList(Question.class,
-				"SELECT * FROM Questions",
-				"SubjectID", subject.getSubjectID());
+				"SELECT * FROM Questions"
+				+ " INNER JOIN Subjects ON Questions.SubjectID = Subjects.SubjectID",
+				"Subjects.SubjectID", subject.getSubjectID());
 	}
 }

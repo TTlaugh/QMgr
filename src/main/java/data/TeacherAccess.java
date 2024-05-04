@@ -1,6 +1,7 @@
 package data;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import business.model.Teacher;
@@ -13,24 +14,21 @@ public class TeacherAccess implements DataAccess<Teacher> {
 	@Override
 	public boolean insert(Teacher teacher) throws SQLException {
 		connection = SQLUtils.getConnection();
-		String id = teacher.getTeacherID();
-		String personID = "TC" + id;
-		String firstName = teacher.getFirstName();
-		String lastName = teacher.getLastName();
-		String email = teacher.getEmail();
-		String phone = teacher.getPhone();
-		String sql = "INSERT INTO Person VALUES ('"
-				+ personID + "','"
-				+ firstName + "','"
-				+ lastName + "','"
-				+ email + "','"
-				+ phone + "');"
-				+ "INSERT INTO Teachers VALUES ('"
-				+ id + "','"
-				+ personID + "');";
-		boolean i = connection.createStatement().executeUpdate(sql) >= 1;
+		PreparedStatement pStatement1 = connection.prepareStatement(
+				"INSERT INTO Person VALUES (?,?,?,?,?)");
+		pStatement1.setString(1, "ST" + teacher.getTeacherID());
+		pStatement1.setString(2, teacher.getFirstName());
+		pStatement1.setString(3, teacher.getLastName());
+		pStatement1.setString(4, teacher.getPhone());
+		pStatement1.setString(5, teacher.getEmail());
+		boolean a = pStatement1.executeUpdate() >= 1;
+		PreparedStatement pStatement2 = connection.prepareStatement(
+				"INSERT INTO Students VALUES (?,?)");
+		pStatement2.setString(1, teacher.getTeacherID());
+		pStatement2.setString(2, "ST" + teacher.getTeacherID());
+		boolean b = pStatement2.executeUpdate() >= 1;
 		SQLUtils.closeConnection(connection);
-		return i;
+		return a && b;
 	}
 
 	@Override
@@ -39,14 +37,14 @@ public class TeacherAccess implements DataAccess<Teacher> {
 		String personID = "TC" + teacher.getTeacherID();
 		String firstName = teacher.getFirstName();
 		String lastName = teacher.getLastName();
-		String email = teacher.getEmail();
 		String phone = teacher.getPhone();
-		String sql = "UPDATE Person SET "
-				+ "FirstName = '" + firstName + "', "
-				+ "LastName = '" + lastName + "', "
-				+ "Email = '" + email + "', "
-				+ "Phone = '" + phone + "' "
-				+ "WHERE PersonID = '" + personID + "'";
+		String email = teacher.getEmail();
+		String sql = "UPDATE Person SET"
+				+ " FirstName = '" + firstName + "',"
+				+ " LastName = '" + lastName + "',"
+				+ " Phone = '" + phone + "',"
+				+ " Email = '" + email + "'"
+				+ " WHERE PersonID = '" + personID + "'";
 		boolean i = connection.createStatement().executeUpdate(sql) >= 1;
 		SQLUtils.closeConnection(connection);
 		return i;

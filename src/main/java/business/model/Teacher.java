@@ -7,19 +7,18 @@ public class Teacher extends Person {
 
 	private String teacherID;
 	
-	public Teacher(String personID, String firstName, String lastName, String email, String phone,
-			String teacherID) {
-		super(personID, firstName, lastName, email, phone);
+	public Teacher(String teacherID, String personID, String firstName, String lastName, String phone, String email) {
+		super(personID, firstName, lastName, phone, email);
 		this.teacherID = teacherID;
 	}
-	
+
 	public Teacher(ResultSet rs) throws SQLException {
 		super(
 				rs.getString("PersonID"),
 				rs.getString("FirstName"),
 				rs.getString("LastName"),
-				rs.getString("Email"),
-				rs.getString("Phone")
+				rs.getString("Phone"),
+				rs.getString("Email")
 				);
 		this.teacherID = rs.getString("TeacherID");
 	}
