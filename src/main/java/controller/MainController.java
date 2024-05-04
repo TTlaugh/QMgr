@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
@@ -20,6 +21,9 @@ public class MainController implements Initializable{
 	
 	@FXML
 	private Label nameAccount;
+	
+    @FXML
+    public static Button start_Test_Main=new Button();
 
 	public void LogOut_Quizz(ActionEvent event) throws IOException {
 		root = (Parent) FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
@@ -66,9 +70,8 @@ public class MainController implements Initializable{
 	}
 
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-//		// TODO Auto-generated method stub
-//		if(new LoginController().teacher_Current != null)
-//		nameAccount.setText(new LoginController().teacher_Current.getTeacherID());
+	public  void initialize(URL location, ResourceBundle resources) {
+		System.out.println(new ExamController().exam_Current);
+		start_Test_Main.setDisable(false);
 	}
 }

@@ -225,7 +225,6 @@ public class ExamController implements Initializable {
 	    	selectionModel.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 	    		if (newValue != null) {
 	    			new ExamController().exam_Current=newValue;
-
 	    			setVisableView_Delete(true);
 	    		}
 	    	});	    	
@@ -403,7 +402,7 @@ public class ExamController implements Initializable {
 				DisplayDialog_Notification.Dialog_Error("Notification Error", "Exam wasn't created", "Error");
 			}
 			else 
-				DisplayDialog_Notification.Dialog_Error("Notification Successfully", "Exam was created", "Successful");
+				DisplayDialog_Notification.Dialog_Infomation("Notification Successfully", "Exam was created", "Successful");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			DisplayDialog_Notification.Dialog_Error("Notification Error", "Exam wasn't created", "Error");

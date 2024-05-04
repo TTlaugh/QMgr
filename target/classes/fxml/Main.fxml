@@ -33,7 +33,7 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <Button layoutX="28.0" layoutY="160.0" mnemonicParsing="false" onAction="#Start_Test" prefHeight="62.0" prefWidth="195.0" text="START TEST" textFill="WHITE" AnchorPane.leftAnchor="28.0">
+      <Button fx:id="start_Test_Main" disable="true" layoutX="28.0" layoutY="160.0" mnemonicParsing="false" onAction="#Start_Test" prefHeight="62.0" prefWidth="195.0" text="START TEST" textFill="WHITE" AnchorPane.leftAnchor="28.0">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
