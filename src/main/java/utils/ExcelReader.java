@@ -23,7 +23,8 @@ public abstract class ExcelReader {
 		Workbook workbook = getWorkbook(inputStream, excelFilePath);
 		Sheet sheet = workbook.getSheetAt(0);
 		for (Row row : sheet) {
-			if (row.getRowNum() == 0) continue; // Ignore header
+			if (row.getRowNum() == 0)
+				continue; // Ignore header
 			listData.add(getData(row));
 		}
 		workbook.close();
@@ -59,10 +60,11 @@ public abstract class ExcelReader {
 				cellValue = cell.getStringCellValue();
 				break;
 			case FORMULA:
-//				Workbook workbook = cell.getSheet().getWorkbook();
-//				FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
-//				cellValue = evaluator.evaluate(cell).getNumberValue();
-//				break;
+				// Workbook workbook = cell.getSheet().getWorkbook();
+				// FormulaEvaluator evaluator =
+				// workbook.getCreationHelper().createFormulaEvaluator();
+				// cellValue = evaluator.evaluate(cell).getNumberValue();
+				// break;
 			case _NONE:
 			case BLANK:
 			case ERROR:

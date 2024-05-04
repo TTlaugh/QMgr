@@ -1,5 +1,6 @@
 package application;
-	
+
+import controller.GroupController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -13,13 +14,24 @@ import javafx.scene.input.KeyCombination;
 public class Main extends Application {
 
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) throws Exception {
 		try {
-			primaryStage.getIcons().add(new Image("/imgs/icon.png"));
+			System.out.println("Hello everyone");
+			// primaryStage.getIcons().add(new Image("/images/icon.png"));
+
+			 primaryStage.getIcons().add(new Image("/imgs/icon.png"));
+
 			primaryStage.setTitle("Quizz Server - HEHE");
 			primaryStage.show();
 
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
+			// FXMLLoader loader = new
+			// FXMLLoader(getClass().getResource("/resources/fxml/login.fxml"));
+
+			 primaryStage.getIcons().add(new Image("/imgs/icon.png"));
+			primaryStage.setTitle("Quizz Server - HEHE");
+
+			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
 			Parent root = (Parent) loader.load();
 			Scene scene = new Scene(root, Constant.ScreenSize.WIDTH, Constant.ScreenSize.HEIGHT);
 
@@ -30,6 +42,9 @@ public class Main extends Application {
 			primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 
 			scene.setOnKeyPressed(KeyEventFunction.toggleFullScreen(primaryStage));
+			primaryStage.show();
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+   <children>
+      <AnchorPane fx:id="Anchor_SignIn" layoutX="413.0" layoutY="238.0" prefHeight="424.0" prefWidth="475.0" style="-fx-border-color: white;">
+         <styleClass>
+            <String fx:value="white-background" />
+            <String fx:value="round-layout" />
+         </styleClass>
+         <children>
+            <Label layoutX="124.0" layoutY="38.0" prefHeight="75.0" prefWidth="228.0" text="Wellcome" textFill="#ff6d97">
+               <font>
+                  <Font name="Kristen ITC" size="47.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" fillHeight="false" layoutX="64.0" layoutY="156.0" maxHeight="-Infinity" prefHeight="38.0" prefWidth="348.0" style="-fx-border-color: #ff6d97;" styleClass="round-layout" AnchorPane.topAnchor="156.0">
+               <children>
+                  <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../imgs/person.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </ImageView>
+                  <TextField fx:id="textField_User_Login" prefHeight="31.0" prefWidth="307.0" promptText="User" styleClass="transparent">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" fillHeight="false" layoutX="64.0" layoutY="210.0" maxHeight="-Infinity" prefHeight="38.0" prefWidth="348.0" style="-fx-border-color: #ff6d97;" styleClass="round-layout" AnchorPane.topAnchor="210.0">
+               <children>
+                  <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../imgs/password.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </ImageView>
+                  <PasswordField fx:id="textField_Password_Login" prefHeight="31.0" prefWidth="307.0" promptText="Password" styleClass="transparent">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </PasswordField>
+               </children>
+            </HBox>
+            <Button layoutX="178.0" layoutY="267.0" mnemonicParsing="false" onAction="#Sign_In" prefHeight="38.0" prefWidth="120.0" text="Sign In" textFill="WHITE" AnchorPane.bottomAnchor="118.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Label layoutX="138.0" layoutY="373.0" text="Don't have an account?" AnchorPane.bottomAnchor="31.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button layoutX="283.0" layoutY="367.0" mnemonicParsing="false" onAction="#Sign_Up_Tranfer" styleClass="button-in-login" text="Sign Up">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="Anchor_Regester" layoutX="413.0" layoutY="238.0" prefHeight="424.0" prefWidth="475.0" style="-fx-border-color: white;" visible="false">
+         <styleClass>
+            <String fx:value="white-background" />
+            <String fx:value="round-layout" />
+         </styleClass>
+         <children>
+            <HBox alignment="CENTER" fillHeight="false" layoutX="64.0" layoutY="226.0" maxHeight="-Infinity" prefHeight="38.0" prefWidth="348.0" style="-fx-border-color: #ff6d97;" styleClass="round-layout">
+               <children>
+                  <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../imgs/person.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </ImageView>
+                  <TextField fx:id="textField_USer_SignUp_Login" prefHeight="31.0" prefWidth="307.0" promptText="User" styleClass="transparent">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <Button layoutX="178.0" layoutY="324.0" mnemonicParsing="false" onAction="#SignUp_Login" prefHeight="38.0" prefWidth="120.0" text="Sign Up" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <HBox alignment="CENTER" fillHeight="false" layoutX="64.0" layoutY="30.0" maxHeight="-Infinity" prefHeight="38.0" prefWidth="348.0" style="-fx-border-color: #ff6d97;" styleClass="round-layout">
+               <children>
+                  <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../imgs/person.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </ImageView>
+                  <TextField fx:id="textField_FirstName_SignUp_Login" prefHeight="31.0" prefWidth="307.0" promptText="First Name" styleClass="transparent">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" fillHeight="false" layoutX="64.0" layoutY="80.0" maxHeight="-Infinity" prefHeight="38.0" prefWidth="348.0" style="-fx-border-color: #ff6d97;" styleClass="round-layout">
+               <children>
+                  <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../imgs/person.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </ImageView>
+                  <TextField fx:id="textField_LastName_SignUp_Login" prefHeight="31.0" prefWidth="307.0" promptText="Last Name" styleClass="transparent">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" fillHeight="false" layoutX="64.0" layoutY="130.0" maxHeight="-Infinity" prefHeight="38.0" prefWidth="348.0" style="-fx-border-color: #ff6d97;" styleClass="round-layout">
+               <children>
+                  <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../imgs/email.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </ImageView>
+                  <TextField fx:id="textField_Email_SignUp_Login" prefHeight="31.0" prefWidth="307.0" promptText="Email" styleClass="transparent">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" fillHeight="false" layoutX="64.0" layoutY="178.0" maxHeight="-Infinity" prefHeight="38.0" prefWidth="348.0" style="-fx-border-color: #ff6d97;" styleClass="round-layout">
+               <children>
+                  <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../imgs/phone.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </ImageView>
+                  <TextField fx:id="textField_Phone_SignUp_Login" prefHeight="31.0" prefWidth="307.0" promptText="Phone Number" styleClass="transparent">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <Label layoutX="134.0" layoutY="374.0" text="Already have an account?" AnchorPane.bottomAnchor="31.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button layoutX="298.0" layoutY="367.0" mnemonicParsing="false" onAction="#Sign_In_Tranfer" styleClass="button-in-login" text="Sign In">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <HBox alignment="CENTER" fillHeight="false" layoutX="64.0" layoutY="273.0" maxHeight="-Infinity" prefHeight="38.0" prefWidth="348.0" style="-fx-border-color: #ff6d97;" styleClass="round-layout">
+               <children>
+                  <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../imgs/password.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </ImageView>
+                  <PasswordField fx:id="textField_Password_SignUp_Login" prefHeight="31.0" prefWidth="307.0" promptText="Password" styleClass="transparent">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </PasswordField>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

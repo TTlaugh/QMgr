@@ -26,6 +26,7 @@ public class WelcomeFunction {
 		try {
 			return new TeacherAccess().insert(teacher) &&
 			new AccountAccess().insert(new Account(teacher.getPersonID(), password));
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

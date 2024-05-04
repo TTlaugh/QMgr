@@ -19,7 +19,7 @@ public class GroupStudentAccess {
 		SQLUtils.closeConnection(connection);
 		return i;
 	}
-	
+
 	public boolean removeStudent(String groupID, String studentID) throws SQLException {
 		connection = SQLUtils.getConnection();
 		boolean i = connection.createStatement().executeUpdate(
@@ -29,7 +29,7 @@ public class GroupStudentAccess {
 		SQLUtils.closeConnection(connection);
 		return i;
 	}
-	
+
 	public int countClassesOfStudent(String studentID) throws SQLException {
 		connection = SQLUtils.getConnection();
 		ResultSet rs = connection.createStatement().executeQuery(

@@ -73,11 +73,11 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                ${class.main}
+                                ${class.launcher}
                             </mainClass>
-                            <executable> <!--Set JAVA_HOME or use this tag-->
-                                ${java.path}
-                            </executable>
+                            <!--executable--> <!--Set JAVA_HOME or use this tag-->
+                              <!--  ${java.path}-->
+                            <!--executable-->
                         </configuration>
                     </execution>
                 </executions>

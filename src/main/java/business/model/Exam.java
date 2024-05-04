@@ -1,3 +1,4 @@
+
 package business.model;
 
 import java.sql.ResultSet;
