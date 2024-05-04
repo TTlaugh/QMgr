@@ -152,6 +152,6 @@
             </ImageView>
          </graphic>
       </Button>
-      <AnchorPane fx:id="AnchorPaneLayout" layoutX="271.0" layoutY="160.0" prefHeight="830.0" prefWidth="1050.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
+      <AnchorPane fx:id="AnchorPaneLayout" layoutX="250.0" prefHeight="900.0" prefWidth="1050.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>
