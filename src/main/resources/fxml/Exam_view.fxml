@@ -31,36 +31,6 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <VBox fx:id="VBox_DisplayQuestion" layoutX="31.0" layoutY="194.0" prefHeight="733.0" prefWidth="513.0" AnchorPane.bottomAnchor="-109.0" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="194.0">
-                     <children>
-                        <Separator prefHeight="10.0" prefWidth="510.0" />
-                        <Label text="Question : Phương Trâm có đẹp gái không ? " wrapText="true">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                        </Label>
-                        <Label text="A: Co">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label text="B: Co">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label text="C: Co">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label text="D: Co">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
                   <Label layoutX="32.0" layoutY="103.0" text="Time:" AnchorPane.leftAnchor="32.0">
                      <font>
                         <Font name="System Bold" size="18.0" />
@@ -91,18 +61,6 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Button contentDisplay="RIGHT" layoutX="504.0" layoutY="11.0" mnemonicParsing="false" onAction="#Back_Exam" styleClass="button-back" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="11.0">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true">
-                           <image>
-                              <Image url="@../imgs/back_exam_view.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
                   <Label layoutX="31.0" layoutY="23.0" text="Name:" AnchorPane.leftAnchor="32.0">
                      <font>
                         <Font name="System Bold" size="18.0" />
@@ -123,6 +81,23 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
+                  <Button contentDisplay="RIGHT" layoutX="504.0" layoutY="11.0" mnemonicParsing="false" onAction="#Back_Exam" styleClass="button-back" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="11.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true">
+                           <image>
+                              <Image url="@../imgs/back_exam_view.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <VBox fx:id="VBox_DisplayQuestion" layoutX="34.0" layoutY="197.0" prefHeight="486.0" prefWidth="502.0" AnchorPane.bottomAnchor="-109.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="196.0">
+                     <children>
+                        <Separator prefHeight="10.0" prefWidth="510.0" />
+                     </children>
+                  </VBox>
                </children>
             </AnchorPane>
          </content>

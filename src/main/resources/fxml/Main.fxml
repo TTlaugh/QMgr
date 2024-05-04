@@ -23,7 +23,7 @@
             <Font name="System Italic" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="28.0" layoutY="85.0" prefHeight="30.0" prefWidth="73.0" text="MS.Tram" AnchorPane.leftAnchor="28.0">
+      <Label fx:id="nameAccount" layoutX="28.0" layoutY="85.0" prefHeight="30.0" prefWidth="73.0" text="MS.Tram" AnchorPane.leftAnchor="28.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

@@ -47,6 +47,7 @@ import javafx.util.StringConverter;
 import utils.DateTime;
 import utils.DisplayDialog_Notification;
 import utils.ObjectCell;
+import utils.uiUtils;
 
 public class ExamController implements Initializable {
 	private Scene scene = null;
@@ -432,46 +433,49 @@ public class ExamController implements Initializable {
     	deleteExam_Exam.setVisible(b);
     }
     private void Load_Exam_ExamView() {
-    	
-    	String examName=exam_Current.getName();
-    	String SubjectName=exam_Current.getSubject().getSubjectName();
-    	String Date= exam_Current.getStartDateTime().toString();
-    	String Score=String.valueOf(exam_Current.getMaxScore());
-		String timeLimit=String.valueOf(exam_Current.getTimeLimit());
-		String desc=exam_Current.getDescription();
-		
-    	Name_ExamView.setText(examName);
+
+		String examName = exam_Current.getName();
+		String SubjectName = exam_Current.getSubject().getSubjectName();
+		String Date = exam_Current.getStartDateTime().toString();
+		String Score = String.valueOf(exam_Current.getMaxScore());
+		String timeLimit = String.valueOf(exam_Current.getTimeLimit());
+		String desc = exam_Current.getDescription();
+
+		Name_ExamView.setText(examName);
 		Subject_ExamView.setText(SubjectName);
 		Date_ExamView.setText(Date);
 		Score_ExamView.setText(Score);
 		TimeLimit_ExamView.setText(timeLimit);
 		Desc_ExamView.setText(desc);
 
-		if(exam_Current.getQuestions() !=null) {
-		for(Question q: exam_Current.getQuestions())
-		{
-			
-			
-			Label Ques = new Label();
-			
-			List<Label> answer = new ArrayList<Label>();
-			
-			Ques.setText(q.getContent());
-			
-			for(String a : q.getAnswers())
-			{	
-				for(Label ans:answer)
-				{
-					ans.setText(a);
+		examManager.getQuestions(exam_Current);
+		if (exam_Current.getQuestions() != null) {
+			List<Question> questions = exam_Current.getQuestions();
+			int questions_size = questions.size();
+			for (int i = 0; i < questions_size; i++) {
+				Question question = questions.get(i);
+				Label contentLabel = new Label();
+				contentLabel.setText((i + 1) + ". " + question.getContent());
+				contentLabel.setStyle("-fx-font-size:30 ; -fx-font-weight:bold");
+
+				VBox_DisplayQuestion.getChildren().add(contentLabel);
+
+				List<String> answers = question.getAnswers();
+				int answers_size = answers.size();
+				List<Integer> correctAns = question.getCorrectAnswers();
+				for (int j = 0; j < answers_size; j++) {
+					String answer = answers.get(j);
+					Label answerLabel = new Label();
+					answerLabel.setText(uiUtils.indexToLetter(j) + ". " + answer);
+					answerLabel.setStyle("-fx-font-size:26");
+					if (correctAns.contains(j + 1))
+						answerLabel.setStyle("-fx-font-size:26;-fx-text-fill:green");
+					VBox_DisplayQuestion.getChildren().add(answerLabel);
 				}
 			}
-			
-			VBox_DisplayQuestion.getChildren().add(Ques);
-			for (Label ans : answer) {
-				VBox_DisplayQuestion.getChildren().add(ans);				
-			}
+
 		}
-		}
-    }
+
+	}
 
 }

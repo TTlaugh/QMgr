@@ -15,4 +15,14 @@ public class OpenFileExplorer {
 			return file;
 		return null ;
     }
+    
+    public static File Save(ActionEvent event) {
+    	FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open Resource File ");
+		File file = fileChooser.showSaveDialog(null);
+		
+		if(file != null)
+			return file;
+		return null ;
+    }
 }

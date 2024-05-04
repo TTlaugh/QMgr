@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body onload="getUser()">
+    <table cellpadding="15" cellspacing="0" border="1" id="table"></table>
+    <div id="pagination"></div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js"
+      integrity="sha512-emSwuKiMyYedRwflbZB2ghzX8Cw8fmNVgZ6yQNNXXagFzFOaQmbvQ1vmDkddHjm5AITcBIZfC7k4ShQSjgPAmQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      let users = [];
+      let currentPage = 1;
+      let perPage = 2;
+      let totalPage = 0;
+      let perUser = [];
+
+      async function getUser() {
+        try {
+          let data = await axios.get(
+            "https://jsonplaceholder.typicode.com/users"
+          );
+          users = data.data;
+          //   console.log(users);
+          perUser = users.slice(
+            (currentPage - 1) * perPage,
+            (currentPage - 1) * perPage + perPage
+          );
+          renderPageNumber();
+          renderUser();
+        } catch (e) {
+          console.log(e);
+        }
+      }
+
+      function handlePageNumber(num) {
+        currentPage = num;
+        console.log(currentPage);
+        perUser = users.slice(
+          (currentPage - 1) * perPage,
+          (currentPage - 1) * perPage + perPage
+        );
+        renderUser();
+      }
+      function renderPageNumber() {
+        totalPage = users.length / perPage;
+        for (let i = 1; i <= totalPage; i++) {
+          document.getElementById(
+            "pagination"
+          ).innerHTML += `<p onclick="handlePageNumber(${i})"> ${i}</p>`;
+        }
+      }
+
+      function renderUser() {
+        let element = `<tr>
+            <th>ID</th>
+            <th align="left">Name</th>
+            </tr>`;
+        perUser.map((value) => {
+          element += `<tr>
+            <td align="center"> ${value.id}</td>
+            <td>${value.name}</td>
+            </tr>`;
+        });
+        document.getElementById("table").innerHTML = element;
+      }
+    </script>
+  </body>
+</html>

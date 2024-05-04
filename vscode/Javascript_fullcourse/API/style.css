@@ -1,0 +1,10 @@
+body{
+    background-image: linear-gradient(to top right,#CC64A2,#5C3075);
+    min-height: 100vh;
+    line-height: 20px;
+    font-family: monospace;
+}
+.container{
+    width: 900px;
+    margin:150px auto 0;
+}

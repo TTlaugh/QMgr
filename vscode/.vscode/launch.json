@@ -1,0 +1,141 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "main",
+            "request": "launch",
+            "mainClass": "NEW_JAVA.main",
+            "projectName": "vscode_dd112ee2"
+        },
+        {
+            "type": "java",
+            "name": "file",
+            "request": "launch",
+            "mainClass": "java_exercise.file",
+            "projectName": "vscode_dd112ee2"
+        },
+        {
+            "type": "java",
+            "name": "main",
+            "request": "launch",
+            "mainClass": "ProjectJava.main",
+            "projectName": "vscode_dd112ee2"
+        },
+        {
+            "type": "java",
+            "name": "ex5",
+            "request": "launch",
+            "mainClass": "java_exercise.ex5",
+            "projectName": "vscode_dd112ee2"
+        },
+        {
+            "type": "java",
+            "name": "exx5",
+            "request": "launch",
+            "mainClass": "java_exercise.exx5",
+            "projectName": "vscode_dd112ee2"
+        },
+        {
+            "type": "java",
+            "name": "ex4",
+            "request": "launch",
+            "mainClass": "java_exercise.ex4",
+            "projectName": "vscode_dd112ee2"
+        },
+        {
+            "type": "java",
+            "name": "ex3",
+            "request": "launch",
+            "mainClass": "java_exercise.ex3",
+            "projectName": "vscode_dd112ee2"
+        },
+        {
+            "type": "java",
+            "name": "ex2",
+            "request": "launch",
+            "mainClass": "java_exercise.ex2",
+            "projectName": "vscode_dd112ee2"
+        },
+        {
+            "type": "java",
+            "name": "ex1",
+            "request": "launch",
+            "mainClass": "java_exercise.ex1",
+            "projectName": "vscode_dd112ee2"
+        },
+        {
+            "type": "java",
+            "name": "main",
+            "request": "launch",
+            "mainClass": "Object.main",
+            "projectName": "vscode_dd112ee2"
+        },
+        {
+            "type": "java",
+            "name": "bai8",
+            "request": "launch",
+            "mainClass": "bai8",
+            "projectName": "vscode_dd112ee2"
+        },
+        {
+            "type": "java",
+            "name": "main",
+            "request": "launch",
+            "mainClass": "STUDY_JAVA.oop.main",
+            "projectName": "vscode_71559de3"
+        },
+        {
+            "type": "java",
+            "name": "bai8",
+            "request": "launch",
+            "mainClass": "bai8",
+            "projectName": "vscode_71559de3"
+        },
+        {
+            "type": "java",
+            "name": "bai9",
+            "request": "launch",
+            "mainClass": "bai9",
+            "projectName": "vscode_71559de3"
+        },
+        {
+            "type": "java",
+            "name": "add",
+            "request": "launch",
+            "mainClass": "add",
+            "projectName": "vscode_71559de3"
+        },
+        {
+            "type": "java",
+            "name": "basic",
+            "request": "launch",
+            "mainClass": "basic",
+            "projectName": "vscode_71559de3"
+        },
+        {
+            "type": "java",
+            "name": "basic",
+            "request": "launch",
+            "mainClass": "OOP.basic",
+            "projectName": "vscode_71559de3"
+        },
+        {
+            "type": "java",
+            "name": "hello",
+            "request": "launch",
+            "mainClass": "hello",
+            "projectName": "vscode_71559de3"
+        },
+        {
+            "type": "java",
+            "name": "hellobasic",
+            "request": "launch",
+            "mainClass": "hellobasic",
+            "projectName": "vscode_71559de3"
+        }
+    ]
+}

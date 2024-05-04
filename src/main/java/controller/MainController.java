@@ -1,22 +1,29 @@
 package controller;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class MainController {
+public class MainController implements Initializable{
 	private Parent root = null;
 	@FXML
 	private AnchorPane AnchorPaneLayout;
+	
+	@FXML
+	private Label nameAccount;
 
 	public void LogOut_Quizz(ActionEvent event) throws IOException {
 		root = (Parent) FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
@@ -60,5 +67,12 @@ public class MainController {
 		AnchorPane.setBottomAnchor(insidePane, 0.0);
 		AnchorPane.setRightAnchor(insidePane, 0.0);
 		AnchorPane.setLeftAnchor(insidePane, 0.0);
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+//		// TODO Auto-generated method stub
+//		if(new LoginController().teacher_Current != null)
+//		nameAccount.setText(new LoginController().teacher_Current.getTeacherID());
 	}
 }

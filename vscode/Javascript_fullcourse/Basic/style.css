@@ -1,0 +1,13 @@
+ /* #myDiv{
+    height: 100px;
+    width:100px  ;
+    background-color: aquamarine;
+    border: 1px solid #999;
+    border-radius: 10px ;
+    position: relative;
+} */
+
+#myCanvas{
+    border: 1px solid #333;
+    /* background-color: skyblue; */
+}

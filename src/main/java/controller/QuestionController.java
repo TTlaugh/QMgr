@@ -567,7 +567,9 @@ public class QuestionController  implements Initializable{
    
    @FXML
   private void Export_Question(ActionEvent event) {
-   	String fileNameExel=String.valueOf(subject_Current.getSubjectName())+"_Exel.xlsx";
+	   
+	file_Current= OpenFileExplorer.Save(event);
+   	String fileNameExel=file_Current.getPath();
    	if(!quesManager.exportQuestions(subject_Current, fileNameExel)) {
 			DisplayDialog_Notification.Dialog_Infomation("Unsuccessful notification", "Creat file exel failed", "Error");
 		}

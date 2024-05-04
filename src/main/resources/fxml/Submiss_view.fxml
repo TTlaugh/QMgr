@@ -51,54 +51,9 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <VBox layoutX="28.0" layoutY="112.0" prefHeight="733.0" prefWidth="513.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+                  <VBox fx:id="vBox_Submissview" layoutX="28.0" layoutY="112.0" prefHeight="733.0" prefWidth="513.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
                      <children>
                         <Separator prefHeight="10.0" prefWidth="510.0" />
-                        <Label text="Question 1: Phương Trâm có đẹp gái không ? " wrapText="true">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                           <graphic>
-                              <Label alignment="CENTER" prefHeight="21.0" prefWidth="48.0" style="-fx-background-color: green; -fx-text-fill: white; -fx-background-radius: 5;" text="True">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                           </graphic>
-                        </Label>
-                        <Label text="Chosen: A">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label text="Correct: A">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Separator prefHeight="10.0" prefWidth="510.0" />
-                        <Label text="Question 2: Phương Trâm có đẹp gái không ? " wrapText="true">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                           <graphic>
-                              <Label alignment="CENTER" prefHeight="21.0" prefWidth="48.0" style="-fx-background-color: red; -fx-text-fill: white; -fx-background-radius: 5;" text="Flase">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                           </graphic>
-                        </Label>
-                        <Label text="Chosen: A">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label text="Correct: B">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
                      </children>
                   </VBox>
                   <Button contentDisplay="RIGHT" layoutX="449.0" layoutY="14.0" mnemonicParsing="false" onAction="#back_Submission" styleClass="button-back" text="Back" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="14.0">

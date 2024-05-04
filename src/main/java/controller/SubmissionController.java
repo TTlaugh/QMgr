@@ -21,10 +21,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionModel;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import utils.DisplayDialog_Notification;
 
 public class SubmissionController implements Initializable {
@@ -33,6 +37,8 @@ public class SubmissionController implements Initializable {
 		private AnchorPane anchor;
 		
 		private ObservableList<Submission> observableList ;
+	    @FXML
+	    private VBox vBox_Submissview=new VBox();
 		
 	  	@FXML
 	    private TableColumn<Submission, String> ExamID_Submission=new TableColumn<Submission, String>();
@@ -94,18 +100,34 @@ public class SubmissionController implements Initializable {
 		score_SubmissView.setText(String.valueOf(submission_Current.getScore()));
 		
 		for(SelectedQuestion submissSelect : submissionManager.getSelectedQuestions(submission_Current)) {
-			for(String question : submissSelect.getQuestionID()) {
-				
+			Separator separator = new Separator();
+			Label labelQues =new Label(submissSelect.getContent());
+			Label  labelChosen= new Label();
+			Label labelCorrect= new Label();
+			String chosen = "";
+			String correct = "";
+			for(int i: submissSelect.getSelectedAnswers() ) {
+				if(i==0 ) chosen+="A ";
+				else if(i==1) chosen+="B ";
+				else if(i==2) chosen+="C ";
+				else if(i==3) chosen+="D ";
 			}
-			for(String answer : submissSelect.getAnswers()) {
-				System.out.println(answer);
-			}
-			for(int answerSelect :submissSelect.getSelectedAnswers())
+			labelChosen.setText("Chosen : "+chosen);
+			for(int i: submissSelect.getCorrectAnswers())
 			{
-				
+				if(i==0 ) correct+="A ";
+				else if(i==1) correct+="B ";
+				else if(i==2) correct+="C ";
+				else if(i==3) correct+="D ";
 			}
+			labelCorrect.setText("Corect : "+correct);
+			labelQues.setStyle("-fx-font-size: 40px");
+			labelChosen.setStyle("-fx-font-size: 30px");
+			labelCorrect.setStyle("-fx-font-size: 30px");
+			labelQues.setStyle(chosen.equalsIgnoreCase(correct) ?"-fx-background-color: green":"-fx-background-color: red");
+			
+		vBox_Submissview.getChildren().addAll(separator,labelQues,labelChosen,labelCorrect);
 		}
-		
 		
 	}
 	private void loadData_Submission() {

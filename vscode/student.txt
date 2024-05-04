@@ -1,0 +1,4 @@
+30;nguyen van a;mail;q8;123;700.0
+30;nguyen van b;mail;q8;123;700.0
+30;nguyen van c;mail;q8;123;700.0
+30;nguyen van d;mail;q8;123;700.0
