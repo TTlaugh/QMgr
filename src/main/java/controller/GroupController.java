@@ -405,8 +405,11 @@ public class GroupController implements Initializable{
     }
     @FXML
    private void Export_Group(ActionEvent event) {
-    	file_Current= OpenFileExplorer.Open(event);
-    	String fileNameExel=String.valueOf(group_Current_Layout.getGroupName())+"_Exel.xlsx";
+    	file_Current= OpenFileExplorer.Save(event);
+    	
+    	String fileNameExel=file_Current.getPath();
+    	
+    	
     
     	if(!gr.exportStudent(group_Current_Layout,fileNameExel)) {
 			DisplayDialog_Notification.Dialog_Infomation("Unsuccessful notification", "Creat file exel failed", "Error");
