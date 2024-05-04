@@ -249,6 +249,8 @@ public class QuestionController  implements Initializable{
 		    }catch (Exception e) {
 			    e.printStackTrace();
 		    }
+		   if(Question_Current!=null)
+			   loadQuestionDetail(Question_Current);
 	}
 	private void buttonRadioGroup_View() {
 		radioEasy_QuestionView.setToggleGroup(group_Button_Difficulty_QuestionView);
@@ -378,7 +380,6 @@ public class QuestionController  implements Initializable{
     @FXML
     public void buttonEdit_QuestionView(ActionEvent event) {
     	boolean edit_Status= false;
-    	loadQuestionDetail(Question_Current);
     	setDisable_display_QuestionDetail(edit_Status);
     	buttonRadioGroup_View();
     }

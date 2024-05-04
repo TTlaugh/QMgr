@@ -114,7 +114,7 @@ public class GroupManager {
 		return false;
 	}
 	
-	public boolean importStudent(Group group, String excelFilePath) throws IOException {
+	public boolean importStudent(Group group, String excelFilePath, boolean useExist) throws IOException {
 		boolean stat = true;
 		List<Student> students = new StudentExcelReader().readExcel(excelFilePath);
 		for (Student student : students) {
@@ -122,7 +122,16 @@ public class GroupManager {
 				addStudent(group, student);
 			} catch (SQLException e) {
 				SQLUtils.printSQLException(e);
-				stat = false;
+				
+				if (useExist) {
+						try {
+							addStudentToGroup(group.getGroupID(), student.getStudentID());
+						} catch (SQLException e1) {
+							SQLUtils.printSQLException(e1);
+							stat = false;
+						}
+				}
+				else stat = false;
 			}
 		}
 		return stat;

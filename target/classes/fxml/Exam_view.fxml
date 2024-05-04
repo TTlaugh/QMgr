@@ -31,30 +31,30 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <VBox layoutX="31.0" layoutY="194.0" prefHeight="733.0" prefWidth="513.0" AnchorPane.bottomAnchor="-109.0" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="194.0">
+                  <VBox fx:id="VBox_DisplayQuestion" layoutX="31.0" layoutY="194.0" prefHeight="733.0" prefWidth="513.0" AnchorPane.bottomAnchor="-109.0" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="194.0">
                      <children>
                         <Separator prefHeight="10.0" prefWidth="510.0" />
-                        <Label fx:id="Question_ExamView" text="Question : Phương Trâm có đẹp gái không ? " wrapText="true">
+                        <Label text="Question : Phương Trâm có đẹp gái không ? " wrapText="true">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="Label_A_ExamView" text="A: Co">
+                        <Label text="A: Co">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="Label_B_ExamView" text="B: Co">
+                        <Label text="B: Co">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="Label_C_ExamView" text="C: Co">
+                        <Label text="C: Co">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="Label_D_ExamView" text="D: Co">
+                        <Label text="D: Co">
                            <font>
                               <Font size="18.0" />
                            </font>

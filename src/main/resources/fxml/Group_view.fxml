@@ -17,7 +17,7 @@
             <String fx:value="round-layout" />
          </styleClass>
          <children>
-            <Button fx:id="btn_Edit_Group_View" layoutX="297.0" layoutY="16.0" mnemonicParsing="false" onAction="#button_Edit_GroupView_Display" prefHeight="35.0" prefWidth="141.0" text="Edit/View" textFill="WHITE" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+            <Button fx:id="btn_Edit_Group_View" layoutX="297.0" layoutY="17.0" mnemonicParsing="false" onAction="#button_Edit_GroupView_Display" prefHeight="35.0" prefWidth="88.0" text="Edit" textFill="WHITE" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
@@ -51,7 +51,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="label_Stu_Id_GroupView" disable="true" layoutX="136.0" layoutY="165.0" text="S001" visible="false" AnchorPane.leftAnchor="136.0">
+            <Label fx:id="label_Stu_Id_GroupView" disable="true" layoutX="136.0" layoutY="165.0" text="S001" AnchorPane.leftAnchor="136.0">
                <font>
                   <Font size="18.0" />
                </font>
@@ -61,7 +61,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="textField_FirstName_GroupView" layoutX="137.0" layoutY="200.0" prefHeight="33.0" prefWidth="234.0" text="Hahah" visible="false" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="31.0">
+            <TextField fx:id="textField_FirstName_GroupView" disable="true" layoutX="137.0" layoutY="200.0" prefHeight="33.0" prefWidth="234.0" text="Hahah" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="31.0">
                <styleClass>
                   <String fx:value="transparent" />
                   <String fx:value="round-layout" />
@@ -75,7 +75,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="textField_LastName_GroupView" layoutX="136.0" layoutY="242.0" prefHeight="33.0" prefWidth="234.0" text="HIHI" visible="false" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="30.0">
+            <TextField fx:id="textField_LastName_GroupView" disable="true" layoutX="136.0" layoutY="242.0" prefHeight="33.0" prefWidth="234.0" text="HIHI" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="30.0">
                <styleClass>
                   <String fx:value="transparent" />
                   <String fx:value="round-layout" />
@@ -84,7 +84,7 @@
                   <Font size="15.0" />
                </font>
             </TextField>
-            <TextField fx:id="textField_Phone_GroupView" layoutX="136.0" layoutY="284.0" prefHeight="33.0" prefWidth="234.0" text="09X9" visible="false" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="30.0">
+            <TextField fx:id="textField_Phone_GroupView" disable="true" layoutX="136.0" layoutY="284.0" prefHeight="33.0" prefWidth="234.0" text="09X9" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="30.0">
                <styleClass>
                   <String fx:value="transparent" />
                   <String fx:value="round-layout" />
@@ -93,7 +93,7 @@
                   <Font size="15.0" />
                </font>
             </TextField>
-            <TextField fx:id="textField_Email_GroupView" layoutX="136.0" layoutY="326.0" prefHeight="33.0" prefWidth="234.0" text="ad@gmail.com" visible="false" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="30.0">
+            <TextField fx:id="textField_Email_GroupView" disable="true" layoutX="136.0" layoutY="326.0" prefHeight="33.0" prefWidth="234.0" text="ad@gmail.com" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="30.0">
                <styleClass>
                   <String fx:value="transparent" />
                   <String fx:value="round-layout" />

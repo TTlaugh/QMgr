@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="830.0" prefWidth="1050.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="830.0" prefWidth="1050.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SubmissionController">
    <children>
       <ScrollPane fitToWidth="true" hbarPolicy="NEVER" hmax="0.0" layoutX="240.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="570.0" styleClass="transparent" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="30.0">
          <content>
@@ -26,7 +26,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="134.0" layoutY="20.0" text="1234567" AnchorPane.leftAnchor="134.0">
+                  <Label fx:id="studentID_SubmissView" layoutX="134.0" layoutY="20.0" text="1234567" AnchorPane.leftAnchor="134.0">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -36,7 +36,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="140.0" layoutY="47.0" text="1234567" AnchorPane.leftAnchor="134.0">
+                  <Label fx:id="ExamID_SubmissView" layoutX="140.0" layoutY="47.0" text="1234567" AnchorPane.leftAnchor="134.0">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -46,7 +46,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="145.0" layoutY="75.0" text="100" AnchorPane.leftAnchor="134.0">
+                  <Label fx:id="score_SubmissView" layoutX="145.0" layoutY="75.0" text="100" AnchorPane.leftAnchor="134.0">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -101,7 +101,7 @@
                         </Label>
                      </children>
                   </VBox>
-                  <Button contentDisplay="RIGHT" layoutX="449.0" layoutY="14.0" mnemonicParsing="false" styleClass="button-back" text="Back" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="14.0">
+                  <Button contentDisplay="RIGHT" layoutX="449.0" layoutY="14.0" mnemonicParsing="false" onAction="#back_Submission" styleClass="button-back" text="Back" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="14.0">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>

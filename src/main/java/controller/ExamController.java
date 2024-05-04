@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -28,6 +29,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.SelectionModel;
@@ -40,6 +42,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 import utils.DateTime;
 import utils.DisplayDialog_Notification;
@@ -67,7 +70,33 @@ public class ExamController implements Initializable {
 	private ObservableList<Exam> observableList ;
 	
 	private ObservableList<Question> observableList_Question ;
+	@FXML
+    private Label Date_ExamView=new Label();
+
+    @FXML
+    private Label Desc_ExamView=new Label();
+
+    @FXML
+    private Label Name_ExamView=new Label();
+
+    @FXML
+    private Label Score_ExamView=new Label();
+
+    @FXML
+    private Label Subject_ExamView=new Label();
+
+    @FXML
+    private Label TimeLimit_ExamView=new Label();
+
+    @FXML
+    private VBox VBox_DisplayQuestion=new VBox();
 	
+    @FXML
+    private Spinner<Integer> Spinner_Hours_ExamAdd=new Spinner<Integer>();
+
+    @FXML
+    private Spinner<Integer> Spinner_Minutes_ExamAdd=new Spinner<Integer>();
+    
 	@FXML
 	private Button deleteExam_Exam;
 	
@@ -182,6 +211,7 @@ public class ExamController implements Initializable {
 	    	SelectionModel<Question> selectionModel = tableView_ExamAdd.getSelectionModel();
 	    	selectionModel.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 	    		if (newValue != null) {
+	    			
 	    			new ExamController().question_Current=newValue;
 	    		}
 	    	});	    	
@@ -194,12 +224,16 @@ public class ExamController implements Initializable {
 	    	selectionModel.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 	    		if (newValue != null) {
 	    			new ExamController().exam_Current=newValue;
+
 	    			setVisableView_Delete(true);
 	    		}
 	    	});	    	
 	    }catch (Exception e) {
 		    e.printStackTrace();
 	    }
+		if (exam_Current != null) {
+			Load_Exam_ExamView();
+		}
 	}
 	
 	private ObservableList loadQuestion_tableView_ExamAdd(List<Question> list) {
@@ -234,7 +268,13 @@ public class ExamController implements Initializable {
 		spinner_Exam.setEditable(true);
 		
 		Time_ExamAdd.setValueFactory(valueFatory);
-		Time_ExamAdd.setEditable(true);
+		
+		SpinnerValueFactory<Integer> valueFatoryStartTime_Hours=new SpinnerValueFactory.IntegerSpinnerValueFactory(0,23);
+		SpinnerValueFactory<Integer> valueFatoryStartTime_Minutes=new SpinnerValueFactory.IntegerSpinnerValueFactory(0,59);
+		Spinner_Hours_ExamAdd.setValueFactory(valueFatoryStartTime_Hours);
+		Spinner_Minutes_ExamAdd.setValueFactory(valueFatoryStartTime_Minutes);
+		
+		
 	}
 	public void Exam_Tranfer_ExamAdd_Quizz(ActionEvent event) throws IOException {
 		AnchorPane insidePane = new FXMLLoader(getClass().getResource("/fxml/Exam_add.fxml")).load();
@@ -303,33 +343,73 @@ public class ExamController implements Initializable {
     private void Delete_Exam_Exam(ActionEvent event) {
     	if(!examManager.deleteExam(String .valueOf(exam_Current.getExamID()))) {	
     		DisplayDialog_Notification.Dialog_Error( "Unsuccessful notification!", "Exam wasn't delete!","Unsuccessful!");
-    		Exam exam_Delete = tableView_Exam.getSelectionModel().getSelectedItem();
-    		tableView_Exam.getItems().remove(exam_Delete);
     	}
     	else {
+    		Exam exam_Delete = tableView_Exam.getSelectionModel().getSelectedItem();
+    		tableView_Exam.getItems().remove(exam_Delete);
     		DisplayDialog_Notification.Dialog_Infomation( "Successful notification!", "Exam was deleted!","Successful!");
     	}
     	CreateExam_ExamAdd.setDisable(!checkListView());
     }
     public static String getCurrentTime() {
-        LocalDateTime now = LocalDateTime.now();
-        int year = now.getYear();
-        int month = now.getMonthValue();
-        int day = now.getDayOfMonth();
-        int hour = now.getHour();
-        int minute = now.getMinute();
-        int second = now.getSecond();
+    	 LocalDateTime now = LocalDateTime.now();
 
-        String formattedTime = String.format("%d-%d-%d %02d:%02d:%02d", year, month, day, hour, minute, second);
-        return formattedTime;
+         // Define the format pattern
+         String format = "yyyy-MM-dd HH:mm:ss"; // Customize the format as needed
+
+         // Create a DateTimeFormatter object
+         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+
+         // Format the current date and time
+         String formattedDateTime = now.format(formatter);
+         return formattedDateTime;
     }
+    
+
     @FXML
     private void buttonCreateExam(ActionEvent event) {
-//    	examManager.addExam(new Exam(
-//    			new DateTime(getCurrentTime()),
-//    			subject_Current,
-//    			
-//    			))
+    	try {
+    	int MaxScore =Integer.parseInt(Score_ExamAdd.getText());
+    	int timeLimit=Time_ExamAdd.getValue();
+    	String nameExam=Name_ExamAdd.getText();
+    	String desctiption=Desctiption_ExamAdd.getText();
+    	DateTime dateTimeID = new DateTime(getCurrentTime());
+
+    	String year = String.valueOf(Date_Exam_Add.getValue().getYear());
+		String month = String.valueOf(Date_Exam_Add.getValue().getMonthValue());
+		String day = String.valueOf(Date_Exam_Add.getValue().getDayOfMonth());
+		
+		String hours =Spinner_Hours_ExamAdd.getValue()>=10 ? String.valueOf(Spinner_Hours_ExamAdd.getValue()) :"0"+String.valueOf(Spinner_Hours_ExamAdd.getValue());
+		
+		
+		String minutes =Spinner_Minutes_ExamAdd.getValue()>=10 ?String.valueOf(Spinner_Minutes_ExamAdd.getValue()) : "0"+String.valueOf(Spinner_Minutes_ExamAdd.getValue()) ;
+    	
+    	DateTime dateTimeStart_Time = new DateTime(year, month, day, hours, minutes);
+    	try {
+			if(!examManager.addExam(
+					new Exam(
+					dateTimeID,
+					subject_Current,
+					dateTimeStart_Time,
+					timeLimit,
+					MaxScore,
+					nameExam,
+					desctiption,
+					true,
+					listQuestion_Selected
+					)))
+			{
+				DisplayDialog_Notification.Dialog_Error("Notification Error", "Exam wasn't created", "Error");
+			}
+			else 
+				DisplayDialog_Notification.Dialog_Error("Notification Successfully", "Exam was created", "Successful");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			DisplayDialog_Notification.Dialog_Error("Notification Error", "Exam wasn't created", "Error");
+		}
+    	}catch (NumberFormatException e) {
+	    	DisplayDialog_Notification.Dialog_Error("Error", "Time or timeStart or MaxScore must be number", "Error");
+    	}		
     }
     
     private boolean checkListView() {
@@ -340,7 +420,7 @@ public class ExamController implements Initializable {
     private void checkDateTime_StartTest() {
     	Date_Exam_Add.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.isBefore(LocalDate.now())) {
-            	Date_Exam_Add.setValue(null);
+            	Date_Exam_Add.setValue(LocalDate.now());
             	DisplayDialog_Notification.Dialog_Error("Notification", "Invalid date", "Time error");
             } else {
             	Date_Exam_Add.setValue(newValue);
@@ -351,24 +431,47 @@ public class ExamController implements Initializable {
     	viewExam_Exam.setVisible(b);
     	deleteExam_Exam.setVisible(b);
     }
-    @FXML
-    private String checkTimeStart_ExamAdd(ActionEvent event) {
+    private void Load_Exam_ExamView() {
     	
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+    	String examName=exam_Current.getName();
+    	String SubjectName=exam_Current.getSubject().getSubjectName();
+    	String Date= exam_Current.getStartDateTime().toString();
+    	String Score=String.valueOf(exam_Current.getMaxScore());
+		String timeLimit=String.valueOf(exam_Current.getTimeLimit());
+		String desc=exam_Current.getDescription();
+		
+    	Name_ExamView.setText(examName);
+		Subject_ExamView.setText(SubjectName);
+		Date_ExamView.setText(Date);
+		Score_ExamView.setText(Score);
+		TimeLimit_ExamView.setText(timeLimit);
+		Desc_ExamView.setText(desc);
 
-        Time_Start_ExamAdd.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent t) {
-            	 String timeString = Time_Start_ExamAdd.getText();
-
-                 try {
-                     LocalDateTime dateTime = LocalDateTime.parse(timeString, formatter);
-                 } catch (Exception e) {
-                	 DisplayDialog_Notification.Dialog_Error("Notification","\r\n"
-                	 		+ "Invalid time", "Error Time");
-                 }
-            }
-          });
-		return null;
+		if(exam_Current.getQuestions() !=null) {
+		for(Question q: exam_Current.getQuestions())
+		{
+			
+			
+			Label Ques = new Label();
+			
+			List<Label> answer = new ArrayList<Label>();
+			
+			Ques.setText(q.getContent());
+			
+			for(String a : q.getAnswers())
+			{	
+				for(Label ans:answer)
+				{
+					ans.setText(a);
+				}
+			}
+			
+			VBox_DisplayQuestion.getChildren().add(Ques);
+			for (Label ans : answer) {
+				VBox_DisplayQuestion.getChildren().add(ans);				
+			}
+		}
+		}
     }
+
 }

@@ -140,15 +140,8 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="Time_Start_ExamAdd" layoutX="48.0" layoutY="200.0" onAction="#checkTimeStart_ExamAdd" prefHeight="35.0" prefWidth="108.0" promptText="Time">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <styleClass>
-                  <String fx:value="transparent" />
-                  <String fx:value="round-layout" />
-               </styleClass>
-            </TextField>
+            <Spinner fx:id="Spinner_Hours_ExamAdd" editable="true" layoutX="14.0" layoutY="200.0" prefHeight="33.0" prefWidth="76.0" />
+            <Spinner fx:id="Spinner_Minutes_ExamAdd" editable="true" layoutX="102.0" layoutY="200.0" prefHeight="33.0" prefWidth="76.0" />
          </children>
       </AnchorPane>
       <ComboBox layoutX="812.0" layoutY="37.0" prefHeight="35.0" prefWidth="100.0" promptText="Chapter" AnchorPane.rightAnchor="138.0" AnchorPane.topAnchor="37.0">

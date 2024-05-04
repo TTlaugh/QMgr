@@ -12,7 +12,6 @@ import business.model.Group;
 import business.model.Student;
 import business.model.Teacher;
 import business.services.GroupManager;
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -176,6 +175,8 @@ public class GroupController implements Initializable{
 	    }catch (Exception e) {
 		    e.printStackTrace();
 	    }
+	    if(student_Current!=null)
+	    	load_QuestionView() ;
 	   
 	}
 	private void setVisibleButton_Add_DelGroup(boolean b) {
@@ -287,21 +288,22 @@ public class GroupController implements Initializable{
 		AnchorPane.setRightAnchor(insidePane, 0.0);
 		AnchorPane.setLeftAnchor(insidePane, 0.0);
 	}
-    @FXML
-    void button_Edit_GroupView_Display(ActionEvent event) {
-    	label_Stu_Id_GroupView.setVisible(true);
-		textField_Email_GroupView.setVisible(true);
-		textField_FirstName_GroupView.setVisible(true);
-		textField_LastName_GroupView.setVisible(true);
-		textField_Phone_GroupView.setVisible(true);
-		 
-    	button_Save_GroupView_Display.setVisible(true);
-    	
-    	label_Stu_Id_GroupView.setText(student_Current.getStudentID());
+	public void load_QuestionView() {
+		label_Stu_Id_GroupView.setText(student_Current.getStudentID());
 		textField_Email_GroupView.setText(student_Current.getEmail());
 		textField_FirstName_GroupView.setText(student_Current.getFirstName());
 		textField_LastName_GroupView.setText(student_Current.getLastName());
 		textField_Phone_GroupView.setText(student_Current.getPhone());
+	}
+    @FXML
+    void button_Edit_GroupView_Display(ActionEvent event) {
+    	label_Stu_Id_GroupView.setDisable(false);
+		textField_Email_GroupView.setDisable(false);
+		textField_FirstName_GroupView.setDisable(false);
+		textField_LastName_GroupView.setDisable(false);
+		textField_Phone_GroupView.setDisable(false);
+		 
+    	button_Save_GroupView_Display.setVisible(true);
     }
 
     @FXML
@@ -343,7 +345,10 @@ public class GroupController implements Initializable{
 				textField_GroupName.getText()!="") {
     		try {
     			if(!gr.addGroup(new Group(textField_GroupID.getText(),teacher_Group,textField_GroupName.getText()))){
-    				ComboBoxGroup.getItems().add(new Group(textField_GroupID.getText(),teacher_Group,textField_GroupName.getText()));				
+    				
+    			}
+    			else {	    			
+    				ComboBoxGroup.getItems().add(new Group(textField_GroupID.getText(),teacher_Group,textField_GroupName.getText()));		
     				DisplayDialog_Notification.Dialog_Infomation("Successful notification!","The group added successfully!", "Successful!");
     			}
     		} catch (SQLException e) {
@@ -367,10 +372,17 @@ public class GroupController implements Initializable{
     		String check_xlsx = file_Current.getPath().substring(file_Current.getPath().lastIndexOf(".")+1);
     		try {
     			
-				if( (check_xlsx.equalsIgnoreCase("xlsx") || check_xlsx.equalsIgnoreCase("xls") ) && gr.importStudent(group_Current_Layout, file_Current.getPath())) {
+				if( (check_xlsx.equalsIgnoreCase("xlsx") || check_xlsx.equalsIgnoreCase("xls") ) ) {
 					
 			    	tableView_Group.getItems().clear();
 			    	
+			    	if((DisplayDialog_Notification.Dialog_Comfrim("Notification!", 
+			    			"File data co kha nang trung voi he thong ban co muon dung thong tin he thong co san neu gap truong hop nay ", 
+			    			"Yes/cancel").getResult()==ButtonType.YES)) 
+			    		gr.importStudent(group_Current_Layout, file_Current.getPath(), true);
+				    else 
+				    	gr.importStudent(group_Current_Layout, file_Current.getPath(), false);
+			   
 			    	DisplayDialog_Notification.Dialog_Infomation("Successful notification", "Import Successful", "Successful");
 				}
 				else {
@@ -393,7 +405,9 @@ public class GroupController implements Initializable{
     }
     @FXML
    private void Export_Group(ActionEvent event) {
+    	file_Current= OpenFileExplorer.Open(event);
     	String fileNameExel=String.valueOf(group_Current_Layout.getGroupName())+"_Exel.xlsx";
+    
     	if(!gr.exportStudent(group_Current_Layout,fileNameExel)) {
 			DisplayDialog_Notification.Dialog_Infomation("Unsuccessful notification", "Creat file exel failed", "Error");
 		}
