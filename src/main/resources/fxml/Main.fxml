@@ -18,11 +18,6 @@
          </font>
       </Label>
       <Separator layoutX="250.0" layoutY="13.0" maxHeight="-Infinity" orientation="VERTICAL" prefHeight="44.0" />
-      <Label layoutX="272.0" layoutY="13.0" text="Welcome">
-         <font>
-            <Font name="System Italic" size="30.0" />
-         </font>
-      </Label>
       <Label fx:id="nameAccount" layoutX="28.0" layoutY="85.0" prefHeight="30.0" prefWidth="73.0" text="MS.Tram" AnchorPane.leftAnchor="28.0">
          <font>
             <Font name="System Bold" size="16.0" />
