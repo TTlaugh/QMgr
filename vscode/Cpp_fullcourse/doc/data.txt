@@ -1,5 +1,0 @@
-2
-jejej
-2
-jejej
-g++ -C:\Users\BANDA\Downloads\SFML-2.6.1-windows-gcc-13.1.0-mingw-64-bit\SFML-2.6.1\include/opt/homebrew/Cellar/sfml/2.6.1/include -C:\Users\BANDA\Downloads\SFML-2.6.1-windows-gcc-13.1.0-mingw-64-bit\SFML-2.6.1\lib/opt/homebrew/Cellar/sfml/2.6.1/lib -lsfml-graphics -lsfml-window -lsfml-network main.cpp -o prog
