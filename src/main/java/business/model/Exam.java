@@ -2,6 +2,7 @@ package business.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import utils.DateTime;
@@ -44,7 +45,7 @@ public class Exam {
 		this.name = rs.getString("Name");
 		this.description = rs.getString("Description");
 		this.isShuffled = rs.getBoolean("IsShuffled");
-		this.questions = null;
+		this.questions = new ArrayList<Question>();
 	}
 	
 	public Exam(Exam exam) {

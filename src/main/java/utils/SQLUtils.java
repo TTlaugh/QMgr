@@ -13,6 +13,7 @@ import business.model.Question;
 import business.model.Student;
 import business.model.Subject;
 import business.services.WelcomeFunction;
+import data.ExamAccess;
 import data.StudentAccess;
 
 public class SQLUtils {
@@ -68,14 +69,8 @@ public class SQLUtils {
 		testDataSource();
 	}
 	private static void testDataSource() {
-		ArrayList<Question> questions = new ArrayList<>();
-		questions.add(new Question("1", null, 0, 0, null, null, null));
-		questions.add(new Question("2", null, 0, 0, null, null, null));
-		questions.add(new Question("3", null, 0, 0, null, null, null));
-		questions.add(new Question("4", null, 0, 0, null, null, null));
-		questions.add(new Question("5", null, 0, 0, null, null, null));
 		Exam exam = new Exam(
-				null,
+				new DateTime("2024-01-01 18:00:00"),
 				null,
 				null,
 				0,
@@ -83,8 +78,11 @@ public class SQLUtils {
 				null,
 				null,
 				false,
-				questions
+				null
 				);
-		System.out.println(exam.getQuestionIDs());
+		try {
+			new ExamAccess().getQuestions(exam);
+		} catch (SQLException e) { }
+		System.out.println(exam);
 	}
 }

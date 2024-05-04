@@ -83,10 +83,10 @@ public class ExamAccess implements DataAccess<Exam> {
 	public void getQuestions(Exam exam) throws SQLException {
 		Connection connection = SQLUtils.getConnection();
 		ResultSet rs = connection.createStatement().executeQuery(
-				"SECLECT QuestionIDs FROM Exams WHERE ExamID='"+exam.getExamID()+"'");
+				"SELECT QuestionIDs FROM Exams WHERE ExamID='"+exam.getExamID()+"'");
 		List<Integer> questionIDsList = null;
 		if (rs.next())
-			try { questionIDsList = JsonUtils.jsonToList(rs.getString(0), Integer.class);
+			try { questionIDsList = JsonUtils.jsonToList(rs.getString("QuestionIDs"), Integer.class);
 			} catch (IOException e) { e.printStackTrace(); }
 		QuestionAccess questionAccess = new QuestionAccess();
 		for (Integer questionID : questionIDsList)
