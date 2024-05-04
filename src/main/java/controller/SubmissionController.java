@@ -94,9 +94,9 @@ public class SubmissionController implements Initializable {
 		score_SubmissView.setText(String.valueOf(submission_Current.getScore()));
 		
 		for(SelectedQuestion submissSelect : submissionManager.getSelectedQuestions(submission_Current)) {
-			for(String question : submissSelect.getQuestionID()) {
-				
-			}
+//			for(String question : submissSelect.getQuestionID()) {
+//				
+//			}
 			for(String answer : submissSelect.getAnswers()) {
 				System.out.println(answer);
 			}

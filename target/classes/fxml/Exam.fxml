@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1050.0" style="-fx-background-color: white;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ExamController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1050.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ExamController">
    <children>
       <Label layoutX="60.0" layoutY="14.0" prefHeight="75.0" prefWidth="133.0" text="Exam" textFill="#ff6d97" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="14.0">
          <font>
@@ -47,12 +47,12 @@
             </ImageView>
          </children>
       </HBox>
-      <TableView fx:id="tableView_Exam" layoutX="30.0" layoutY="102.0" prefHeight="626.0" prefWidth="990.0" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="102.0">
+      <TableView fx:id="tableView_Exam" layoutX="30.0" layoutY="102.0" prefHeight="748.0" prefWidth="990.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="102.0">
          <columns>
-            <TableColumn fx:id="ID_Exam_Column" prefWidth="144.0" resizable="false" text="ID" />
-            <TableColumn fx:id="Subject_Exam_Column" prefWidth="247.0" text="Subject" />
-            <TableColumn fx:id="DateTime_Exam_Column" prefWidth="171.0" resizable="false" text="Date Time" />
-            <TableColumn fx:id="Time_Exam_Column" prefWidth="99.0" resizable="false" text="Time" />
+            <TableColumn fx:id="ID_Exam_Column" prefWidth="175.0" resizable="false" text="ID" />
+            <TableColumn fx:id="Subject_Exam_Column" prefWidth="161.0" resizable="false" text="Subject" />
+            <TableColumn fx:id="DateTime_Exam_Column" prefWidth="190.0" resizable="false" text="Date Time" />
+            <TableColumn fx:id="Time_Exam_Column" prefWidth="136.0" resizable="false" text="Time" />
             <TableColumn fx:id="Name_Exam_Column" prefWidth="325.0" text="Name" />
          </columns>
          <columnResizePolicy>
@@ -70,7 +70,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
-      <Button layoutX="877.0" layoutY="48.0" mnemonicParsing="false" onAction="#Exam_Tranfer_ExamAdd_Quizz" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50; -fx-background-color: #ff6d97;" styleClass="transparent" AnchorPane.rightAnchor="132.0">
+      <Button layoutX="979.0" layoutY="48.0" mnemonicParsing="false" onAction="#Exam_Tranfer_ExamAdd_Quizz" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50; -fx-background-color: #ff6d97;" styleClass="transparent" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="48.0">
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
                <image>
@@ -79,7 +79,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="viewExam_Exam" layoutX="929.0" layoutY="48.0" mnemonicParsing="false" onAction="#Exam_Tranfer_ExamView_Quizz" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50; -fx-background-color: #ff6d97;" styleClass="transparent" visible="false" AnchorPane.rightAnchor="80.0">
+      <Button fx:id="viewExam_Exam" layoutX="929.0" layoutY="48.0" mnemonicParsing="false" onAction="#Exam_Tranfer_ExamView_Quizz" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50; -fx-background-color: #ff6d97;" styleClass="transparent" visible="false" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="48.0">
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
                <image>
@@ -88,7 +88,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="deleteExam_Exam" layoutX="979.0" layoutY="48.0" mnemonicParsing="false" onAction="#Delete_Exam_Exam" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50; -fx-background-color: #ff6d97;" styleClass="transparent" visible="false" AnchorPane.rightAnchor="30.0">
+      <Button fx:id="deleteExam_Exam" layoutX="880.0" layoutY="49.0" mnemonicParsing="false" onAction="#Delete_Exam_Exam" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50; -fx-background-color: #ff6d97;" styleClass="transparent" visible="false" AnchorPane.rightAnchor="129.0" AnchorPane.topAnchor="48.0">
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
                <image>
@@ -98,6 +98,6 @@
          </graphic>
       </Button>
       <DatePicker layoutX="592.0" layoutY="50.0" prefHeight="35.0" prefWidth="100.0" />
-      <Spinner fx:id="spinner_Exam" editable="true" layoutX="715.0" layoutY="50.0" prefHeight="35.0" prefWidth="66.0" />
+      <Spinner fx:id="spinner_Exam" editable="true" layoutX="703.0" layoutY="50.0" prefHeight="35.0" prefWidth="66.0" />
    </children>
 </AnchorPane>

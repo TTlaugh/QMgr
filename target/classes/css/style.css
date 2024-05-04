@@ -72,21 +72,22 @@
 }
 
 .table-view .table-cell{
-	-fx-alignment: CENTER-LEFT;
+	-fx-alignment: CENTER;
     -fx-text-fill: black;
+    -fx-font-size: 18;
     -fx-border-color: transparent;
 }
 
 .table-view .column-header-background .label {
 	-fx-text-fill: #fce3db;
-	-fx-font-size: 21px;
+	-fx-font-size: 20px;
 }
 
 .column-header-background{
 	-fx-background-color:  #fc94ab;
 	-fx-background-radius: 10 ;
 	-fx-border-radius: 10;
-	-fx-pref-height: 40;
+	-fx-pref-height: 35;
 }
 
 .date-picker {
@@ -132,4 +133,18 @@
 .text-area .content {
 	-fx-background-color: transparent;
 	-fx-background-radius: 10;
+}
+
+.check-box .box {
+    -fx-background-color: white;
+    -fx-border-color: grey;
+    -fx-border-radius: 3px;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: white;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #1e81b0;
 }
