@@ -49,5 +49,14 @@ public class ExamManager {
 		}
 		return false;
 	}
+	
+	public boolean getQuestions(Exam exam) {
+		try {
+			new ExamAccess().getQuestions(exam);
+		} catch (SQLException e) {
+			SQLUtils.printSQLException(e);
+		}
+		return false;
+	}
 
 }
