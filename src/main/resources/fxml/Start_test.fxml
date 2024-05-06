@@ -189,7 +189,7 @@
                         </Label>
                      </children>
                   </VBox>
-                  <Button layoutX="438.0" layoutY="14.0" mnemonicParsing="false" styleClass="button-in-login" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                  <Button layoutX="438.0" layoutY="14.0" mnemonicParsing="false" onAction="#reloadServer" styleClass="button-in-login" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true">
                            <image>
@@ -244,7 +244,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutY="759.0" mnemonicParsing="false" styleClass="button-in-login" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0">
+      <Button layoutY="759.0" mnemonicParsing="false" onAction="#shutdownServer" styleClass="button-in-login" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0">
          <graphic>
             <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true">
                <image>

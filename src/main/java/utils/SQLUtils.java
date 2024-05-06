@@ -11,9 +11,11 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 
 import business.model.Exam;
 import business.model.Question;
+import business.model.Score;
 import business.model.Student;
 import business.model.Subject;
 import business.services.WelcomeFunction;
+import data.ExamAccess;
 import data.StudentAccess;
 
 public class SQLUtils {
@@ -69,23 +71,12 @@ public class SQLUtils {
 		testDataSource();
 	}
 	private static void testDataSource() {
-		ArrayList<Question> questions = new ArrayList<>();
-		questions.add(new Question("1", null, 0, 0, null, null, null));
-		questions.add(new Question("2", null, 0, 0, null, null, null));
-		questions.add(new Question("3", null, 0, 0, null, null, null));
-		questions.add(new Question("4", null, 0, 0, null, null, null));
-		questions.add(new Question("5", null, 0, 0, null, null, null));
-		Exam exam = new Exam(
-				null,
-				null,
-				null,
-				0,
-				0,
-				null,
-				null,
-				false,
-				questions
-				);
-		System.out.println(exam.getQuestionIDs());
+		try {
+			Student student = new StudentAccess().get("S001");
+			for (Score score : student.getScores()) {
+				System.out.println(score.getExamID());
+				System.out.println(score.getScore());
+			}
+		} catch (SQLException e) { }
 	}
 }

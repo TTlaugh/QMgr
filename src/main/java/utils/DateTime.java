@@ -1,5 +1,8 @@
 package utils;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class DateTime {
 
 	private String year;
@@ -96,6 +99,10 @@ public class DateTime {
 
 	public void setSecond(String second) {
 		this.second = second;
+	}
+	public StringProperty getExamIDStringProperty() {
+		StringProperty stringProperty = new SimpleStringProperty(toString());
+		return stringProperty;
 	}
 
 	@Override

@@ -42,7 +42,7 @@
             <Font name="Kristen ITC" size="47.0" />
          </font>
       </Label>
-      <Button fx:id="delete_Submission" layoutX="920.0" layoutY="750.0" mnemonicParsing="false" onAction="#button_Delete_Submission" prefHeight="35.0" prefWidth="100.0" text="Delete" textFill="WHITE" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="30.0">
+      <Button fx:id="delete_Submission" layoutX="920.0" layoutY="750.0" mnemonicParsing="false" onAction="#button_Delete_Submission" prefHeight="35.0" prefWidth="100.0" text="Delete" textFill="WHITE" visible="false" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="30.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -54,7 +54,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="view_Submission" layoutX="807.0" layoutY="750.0" mnemonicParsing="false" onAction="#buttonViewSubmission" prefHeight="35.0" prefWidth="100.0" text="View" textFill="WHITE" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="143.0">
+      <Button fx:id="view_Submission" layoutX="807.0" layoutY="750.0" mnemonicParsing="false" onAction="#buttonViewSubmission" prefHeight="35.0" prefWidth="100.0" text="View" textFill="WHITE" visible="false" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="143.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

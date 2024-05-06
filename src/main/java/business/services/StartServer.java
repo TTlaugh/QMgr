@@ -1,3 +1,4 @@
+
 package business.services;
 
 import java.io.IOException;
@@ -31,10 +32,10 @@ public class StartServer {
 		try {
 			this.serverSocket = new ServerSocket(port);
 			new Thread() {
-				public void run() {
+				@Override public void run() {
 					try {
 						while (true) {
-							new ThreadServer(serverSocket.accept(), clients, exam);
+							new ThreadServer(serverSocket.accept(), clients, exam).start();
 						}
 					} catch (SocketException e) {
 						if(serverSocket.isClosed())

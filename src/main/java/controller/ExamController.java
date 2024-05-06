@@ -176,7 +176,7 @@ public class ExamController implements Initializable {
 	}
 
 	private void loadComboBoxInExamAdd() {
-		List<Subject> subjects = quesManager.getSubjects(new LoginController().teacher_Current);
+		List<Subject> subjects = quesManager.getSubjects(LoginController.teacher_Current);
 
 		for (Subject subj : subjects) {
 			comboBox_ChooseSubject_ExamAdd.getItems().add(subj);
@@ -201,7 +201,7 @@ public class ExamController implements Initializable {
 			question_ListOfSubject = quesManager.getQuestionsForSubject(comboBox_ChooseSubject_ExamAdd.getValue());
 
 			// Save subject current
-			new ExamController().subject_Current = comboBox_ChooseSubject_ExamAdd.getValue();
+			ExamController.subject_Current = comboBox_ChooseSubject_ExamAdd.getValue();
 
 			tableView_ExamAdd.setItems(loadQuestion_tableView_ExamAdd(question_ListOfSubject));
 		});
@@ -211,7 +211,7 @@ public class ExamController implements Initializable {
 			SelectionModel<Question> selectionModel = tableView_ExamAdd.getSelectionModel();
 			selectionModel.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 				if (newValue != null) {
-					new ExamController().question_Current = newValue;
+					ExamController.question_Current = newValue;
 				}
 			});
 		} catch (Exception e) {
@@ -222,9 +222,9 @@ public class ExamController implements Initializable {
 			SelectionModel<Exam> selectionModel = tableView_Exam.getSelectionModel();
 			selectionModel.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 				if (newValue != null) {
-					new ExamController().exam_Current = newValue;
-					
-					 picktoTest.setVisible(true);
+					ExamController.exam_Current = newValue;
+
+					picktoTest.setVisible(true);
 
 					setVisableView_Delete(true);
 				}
@@ -237,14 +237,15 @@ public class ExamController implements Initializable {
 		}
 	}
 
-    @FXML
-    void button_PickToTest(ActionEvent event) {    	
-    	new MainController().receiveExam(exam_Current);
-    	new Start_TestController().receiveExam(exam_Current);
-    	DisplayDialog_Notification.Dialog_Infomation("Successfully", "Ban da chon exam nay hay nhan start test de bat dau bai kiem tra", getCurrentTime());
-    }
+	@FXML
+	void button_PickToTest(ActionEvent event) {
+		new MainController().receiveExam(exam_Current);
+		new Start_TestController().receiveExam(exam_Current);
+		DisplayDialog_Notification.Dialog_Infomation("Successfully",
+				"Ban da chon exam nay hay nhan start test de bat dau bai kiem tra", getCurrentTime());
+	}
 
-	private ObservableList loadQuestion_tableView_ExamAdd(List<Question> list) {
+	private ObservableList<Question> loadQuestion_tableView_ExamAdd(List<Question> list) {
 		observableList_Question = FXCollections.observableArrayList(list);
 
 		ID_ExamAdd.setCellValueFactory(new PropertyValueFactory<Question, String>("questionID"));
@@ -256,11 +257,11 @@ public class ExamController implements Initializable {
 	}
 
 	private void loadExam() {
-		List<Exam> examList = examManager.getExams(new LoginController().teacher_Current);
+		List<Exam> examList = examManager.getExams(LoginController.teacher_Current);
 		tableView_Exam.setItems(loadStudent_tableView(examList));
 	}
 
-	private ObservableList loadStudent_tableView(List<Exam> list) {
+	private ObservableList<Exam> loadStudent_tableView(List<Exam> list) {
 		observableList = FXCollections.observableArrayList(list);
 
 		ID_Exam_Column.setCellValueFactory(new PropertyValueFactory<Exam, DateTime>("examID"));
@@ -296,8 +297,7 @@ public class ExamController implements Initializable {
 		setAnchor(insidePane);
 		anchor.getChildren().clear();
 		anchor.getChildren().add(insidePane);
-		
-		
+
 	}
 
 	public void Exam_Tranfer_ExamView_Quizz(ActionEvent event) throws IOException {
@@ -465,7 +465,8 @@ public class ExamController implements Initializable {
 				Question question = questions.get(i);
 				Label contentLabel = new Label();
 				contentLabel.setText((i + 1) + ". " + question.getContent());
-				contentLabel.setStyle("-fx-font-size:30 ; -fx-font-weight:bold");
+				contentLabel.setStyle("-fx-font-size:18 ; -fx-font-weight:bold");
+				contentLabel.setWrapText(true);
 
 				VBox_DisplayQuestion.getChildren().add(contentLabel);
 
@@ -476,7 +477,8 @@ public class ExamController implements Initializable {
 					String answer = answers.get(j);
 					Label answerLabel = new Label();
 					answerLabel.setText(uiUtils.indexToLetter(j) + ". " + answer);
-					answerLabel.setStyle("-fx-font-size:26");
+					answerLabel.setStyle("-fx-font-size:18");
+					answerLabel.setWrapText(true);
 					if (correctAns.contains(j + 1))
 						answerLabel.setStyle("-fx-font-size:26;-fx-text-fill:green");
 					VBox_DisplayQuestion.getChildren().add(answerLabel);
