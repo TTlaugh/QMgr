@@ -50,7 +50,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <VBox fx:id="vBox_Submissview" layoutX="28.0" layoutY="112.0" prefHeight="733.0" prefWidth="513.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+                  <VBox fx:id="vBox_Submissview" layoutX="28.0" layoutY="112.0" prefWidth="513.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
                   <Button contentDisplay="RIGHT" layoutX="449.0" layoutY="14.0" mnemonicParsing="false" onAction="#back_Submission" styleClass="button-back" text="Back" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="14.0">
                      <font>
                         <Font name="System Bold" size="18.0" />

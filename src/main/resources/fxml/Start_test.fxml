@@ -50,7 +50,7 @@
             <Font size="19.0" />
          </font>
       </TextField>
-      <Button layoutX="674.0" layoutY="188.0" mnemonicParsing="false" onAction="#button_StartTest" prefHeight="42.0" prefWidth="138.0" style="-fx-background-radius: 12; -fx-background-color: #ff6d97; -fx-text-fill: #fce3db;" text="START SEVER" textFill="WHITE" AnchorPane.rightAnchor="488.0">
+      <Button layoutX="674.0" layoutY="188.0" mnemonicParsing="false" onAction="#button_StartTest" prefHeight="42.0" prefWidth="138.0" text="START SEVER" textFill="WHITE" AnchorPane.rightAnchor="488.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -64,7 +64,7 @@
                         <Font name="System Italic" size="20.0" />
                      </font>
                   </Label>
-                  <VBox alignment="CENTER" layoutX="27.0" layoutY="67.0" prefWidth="516.0" styleClass="transparent" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="67.0">
+                  <VBox alignment="CENTER" layoutX="27.0" layoutY="67.0" prefWidth="516.0" styleClass="transparent" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="67.0">
                      <children>
                         <Separator prefHeight="10.0" prefWidth="510.0" />
                         <Label prefHeight="69.0" text="Nguyen Phuong Tram - STS0123456789" wrapText="true">
@@ -189,6 +189,18 @@
                         </Label>
                      </children>
                   </VBox>
+                  <Button layoutX="438.0" layoutY="14.0" mnemonicParsing="false" styleClass="button-in-login" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../imgs/reload.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
                </children>
                <styleClass>
                   <String fx:value="round-layout" />
@@ -197,25 +209,6 @@
             </AnchorPane>
          </content>
       </ScrollPane>
-      <ImageView fitHeight="115.0" fitWidth="128.0" layoutX="1146.0" layoutY="785.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="26.0">
-         <image>
-            <Image url="@../imgs/start.png" />
-         </image>
-         <effect>
-            <ColorAdjust contrast="0.43" hue="-0.87" />
-         </effect>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
-      <ImageView fitHeight="130.0" fitWidth="130.0" layoutY="770.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
-         <image>
-            <Image url="@../imgs/stopserver.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
       <Button layoutX="21.0" layoutY="86.0" mnemonicParsing="false" onAction="#Back_Test" styleClass="button-back" text="Back">
          <font>
             <Font name="System Bold" size="18.0" />
@@ -233,5 +226,38 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <Button layoutX="1142.0" layoutY="767.0" mnemonicParsing="false" prefHeight="112.0" prefWidth="144.0" styleClass="button-in-login" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="14.0">
+         <graphic>
+            <ImageView fitHeight="115.0" fitWidth="128.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../imgs/start.png" />
+               </image>
+               <effect>
+                  <ColorAdjust contrast="0.43" hue="-0.87" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutY="759.0" mnemonicParsing="false" styleClass="button-in-login" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0">
+         <graphic>
+            <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../imgs/stopserver.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

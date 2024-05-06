@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="900.0" prefWidth="1050.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ExamController">
    <children>
-      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" hmax="0.0" layoutX="240.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="570.0" styleClass="transparent" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="30.0">
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" hmax="0.0" layoutX="240.0" layoutY="30.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="570.0" styleClass="transparent" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="30.0">
          <content>
             <AnchorPane minHeight="800.0" minWidth="0.0" prefWidth="550.0">
                <styleClass>
@@ -93,7 +93,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <VBox fx:id="VBox_DisplayQuestion" layoutX="34.0" layoutY="197.0" prefHeight="486.0" prefWidth="502.0" AnchorPane.bottomAnchor="-109.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="196.0">
+                  <VBox fx:id="VBox_DisplayQuestion" layoutX="34.0" layoutY="197.0" prefWidth="502.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="196.0">
                      <children>
                         <Separator prefHeight="10.0" prefWidth="510.0" />
                      </children>

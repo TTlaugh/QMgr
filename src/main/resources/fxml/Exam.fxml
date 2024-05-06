@@ -47,7 +47,7 @@
             </ImageView>
          </children>
       </HBox>
-      <TableView fx:id="tableView_Exam" layoutX="30.0" layoutY="102.0" prefHeight="748.0" prefWidth="990.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="102.0">
+      <TableView fx:id="tableView_Exam" layoutX="30.0" layoutY="102.0" prefHeight="702.0" prefWidth="990.0" AnchorPane.bottomAnchor="96.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="102.0">
          <columns>
             <TableColumn fx:id="ID_Exam_Column" prefWidth="175.0" resizable="false" text="ID" />
             <TableColumn fx:id="Subject_Exam_Column" prefWidth="161.0" resizable="false" text="Subject" />
