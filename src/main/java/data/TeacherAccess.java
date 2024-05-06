@@ -16,16 +16,16 @@ public class TeacherAccess implements DataAccess<Teacher> {
 		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement1 = connection.prepareStatement(
 				"INSERT INTO Person VALUES (?,?,?,?,?)");
-		pStatement1.setString(1, "ST" + teacher.getTeacherID());
+		pStatement1.setString(1, teacher.getPersonID());
 		pStatement1.setString(2, teacher.getFirstName());
 		pStatement1.setString(3, teacher.getLastName());
 		pStatement1.setString(4, teacher.getPhone());
 		pStatement1.setString(5, teacher.getEmail());
 		boolean a = pStatement1.executeUpdate() >= 1;
 		PreparedStatement pStatement2 = connection.prepareStatement(
-				"INSERT INTO Students VALUES (?,?)");
+				"INSERT INTO Teachers VALUES (?,?)");
 		pStatement2.setString(1, teacher.getTeacherID());
-		pStatement2.setString(2, "ST" + teacher.getTeacherID());
+		pStatement2.setString(2, teacher.getPersonID());
 		boolean b = pStatement2.executeUpdate() >= 1;
 		SQLUtils.closeConnection(connection);
 		return a && b;
@@ -34,7 +34,7 @@ public class TeacherAccess implements DataAccess<Teacher> {
 	@Override
 	public boolean update(Teacher teacher) throws SQLException {
 		connection = SQLUtils.getConnection();
-		String personID = "TC" + teacher.getTeacherID();
+		String personID = teacher.getPersonID();
 		String firstName = teacher.getFirstName();
 		String lastName = teacher.getLastName();
 		String phone = teacher.getPhone();
