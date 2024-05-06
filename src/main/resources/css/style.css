@@ -148,3 +148,11 @@
 .check-box:selected .box {
     -fx-background-color: #1e81b0;
 }
+
+.scroll-pane{
+   -fx-background-color:transparent;
+}
+
+.scroll-pane .viewport {
+       -fx-background-color: transparent;
+}
