@@ -10,9 +10,9 @@ public class Student extends Person {
 	private String studentID;
 	private List<Score> scores;
 	
-	public Student(String studentID, String personID, String firstName, String lastName, String phone, String email,
+	public Student(String studentID, String firstName, String lastName, String phone, String email,
 			List<Score> scores) {
-		super(personID, firstName, lastName, phone, email);
+		super("ST"+studentID, firstName, lastName, phone, email);
 		this.studentID = studentID;
 		this.scores = scores;
 	}
