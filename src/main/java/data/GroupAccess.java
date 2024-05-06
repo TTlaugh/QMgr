@@ -78,7 +78,8 @@ public class GroupAccess implements DataAccess<Group> {
 				"SGroups.SGroupID", group.getGroupID()));
 		for (Student student : group.getStudents()) {
 			student.setScores(getList(Score.class,
-				"SELECT ExamID, Score FROM Submissions",
+				"SELECT Exams.ExamID, Score, SubjectID FROM Submissions"
+				+ " INNER JOIN Exams ON Submissions.ExamID = Exams.ExamID",
 				"StudentID", student.getStudentID()));
 		}
 	}

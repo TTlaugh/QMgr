@@ -33,7 +33,10 @@ public class Teacher extends Person {
 
 	@Override
 	public String toString() {
-		return "Teacher [teacherID=" + teacherID + "]";
+		return "Teacher [teacherID=" + teacherID + ", getPersonID()=" + getPersonID() + ", getFirstName()="
+				+ getFirstName() + ", getLastName()=" + getLastName() + ", getPhone()=" + getPhone() + ", getEmail()="
+				+ getEmail() + "]";
 	}
+
 
 }

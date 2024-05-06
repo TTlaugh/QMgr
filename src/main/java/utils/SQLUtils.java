@@ -13,6 +13,7 @@ import business.model.Question;
 import business.model.Score;
 import business.model.Student;
 import business.model.Subject;
+import business.model.Teacher;
 import business.services.WelcomeFunction;
 import data.ExamAccess;
 import data.StudentAccess;
@@ -70,12 +71,13 @@ public class SQLUtils {
 		testDataSource();
 	}
 	private static void testDataSource() {
-		try {
-			Student student = new StudentAccess().get("S001");
-			for (Score score : student.getScores()) {
-				System.out.println(score.getExamID());
-				System.out.println(score.getScore());
-			}
-		} catch (SQLException e) { }
+//		new WelcomeFunction().signUp(
+//				new Teacher("Trien",
+//						"Nguyen Le Tien",
+//						"Trien",
+//						"0987654321",
+//						"trien@mail.com"),
+//				"1234");
+		System.out.println(new WelcomeFunction().signIn("Trien", "1234"));
 	}
 }
