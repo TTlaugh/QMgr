@@ -1,6 +1,5 @@
 package application;
 
-import controller.GroupController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -17,17 +16,14 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		try {
 			System.out.println("Hello everyone");
-			// primaryStage.getIcons().add(new Image("/images/icon.png"));
 
 			 primaryStage.getIcons().add(new Image("/imgs/icon.png"));
 
 			primaryStage.setTitle("Quizz Server - HEHE");
 			primaryStage.show();
 
-			// FXMLLoader loader = new
-			// FXMLLoader(getClass().getResource("/resources/fxml/login.fxml"));
 
-			 primaryStage.getIcons().add(new Image("/imgs/icon.png"));
+			primaryStage.getIcons().add(new Image("/imgs/icon.png"));
 			primaryStage.setTitle("Quizz Server - HEHE");
 
 			

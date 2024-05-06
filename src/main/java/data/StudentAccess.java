@@ -17,7 +17,7 @@ public class StudentAccess implements DataAccess<Student> {
 		connection = SQLUtils.getConnection();
 		PreparedStatement pStatement1 = connection.prepareStatement(
 				"INSERT INTO Person VALUES (?,?,?,?,?)");
-		pStatement1.setString(1, "ST" + student.getStudentID());
+		pStatement1.setString(1, student.getPersonID());
 		pStatement1.setString(2, student.getFirstName());
 		pStatement1.setString(3, student.getLastName());
 		pStatement1.setString(4, student.getPhone());
@@ -26,7 +26,7 @@ public class StudentAccess implements DataAccess<Student> {
 		PreparedStatement pStatement2 = connection.prepareStatement(
 				"INSERT INTO Students VALUES (?,?)");
 		pStatement2.setString(1, student.getStudentID());
-		pStatement2.setString(2, "ST" + student.getStudentID());
+		pStatement2.setString(2, student.getPersonID());
 		boolean b = pStatement2.executeUpdate() >= 1;
 		SQLUtils.closeConnection(connection);
 		return a && b;
@@ -35,7 +35,7 @@ public class StudentAccess implements DataAccess<Student> {
 	@Override
 	public boolean update(Student student) throws SQLException {
 		connection = SQLUtils.getConnection();
-		String personID = "ST" + student.getStudentID();
+		String personID = student.getPersonID();
 		String firstName = student.getFirstName();
 		String lastName = student.getLastName();
 		String phone = student.getPhone();

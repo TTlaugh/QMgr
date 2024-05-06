@@ -1,10 +1,14 @@
 package controller;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import business.model.Exam;
+import business.services.WelcomeFunction;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -12,7 +16,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import utils.DisplayDialog_Notification;
 
-public class MainController {
+public class MainController implements Initializable {
+    @FXML
+    private Label Account_Teacher=new Label();
 
 	private static Parent root = null;
 
@@ -20,16 +26,23 @@ public class MainController {
 	private AnchorPane AnchorPaneLayout;
 
 	@FXML
-	private Label nameAccount;
-
-	@FXML
 	private Button start_Test_Main = new Button();
 
 	public static Exam exam_StartTest;
+	
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		Account_Teacher.setText(LoginController.teacher_Current.getTeacherID());
+	}
 
 	public void LogOut_Quizz(ActionEvent event) throws IOException {
 		root = (Parent) FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
 		((Node) event.getSource()).getScene().setRoot(root);
+		
+		GroupController.group_Current_Layout=null;
+		LoginController.teacher_Current=null;
+		
 	}
 
 	public void Start_Test(ActionEvent event) throws IOException {

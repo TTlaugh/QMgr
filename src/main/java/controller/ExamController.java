@@ -14,6 +14,8 @@ import business.model.Question;
 import business.model.Subject;
 import business.services.ExamManager;
 import business.services.QuestionManager;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,6 +28,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.SelectionModel;
@@ -41,7 +44,6 @@ import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 import utils.DateTime;
 import utils.DisplayDialog_Notification;
-import utils.ObjectCell;
 import utils.uiUtils;
 
 public class ExamController implements Initializable {
@@ -169,6 +171,7 @@ public class ExamController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		listQuestion_Selected = new ArrayList<Question>();
 		loadSpinner();
 		loadExam();
 		loadComboBoxInExamAdd();
@@ -261,12 +264,16 @@ public class ExamController implements Initializable {
 		tableView_Exam.setItems(loadStudent_tableView(examList));
 	}
 
+	public StringProperty getSubjectNameStringProperty(Subject subject) {
+		StringProperty name = new SimpleStringProperty(subject.getSubjectName());
+		return name;
+	}
 	private ObservableList<Exam> loadStudent_tableView(List<Exam> list) {
 		observableList = FXCollections.observableArrayList(list);
 
 		ID_Exam_Column.setCellValueFactory(new PropertyValueFactory<Exam, DateTime>("examID"));
 		Subject_Exam_Column
-				.setCellValueFactory(cellData -> cellData.getValue().getSubject().getSubjectNameStringProperty());
+				.setCellValueFactory(cellData -> getSubjectNameStringProperty(cellData.getValue().getSubject()));
 		DateTime_Exam_Column.setCellValueFactory(new PropertyValueFactory<Exam, DateTime>("startDateTime"));
 		Time_Exam_Column.setCellValueFactory(new PropertyValueFactory<Exam, Integer>("timeLimit"));
 		Name_Exam_Column.setCellValueFactory(new PropertyValueFactory<Exam, String>("name"));
@@ -327,7 +334,9 @@ public class ExamController implements Initializable {
 
 	@FXML
 	private void choice_QuestionForExam_ExamAdd(ActionEvent event) {
-
+		if(listQuestion_Selected .contains(question_Current))
+			DisplayDialog_Notification.Dialog_Infomation("Notification", "Cau hoi da duoc chon", "cau hoi trung");
+			
 		listQuestion_Selected.add(question_Current);
 
 		ObservableList<Question> observableListView_Question = FXCollections.observableArrayList(listQuestion_Selected);
@@ -336,7 +345,21 @@ public class ExamController implements Initializable {
 
 		listViewQuestion_Selected_ExamAdd.setItems(observableListView_Question);
 
-		listViewQuestion_Selected_ExamAdd.setCellFactory(param -> new ObjectCell<Question>());
+		listViewQuestion_Selected_ExamAdd.setCellFactory(param -> new ListCell<Question>() {
+			@Override
+			protected void updateItem(Question item, boolean empty) {
+				super.updateItem(item, empty);
+				if (item != null && !empty) {
+					setText("ID: " + item.getQuestionID()         + ", " +
+							"Chapter: " + item.getChapter()       + ", " +
+							"Difficulty: " + item.getDifficulty() + ", " +
+							"Correct Answers: " + item.getCorrectAnswers().toString());
+				}
+				else {
+					setText("");
+				}
+			}
+		});
 
 		// Cho phép chọn 1 dòng trong list
 		listViewQuestion_Selected_ExamAdd.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -480,7 +503,7 @@ public class ExamController implements Initializable {
 					answerLabel.setStyle("-fx-font-size:18");
 					answerLabel.setWrapText(true);
 					if (correctAns.contains(j + 1))
-						answerLabel.setStyle("-fx-font-size:26;-fx-text-fill:green");
+						answerLabel.setStyle("-fx-font-size:18;-fx-text-fill:green");
 					VBox_DisplayQuestion.getChildren().add(answerLabel);
 				}
 			}

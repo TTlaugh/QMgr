@@ -16,6 +16,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import utils.DisplayDialog_Notification;
 
 public class LoginController {
 	private Parent root = null;
@@ -62,39 +63,26 @@ public class LoginController {
 	}
 
 	public void Sign_In(ActionEvent event) throws IOException {
-		try {
+			System.out.println(textField_User_Login.getText());
+			System.out.println(textField_Password_Login.getText());
 			teacher_Current = welcom_Login.signIn(textField_User_Login.getText().trim(),
 					textField_Password_Login.getText().trim());
 
 			if (textField_User_Login.getText() == null || textField_User_Login.getText() == ""
 					|| textField_Password_Login.getText() == null || textField_Password_Login.getText() == "") {
-				Alert alert = new Alert(Alert.AlertType.ERROR);
-				alert.setTitle("\r\n" + "Notice filled in completely");
-				alert.setHeaderText("Please enter complete information");
-				alert.setContentText("You need to enter complete information");
-
-				alert.showAndWait();
+				DisplayDialog_Notification.Dialog_Error("Error", " Please enter complete information", " Error");
 			} else {
 				if (teacher_Current != null) {
 					root = (Parent) FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
 					((Node) event.getSource()).getScene().setRoot(root);
 				} else {
-					Alert alert = new Alert(Alert.AlertType.ERROR);
-					alert.setTitle("Sign In Failed");
-					alert.setHeaderText("Not found user");
-					alert.setContentText("\r\n" + "Username or password is incorrect.");
-					// Hiển thị hộp thoại
-					alert.showAndWait();
+					DisplayDialog_Notification.Dialog_Error(" Error", "Username or password is incorrect", " Error");
 				}
 			}
-		} catch (Exception e) {
-			System.out.println("Error" + e);
-		}
-
 	}
 
 	@FXML
-	void SignUp_Login(ActionEvent event) {
+	void SignUp_Login(ActionEvent event) throws IOException {
 		if (textField_Email_SignUp_Login.getText() != null && textField_Email_SignUp_Login.getText() != ""
 				&& textField_FirstName_SignUp_Login.getText() != null
 				&& textField_FirstName_SignUp_Login.getText() != "" && textField_LastName_SignUp_Login.getText() != null
@@ -102,30 +90,21 @@ public class LoginController {
 				&& textField_Phone_SignUp_Login.getText() != "" && textField_USer_SignUp_Login.getText() != null
 				&& textField_USer_SignUp_Login.getText() != "" && textField_Password_SignUp_Login.getText() != null
 				&& textField_Password_SignUp_Login.getText() != "") {
-			Teacher teacher_SignUp = new Teacher(textField_USer_SignUp_Login.getText(), null,
-					textField_FirstName_SignUp_Login.getText(), textField_LastName_SignUp_Login.getText(),
-					textField_Phone_SignUp_Login.getText(), textField_Email_SignUp_Login.getText());
-			if (welcom_Login.signUp(teacher_SignUp, textField_Password_SignUp_Login.getText())) {
-				Alert alert = new Alert(Alert.AlertType.INFORMATION);
-				alert.setTitle("Sign Up Success");
-				alert.setHeaderText("Congratulations, you have successfully registered");
-				alert.setContentText("Do you want to switch to the login page now?");
-
-				ButtonType confirmButtonType = new ButtonType("OK");
-				ButtonType cancelButtonType = new ButtonType("Cancel");
-				alert.getButtonTypes().addAll(confirmButtonType, cancelButtonType);
-				if (alert.showAndWait().get() == confirmButtonType) {
-					(Anchor_Regester).setVisible(false);
-					(Anchor_SignIn).setVisible(true);
-				}
-			}
+			Teacher teacher_SignUp = new Teacher(
+					textField_USer_SignUp_Login.getText(), 
+					textField_FirstName_SignUp_Login.getText(), 
+					textField_LastName_SignUp_Login.getText(),
+					textField_Phone_SignUp_Login.getText(),
+					textField_Email_SignUp_Login.getText());
+			if (welcom_Login.signUp(teacher_SignUp, textField_Password_SignUp_Login.getText())
+					&& DisplayDialog_Notification
+							.Dialog_Comfrim("Notification", "Congratulations, you have successfully registered",
+									"Do you want to switch to the login page now?")
+							.getResult() == ButtonType.YES) 
+				Sign_In_Tranfer(event);
 		} else {
-			Alert alert = new Alert(Alert.AlertType.ERROR);
-			alert.setTitle("\r\n" + "Notice filled in completely");
-			alert.setHeaderText("Please enter complete information");
-			alert.setContentText("You need to enter complete information");
-
-			alert.showAndWait();
+			DisplayDialog_Notification.Dialog_Error(" Notice filled in completely", "Please enter complete information",
+					"Error");
 		}
 	}
 

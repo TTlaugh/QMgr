@@ -1,4 +1,3 @@
-
 package business.model;
 
 import java.sql.ResultSet;
@@ -46,7 +45,7 @@ public class Exam {
 		this.name = rs.getString("Name");
 		this.description = rs.getString("Description");
 		this.isShuffled = rs.getBoolean("IsShuffled");
-		this.questions =new ArrayList<Question>();
+		this.questions = new ArrayList<Question>();
 	}
 	
 	public Exam(Exam exam) {

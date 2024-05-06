@@ -4,9 +4,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import business.model.Exam;
 import business.model.SelectedQuestion;
+import business.model.Student;
 import business.model.Submission;
 import business.services.SubmissionManager;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -139,14 +144,24 @@ public class SubmissionController implements Initializable {
 		List<Submission> listSubmission = submissionManager.getSubmissions(LoginController.teacher_Current);
 		tableView_Submission.setItems(loadStudent_tableView(listSubmission));
 	}
+	
+	public StringProperty getStudentID(Student student) {
+		StringProperty id = new SimpleStringProperty(student.getStudentID());
+		return id;
+	}
+	
+	public StringProperty getExamID(Exam exam) {
+		StringProperty exam_ID = new SimpleStringProperty(exam.getExamID().toString());
+		return exam_ID;
+	}
 
 	private ObservableList<Submission> loadStudent_tableView(List<Submission> list) {
 		observableList = FXCollections.observableArrayList(list);
 
 		TTaken_Submission.setCellValueFactory(new PropertyValueFactory<Submission, Integer>("timeTaken"));
 		Score_Submission.setCellValueFactory(new PropertyValueFactory<Submission, Double>("score"));
-		ExamID_Submission.setCellValueFactory(cellData -> cellData.getValue().getExamID());
-		StudentID_Submission.setCellValueFactory(cellData -> cellData.getValue().getStudentID());
+		ExamID_Submission.setCellValueFactory(cellData -> getExamID(cellData.getValue().getExam()));
+		StudentID_Submission.setCellValueFactory(cellData -> getStudentID(cellData.getValue().getStudent()));
 
 		return observableList;
 	}

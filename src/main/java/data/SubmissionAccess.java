@@ -94,4 +94,3 @@ public class SubmissionAccess implements DataAccess<Submission> {
 	}
 
 }
-

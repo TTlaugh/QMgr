@@ -129,7 +129,6 @@ public class GroupManager {
 						SQLUtils.printSQLException(e1);
 						stat = false;
 					}
-
 				}
 				else stat = false;
 			}

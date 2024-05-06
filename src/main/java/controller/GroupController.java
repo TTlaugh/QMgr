@@ -7,13 +7,13 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import business.model.Exam;
 import business.model.Group;
 import business.model.Score;
 import business.model.Student;
 import business.model.Teacher;
 import business.services.GroupManager;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -58,13 +58,13 @@ public class GroupController implements Initializable {
 	@FXML
 	private TableView<Student> tableView_Group = new TableView<Student>();
 	@FXML
-	private TableColumn<Student, String> Student_ID_Column;
+	private TableColumn<Student, String> Student_ID_Column=new TableColumn<Student, String>();
 	@FXML
-	private TableColumn<Student, String> Student_FullName_Column;
+	private TableColumn<Student, String> Student_FullName_Column=new TableColumn<Student, String>();
 	@FXML
-	private TableColumn<Student, String> Student_Phone_Column;
+	private TableColumn<Student, String> Student_Phone_Column=new TableColumn<Student, String>();
 	@FXML
-	private TableColumn<Student, String> Student_Email_Column;
+	private TableColumn<Student, String> Student_Email_Column=new TableColumn<Student, String>();
 	@FXML
 	private TableView<Score> tableView_GroupView = new TableView<Score>();
 	@FXML
@@ -131,7 +131,7 @@ public class GroupController implements Initializable {
 
 	private List<Student> studentList;
 
-	private static Group group_Current_Layout;
+	public static Group group_Current_Layout;
 
 	private static GroupManager gr = new GroupManager();
 
@@ -141,6 +141,14 @@ public class GroupController implements Initializable {
 	}
 
 	public void loadData_Group() {
+		setVisibleButton_Add_DelGroup(false);
+		if(group_Current_Layout!=null)
+		{
+			btnAddStudent_Group.setVisible(true);
+			ComboBoxGroup.setValue(group_Current_Layout);
+			studentList =group_Current_Layout.getStudents();
+			tableView_Group.setItems(loadStudent_tableView(studentList));			
+		}
 		List<Group> groups = gr.getGroups(LoginController.teacher_Current);
 
 		for (Group group : groups) {
@@ -158,7 +166,6 @@ public class GroupController implements Initializable {
 				return null;
 			}
 		});
-		setVisibleButton_Add_DelGroup(false);
 
 		ComboBoxGroup.setOnAction(envent -> {
 			btnViewStudent_Group.setVisible(false);
@@ -203,12 +210,15 @@ public class GroupController implements Initializable {
 
 		return observableList_Score;
 	}
-
+	public StringProperty getFullName(Student stu) {
+		StringProperty fullName = new SimpleStringProperty(stu.getFirstName() + " " + stu.getLastName());
+		return fullName;
+	}
 	private ObservableList<Student> loadStudent_tableView(List<Student> list) {
 		observableList = FXCollections.observableArrayList(list);
-
+		
 		Student_ID_Column.setCellValueFactory(new PropertyValueFactory<Student, String>("studentID"));
-		Student_FullName_Column.setCellValueFactory(cellData -> cellData.getValue().getFullName());
+		Student_FullName_Column.setCellValueFactory(cellData -> getFullName(cellData.getValue()));
 		Student_Phone_Column.setCellValueFactory(new PropertyValueFactory<Student, String>("phone"));
 		Student_Email_Column.setCellValueFactory(new PropertyValueFactory<Student, String>("email"));
 
@@ -308,8 +318,6 @@ public class GroupController implements Initializable {
 		textField_FirstName_GroupView.setText(student_Current.getFirstName());
 		textField_LastName_GroupView.setText(student_Current.getLastName());
 		textField_Phone_GroupView.setText(student_Current.getPhone());
-		
-		System.out.println(student_Current.getScores());
 
 		tableView_GroupView.setItems(load_tableViewGroupView(student_Current.getScores()));
 
@@ -329,10 +337,12 @@ public class GroupController implements Initializable {
 	@FXML
 	void buttonSave_Data_ChangeStudent_GroupView(ActionEvent event) {
 		try {
-			if (gr.editStudent(new Student(student_Current.getStudentID(), student_Current.getPersonID(),
+			Student student_Change = new Student(student_Current.getStudentID(), 
 					textField_FirstName_GroupView.getText(), textField_LastName_GroupView.getText(),
 					textField_Phone_GroupView.getText(), textField_Email_GroupView.getText(),
-					student_Current.getScores()))) {
+					student_Current.getScores());
+			if (gr.editStudent(student_Change) ){
+				group_Current_Layout.getStudents().set(group_Current_Layout.getStudents().indexOf(student_Current), student_Change);
 				DisplayDialog_Notification.Dialog_Infomation("Successful notification!", "The student was changed!",
 						"Successful!");
 			}
@@ -345,13 +355,14 @@ public class GroupController implements Initializable {
 	@FXML
 	void buttonDelete_Student_Group(ActionEvent event) {
 		if (!gr.removeStudentFromGroup(group_Current_Layout, student_Current)) {
+			DisplayDialog_Notification.Dialog_Error("Unsuccessful notification!", "The student wasn't delete!",
+					"Unsuccessful!");			
+		} else {
 			DisplayDialog_Notification.Dialog_Infomation("Successful notification!", "The student was deleted!",
 					"Successful!");
 			Student student_Delete = tableView_Group.getSelectionModel().getSelectedItem();
 			tableView_Group.getItems().remove(student_Delete);
-		} else {
-			DisplayDialog_Notification.Dialog_Error("Unsuccessful notification!", "The student wasn't delete!",
-					"Unsuccessful!");
+			group_Current_Layout.getStudents().remove(student_Delete);
 		}
 	}
 
