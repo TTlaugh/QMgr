@@ -18,7 +18,7 @@ import utils.DisplayDialog_Notification;
 
 public class MainController {
 	
-	private Parent root = null;
+	private static Parent root = null;
 	
 	@FXML
 	private AnchorPane AnchorPaneLayout;

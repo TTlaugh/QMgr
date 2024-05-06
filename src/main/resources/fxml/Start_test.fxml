@@ -23,12 +23,12 @@
          </font>
       </Label>
       <Separator layoutY="72.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
-      <Label layoutX="1117.0" layoutY="20.0" prefHeight="30.0" prefWidth="81.0" text="Exam ID:" AnchorPane.rightAnchor="102.0">
+      <Label layoutX="1038.0" layoutY="21.0" prefHeight="30.0" prefWidth="81.0" text="Exam ID:" AnchorPane.rightAnchor="181.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="438.0" layoutY="94.0" prefHeight="73.0" prefWidth="425.0" styleClass="round-layout" text="My ip: 192.168.1.1" AnchorPane.leftAnchor="438.0" AnchorPane.rightAnchor="437.0">
+      <Label fx:id="ip_Address_StartTest" alignment="CENTER" layoutX="438.0" layoutY="94.0" prefHeight="73.0" prefWidth="425.0" styleClass="round-layout" text="My ip: 192.168.1.1" AnchorPane.leftAnchor="438.0" AnchorPane.rightAnchor="437.0">
          <font>
             <Font name="System Italic" size="38.0" />
          </font>
@@ -41,7 +41,7 @@
             <Image url="@../imgs/tulip.png" />
          </image>
       </ImageView>
-      <TextField layoutX="489.0" layoutY="188.0" prefHeight="42.0" prefWidth="171.0" promptText="Port:" AnchorPane.leftAnchor="489.0" AnchorPane.rightAnchor="640.0">
+      <TextField fx:id="port_StartTest" layoutX="489.0" layoutY="188.0" prefHeight="42.0" prefWidth="171.0" promptText="Port: " text="2000" AnchorPane.leftAnchor="489.0" AnchorPane.rightAnchor="640.0">
          <styleClass>
             <String fx:value="round-layout" />
             <String fx:value="transparent" />
@@ -228,7 +228,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Label layoutX="1210.0" layoutY="22.0" text="Label" AnchorPane.rightAnchor="48.0" AnchorPane.topAnchor="22.0">
+      <Label fx:id="exam_ID_StartTest" layoutX="1119.0" layoutY="23.0" textAlignment="RIGHT" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="23.0">
          <font>
             <Font size="18.0" />
          </font>
