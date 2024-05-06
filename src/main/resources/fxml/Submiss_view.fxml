@@ -12,9 +12,9 @@
 
 <AnchorPane prefHeight="900.0" prefWidth="1050.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SubmissionController">
    <children>
-      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" hmax="0.0" layoutX="240.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="570.0" styleClass="transparent" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="30.0">
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" hmax="0.0" layoutX="240.0" layoutY="30.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="570.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="30.0">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1300.0" prefWidth="550.0">
+            <AnchorPane minHeight="840.0" minWidth="0.0" prefWidth="550.0">
                <styleClass>
                   <String fx:value="white-background" />
                   <String fx:value="round-layout" />
@@ -50,7 +50,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <VBox fx:id="vBox_Submissview" layoutX="28.0" layoutY="112.0" prefWidth="513.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+                  <VBox fx:id="vBox_Submissview" layoutX="28.0" layoutY="112.0" prefWidth="513.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="112.0" />
                   <Button contentDisplay="RIGHT" layoutX="449.0" layoutY="14.0" mnemonicParsing="false" onAction="#back_Submission" styleClass="button-back" text="Back" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="14.0">
                      <font>
                         <Font name="System Bold" size="18.0" />
