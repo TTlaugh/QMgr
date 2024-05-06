@@ -3,6 +3,8 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import business.model.Exam;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,8 +14,10 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import utils.DisplayDialog_Notification;
 
-public class MainController implements Initializable{
+public class MainController {
+	
 	private Parent root = null;
 	
 	@FXML
@@ -23,7 +27,9 @@ public class MainController implements Initializable{
 	private Label nameAccount;
 	
     @FXML
-    public static Button start_Test_Main=new Button();
+    private Button start_Test_Main =new Button();
+    
+    public static Exam exam_StartTest;
 
 	public void LogOut_Quizz(ActionEvent event) throws IOException {
 		root = (Parent) FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
@@ -31,15 +37,21 @@ public class MainController implements Initializable{
 	}
 
 	public void Start_Test(ActionEvent event) throws IOException {
-		root = (Parent) FXMLLoader.load(getClass().getResource("/fxml/Start_test.fxml"));
-		((Node) event.getSource()).getScene().setRoot(root);
+		   if(exam_StartTest!= null) {
+			   root = (Parent) FXMLLoader.load(getClass().getResource("/fxml/Start_test.fxml"));
+			   ((Node) event.getSource()).getScene().setRoot(root);						   
+		   }
+		   else {
+			   DisplayDialog_Notification.Dialog_Infomation("Notification", "ban chua chon exam ", "exam ");
+			   Back_Exam(event);
+		   }
 	}
 
 	public void Back_Exam(ActionEvent event) throws IOException {
 		AnchorPane insidePane = new FXMLLoader(getClass().getResource("/fxml/Exam.fxml")).load();
 		setAnchor(insidePane);
 		AnchorPaneLayout.getChildren().clear();
-		AnchorPaneLayout.getChildren().add(insidePane);
+		AnchorPaneLayout.getChildren().add(insidePane);		
 	}
 
 	public void Back_Submission(ActionEvent event) throws IOException {
@@ -68,10 +80,11 @@ public class MainController implements Initializable{
 		AnchorPane.setRightAnchor(insidePane, 0.0);
 		AnchorPane.setLeftAnchor(insidePane, 0.0);
 	}
-
-	@Override
-	public  void initialize(URL location, ResourceBundle resources) {
-		System.out.println(new ExamController().exam_Current);
-		start_Test_Main.setDisable(false);
+	
+	
+	public void receiveExam(Exam exam)
+	{	
+		exam_StartTest=exam;
 	}
+
 }

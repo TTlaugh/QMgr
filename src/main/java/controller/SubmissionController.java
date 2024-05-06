@@ -121,10 +121,9 @@ public class SubmissionController implements Initializable {
 				else if(i==3) correct+="D ";
 			}
 			labelCorrect.setText("Corect : "+correct);
-			labelQues.setStyle("-fx-font-size: 40px");
-			labelChosen.setStyle("-fx-font-size: 30px");
-			labelCorrect.setStyle("-fx-font-size: 30px");
-			labelQues.setStyle(chosen.equalsIgnoreCase(correct) ?"-fx-background-color: green":"-fx-background-color: red");
+			labelChosen.setStyle("-fx-font-size: 18px");
+			labelCorrect.setStyle("-fx-font-size: 18px");
+			labelQues.setStyle(chosen.equalsIgnoreCase(correct) ?"-fx-text-fill:green;-fx-font-size: 30px":"-fx-text-fill:red;-fx-font-size: 30px");
 			
 		vBox_Submissview.getChildren().addAll(separator,labelQues,labelChosen,labelCorrect);
 		}
