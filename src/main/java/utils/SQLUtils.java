@@ -10,6 +10,7 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 
 import business.model.Exam;
 import business.model.Question;
+import business.model.Score;
 import business.model.Student;
 import business.model.Subject;
 import business.services.WelcomeFunction;
@@ -69,20 +70,12 @@ public class SQLUtils {
 		testDataSource();
 	}
 	private static void testDataSource() {
-		Exam exam = new Exam(
-				new DateTime("2024-01-01 18:00:00"),
-				null,
-				null,
-				0,
-				0,
-				null,
-				null,
-				false,
-				null
-				);
 		try {
-			new ExamAccess().getQuestions(exam);
+			Student student = new StudentAccess().get("S001");
+			for (Score score : student.getScores()) {
+				System.out.println(score.getExamID());
+				System.out.println(score.getScore());
+			}
 		} catch (SQLException e) { }
-		System.out.println(exam);
 	}
 }

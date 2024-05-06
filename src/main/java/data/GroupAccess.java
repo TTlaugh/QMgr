@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import business.model.Group;
+import business.model.Score;
 import business.model.Student;
 import utils.SQLUtils;
 
@@ -75,6 +76,11 @@ public class GroupAccess implements DataAccess<Group> {
 				+ " INNER JOIN Students ON SGroupStudents.StudentID = Students.StudentID"
 				+ " INNER JOIN Person ON Students.PersonID = Person.PersonID",
 				"SGroups.SGroupID", group.getGroupID()));
+		for (Student student : group.getStudents()) {
+			student.setScores(getList(Score.class,
+				"SELECT ExamID, Score FROM Submissions",
+				"StudentID", student.getStudentID()));
+		}
 	}
 
 }
