@@ -59,7 +59,7 @@
          <content>
             <AnchorPane minHeight="600.0" minWidth="0.0" prefWidth="550.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="RIGHT" layoutX="157.0" prefHeight="69.0" prefWidth="187.0" text="Students are joining..." wrapText="true" AnchorPane.leftAnchor="156.0" AnchorPane.rightAnchor="155.0">
+                  <Label alignment="CENTER" contentDisplay="RIGHT" layoutX="125.0" prefHeight="69.0" prefWidth="250.0" text="Students are joining..." wrapText="true" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="125.0">
                      <font>
                         <Font name="System Italic" size="20.0" />
                      </font>
