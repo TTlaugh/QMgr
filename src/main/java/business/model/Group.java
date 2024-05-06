@@ -29,12 +29,11 @@ public class Group {
 	public Group(ResultSet rs) throws SQLException {
 		this.groupID = rs.getString("SGroupID");
 		this.teacher = new Teacher(
-				rs.getString("PersonID"),
+				rs.getString("TeacherID"),
 				rs.getString("FirstName"),
 				rs.getString("LastName"),
-				rs.getString("Email"),
 				rs.getString("Phone"),
-				rs.getString("TeacherID")
+				rs.getString("Email")
 				);
 		this.groupName = rs.getString("SGroupName");
 		this.students = null;
