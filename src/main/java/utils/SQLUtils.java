@@ -9,11 +9,13 @@ import javax.sql.DataSource;
 import com.mysql.cj.jdbc.MysqlDataSource;
 
 import business.model.Exam;
+import business.model.Group;
 import business.model.Question;
 import business.model.Score;
 import business.model.Student;
 import business.model.Subject;
 import business.model.Teacher;
+import business.services.GroupManager;
 import business.services.WelcomeFunction;
 import data.ExamAccess;
 import data.StudentAccess;
@@ -67,17 +69,14 @@ public class SQLUtils {
 		}
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		testDataSource();
 	}
-	private static void testDataSource() {
-//		new WelcomeFunction().signUp(
-//				new Teacher("Trien",
-//						"Nguyen Le Tien",
-//						"Trien",
-//						"0987654321",
-//						"trien@mail.com"),
-//				"1234");
-		System.out.println(new WelcomeFunction().signIn("Trien", "1234"));
+	private static void testDataSource() throws SQLException {
+		new GroupManager().removeStudentFromGroup(
+				new Group("T01010", null, null), 
+				new Student("S001", null, null, null, null)
+				);
+		System.out.println(new StudentAccess().get("S001"));
 	}
 }
