@@ -72,6 +72,15 @@ public class QuestionManager {
 		return null;
 	}
 	
+	public List<Question> searchQuestionInSubject(Subject subject, String content, String chapter, String difficulty) {
+		try {
+			return new QuestionAccess().searchQuestionsFromSubject(subject, content, chapter, difficulty);
+		} catch (SQLException e) {
+			SQLUtils.printSQLException(e);
+		}
+		return null;
+	}
+	
 	public boolean addQuestion(Question newQuestion) throws SQLException {
 		try {
 			return new QuestionAccess().insert(newQuestion);

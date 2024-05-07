@@ -58,5 +58,14 @@ public class ExamManager {
 		}
 		return false;
 	}
+	
+	public List<Exam> searchExams(String examID, String subjectID, String startDateTime, String timeLimit) {
+		try {
+			return new ExamAccess().searchExams(examID, subjectID, startDateTime, timeLimit);
+		} catch (SQLException e) {
+			SQLUtils.printSQLException(e);
+		}
+		return null;
+	}
 
 }
