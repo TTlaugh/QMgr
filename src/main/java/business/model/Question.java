@@ -104,5 +104,12 @@ public class Question implements Serializable {
 	public void setCorrectAnswers(List<Integer> correctAnswers) {
 		this.correctAnswers = correctAnswers;
 	}
+
+	@Override
+	public String toString() {
+		return "Question [questionID=" + questionID + ", subject=" + subject + ", chapter=" + chapter + ", difficulty="
+				+ difficulty + ", content=" + content + ", answers=" + answers + ", correctAnswers=" + correctAnswers
+				+ "]";
+	}
 	
 }

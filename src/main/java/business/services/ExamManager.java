@@ -53,6 +53,7 @@ public class ExamManager {
 	public boolean getQuestions(Exam exam) {
 		try {
 			new ExamAccess().getQuestions(exam);
+			return true;
 		} catch (SQLException e) {
 			SQLUtils.printSQLException(e);
 		}
