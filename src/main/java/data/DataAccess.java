@@ -26,7 +26,7 @@ public interface DataAccess<T> {
 			if (conditions[i]!=null&&!conditions[i].isBlank()) {
 				if (i!=0) where+=" " + logicOperator + " ";
 				where += " ("
-						+ conditions[i] + " LIKE '%"
+						+ conditions[i] + " LIKE BINARY '%"
 						+ conditions[i+1] + "%') ";
 			}
 		}

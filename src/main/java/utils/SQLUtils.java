@@ -73,10 +73,6 @@ public class SQLUtils {
 		testDataSource();
 	}
 	private static void testDataSource() throws SQLException {
-		new GroupManager().removeStudentFromGroup(
-				new Group("T01010", null, null), 
-				new Student("S001", null, null, null, null)
-				);
-		System.out.println(new StudentAccess().get("S001"));
+		System.out.println(new WelcomeFunction().signIn("T001", "tttt"));
 	}
 }
