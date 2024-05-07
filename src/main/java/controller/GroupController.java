@@ -142,6 +142,7 @@ public class GroupController implements Initializable {
 
 	public void loadData_Group() {
 		setVisibleButton_Add_DelGroup(false);
+		
 		if(group_Current_Layout!=null)
 		{
 			btnAddStudent_Group.setVisible(true);
@@ -440,18 +441,22 @@ public class GroupController implements Initializable {
 
 	@FXML
 	private void Export_Group(ActionEvent event) {
-		file_Current = OpenFileExplorer.Save(event);
-
-		String fileNameExel = file_Current.getPath();
-
-		if (!gr.exportStudent(group_Current_Layout, fileNameExel)) {
-			DisplayDialog_Notification.Dialog_Infomation("Unsuccessful notification", "Creat file exel failed",
-					"Error");
-		} else {
-			if (DisplayDialog_Notification.Dialog_Comfrim("Successful notification",
-					"Creat file exel successfully and open file?", "Successful").getResult() == ButtonType.YES) {
-				OpenFileExeml_Export(new File(fileNameExel));
-			}
+		try {
+			file_Current = OpenFileExplorer.Save(event);
+			
+			String fileNameExel = file_Current.getAbsolutePath();
+			
+			if (!gr.exportStudent(group_Current_Layout, fileNameExel) ) {
+				DisplayDialog_Notification.Dialog_Infomation("Unsuccessful notification", "Creat file exel failed",
+						"Error");
+			} else {
+				if (DisplayDialog_Notification.Dialog_Comfrim("Successful notification",
+						"Creat file exel successfully and open file?", "Successful").getResult() == ButtonType.YES) {
+					OpenFileExeml_Export(new File(fileNameExel));
+				}
+			}			
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 

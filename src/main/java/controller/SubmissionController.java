@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import business.model.Exam;
 import business.model.SelectedQuestion;
 import business.model.Student;
+import business.model.Subject;
 import business.model.Submission;
 import business.services.SubmissionManager;
 import javafx.beans.property.SimpleStringProperty;
@@ -53,9 +53,12 @@ public class SubmissionController implements Initializable {
 	@FXML
 	private TableColumn<Submission, Integer> TTaken_Submission = new TableColumn<Submission, Integer>();
 
+    @FXML
+    private TableColumn<Submission, String> Subjects_Submission=new TableColumn<Submission,String>();
+
 	@FXML
 	private Button view_Submission = new Button();
-
+	
 	@FXML
 	private Button delete_Submission = new Button();
 
@@ -99,7 +102,6 @@ public class SubmissionController implements Initializable {
 		studentID_SubmissView.setText(submission_Current.getStudent().getStudentID());
 		ExamID_SubmissView.setText(submission_Current.getExam().getExamID().toString());
 		score_SubmissView.setText(String.valueOf(submission_Current.getScore()));
-
 		for (SelectedQuestion submissSelect : submissionManager.getSelectedQuestions(submission_Current)) {
 			Separator separator = new Separator();
 			Label labelQues = new Label(submissSelect.getContent());
@@ -154,6 +156,10 @@ public class SubmissionController implements Initializable {
 		StringProperty exam_ID = new SimpleStringProperty(exam.getExamID().toString());
 		return exam_ID;
 	}
+	public StringProperty getSubjectName(Subject subject) {
+		StringProperty subject_Name = new SimpleStringProperty(subject.getSubjectName());
+		return subject_Name;
+	}
 
 	private ObservableList<Submission> loadStudent_tableView(List<Submission> list) {
 		observableList = FXCollections.observableArrayList(list);
@@ -162,14 +168,15 @@ public class SubmissionController implements Initializable {
 		Score_Submission.setCellValueFactory(new PropertyValueFactory<Submission, Double>("score"));
 		ExamID_Submission.setCellValueFactory(cellData -> getExamID(cellData.getValue().getExam()));
 		StudentID_Submission.setCellValueFactory(cellData -> getStudentID(cellData.getValue().getStudent()));
-
+		Subjects_Submission.setCellValueFactory(cellData -> getSubjectName(cellData.getValue().getExam().getSubject()));
+		
 		return observableList;
 	}
 
 	@FXML
 	void button_Delete_Submission(ActionEvent event) {
 		Submission sub_Delete = tableView_Submission.getSelectionModel().getSelectedItem();
-		if (!submissionManager.deleteSubmission(sub_Delete.getExam().getExamID().toString())) {
+		if (!submissionManager.deleteSubmission(sub_Delete)) {
 			DisplayDialog_Notification.Dialog_Error("Unsuccessful notification!", "Submission wasn't delete!",
 					"Unsuccessful!");
 		} else {

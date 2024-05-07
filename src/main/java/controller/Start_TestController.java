@@ -67,6 +67,7 @@ public class Start_TestController implements Initializable {
 			int port = Integer.parseInt(port_StartTest.getText());
 			try {
 				startServer = new StartServer(exam_StartTest, port);
+				DisplayDialog_Notification.Dialog_Infomation("Conection Successful", "ket noi duoc r kia", null);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				DisplayDialog_Notification.Dialog_Error("Error", e.getMessage(), "Error");
@@ -95,7 +96,9 @@ public class Start_TestController implements Initializable {
 	@FXML
 	void shutdownServer(ActionEvent event) {
 		try {
+			System.out.println("shutdownServer");
 			startServer.shutdownServer();
+			DisplayDialog_Notification.Dialog_Infomation("Connection ", "shutdown server",  null);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			DisplayDialog_Notification.Dialog_Error("Error", e.getMessage(), "Error");

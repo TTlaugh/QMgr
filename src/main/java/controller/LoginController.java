@@ -62,21 +62,24 @@ public class LoginController {
 		(Anchor_SignIn).setVisible(true);
 	}
 
-	public void Sign_In(ActionEvent event) throws IOException {
-			System.out.println(textField_User_Login.getText());
-			System.out.println(textField_Password_Login.getText());
-			teacher_Current = welcom_Login.signIn(textField_User_Login.getText().trim(),
-					textField_Password_Login.getText().trim());
-
+	public void Sign_In(ActionEvent event) throws IOException {	
 			if (textField_User_Login.getText() == null || textField_User_Login.getText() == ""
 					|| textField_Password_Login.getText() == null || textField_Password_Login.getText() == "") {
 				DisplayDialog_Notification.Dialog_Error("Error", " Please enter complete information", " Error");
 			} else {
-				if (teacher_Current != null) {
-					root = (Parent) FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
-					((Node) event.getSource()).getScene().setRoot(root);
-				} else {
-					DisplayDialog_Notification.Dialog_Error(" Error", "Username or password is incorrect", " Error");
+				try {
+					teacher_Current = welcom_Login.signIn(textField_User_Login.getText(),
+							textField_Password_Login.getText());
+					
+					if (teacher_Current != null  ) {
+						root = (Parent) FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
+						((Node) event.getSource()).getScene().setRoot(root);
+					} else {
+						DisplayDialog_Notification.Dialog_Error(" Error", "Username or password is incorrect", " Error");
+					}
+					
+				}catch(Exception e) {
+					DisplayDialog_Notification.Dialog_Error("Error", "Tai khoan khong co trong du lieu", null);
 				}
 			}
 	}

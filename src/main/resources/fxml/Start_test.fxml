@@ -8,7 +8,6 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -67,126 +66,6 @@
                   <VBox alignment="CENTER" layoutX="27.0" layoutY="67.0" prefWidth="516.0" styleClass="transparent" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="67.0">
                      <children>
                         <Separator prefHeight="10.0" prefWidth="510.0" />
-                        <Label prefHeight="69.0" text="Nguyen Phuong Tram - STS0123456789" wrapText="true">
-                           <font>
-                              <Font name="System Italic" size="18.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../imgs/person.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Label>
-                        <Label prefHeight="69.0" text="Nguyen Phuong Tram - STS0123456789" wrapText="true">
-                           <font>
-                              <Font name="System Italic" size="18.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../imgs/person.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Label>
-                        <Label prefHeight="69.0" text="Nguyen Phuong Tram - STS0123456789" wrapText="true">
-                           <font>
-                              <Font name="System Italic" size="18.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../imgs/person.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Label>
-                        <Label prefHeight="69.0" text="Nguyen Phuong Tram - STS0123456789" wrapText="true">
-                           <font>
-                              <Font name="System Italic" size="18.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../imgs/person.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Label>
-                        <Label prefHeight="69.0" text="Nguyen Phuong Tram - STS0123456789" wrapText="true">
-                           <font>
-                              <Font name="System Italic" size="18.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../imgs/person.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Label>
-                        <Label prefHeight="69.0" text="Nguyen Phuong Tram - STS0123456789" wrapText="true">
-                           <font>
-                              <Font name="System Italic" size="18.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../imgs/person.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Label>
-                        <Label prefHeight="69.0" text="Nguyen Phuong Tram - STS0123456789" wrapText="true">
-                           <font>
-                              <Font name="System Italic" size="18.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../imgs/person.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Label>
-                        <Label prefHeight="69.0" text="Nguyen Phuong Tram - STS0123456789" wrapText="true">
-                           <font>
-                              <Font name="System Italic" size="18.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../imgs/person.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Label>
-                        <Label prefHeight="69.0" text="Nguyen Phuong Tram - STS0123456789" wrapText="true">
-                           <font>
-                              <Font name="System Italic" size="18.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../imgs/person.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Label>
-                        <Label prefHeight="69.0" text="Nguyen Phuong Tram - STS0123456789" wrapText="true">
-                           <font>
-                              <Font name="System Italic" size="18.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../imgs/person.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Label>
                      </children>
                   </VBox>
                   <Button layoutX="438.0" layoutY="14.0" mnemonicParsing="false" onAction="#reloadServer" styleClass="button-in-login" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
@@ -227,19 +106,6 @@
          </font>
       </Label>
       <Button layoutX="1142.0" layoutY="767.0" mnemonicParsing="false" prefHeight="112.0" prefWidth="144.0" styleClass="button-in-login" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="14.0">
-         <graphic>
-            <ImageView fitHeight="115.0" fitWidth="128.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../imgs/start.png" />
-               </image>
-               <effect>
-                  <ColorAdjust contrast="0.43" hue="-0.87" />
-               </effect>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-         </graphic>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

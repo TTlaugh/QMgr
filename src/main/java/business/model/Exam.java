@@ -48,17 +48,7 @@ public class Exam {
 		this.questions = new ArrayList<Question>();
 	}
 	
-	public Exam(Exam exam) {
-		this.examID = exam.getExamID();
-		this.subject = exam.getSubject();
-		this.startDateTime = exam.getStartDateTime();
-		this.timeLimit = exam.getTimeLimit();
-		this.maxScore = exam.getMaxScore();
-		this.name = exam.getName();
-		this.description = exam.getDescription();
-		this.isShuffled = exam.isShuffled();
-		this.questions = exam.getQuestions();
-	}
+	public Exam() { }
 
 	public DateTime getExamID() {
 		return examID;

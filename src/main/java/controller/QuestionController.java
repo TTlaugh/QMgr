@@ -11,6 +11,8 @@ import java.util.ResourceBundle;
 import business.model.Question;
 import business.model.Subject;
 import business.services.QuestionManager;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -92,16 +94,16 @@ public class QuestionController implements Initializable {
 	private TableView<Question> tableView_Question = new TableView<Question>();
 
 	@FXML
-	private TableColumn<Question, Integer> Question_Chapter_Column;
+	private TableColumn<Question, Integer> Question_Chapter_Column=new TableColumn<Question, Integer>();
 
 	@FXML
-	private TableColumn<Question, Integer> Question_Difficulty_Column;
+	private TableColumn<Question, Integer> Question_Difficulty_Column=new TableColumn<Question, Integer>();
 
 	@FXML
-	private TableColumn<Question, String> Question_Content_Column;
+	private TableColumn<Question, String> Question_Content_Column=new TableColumn<Question, String>();
 
 	@FXML
-	private TableColumn<Question, String> Question_ID_Column;
+	private TableColumn<Question, String> Question_ID_Column=new TableColumn<Question, String>();
 	@FXML
 	private Button button_Add_Question = new Button();
 
@@ -202,6 +204,33 @@ public class QuestionController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		buttonRadioGroup_Add();
+		button_Add_Question.setVisible(false);
+		if(subject_Current!=null)
+		{	
+			button_Add_Question.setVisible(true);
+			choose_Subject_Question.setValue(subject_Current);
+			question_ListOfSubject = quesManager.getQuestionsForSubject(subject_Current);
+			tableView_Question.setItems(loadQuestion_tableView(question_ListOfSubject));
+		}
+		
+		chapter_QuestionAdd.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+		        String newValue) {
+		        if (!newValue.matches("\\d*")) {
+		        	chapter_QuestionAdd.setText(newValue.replaceAll("[^\\d]", ""));
+		        }
+		    }
+		});
+		chapter_QuestionView.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+		        String newValue) {
+		        if (!newValue.matches("\\d*")) {
+		        	chapter_QuestionView.setText(newValue.replaceAll("[^\\d]", ""));
+		        }
+		    }
+		});
 
 		List<Subject> subjects = quesManager.getSubjects(LoginController.teacher_Current);
 
@@ -221,7 +250,7 @@ public class QuestionController implements Initializable {
 			}
 		});
 
-		button_Add_Question.setVisible(false);
+		
 		setVisibleButton_View_Del_Question(false);
 
 		choose_Subject_Question.setOnAction(envent -> {
@@ -372,8 +401,7 @@ public class QuestionController implements Initializable {
 			DisplayDialog_Notification.Dialog_Error("Notification failed", "\r\n" + "Questions cannot be deleted",
 					"Unsuccessfully");
 		} else {
-			DisplayDialog_Notification.Dialog_Error("Notification successfully", "\r\n" + "Question has been deleted",
-					"Successfully");
+			DisplayDialog_Notification.Dialog_Infomation("Successful notification",  "Questions deleted",  null);
 			tableView_Question.getItems().remove(Question_Current);
 		}
 	}
@@ -404,22 +432,25 @@ public class QuestionController implements Initializable {
 
 	@FXML
 	private void buttonSave_DataChange_QuestionView(ActionEvent event) {
-		try {
-			if (!quesManager.editQuestion(new Question(questionID_QuestionView.getText(), subject_Current,
-					Integer.parseInt(chapter_QuestionView.getText()), radioSelect_Question(listRadioButton),
-					content_QuestionView.getText(), listAnswer_Question(listTextArea),
-					listCorrectAnswer_Question(listCheckBox)))) {
-				DisplayDialog_Notification.Dialog_Error("Unsuccessful notification!", "Question editing failed",
-						"Unsuccessful");
-			} else {
-				DisplayDialog_Notification.Dialog_Infomation("Successful notification!",
-						"Question editing successfully", "Successful");
-			}
-		} catch (NumberFormatException e) {
-			DisplayDialog_Notification.Dialog_Error("Error Notification", "\r\n" + "Chapter can only enter numbers",
-					"Error");
-		} catch (Exception e) {
-			DisplayDialog_Notification.Dialog_Error("Error Notification", "\r\n" + "Unsucessful", "Error");
+		if(checkSelectCheckBox(listCheckBox) && checkTextArea(listTextArea) )
+		{
+			try {
+				if (!quesManager.editQuestion(new Question(questionID_QuestionView.getText(), subject_Current,
+						Integer.parseInt(chapter_QuestionView.getText()), radioSelect_Question(listRadioButton),
+						content_QuestionView.getText(), listAnswer_Question(listTextArea),
+						listCorrectAnswer_Question(listCheckBox)))) {
+					DisplayDialog_Notification.Dialog_Error("Unsuccessful notification!", "Question editing failed",
+							"Unsuccessful");
+				} else {
+					DisplayDialog_Notification.Dialog_Infomation("Successful notification!",
+							"Question editing successfully", "Successful");
+				}
+			} catch (Exception e) {
+				DisplayDialog_Notification.Dialog_Error("Error Notification", "\r\n" + "Unsucessful", "Error");
+			}			
+		}
+		else {
+			DisplayDialog_Notification.Dialog_Error("Error", "Dien day du thong tin", null);
 		}
 	}
 
@@ -449,6 +480,25 @@ public class QuestionController implements Initializable {
 		}
 		return listCorrectAnswer;
 	}
+	private boolean checkSelectCheckBox(List<CheckBox> listCheckBox)
+	{
+		boolean check_BoxSelectedAll=false;
+		for(CheckBox b :  listCheckBox) {
+			if(b.isSelected())
+				check_BoxSelectedAll = true ;
+		}
+		return check_BoxSelectedAll;
+	}
+	private boolean checkTextArea(List<TextArea> listTextArea)
+	{
+		boolean check_AreaAll=true;
+		for(TextArea a: listTextArea)
+		{	
+			if(a.getText()==null || a.getText()=="") 
+				check_AreaAll=false; 
+		}	
+		return check_AreaAll;
+	}
 
 	@FXML
 	void save_DataAdd_QuestionAdd(ActionEvent event) {
@@ -468,46 +518,52 @@ public class QuestionController implements Initializable {
 		listCheckBox.add(checkBoxB_QuestionAdd);
 		listCheckBox.add(checkBoxC_QuestionAdd);
 		listCheckBox.add(checkBoxD_QuestionAdd);
-
-		try {
-			if (!quesManager
-					.addQuestion(new Question(null, subject_Current, Integer.parseInt(chapter_QuestionAdd.getText()),
-							radioSelect_Question(listRadioButton), content_QuestionAdd.getText(),
-							listAnswer_Question(listTextArea), listCorrectAnswer_Question(listCheckBox)))) {
-				DisplayDialog_Notification.Dialog_Error("Unsuccessful notification!", "Question add failed",
-						"Unsuccessful");
-			} else {
-				DisplayDialog_Notification.Dialog_Infomation("Successful notification!",
-						"Question editing successfully", "Successful");
-			}
-		} catch (NumberFormatException e) {
-			DisplayDialog_Notification.Dialog_Error("Error Notification", "\r\n" + "Chapter can only enter numbers",
-					"Error");
-		} catch (Exception e) {
-			DisplayDialog_Notification.Dialog_Error("Error Notification", "\r\n" + "Unsucessful", "Error");
+		
+		String content =content_QuestionAdd.getText();
+		if(checkSelectCheckBox(listCheckBox) && checkTextArea(listTextArea) && content!=null && content!="")
+		{
+			try {
+				if (!quesManager
+						.addQuestion(new Question(null, subject_Current, Integer.parseInt(chapter_QuestionAdd.getText()),
+								radioSelect_Question(listRadioButton), content_QuestionAdd.getText(),
+								listAnswer_Question(listTextArea), listCorrectAnswer_Question(listCheckBox)))) {
+					DisplayDialog_Notification.Dialog_Error("Unsuccessful notification!", "Question add failed",
+							"Unsuccessful");
+				} else {
+					DisplayDialog_Notification.Dialog_Infomation("Successful notification!",
+							"Question editing successfully", "Successful");
+				}
+			}catch (Exception e) {
+				DisplayDialog_Notification.Dialog_Error("Error Notification", "\r\n" + "Unsucessful", "Error");
+			}			
 		}
+		else 
+			DisplayDialog_Notification.Dialog_Error("Error", "Nhaap day du thong tin", null);
 	}
 
 	@FXML
 	void button_Create_Subject_Question(ActionEvent event) {
-
-		try {
-			if (!quesManager.addSubject(new Subject(subject_ID_Question.getText(), LoginController.teacher_Current,
-					subject_Name_Question.getText()))) {
-				DisplayDialog_Notification.Dialog_Error("Unsuccessful notification!", "The subject added failed!",
-						"Unsuccessful");
-			} else {
-				DisplayDialog_Notification.Dialog_Infomation("Successful notification!",
-						"The subject added successfully!", "Successful");
-				choose_Subject_Question.getItems().add(new Subject(subject_ID_Question.getText(),
-						LoginController.teacher_Current, subject_Name_Question.getText()));
-			}
-		} catch (SQLException e) {
-			DisplayDialog_Notification.Dialog_Error("Unsuccessful notification!",
-					"The subject added failed because it already exists!", "Unsuccessful");
-
+		if(subject_ID_Question.getText()==null || subject_ID_Question.getText()!="" &&
+				subject_Name_Question.getText()==null || subject_Name_Question.getText()=="") {
+			DisplayDialog_Notification.Dialog_Infomation("Notification", "SubjectID null or Name is null", null);			
 		}
-
+		else {
+			try {
+				if (!quesManager.addSubject(new Subject(subject_ID_Question.getText(), LoginController.teacher_Current,
+						subject_Name_Question.getText()))) {
+					DisplayDialog_Notification.Dialog_Error("Unsuccessful notification!", "The subject added failed!",
+							"Unsuccessful");
+				} else {
+					DisplayDialog_Notification.Dialog_Infomation("Successful notification!",
+							"The subject added successfully!", "Successful");
+					choose_Subject_Question.getItems().add(new Subject(subject_ID_Question.getText(),
+							LoginController.teacher_Current, subject_Name_Question.getText()));
+				}
+			} catch (SQLException e) {
+				DisplayDialog_Notification.Dialog_Error("Unsuccessful notification!",
+						"The subject added failed because it already exists!", "Unsuccessful")	;
+			}			
+		}
 	}
 
 	@FXML

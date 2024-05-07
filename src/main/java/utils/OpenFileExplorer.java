@@ -18,9 +18,10 @@ public class OpenFileExplorer {
     
     public static File Save(ActionEvent event) {
     	FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Open Resource File ");
+    	fileChooser.setTitle("Open Resource File ");
+		FileChooser.ExtensionFilter xlsxFilter = new FileChooser.ExtensionFilter("Exel Files (*.xlsx)", "*.xlsx");
+		fileChooser.getExtensionFilters().addAll(xlsxFilter);
 		File file = fileChooser.showSaveDialog(null);
-		
 		if(file != null)
 			return file;
 		return null ;
