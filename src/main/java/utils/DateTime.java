@@ -1,7 +1,10 @@
 package utils;
 
-public class DateTime {
+import java.io.Serializable;
 
+public class DateTime implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private String year;
 	private String month;
 	private String day;

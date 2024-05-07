@@ -1,6 +1,7 @@
 package business.model;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -9,13 +10,15 @@ import java.util.Map;
 import utils.DateTime;
 import utils.JsonUtils;
 
-public class Submission {
+public class Submission implements Serializable {
 
-	private transient Exam exam;
-	private transient Student student;
-	private transient int timeTaken;
-	private transient double score;
-	private transient String answerSelectedsJSON;
+	private static final long serialVersionUID = 1L;
+
+	private Exam exam;
+	private Student student;
+	private int timeTaken;
+	private double score;
+	private String answerSelectedsJSON;
 	
 	public Submission(Exam exam, Student student, int timeTaken, double score, String answerSelecteds) {
 		this.exam = exam;

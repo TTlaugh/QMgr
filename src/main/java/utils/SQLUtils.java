@@ -2,23 +2,10 @@ package utils;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
-
-import business.model.Exam;
-import business.model.Group;
-import business.model.Question;
-import business.model.Score;
-import business.model.Student;
-import business.model.Subject;
-import business.model.Teacher;
-import business.services.GroupManager;
-import business.services.WelcomeFunction;
-import data.ExamAccess;
-import data.StudentAccess;
 
 public class SQLUtils {
 
@@ -69,10 +56,19 @@ public class SQLUtils {
 		}
 	}
 	
-	public static void main(String[] args) throws SQLException {
-		testDataSource();
-	}
-	private static void testDataSource() throws SQLException {
-		System.out.println(new WelcomeFunction().signIn("T001", "tttt"));
-	}
+//	public static void main(String[] args) throws Exception {
+//		testDataSource();
+//	}
+//	private static void testDataSource() throws Exception {
+//		Exam exam = new ExamAccess().get("2024-01-01 19:30:00");
+//		new ExamAccess().getQuestions(exam);
+//		System.out.println(exam);
+//		StartServer server = new StartServer(exam, 2000);
+//		try(Scanner sc = new Scanner(System.in)) {
+//			System.out.println("Input: ");
+//			sc.nextLine();
+//		}
+//		server.shutdownServer();
+//		System.out.println("Server already shutdown");
+//	}
 }

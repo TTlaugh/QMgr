@@ -1,5 +1,6 @@
 package business.model;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -7,17 +8,19 @@ import java.util.List;
 
 import utils.DateTime;
 
-public class Exam {
+public class Exam implements Serializable {
 
-	private transient DateTime examID;
-	private transient Subject subject;
-	private transient DateTime startDateTime;
-	private transient int timeLimit;
-	private transient double maxScore;
-	private transient String name;
-	private transient String description;
-	private transient boolean isShuffled;
-	private transient List<Question> questions;
+	private static final long serialVersionUID = 1L;
+
+	private DateTime examID;
+	private Subject subject;
+	private DateTime startDateTime;
+	private int timeLimit;
+	private double maxScore;
+	private String name;
+	private String description;
+	private boolean isShuffled;
+	private List<Question> questions;
 	
 	public Exam(DateTime examID, Subject subject, DateTime dateTime, int timeLimit, double maxScore, String name,
 			String note, boolean isShuffled, List<Question> questions) {
@@ -113,7 +116,8 @@ public class Exam {
 	public String toString() {
 		return "Exam [examID=" + examID + ", subject=" + subject + ", startDateTime=" + startDateTime + ", timeLimit="
 				+ timeLimit + ", maxScore=" + maxScore + ", name=" + name + ", description=" + description
-				+ ", isShuffled=" + isShuffled + ", questionIDs=" + questions + "]";
+				+ ", isShuffled=" + isShuffled + ", questions=" + questions + "]";
 	}
+
 	
 }
