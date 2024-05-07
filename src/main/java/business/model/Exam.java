@@ -1,5 +1,6 @@
 package business.model;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -7,7 +8,9 @@ import java.util.List;
 
 import utils.DateTime;
 
-public class Exam {
+public class Exam implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private DateTime examID;
 	private Subject subject;
@@ -113,7 +116,8 @@ public class Exam {
 	public String toString() {
 		return "Exam [examID=" + examID + ", subject=" + subject + ", startDateTime=" + startDateTime + ", timeLimit="
 				+ timeLimit + ", maxScore=" + maxScore + ", name=" + name + ", description=" + description
-				+ ", isShuffled=" + isShuffled + ", questionIDs=" + questions + "]";
+				+ ", isShuffled=" + isShuffled + ", questions=" + questions + "]";
 	}
+
 	
 }

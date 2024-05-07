@@ -69,18 +69,41 @@ public class GroupAccess implements DataAccess<Group> {
 				"Teachers.TeacherID", teacherID);
 	}
 
-	public void getStudents(Group group) throws SQLException {
-		group.setStudents(getList(Student.class,
+	public List<Student> getStudents(Group group) throws SQLException {
+		List<Student> students = getList(Student.class,
 				"SELECT Students.StudentID, Person.* FROM SGroups"
 				+ " INNER JOIN SGroupStudents ON SGroups.SGroupID = SGroupStudents.SGroupID"
 				+ " INNER JOIN Students ON SGroupStudents.StudentID = Students.StudentID"
 				+ " INNER JOIN Person ON Students.PersonID = Person.PersonID",
-				"SGroups.SGroupID", group.getGroupID()));
-		for (Student student : group.getStudents()) {
+				"SGroups.SGroupID", group.getGroupID());
+		for (Student student : students) {
 			student.setScores(getList(Score.class,
-				"SELECT ExamID, Score FROM Submissions",
+				"SELECT Exams.ExamID, Score, SubjectID FROM Submissions"
+				+ " INNER JOIN Exams ON Submissions.ExamID = Exams.ExamID",
 				"StudentID", student.getStudentID()));
 		}
+		return students;
+	}
+	
+	public List<Student> searchStudents(Group group, String keyword) throws SQLException {
+		List<Student> students = search(Student.class,
+				"SELECT Students.StudentID, Person.* FROM SGroups"
+				+ " INNER JOIN SGroupStudents ON SGroups.SGroupID = SGroupStudents.SGroupID"
+				+ " AND SGroups.SGroupID = '" + group.getGroupID() + "'"
+				+ " INNER JOIN Students ON SGroupStudents.StudentID = Students.StudentID"
+				+ " INNER JOIN Person ON Students.PersonID = Person.PersonID",
+				"Students.StudentID", keyword,
+				"Person.FirstName", keyword,
+				"Person.LastName", keyword,
+				"Person.Phone", keyword,
+				"Person.Email", keyword);
+		for (Student student : students) {
+			student.setScores(getList(Score.class,
+				"SELECT Exams.ExamID, Score, SubjectID FROM Submissions"
+				+ " INNER JOIN Exams ON Submissions.ExamID = Exams.ExamID",
+				"StudentID", student.getStudentID()));
+		}
+		return students;
 	}
 
 }

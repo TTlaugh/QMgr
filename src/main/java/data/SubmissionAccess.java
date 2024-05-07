@@ -92,5 +92,17 @@ public class SubmissionAccess implements DataAccess<Submission> {
 							entry.getValue()));
 		return selectedQuestions;
 	}
+	
+	public List<Submission> searchSubmissions(String subjectID, String examID, String studentID) throws SQLException {
+		return search(Submission.class,
+				"SELECT * FROM Submissions"
+				+ " INNER JOIN Exams ON Submissions.ExamID = Exams.ExamID"
+				+ " INNER JOIN Students ON Submissions.StudentID = Students.StudentID"
+				+ " INNER JOIN Subjects ON Exams.SubjectID = Subjects.SubjectID"
+				+ " INNER JOIN Person ON Students.PersonID = Person.PersonID",
+				"Subjects.SubjectID", subjectID,
+				"Exams.ExamID", examID,
+				"Students.StudentID", studentID);
+	}
 
 }

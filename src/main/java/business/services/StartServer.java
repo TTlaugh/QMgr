@@ -92,10 +92,10 @@ class ThreadServer extends Thread {
 		String studentInfo = null;
 		Submission studentSubmission = null;
 
-		try {
+		try (
 			ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
-			ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
-
+			ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream())
+		) {
 			while (true) {
 				Object dataReceived = inputStream.readObject();
 				System.out.println(dataReceived);

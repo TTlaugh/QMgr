@@ -1,9 +1,12 @@
 package business.model;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Subject {
+public class Subject implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private String subjectID;
 	private Teacher teacher;

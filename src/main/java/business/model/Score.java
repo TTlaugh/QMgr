@@ -1,11 +1,14 @@
 package business.model;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import utils.DateTime;
 
-public class Score {
+public class Score implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	
 	private DateTime examID;
 	private double score;

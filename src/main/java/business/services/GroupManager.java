@@ -62,12 +62,21 @@ public class GroupManager {
 		return false;
 	}
 
-	public void getStudentsForGroup(Group group) {
+	public List<Student> getStudentsFromGroup(Group group) {
 		try {
-			new GroupAccess().getStudents(group);
+			return new GroupAccess().getStudents(group);
 		} catch (SQLException e) {
 			SQLUtils.printSQLException(e);
 		}
+		return null;
+	}
+	public List<Student> searchStudentsFromGroup(Group group, String keyword) {
+		try {
+			return new GroupAccess().searchStudents(group, keyword);
+		} catch (SQLException e) {
+			SQLUtils.printSQLException(e);
+		}
+		return null;
 	}
 	
 	public boolean addStudent(Group group, Student student) throws SQLException {
@@ -113,7 +122,7 @@ public class GroupManager {
 		}
 		return false;
 	}
-	
+
 	public boolean importStudent(Group group, String excelFilePath, boolean useExist) throws IOException {
 		boolean stat = true;
 		List<Student> students = new StudentExcelReader().readExcel(excelFilePath);
@@ -136,13 +145,13 @@ public class GroupManager {
 		return stat;
 	}
 
-	public boolean exportStudent(Group group, String excelFilePath) {
-		if (group.getStudents() == null || group.getStudents().isEmpty())
+	public boolean exportStudent(Group group, List<Student> students, String excelFilePath) {
+		if (students == null || students.isEmpty())
 			return false;
 		try {
 			new StudentExcelWriter().writeExcel(
 					group.getGroupID() + " | " + group.getGroupName(),
-					group.getStudents(),
+					students,
 					excelFilePath);
 			return true;
 		} catch (IOException e) {

@@ -1,10 +1,10 @@
 package utils;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import java.io.Serializable;
 
-public class DateTime {
+public class DateTime implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private String year;
 	private String month;
 	private String day;
@@ -99,10 +99,6 @@ public class DateTime {
 
 	public void setSecond(String second) {
 		this.second = second;
-	}
-	public StringProperty getExamIDStringProperty() {
-		StringProperty stringProperty = new SimpleStringProperty(toString());
-		return stringProperty;
 	}
 
 	@Override

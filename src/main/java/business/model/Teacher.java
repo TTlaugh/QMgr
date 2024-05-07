@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 public class Teacher extends Person {
 
+	private static final long serialVersionUID = 1L;
 	private String teacherID;
 	
 	public Teacher(String teacherID, String firstName, String lastName, String phone, String email) {

@@ -1,6 +1,7 @@
 package business.model;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -8,7 +9,9 @@ import java.util.List;
 
 import utils.JsonUtils;
 
-public class Question {
+public class Question implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private String questionID;
 	private Subject subject;

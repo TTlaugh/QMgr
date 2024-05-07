@@ -37,5 +37,14 @@ public class SubmissionManager {
 		}
 		return null;
 	}
+	
+	public List<Submission> searchSubmissions(String subjectID, String examID, String studentID) {
+		try {
+			return new SubmissionAccess().searchSubmissions(subjectID, examID, studentID);
+		} catch (SQLException e) {
+			SQLUtils.printSQLException(e);
+		}
+		return null;
+	}
 
 }

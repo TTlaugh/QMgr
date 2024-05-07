@@ -4,6 +4,7 @@ import java.util.List;
 
 public class SelectedQuestion extends Question {
 	
+	private static final long serialVersionUID = 1L;
 	private List<Integer> selectedAnswers;
 	
 	public SelectedQuestion(Question question, List<Integer> selectedAnswers) {
