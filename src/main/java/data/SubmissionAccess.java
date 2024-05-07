@@ -94,7 +94,7 @@ public class SubmissionAccess implements DataAccess<Submission> {
 	}
 	
 	public List<Submission> searchSubmissions(String subjectID, String examID, String studentID) throws SQLException {
-		return search(Submission.class,
+		return getList(Submission.class,
 				"SELECT * FROM Submissions"
 				+ " INNER JOIN Exams ON Submissions.ExamID = Exams.ExamID"
 				+ " INNER JOIN Students ON Submissions.StudentID = Students.StudentID"
