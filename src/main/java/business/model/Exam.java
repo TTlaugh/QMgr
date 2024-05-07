@@ -9,15 +9,15 @@ import utils.DateTime;
 
 public class Exam {
 
-	private DateTime examID;
-	private Subject subject;
-	private DateTime startDateTime;
-	private int timeLimit;
-	private double maxScore;
-	private String name;
-	private String description;
-	private boolean isShuffled;
-	private List<Question> questions;
+	private transient DateTime examID;
+	private transient Subject subject;
+	private transient DateTime startDateTime;
+	private transient int timeLimit;
+	private transient double maxScore;
+	private transient String name;
+	private transient String description;
+	private transient boolean isShuffled;
+	private transient List<Question> questions;
 	
 	public Exam(DateTime examID, Subject subject, DateTime dateTime, int timeLimit, double maxScore, String name,
 			String note, boolean isShuffled, List<Question> questions) {

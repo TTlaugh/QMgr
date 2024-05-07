@@ -6,19 +6,28 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import utils.DateTime;
 import utils.JsonUtils;
 
 public class Submission {
 
-	private Exam exam;
-	private Student student;
-	private int timeTaken;
-	private double score;
-	private String answerSelectedsJSON;
+	private transient Exam exam;
+	private transient Student student;
+	private transient int timeTaken;
+	private transient double score;
+	private transient String answerSelectedsJSON;
 	
 	public Submission(Exam exam, Student student, int timeTaken, double score, String answerSelecteds) {
 		this.exam = exam;
 		this.student = student;
+		this.timeTaken = timeTaken;
+		this.score = score;
+		this.answerSelectedsJSON = answerSelecteds;
+	}
+
+	public Submission(String examID, String studentID, int timeTaken, double score, String answerSelecteds) {
+		this.exam = new Exam(); this.exam.setExamID(new DateTime(examID));
+		this.student = new Student(); this.student.setStudentID(studentID);
 		this.timeTaken = timeTaken;
 		this.score = score;
 		this.answerSelectedsJSON = answerSelecteds;
