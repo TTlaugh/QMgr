@@ -20,9 +20,9 @@ public class SubmissionManager {
 		return null;
 	}
 	
-	public boolean deleteSubmission(String submissionID) {
+	public boolean deleteSubmission(Submission submission) {
 		try {
-			return new SubmissionAccess().delete(submissionID);
+			return new SubmissionAccess().delete(submission.getExam().getExamID().toString(), submission.getStudent().getStudentID());
 		} catch (SQLException e) {
 			SQLUtils.printSQLException(e);
 		}
