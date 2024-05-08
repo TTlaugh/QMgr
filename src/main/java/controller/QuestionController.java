@@ -11,6 +11,8 @@ import java.util.ResourceBundle;
 import business.model.Question;
 import business.model.Subject;
 import business.services.QuestionManager;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -35,6 +37,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.util.StringConverter;
 import utils.DisplayDialog_Notification;
 import utils.OpenFileExplorer;
@@ -43,6 +46,8 @@ public class QuestionController implements Initializable {
 	private Scene scene = null;
 
 	private AnchorPane anchor;
+	
+	public static List<Subject> subjects ;
 
 	private QuestionManager quesManager = new QuestionManager();
 
@@ -65,12 +70,21 @@ public class QuestionController implements Initializable {
 	public static Subject subject_Current;
 
 	private static File file_Current;
+	@FXML
+    private HBox hBox_Question=new HBox();
+    @FXML
+    private TextField chapter_Question=new TextField();
+    @FXML
+    private ComboBox<String> dificult_Question=new ComboBox<String>();
+
+    @FXML
+    private TextField searchQuestion=new TextField();
 
 	@FXML
-	private Button Export_Question_Disable;
+	private Button Export_Question_Disable=new Button();
 
 	@FXML
-	private Button Import_Question_Disable;
+	private Button Import_Question_Disable=new Button();
 
 	@FXML
 	private AnchorPane anchor_CreateSubject_Question = new AnchorPane();
@@ -97,7 +111,7 @@ public class QuestionController implements Initializable {
 	private TableColumn<Question, Integer> Question_Chapter_Column=new TableColumn<Question, Integer>();
 
 	@FXML
-	private TableColumn<Question, Integer> Question_Difficulty_Column=new TableColumn<Question, Integer>();
+	private TableColumn<Question,String> Question_Difficulty_Column=new TableColumn<Question, String>();
 
 	@FXML
 	private TableColumn<Question, String> Question_Content_Column=new TableColumn<Question, String>();
@@ -208,6 +222,9 @@ public class QuestionController implements Initializable {
 		if(subject_Current!=null)
 		{	
 			button_Add_Question.setVisible(true);
+			dificult_Question.setVisible(true);
+			chapter_Question.setVisible(true);
+			hBox_Question.setVisible(true);
 			choose_Subject_Question.setValue(subject_Current);
 			question_ListOfSubject = quesManager.getQuestionsForSubject(subject_Current);
 			tableView_Question.setItems(loadQuestion_tableView(question_ListOfSubject));
@@ -232,7 +249,7 @@ public class QuestionController implements Initializable {
 		    }
 		});
 
-		List<Subject> subjects = quesManager.getSubjects(LoginController.teacher_Current);
+		 subjects = quesManager.getSubjects(LoginController.teacher_Current);
 
 		for (Subject subj : subjects) {
 			choose_Subject_Question.getItems().add(subj);
@@ -261,8 +278,14 @@ public class QuestionController implements Initializable {
 			QuestionController.subject_Current = choose_Subject_Question.getValue();
 
 			tableView_Question.setItems(loadQuestion_tableView(question_ListOfSubject));
-
+			ObservableList<String> options = FXCollections.observableArrayList("Easy", "Medium", "Hard");
+			
+			dificult_Question.setItems(options);
 			button_Add_Question.setVisible(true);
+			
+			dificult_Question.setVisible(true);
+			chapter_Question.setVisible(true);
+			 hBox_Question.setVisible(true);
 		});
 
 		try {
@@ -302,10 +325,21 @@ public class QuestionController implements Initializable {
 
 		Question_ID_Column.setCellValueFactory(new PropertyValueFactory<Question, String>("questionID"));
 		Question_Chapter_Column.setCellValueFactory(new PropertyValueFactory<Question, Integer>("chapter"));
-		Question_Difficulty_Column.setCellValueFactory(new PropertyValueFactory<Question, Integer>("difficulty"));
+		Question_Difficulty_Column.setCellValueFactory(cellData ->  getSubject(cellData.getValue()));
 		Question_Content_Column.setCellValueFactory(new PropertyValueFactory<Question, String>("content"));
 
 		return observableList_Question;
+	}
+	private StringProperty getSubject(Question q)
+	{	
+		StringProperty string=null;
+		if(q.getDifficulty()==1)
+			string= new SimpleStringProperty("Easy");
+		else if(q.getDifficulty()==2)
+			string =new SimpleStringProperty("Medium");
+		else 
+			string =new SimpleStringProperty("Hard");	
+		return string;
 	}
 
 	public void Question_Tranfer_QuestionView_Quizz(ActionEvent event) throws IOException {
@@ -565,6 +599,27 @@ public class QuestionController implements Initializable {
 			}			
 		}
 	}
+    @FXML
+    void buttonSearchQuestion(ActionEvent event) {
+    	String  content= searchQuestion.getText();
+    	String chapter= chapter_Question.getText();
+    	String difficulty= dificult_Question.getValue();
+    	if (difficulty.equals("Hard"))
+    		difficulty="3";
+    	else if(difficulty.equals("Medium"))
+    		difficulty="2";
+    	else 
+    		difficulty="1";
+    	
+    	difficulty= difficulty==null ? "1" : difficulty; 
+    	if(quesManager.searchQuestionInSubject(subject_Current,content , chapter, difficulty) == null)
+    		DisplayDialog_Notification.Dialog_Infomation("Null", "Khong co du lieu", difficulty);
+    	else {
+    		tableView_Question.getItems().clear();
+    		List<Question> list= quesManager.searchQuestionInSubject(subject_Current,content , chapter, difficulty);
+    		tableView_Question.setItems(loadQuestion_tableView(list));
+    	}
+    }
 
 	@FXML
 	void button_Delete_Subject_Question(ActionEvent event) {

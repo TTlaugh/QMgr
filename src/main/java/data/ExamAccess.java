@@ -110,7 +110,7 @@ public class ExamAccess implements DataAccess<Exam> {
 	}
 	
 	public List<Exam> searchExams(String examID, String subjectID, String startDateTime, String timeLimit) throws SQLException {
-		return search(Exam.class,
+		return getList(Exam.class,
 				"SELECT * FROM Exams"
 				+ " INNER JOIN Subjects ON Exams.SubjectID = Subjects.SubjectID",
 				"Exams.ExamID", examID,

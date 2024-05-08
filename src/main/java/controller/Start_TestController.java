@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import business.model.Exam;
 import business.services.StartServer;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -18,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import utils.DisplayDialog_Notification;
 
 public class Start_TestController implements Initializable {
@@ -33,6 +35,9 @@ public class Start_TestController implements Initializable {
 
 	@FXML
 	private TextField port_StartTest = new TextField();
+	
+	@FXML
+	private VBox vBox_StartTest;
 
 	private StartServer startServer;
 
@@ -80,16 +85,24 @@ public class Start_TestController implements Initializable {
 	@FXML
 	void reloadServer(ActionEvent event) {
 		List<String> listStudent = startServer.getConnectedClients();
-
+	
+		vBox_StartTest.getChildren().clear();
 		for (String s : listStudent) {
-			Label label = new Label(s);
-			Image img = new Image("/imgs/person.png");
-			ImageView imageView = new ImageView(img);
-			imageView.setFitHeight(50);
-			imageView.setFitWidth(50);
-
-			label.setGraphic(imageView);
-			label.setStyle("-fx-text-fill:18px;-fx-font-stylet:italic;");
+			Label label = new Label();		
+//			label.setStyle("-fx-text-fill:18px;-fx-font-stylet:italic;");
+//			Image img = new Image("/imgs/person.png");
+//			ImageView imageView = new ImageView(img);
+//			imageView.setFitHeight(50);
+//			imageView.setFitWidth(50);
+//			label.setGraphic(imageView);
+			
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					label.setText(s);
+				}
+			});
+			vBox_StartTest.getChildren().add(label);
 		}
 	}
 

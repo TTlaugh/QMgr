@@ -26,7 +26,7 @@
       </Label>
       <HBox alignment="CENTER" fillHeight="false" layoutX="205.0" layoutY="51.0" maxHeight="-Infinity" prefHeight="35.0" prefWidth="267.0" styleClass="round-layout" AnchorPane.leftAnchor="205.0" AnchorPane.topAnchor="51.0">
          <children>
-            <TextField prefHeight="31.0" prefWidth="218.0" promptText="Search" styleClass="transparent">
+            <TextField fx:id="textFile_Exam" onAction="#search_Exam" prefHeight="31.0" prefWidth="218.0" promptText="Search" styleClass="transparent">
                <font>
                   <Font size="15.0" />
                </font>
@@ -59,7 +59,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <ComboBox layoutX="483.0" layoutY="50.0" prefHeight="35.0" prefWidth="100.0" promptText="Filter">
+      <ComboBox fx:id="subject_Exam" layoutX="483.0" layoutY="50.0" prefHeight="35.0" prefWidth="100.0" promptText="Subject">
          <styleClass>
             <String fx:value="transparent" />
             <String fx:value="round-layout" />
@@ -97,7 +97,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <DatePicker layoutX="592.0" layoutY="50.0" prefHeight="35.0" prefWidth="100.0" />
+      <DatePicker fx:id="DatePicker_Exam" layoutX="592.0" layoutY="50.0" prefHeight="35.0" prefWidth="100.0" />
       <Spinner fx:id="spinner_Exam" editable="true" layoutX="703.0" layoutY="50.0" prefHeight="35.0" prefWidth="66.0" />
    </children>
 </AnchorPane>

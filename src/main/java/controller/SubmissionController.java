@@ -2,13 +2,16 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import business.model.Exam;
+import business.model.Group;
 import business.model.SelectedQuestion;
 import business.model.Student;
 import business.model.Subject;
 import business.model.Submission;
+import business.services.QuestionManager;
 import business.services.SubmissionManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -21,15 +24,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionModel;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.layout.VBox;
+import javafx.util.StringConverter;
 import utils.DisplayDialog_Notification;
 
 public class SubmissionController implements Initializable {
@@ -38,6 +44,8 @@ public class SubmissionController implements Initializable {
 	private AnchorPane anchor;
 
 	private ObservableList<Submission> observableList;
+	
+	private List<Submission> listSubmission;
 	@FXML
 	private VBox vBox_Submissview = new VBox();
 
@@ -73,6 +81,18 @@ public class SubmissionController implements Initializable {
 	@FXML
 	private Label studentID_SubmissView = new Label();
 
+    @FXML
+    private TextField examID_textFiled=new TextField();
+
+    @FXML
+    private Button search_Submiss=new Button();
+
+    @FXML
+    private TextField student_ID_textField=new TextField();
+
+    @FXML
+    private ComboBox<Subject> subjectt_ComboBox=new ComboBox<Subject>();
+
 	private static SubmissionManager submissionManager = new SubmissionManager();
 
 	public static Submission submission_Current;
@@ -80,6 +100,25 @@ public class SubmissionController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		if (submission_Current != null && listSubmission!=null) {
+			load_SubmissView();
+			delete_Submission.setVisible(true);
+			view_Submission.setVisible(true);
+		}
+		for(Subject sub:new QuestionManager().getSubjects(LoginController.teacher_Current)) {
+			subjectt_ComboBox.getItems().add(sub);
+		}
+		subjectt_ComboBox.setConverter(new StringConverter<Subject>() {
+			@Override
+			public String toString(Subject sub) {
+				return sub == null ? "" : sub.getSubjectName();
+			}
+
+			@Override
+			public Subject fromString(String s) {
+				return null;
+			}
+		});
 		try {
 			SelectionModel<Submission> selectionModel = tableView_Submission.getSelectionModel();
 			selectionModel.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -93,10 +132,22 @@ public class SubmissionController implements Initializable {
 			e.printStackTrace();
 		}
 		loadData_Submission();
-		if (submission_Current != null) {
-			load_SubmissView();
-		}
+		
 	}
+    @FXML
+    void button_Search_Submiss(ActionEvent event) {
+    	String subject_ID=String.valueOf(subjectt_ComboBox.getValue().getSubjectID()); 
+    	String exam_ID =examID_textFiled.getText() ;
+    	String student_ID=	student_ID_textField.getText();
+    	
+    	if(submissionManager.searchSubmissions(subject_ID, exam_ID, student_ID)==null)
+    		DisplayDialog_Notification.Dialog_Infomation("null", "Hong tim thay", student_ID);
+    	else {
+    		tableView_Submission.getItems().clear();
+    		List<Submission> list=submissionManager.searchSubmissions(subject_ID, exam_ID, student_ID);
+    		tableView_Submission.setItems(loadStudent_tableView(list));
+    	}
+    }
 
 	private void load_SubmissView() {
 		studentID_SubmissView.setText(submission_Current.getStudent().getStudentID());
@@ -143,7 +194,7 @@ public class SubmissionController implements Initializable {
 	}
 
 	private void loadData_Submission() {
-		List<Submission> listSubmission = submissionManager.getSubmissions(LoginController.teacher_Current);
+		listSubmission = submissionManager.getSubmissions(LoginController.teacher_Current);
 		tableView_Submission.setItems(loadStudent_tableView(listSubmission));
 	}
 	

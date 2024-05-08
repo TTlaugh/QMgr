@@ -100,7 +100,7 @@ public class QuestionAccess implements DataAccess<Question> {
 	}
 	
 	public List<Question> searchQuestionsFromSubject(Subject subject, String content, String chapter, String difficulty) throws SQLException {
-		return search(Question.class,
+		return getList(Question.class,
 				"SELECT * FROM Questions"
 				+ " INNER JOIN Subjects ON Questions.SubjectID = Subjects.SubjectID"
 				+ " AND Subjects.SubjectID = '" + subject.getSubjectID() + "'",

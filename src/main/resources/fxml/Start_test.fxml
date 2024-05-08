@@ -63,7 +63,7 @@
                         <Font name="System Italic" size="20.0" />
                      </font>
                   </Label>
-                  <VBox alignment="CENTER" layoutX="27.0" layoutY="67.0" prefWidth="516.0" styleClass="transparent" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="67.0">
+                  <VBox fx:id="vBox_StartTest" alignment="CENTER" layoutX="27.0" layoutY="67.0" prefWidth="516.0" styleClass="transparent" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="67.0">
                      <children>
                         <Separator prefHeight="10.0" prefWidth="510.0" />
                      </children>

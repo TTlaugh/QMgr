@@ -32,6 +32,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.util.StringConverter;
 import utils.DisplayDialog_Notification;
 import utils.OpenFileExplorer;
@@ -80,13 +81,15 @@ public class GroupController implements Initializable {
 
 	@FXML
 	private Button btnDeleteStudent_Group = new Button();
-
+    @FXML
+    private HBox HBox_Search=new HBox();
 	@FXML
 	private Button btnDeleteGroup_Group = new Button();
 
 	@FXML
 	private Button btnViewStudent_Group = new Button();
-
+	@FXML
+	private TextField searchOnnGroup=new TextField();
 	@FXML
 	private TextField textField_EmailAdd_GroupAdd;
 
@@ -147,8 +150,9 @@ public class GroupController implements Initializable {
 		{
 			btnAddStudent_Group.setVisible(true);
 			ComboBoxGroup.setValue(group_Current_Layout);
-			studentList =group_Current_Layout.getStudents();
-			tableView_Group.setItems(loadStudent_tableView(studentList));			
+			studentList =gr.getStudentsFromGroup(group_Current_Layout);
+			tableView_Group.setItems(loadStudent_tableView(studentList));	
+			HBox_Search.setVisible(true);
 		}
 		List<Group> groups = gr.getGroups(LoginController.teacher_Current);
 
@@ -171,10 +175,10 @@ public class GroupController implements Initializable {
 		ComboBoxGroup.setOnAction(envent -> {
 			btnViewStudent_Group.setVisible(false);
 			Group Group_Current = ComboBoxGroup.getValue();
-			gr.getStudentsForGroup(Group_Current);
 			group_Current_Layout = Group_Current;
-			studentList = Group_Current.getStudents();
+			studentList = gr.getStudentsFromGroup(Group_Current);;
 			tableView_Group.setItems(loadStudent_tableView(studentList));
+			HBox_Search.setVisible(true);
 			export_Group.setDisable(false);
 			import_Group.setDisable(false);
 			setVisibleButton_Add_DelGroup(true);
@@ -201,11 +205,15 @@ public class GroupController implements Initializable {
 		btnAddStudent_Group.setVisible(b);
 		btnDeleteGroup_Group.setVisible(b);
 	}
+	private StringProperty getExamIDStringProperty(String t) {
+		StringProperty examID = new SimpleStringProperty(t);
+		return examID;
+	}
 
 	private ObservableList<Score> load_tableViewGroupView(List<Score> list) {
 		observableList_Score = FXCollections.observableArrayList(list);
 
-		Exam_ID_GroupView.setCellValueFactory(cellData -> cellData.getValue().getExamID().getExamIDStringProperty());
+		Exam_ID_GroupView.setCellValueFactory(cellData -> getExamIDStringProperty(cellData.getValue().getExamID().toString()));
 		Score_GroupView.setCellValueFactory(new PropertyValueFactory<Score, Double>("score"));
 //	    Subject_GroupView.setCellValueFactory(new PropertyValueFactory<Score, String>("subjectName"));
 
@@ -274,7 +282,7 @@ public class GroupController implements Initializable {
 					&& textField_PhoneAdd_GroupAdd.getText() != null && textField_PhoneAdd_GroupAdd.getText() != ""
 					&& textField_EmailAdd_GroupAdd.getText() != null && textField_EmailAdd_GroupAdd.getText() != "") {
 				if (!gr.addStudent(group_Current_Layout,
-						new Student(textField_IdAdd_GroupAdd.getText(), null, textField_FirstNameAdd_GroupAdd.getText(),
+						new Student(textField_IdAdd_GroupAdd.getText(), textField_FirstNameAdd_GroupAdd.getText(),
 								textField_LastNameAdd_GroupAdd.getText(), textField_PhoneAdd_GroupAdd.getText(),
 								textField_EmailAdd_GroupAdd.getText()))) {
 					DisplayDialog_Notification.Dialog_Infomation("Successful notification!",
@@ -343,7 +351,7 @@ public class GroupController implements Initializable {
 					textField_Phone_GroupView.getText(), textField_Email_GroupView.getText(),
 					student_Current.getScores());
 			if (gr.editStudent(student_Change) ){
-				group_Current_Layout.getStudents().set(group_Current_Layout.getStudents().indexOf(student_Current), student_Change);
+				studentList.set(studentList.indexOf(student_Current), student_Change);
 				DisplayDialog_Notification.Dialog_Infomation("Successful notification!", "The student was changed!",
 						"Successful!");
 			}
@@ -363,7 +371,7 @@ public class GroupController implements Initializable {
 					"Successful!");
 			Student student_Delete = tableView_Group.getSelectionModel().getSelectedItem();
 			tableView_Group.getItems().remove(student_Delete);
-			group_Current_Layout.getStudents().remove(student_Delete);
+			studentList.remove(student_Delete);
 		}
 	}
 
@@ -430,14 +438,27 @@ public class GroupController implements Initializable {
 						"Error");
 			}
 		}
-		gr.getStudentsForGroup(group_Current_Layout);
+		studentList =gr.getStudentsFromGroup(group_Current_Layout);
 
-		studentList = group_Current_Layout.getStudents();
 
 		tableView_Group.setItems(loadStudent_tableView(studentList));
 
 		return file_Current == null ? false : true;
 	}
+	
+
+    @FXML
+    private void searchGroup(ActionEvent event) {
+    	String keyword=searchOnnGroup.getText();
+    	if(gr.searchStudentsFromGroup(group_Current_Layout,keyword) == null)
+			DisplayDialog_Notification.Dialog_Infomation("Null", "Danh sash kh co", null);
+		else	
+		{	
+			tableView_Group.getItems().clear();
+			List <Student> list =gr.searchStudentsFromGroup(group_Current_Layout,keyword);
+			tableView_Group.setItems(loadStudent_tableView(list));
+		}
+    }
 
 	@FXML
 	private void Export_Group(ActionEvent event) {
@@ -446,7 +467,7 @@ public class GroupController implements Initializable {
 			
 			String fileNameExel = file_Current.getAbsolutePath();
 			
-			if (!gr.exportStudent(group_Current_Layout, fileNameExel) ) {
+			if (!gr.exportStudent(group_Current_Layout, studentList,fileNameExel) ) {
 				DisplayDialog_Notification.Dialog_Infomation("Unsuccessful notification", "Creat file exel failed",
 						"Error");
 			} else {

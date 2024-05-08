@@ -73,6 +73,14 @@ public class ExamController implements Initializable {
 	private ObservableList<Exam> observableList;
 
 	private ObservableList<Question> observableList_Question;
+    @FXML
+    private DatePicker DatePicker_Exam=new DatePicker();
+	@FXML
+	private TextField textFile_Exam=new TextField()	;
+	   
+	@FXML
+	private ComboBox<Subject> subject_Exam=new ComboBox<Subject>();
+	
 	@FXML
 	private Button picktoTest = new Button();
 
@@ -193,8 +201,23 @@ public class ExamController implements Initializable {
 		loadSpinner();
 		loadExam();
 		loadComboBoxInExamAdd();
+		for(Subject sub: new QuestionManager().getSubjects(LoginController.teacher_Current))
+		{
+			subject_Exam.getItems().add(sub);
+		}
+		subject_Exam.setConverter(new StringConverter<Subject>() {
+			@Override
+			public String toString(Subject sub) {
+				return sub == null ? "" : sub.getSubjectName();
+			}
 
+			@Override
+			public Subject fromString(String s) {
+				return null;
+			}
+		});
 	}
+	   
 
 	private void loadComboBoxInExamAdd() {
 		List<Subject> subjects = quesManager.getSubjects(LoginController.teacher_Current);
@@ -262,13 +285,33 @@ public class ExamController implements Initializable {
 			Load_Exam_ExamView();
 		}
 	}
-
+	@FXML
+    private void search_Exam(ActionEvent event) {
+		String exam=textFile_Exam.getText();
+		String subject = subject_Exam.getValue().getSubjectID();
+		String date =DatePicker_Exam.getValue().toString();
+		String pinner=String.valueOf(spinner_Exam.getValue());
+		
+		if(examManager.searchExams(exam, subject, date, pinner)==null)
+			DisplayDialog_Notification.Dialog_Infomation("Null", "KH tim thAY", pinner);
+		else {
+			tableView_Exam.getItems().clear();
+			List<Exam> list_Exam=examManager.searchExams(exam, subject, date, pinner);
+			tableView_Exam.setItems(loadStudent_tableView(list_Exam));
+		}
+	}
 	@FXML
 	void button_PickToTest(ActionEvent event) {
-		new MainController().receiveExam(exam_Current);
-		new Start_TestController().receiveExam(exam_Current);
-		DisplayDialog_Notification.Dialog_Infomation("Successfully",
-				"Ban da chon exam nay hay nhan start test de bat dau bai kiem tra", getCurrentTime());
+		if(examManager.getQuestions(exam_Current))
+		{			
+			new MainController().receiveExam(exam_Current);
+			new Start_TestController().receiveExam(exam_Current);
+			DisplayDialog_Notification.Dialog_Infomation("Successfully",
+					"Ban da chon exam nay hay nhan start test de bat dau bai kiem tra", getCurrentTime());
+		}
+		else {
+			DisplayDialog_Notification.Dialog_Error("Null", "Khong co cau hoi", getCurrentTime());
+		}
 	}
 
 	private ObservableList<Question> loadQuestion_tableView_ExamAdd(List<Question> list) {
