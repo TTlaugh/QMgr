@@ -109,7 +109,6 @@ public class Start_TestController implements Initializable {
 	@FXML
 	void shutdownServer(ActionEvent event) {
 		try {
-			System.out.println("shutdownServer");
 			startServer.shutdownServer();
 			DisplayDialog_Notification.Dialog_Infomation("Connection ", "shutdown server",  null);
 		} catch (IOException e) {
