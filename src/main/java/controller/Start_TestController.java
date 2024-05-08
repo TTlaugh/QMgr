@@ -23,6 +23,7 @@ import javafx.scene.layout.VBox;
 import utils.DisplayDialog_Notification;
 
 public class Start_TestController implements Initializable {
+	
 	private Parent root = null;
 
 	private static Exam exam_StartTest;
@@ -40,10 +41,13 @@ public class Start_TestController implements Initializable {
 	private VBox vBox_StartTest;
 
 	private StartServer startServer;
+	
+	private boolean check_Shutdown=false;
 
 	public void Back_Test(ActionEvent event) throws IOException {
 		root = (Parent) FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
 		((Node) event.getSource()).getScene().setRoot(root);
+		if (!check_Shutdown) shutdownServer(event);
 	}
 
 	public void receiveExam(Exam exam) {
@@ -110,6 +114,7 @@ public class Start_TestController implements Initializable {
 	void shutdownServer(ActionEvent event) {
 		try {
 			startServer.shutdownServer();
+			check_Shutdown=true;
 			DisplayDialog_Notification.Dialog_Infomation("Connection ", "shutdown server",  null);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

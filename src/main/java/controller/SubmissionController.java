@@ -101,7 +101,7 @@ public class SubmissionController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		if (submission_Current != null && listSubmission!=null) {
-			load_SubmissView();
+			
 			delete_Submission.setVisible(true);
 			view_Submission.setVisible(true);
 		}
@@ -131,8 +131,10 @@ public class SubmissionController implements Initializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		loadData_Submission();
 		
+		loadData_Submission();
+		if(submission_Current!=null)
+		load_SubmissView();
 	}
     @FXML
     void button_Search_Submiss(ActionEvent event) {
@@ -153,7 +155,9 @@ public class SubmissionController implements Initializable {
 		studentID_SubmissView.setText(submission_Current.getStudent().getStudentID());
 		ExamID_SubmissView.setText(submission_Current.getExam().getExamID().toString());
 		score_SubmissView.setText(String.valueOf(submission_Current.getScore()));
-		for (SelectedQuestion submissSelect : submissionManager.getSelectedQuestions(submission_Current)) {
+		List<SelectedQuestion> list = submissionManager.getSelectedQuestions(submission_Current);
+		
+		for (SelectedQuestion submissSelect : list) {
 			Separator separator = new Separator();
 			Label labelQues = new Label(submissSelect.getContent());
 			Label labelChosen = new Label();
