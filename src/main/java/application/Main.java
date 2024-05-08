@@ -1,6 +1,7 @@
 package application;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import utils.Constant;
@@ -15,18 +16,10 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		try {
-			System.out.println("Hello everyone");
-
-			 primaryStage.getIcons().add(new Image("/imgs/icon.png"));
-
+			primaryStage.getIcons().add(new Image("/imgs/icon.png"));
 			primaryStage.setTitle("Quizz Server - HEHE");
 			primaryStage.show();
 
-
-			primaryStage.getIcons().add(new Image("/imgs/icon.png"));
-			primaryStage.setTitle("Quizz Server - HEHE");
-
-			
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
 			Parent root = (Parent) loader.load();
 			Scene scene = new Scene(root, Constant.ScreenSize.WIDTH, Constant.ScreenSize.HEIGHT);
@@ -38,9 +31,11 @@ public class Main extends Application {
 			primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 
 			scene.setOnKeyPressed(KeyEventFunction.toggleFullScreen(primaryStage));
-			primaryStage.show();
-			
-			
+
+			primaryStage.setOnCloseRequest(event -> {
+				Platform.exit();
+				System.exit(0);
+			});
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
