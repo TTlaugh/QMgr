@@ -61,7 +61,7 @@ public class SQLUtils {
 //		testDataSource();
 //	}
 //	private static void testDataSource() throws Exception {
-//		Exam exam = new ExamAccess().get("2024-01-01 19:30:00");
+//		Exam exam = new ExamAccess().get("2024-05-08 09:00:00");
 //		new ExamAccess().getQuestions(exam);
 //		System.out.println(exam);
 //		StartServer server = new StartServer(exam, 2000);
