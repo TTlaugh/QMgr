@@ -156,3 +156,6 @@
 .scroll-pane .viewport {
        -fx-background-color: transparent;
 }
+.list-cell{
+    -fx-font-size:18.0;
+}

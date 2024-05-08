@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import utils.DisplayDialog_Notification;
 
 public class Start_TestController implements Initializable {
@@ -93,19 +94,16 @@ public class Start_TestController implements Initializable {
 		vBox_StartTest.getChildren().clear();
 		for (String s : listStudent) {
 			Label label = new Label();		
-//			label.setStyle("-fx-text-fill:18px;-fx-font-stylet:italic;");
-//			Image img = new Image("/imgs/person.png");
-//			ImageView imageView = new ImageView(img);
-//			imageView.setFitHeight(50);
-//			imageView.setFitWidth(50);
-//			label.setGraphic(imageView);
+			Image img = new Image("/imgs/person.png");
+			ImageView imageView = new ImageView(img);
+			imageView.setFitHeight(50);
+			imageView.setFitWidth(50);
 			
-			Platform.runLater(new Runnable() {
-				@Override
-				public void run() {
-					label.setText(s);
-				}
-			});
+			Platform.runLater(() -> {
+				label.setFont(new Font("Arial", 20));
+				label.setText(s);
+				label.setGraphic(imageView);
+				});
 			vBox_StartTest.getChildren().add(label);
 		}
 	}
