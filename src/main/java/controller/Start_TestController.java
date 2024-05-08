@@ -100,7 +100,7 @@ public class Start_TestController implements Initializable {
 			imageView.setFitWidth(50);
 			
 			Platform.runLater(() -> {
-				label.setFont(new Font("Arial", 20));
+				label.setFont(new Font(20));
 				label.setText(s);
 				label.setGraphic(imageView);
 				});
