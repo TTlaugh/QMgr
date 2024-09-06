@@ -1,5 +1,5 @@
 # Java Project
-![](https://raw.githubusercontent.com/nguyenletientrien/QuizzServer/main/.github/img.jpg)
+![](https://raw.githubusercontent.com/TTlaugh/QuizzServer/main/.github/img.jpg)
 
 ### Introduction
 - Design Pattern: Three-layer
@@ -8,7 +8,7 @@
 - Database: MySQL
 
 #### Database table relationship
-![](https://raw.githubusercontent.com/nguyenletientrien/QuizzServer/main/.github/QuizzServerERD.png)
+![](https://raw.githubusercontent.com/TTlaugh/QuizzServer/main/.github/QuizzServerERD.png)
 
 #### Project structure
 ```
