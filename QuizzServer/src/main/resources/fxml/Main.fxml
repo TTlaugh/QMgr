@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="900.0" prefWidth="1300.0" styleClass="white-background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+   <children>
+      <Label alignment="CENTER" prefHeight="60.0" prefWidth="250.0" text="MINEQUIZ" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0">
+         <font>
+            <Font name="System Bold" size="38.0" />
+         </font>
+      </Label>
+      <Separator layoutX="250.0" layoutY="13.0" maxHeight="-Infinity" orientation="VERTICAL" prefHeight="44.0" />
+      <Label fx:id="Account_Teacher" layoutX="28.0" layoutY="85.0" prefHeight="30.0" prefWidth="73.0" text="MS.Tram" AnchorPane.leftAnchor="28.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="28.0" layoutY="115.0" prefHeight="17.0" prefWidth="145.0" text="Personal Account" AnchorPane.leftAnchor="28.0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="start_Test_Main" layoutX="28.0" layoutY="160.0" mnemonicParsing="false" onAction="#Start_Test" prefHeight="62.0" prefWidth="195.0" text="START TEST" textFill="WHITE" AnchorPane.leftAnchor="28.0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
+      <Button layoutY="259.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="250.0" text="Statistics">
+         <styleClass>
+            <String fx:value="button-in-main" />
+            <String fx:value="button_hover" />
+         </styleClass>
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../imgs/statistics.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="23.0" />
+         </font>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+      </Button>
+      <Button layoutY="314.0" mnemonicParsing="false" onAction="#Back_Exam" prefHeight="55.0" prefWidth="250.0" text="Exam">
+         <styleClass>
+            <String fx:value="button-in-main" />
+            <String fx:value="button_hover" />
+         </styleClass>
+         <font>
+            <Font size="23.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../imgs/test.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+      </Button>
+      <Button layoutY="369.0" mnemonicParsing="false" onAction="#Back_Submission" prefHeight="55.0" prefWidth="250.0" text="Submission">
+         <styleClass>
+            <String fx:value="button-in-main" />
+            <String fx:value="button_hover" />
+         </styleClass>
+         <font>
+            <Font size="23.0" />
+         </font>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../imgs/assessment.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutY="424.0" mnemonicParsing="false" onAction="#Back_Question" prefHeight="55.0" prefWidth="250.0" text="Question">
+         <styleClass>
+            <String fx:value="button-in-main" />
+            <String fx:value="button_hover" />
+         </styleClass>
+         <font>
+            <Font size="23.0" />
+         </font>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../imgs/ballot.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutY="479.0" mnemonicParsing="false" onAction="#Back_Group" prefHeight="55.0" prefWidth="250.0" text="Group">
+         <styleClass>
+            <String fx:value="button-in-main" />
+            <String fx:value="button_hover" />
+         </styleClass>
+         <font>
+            <Font size="23.0" />
+         </font>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../imgs/users.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutY="845.0" mnemonicParsing="false" onAction="#LogOut_Quizz" prefHeight="55.0" prefWidth="250.0" text="Log out" AnchorPane.bottomAnchor="0.0">
+         <styleClass>
+            <String fx:value="button-in-main" />
+            <String fx:value="button_hover" />
+         </styleClass>
+         <font>
+            <Font size="23.0" />
+         </font>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../imgs/logout.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <AnchorPane fx:id="AnchorPaneLayout" layoutX="250.0" prefHeight="900.0" prefWidth="1050.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+   </children>
+</AnchorPane>

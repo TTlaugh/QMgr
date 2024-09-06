@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Student_Exam">
+   <children>
+      <AnchorPane fx:id="anchor_Exam" layoutX="54.0" layoutY="34.0" prefHeight="833.0" prefWidth="1192.0" stylesheets="@../css/style.css" visible="false" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="54.0" AnchorPane.rightAnchor="54.0" AnchorPane.topAnchor="34.0">
+         <styleClass>
+            <String fx:value="white-background" />
+            <String fx:value="round-layout" />
+         </styleClass>
+         <children>
+            <Label alignment="CENTER" layoutX="421.0" layoutY="14.0" prefHeight="75.0" text="Exam Question" textFill="#33cccc" AnchorPane.leftAnchor="419.0" AnchorPane.rightAnchor="419.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="Kristen ITC" size="47.0" />
+               </font>
+            </Label>
+            <ListView fx:id="listView_Exam" layoutX="39.0" layoutY="127.0" prefHeight="660.0" prefWidth="272.0" styleClass="round-layout" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="127.0" />
+            <AnchorPane layoutX="346.0" layoutY="127.0" prefHeight="516.0" prefWidth="802.0" styleClass="round-layout" AnchorPane.bottomAnchor="189.0" AnchorPane.leftAnchor="345.0" AnchorPane.rightAnchor="44.0" AnchorPane.topAnchor="127.0">
+               <children>
+                  <TextArea fx:id="textArea_Content" editable="false" layoutX="24.0" layoutY="14.0" prefHeight="177.0" prefWidth="756.0" AnchorPane.bottomAnchor="322.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="round-layout" />
+                        <String fx:value="transparent" />
+                     </styleClass>
+                  </TextArea>
+                  <CheckBox fx:id="checkBoxA" layoutX="21.0" layoutY="219.0" mnemonicParsing="false" text="A:" AnchorPane.bottomAnchor="269.0" AnchorPane.leftAnchor="20.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </CheckBox>
+                  <TextArea fx:id="answerA" editable="false" layoutX="141.0" layoutY="207.0" prefHeight="63.0" prefWidth="699.0" wrapText="true" AnchorPane.bottomAnchor="245.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="21.0">
+                     <styleClass>
+                        <String fx:value="round-layout" />
+                        <String fx:value="transparent" />
+                     </styleClass>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextArea>
+                  <CheckBox fx:id="checkBoxB" layoutX="21.0" layoutY="293.0" mnemonicParsing="false" text="B:" AnchorPane.bottomAnchor="195.0" AnchorPane.leftAnchor="20.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </CheckBox>
+                  <TextArea fx:id="answerB" editable="false" layoutX="141.0" layoutY="281.0" prefHeight="63.0" prefWidth="699.0" wrapText="true" AnchorPane.bottomAnchor="171.0" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="21.0">
+                     <styleClass>
+                        <String fx:value="round-layout" />
+                        <String fx:value="transparent" />
+                     </styleClass>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextArea>
+                  <CheckBox fx:id="checkBoxC" layoutX="21.0" layoutY="368.0" mnemonicParsing="false" text="C:" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="20.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </CheckBox>
+                  <TextArea fx:id="answerC" editable="false" layoutX="142.0" layoutY="356.0" prefHeight="63.0" prefWidth="699.0" wrapText="true" AnchorPane.bottomAnchor="96.0" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="21.0">
+                     <styleClass>
+                        <String fx:value="round-layout" />
+                        <String fx:value="transparent" />
+                     </styleClass>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextArea>
+                  <CheckBox fx:id="checkBoxD" layoutX="21.0" layoutY="443.0" mnemonicParsing="false" text="D:" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="20.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </CheckBox>
+                  <TextArea fx:id="answerD" editable="false" layoutX="142.0" layoutY="431.0" prefHeight="63.0" prefWidth="699.0" wrapText="true" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="21.0">
+                     <styleClass>
+                        <String fx:value="round-layout" />
+                        <String fx:value="transparent" />
+                     </styleClass>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextArea>
+               </children>
+            </AnchorPane>
+            <Button layoutX="1052.0" layoutY="761.0" mnemonicParsing="false" onAction="#submit" prefHeight="38.0" prefWidth="120.0" text="Submit" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Button>
+            <Button layoutX="1002.0" layoutY="654.0" mnemonicParsing="false" onAction="#save_Exam" prefHeight="38.0" prefWidth="120.0" text="Save" textFill="WHITE" AnchorPane.bottomAnchor="126.0" AnchorPane.rightAnchor="70.0">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <BorderPane fx:id="start_Exam" layoutX="445.0" layoutY="301.0" prefHeight="299.0" prefWidth="411.0" AnchorPane.leftAnchor="445.0" AnchorPane.rightAnchor="445.0">
+         <styleClass>
+            <String fx:value="round-layout" />
+            <String fx:value="white-background" />
+         </styleClass>
+         <top>
+            <ImageView fitHeight="140.0" fitWidth="198.0" pickOnBounds="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../imgs/good_luck.gif" />
+               </image>
+            </ImageView>
+         </top>
+         <center>
+            <Label alignment="CENTER" prefHeight="63.0" prefWidth="361.0" text="Login Successfull !!" textFill="#33cccc" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Kristen ITC" size="38.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets bottom="20.0" />
+               </BorderPane.margin>
+            </Label>
+         </center>
+         <bottom>
+            <Button mnemonicParsing="false" onAction="#start" prefHeight="52.0" prefWidth="180.0" text="Start Exam" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets bottom="20.0" />
+               </BorderPane.margin>
+            </Button>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

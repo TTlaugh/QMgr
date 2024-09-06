@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1050.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GroupController">
+   <children>
+      <AnchorPane layoutX="325.0" layoutY="199.0" prefHeight="433.0" prefWidth="400.0" AnchorPane.bottomAnchor="198.0" AnchorPane.leftAnchor="325.0" AnchorPane.rightAnchor="325.0" AnchorPane.topAnchor="199.0">
+         <styleClass>
+            <String fx:value="white-background" />
+            <String fx:value="round-layout" />
+         </styleClass>
+         <children>
+            <Button layoutX="14.0" layoutY="12.0" mnemonicParsing="false" onAction="#Back_Group" styleClass="button-back" text="Back" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../imgs/leftarrow.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label alignment="CENTER" layoutX="71.0" layoutY="69.0" prefHeight="56.0" prefWidth="259.0" text="Add Student" textFill="#ff6d97" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="69.0">
+               <font>
+                  <Font name="Kristen ITC" size="35.0" />
+               </font>
+            </Label>
+            <Label layoutX="30.0" layoutY="161.0" text="Student ID:" AnchorPane.leftAnchor="30.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="30.0" layoutY="203.0" text="First Name:" AnchorPane.leftAnchor="30.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="textField_FirstNameAdd_GroupAdd" layoutX="136.0" layoutY="200.0" prefHeight="33.0" prefWidth="234.0" promptText="First Name" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="30.0">
+               <styleClass>
+                  <String fx:value="transparent" />
+                  <String fx:value="round-layout" />
+               </styleClass>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <Label layoutX="30.0" layoutY="287.0" text="Phone:" AnchorPane.leftAnchor="30.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="textField_LastNameAdd_GroupAdd" layoutX="136.0" layoutY="242.0" prefHeight="33.0" prefWidth="234.0" promptText="Last Name" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="30.0">
+               <styleClass>
+                  <String fx:value="transparent" />
+                  <String fx:value="round-layout" />
+               </styleClass>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textField_PhoneAdd_GroupAdd" layoutX="136.0" layoutY="284.0" prefHeight="33.0" prefWidth="234.0" promptText="Phone" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="30.0">
+               <styleClass>
+                  <String fx:value="transparent" />
+                  <String fx:value="round-layout" />
+               </styleClass>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textField_EmailAdd_GroupAdd" layoutX="136.0" layoutY="326.0" prefHeight="33.0" prefWidth="234.0" promptText="Email" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="30.0">
+               <styleClass>
+                  <String fx:value="transparent" />
+                  <String fx:value="round-layout" />
+               </styleClass>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <Label layoutX="30.0" layoutY="245.0" text="Last Name:" AnchorPane.leftAnchor="30.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="30.0" layoutY="329.0" text="Email:" AnchorPane.leftAnchor="30.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button layoutX="319.0" layoutY="380.0" mnemonicParsing="false" onAction="#saveStudent_Group" prefHeight="35.0" prefWidth="66.0" text="Save" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <TextField fx:id="textField_IdAdd_GroupAdd" layoutX="136.0" layoutY="158.0" prefHeight="33.0" prefWidth="234.0" promptText="ID(Ex: S007)" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="30.0">
+               <styleClass>
+                  <String fx:value="transparent" />
+                  <String fx:value="round-layout" />
+               </styleClass>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

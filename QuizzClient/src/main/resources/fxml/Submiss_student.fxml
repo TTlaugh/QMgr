@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Student_Exam">
+   <children>
+      <Label alignment="CENTER" layoutX="367.0" layoutY="204.0" prefHeight="248.0" prefWidth="566.0" text="Thanks you for your submission" textAlignment="CENTER" textFill="#33cccc" wrapText="true" AnchorPane.leftAnchor="367.0" AnchorPane.rightAnchor="367.0">
+         <font>
+            <Font name="Kristen ITC" size="68.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="207.0" layoutY="228.0" pickOnBounds="true" rotate="90.0" AnchorPane.leftAnchor="210.0">
+         <image>
+            <Image url="@../imgs/congrate.gif" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="883.0" layoutY="228.0" pickOnBounds="true" rotate="180.0" AnchorPane.rightAnchor="210.0">
+         <image>
+            <Image url="@../imgs/congrate.gif" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="466.0" layoutY="450.0" prefHeight="55.0" prefWidth="235.0" text="Your score:" AnchorPane.leftAnchor="466.0" AnchorPane.rightAnchor="599.0">
+         <font>
+            <Font name="System Bold" size="38.0" />
+         </font>
+      </Label>
+      <Label fx:id="score_Sub" alignment="CENTER" layoutX="708.0" layoutY="450.0" prefHeight="40.0" prefWidth="46.0" AnchorPane.leftAnchor="708.0" AnchorPane.rightAnchor="445.0">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

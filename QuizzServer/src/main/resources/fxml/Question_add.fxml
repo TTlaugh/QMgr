@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1050.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QuestionController">
+   <children>
+      <AnchorPane layoutX="133.0" layoutY="52.0" prefHeight="727.0" prefWidth="800.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="133.0" AnchorPane.rightAnchor="117.0" AnchorPane.topAnchor="52.0">
+         <styleClass>
+            <String fx:value="white-background" />
+            <String fx:value="round-layout" />
+         </styleClass>
+         <children>
+            <Button layoutX="14.0" layoutY="12.0" mnemonicParsing="false" onAction="#Back_Question" styleClass="button-back" text="Back" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../imgs/leftarrow.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label alignment="CENTER" layoutX="61.0" layoutY="69.0" prefHeight="56.0" prefWidth="281.0" text="Add Question" textFill="#ff6d97" AnchorPane.leftAnchor="61.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="69.0">
+               <font>
+                  <Font name="Kristen ITC" size="35.0" />
+               </font>
+            </Label>
+            <Label layoutX="30.0" layoutY="203.0" text="Chapter:" AnchorPane.leftAnchor="30.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="chapter_QuestionAdd" layoutX="146.0" layoutY="200.0" prefHeight="33.0" prefWidth="59.0" text="1" AnchorPane.leftAnchor="146.0">
+               <styleClass>
+                  <String fx:value="transparent" />
+                  <String fx:value="round-layout" />
+               </styleClass>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <Label layoutX="30.0" layoutY="287.0" text="Content:" AnchorPane.leftAnchor="30.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="30.0" layoutY="245.0" text="Difficulty:" AnchorPane.leftAnchor="30.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button layoutX="319.0" layoutY="380.0" mnemonicParsing="false" onAction="#save_DataAdd_QuestionAdd" prefHeight="35.0" prefWidth="66.0" text="Save" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <RadioButton fx:id="radioEasy_QuestionAdd" layoutX="148.0" layoutY="245.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="84.0" selected="true" text="Easy" AnchorPane.leftAnchor="145.0">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="radioMedium_QuestionAdd" layoutX="227.0" layoutY="248.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="103.0" text="Medium" AnchorPane.leftAnchor="226.0">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="radioHard_QuestionAdd" layoutX="331.0" layoutY="248.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="73.0" text="Hard" AnchorPane.leftAnchor="331.0">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </RadioButton>
+            <CheckBox fx:id="checkBoxA_QuestionAdd" layoutX="30.0" layoutY="365.0" mnemonicParsing="false" text="Answer A:" AnchorPane.leftAnchor="30.0">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </CheckBox>
+            <TextArea fx:id="content_QuestionAdd" layoutX="152.0" layoutY="287.0" prefHeight="63.0" prefWidth="617.0" wrapText="true" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="30.0">
+               <styleClass>
+                  <String fx:value="round-layout" />
+                  <String fx:value="transparent" />
+               </styleClass>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextArea>
+            <TextArea fx:id="answerA_QuestionAdd" layoutX="147.0" layoutY="365.0" prefHeight="63.0" prefWidth="623.0" wrapText="true" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="30.0">
+               <styleClass>
+                  <String fx:value="round-layout" />
+                  <String fx:value="transparent" />
+               </styleClass>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextArea>
+            <CheckBox fx:id="checkBoxB_QuestionAdd" layoutX="29.0" layoutY="442.0" mnemonicParsing="false" text="Answer B:" AnchorPane.leftAnchor="30.0">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </CheckBox>
+            <TextArea fx:id="answerB_QuestionAdd" layoutX="146.0" layoutY="442.0" prefHeight="63.0" prefWidth="623.0" wrapText="true" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="30.0">
+               <styleClass>
+                  <String fx:value="round-layout" />
+                  <String fx:value="transparent" />
+               </styleClass>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextArea>
+            <CheckBox fx:id="checkBoxC_QuestionAdd" layoutX="29.0" layoutY="519.0" mnemonicParsing="false" text="Answer C:" AnchorPane.leftAnchor="30.0">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </CheckBox>
+            <TextArea fx:id="answerC_QuestionAdd" layoutX="146.0" layoutY="519.0" prefHeight="63.0" prefWidth="623.0" wrapText="true" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="30.0">
+               <styleClass>
+                  <String fx:value="round-layout" />
+                  <String fx:value="transparent" />
+               </styleClass>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextArea>
+            <CheckBox fx:id="checkBoxD_QuestionAdd" layoutX="30.0" layoutY="596.0" mnemonicParsing="false" text="Answer D:" AnchorPane.leftAnchor="30.0">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </CheckBox>
+            <TextArea fx:id="answerD_QuestionAdd" layoutX="147.0" layoutY="596.0" prefHeight="63.0" prefWidth="623.0" wrapText="true" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="30.0">
+               <styleClass>
+                  <String fx:value="round-layout" />
+                  <String fx:value="transparent" />
+               </styleClass>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextArea>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

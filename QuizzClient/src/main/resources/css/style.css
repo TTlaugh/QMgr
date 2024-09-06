@@ -1,0 +1,162 @@
+.background {
+	-fx-background-image:url('/imgs/background.jpg');
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover;
+}
+
+.white-background{
+	-fx-background-color: #fff;
+}
+
+.gray-background{
+	-fx-background-color: #EEEEEE;
+}
+
+.transparent{
+	-fx-background-color: rgba(0,0,0,0);
+}
+
+.round-layout{
+	-fx-border-radius: 10;
+	-fx-border-color: #D7D7D7;
+	-fx-background-radius: 10;
+}
+
+.button {
+	-fx-background-radius: 12;
+	-fx-background-color:  #33cccc;
+	-fx-text-fill:  white;
+	-fx-cursor: hand;
+}
+
+.button_hover:hover {
+	-fx-background-color: #EEEEEE;
+}
+
+.button-in-login {
+	-fx-background-color: transparent;
+	-fx-border-radius: 0;
+	-fx-background-radius: 0;
+	-fx-text-fill: #ff6d97;
+}
+
+.button-in-main {
+	-fx-background-color: transparent;
+	-fx-border-radius: 0;
+	-fx-background-radius: 0;
+	-fx-alignment: left;
+	-fx-text-fill: black;
+}
+
+.button-back {
+	-fx-background-color: transparent;
+	-fx-border-radius: 0;
+	-fx-background-radius: 0;
+	-fx-text-fill: black;
+}
+
+.button-start {
+	-fx-background-color: transparent;
+	-fx-border-radius: 0;
+	-fx-background-radius: 0;
+}
+
+.table-view {
+	-fx-background-radius: 10 ;
+	-fx-border-radius: 10;
+	-fx-background-color: white;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+}
+
+.table-view .corner {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell{
+	-fx-alignment: CENTER;
+    -fx-text-fill: black;
+    -fx-font-size: 18;
+    -fx-border-color: transparent;
+}
+
+.table-view .column-header-background .label {
+	-fx-text-fill: #fce3db;
+	-fx-font-size: 20px;
+}
+
+.column-header-background{
+	-fx-background-color:  #fc94ab;
+	-fx-background-radius: 10 ;
+	-fx-border-radius: 10;
+	-fx-pref-height: 35;
+}
+
+.date-picker {
+	-fx-background-radius: 10;
+	-fx-background-color: transparent;
+	-fx-border-color: #D7D7D7;
+	-fx-border-radius: 10;
+}
+
+.date-picker > .text-field {
+	-fx-background-radius: 10 0 0 10;
+	-fx-background-color: transparent;
+}
+
+.date-picker > .arrow-button {
+	-fx-background-radius: 0.0 10 10 0;
+	-fx-background-color:  #D7D7D7;
+}
+
+.spinner {
+	-fx-background-radius: 10;
+	-fx-background-color: transparent;
+}
+
+.spinner > .text-field {
+	-fx-background-radius: 10 0 0 10;
+	-fx-background-color: transparent;
+	-fx-border-color: #D7D7D7;
+	-fx-border-radius: 10 0 0 10;
+	-fx-font-size: 15px;
+}
+
+.spinner > .increment-arrow-button {
+	-fx-background-radius: 0.0 10 0 0;
+	-fx-background-color:  #D7D7D7;
+}
+
+.spinner > .decrement-arrow-button {
+	-fx-background-radius: 0.0 0 10 0;
+	-fx-background-color:  #D7D7D7;
+}
+
+.text-area .content {
+	-fx-background-color: transparent;
+	-fx-background-radius: 10;
+}
+
+.check-box .box {
+    -fx-background-color: white;
+    -fx-border-color: grey;
+    -fx-border-radius: 3px;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: white;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #1e81b0;
+}
+
+.list-cell{
+    -fx-font-size:18.0;
+}

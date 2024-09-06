@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1050.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ExamController">
+   <children>
+      <Label layoutX="60.0" layoutY="14.0" prefHeight="75.0" prefWidth="133.0" text="Exam" textFill="#ff6d97" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font name="Kristen ITC" size="47.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" fillHeight="false" layoutX="205.0" layoutY="51.0" maxHeight="-Infinity" prefHeight="35.0" prefWidth="267.0" styleClass="round-layout" AnchorPane.leftAnchor="205.0" AnchorPane.topAnchor="51.0">
+         <children>
+            <TextField fx:id="textFile_Exam" onAction="#search_Exam" prefHeight="31.0" prefWidth="218.0" promptText="Search" styleClass="transparent">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </TextField>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../imgs/search2.png" />
+               </image>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </HBox>
+      <TableView fx:id="tableView_Exam" layoutX="30.0" layoutY="102.0" prefHeight="702.0" prefWidth="990.0" AnchorPane.bottomAnchor="96.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="102.0">
+         <columns>
+            <TableColumn fx:id="ID_Exam_Column" prefWidth="175.0" resizable="false" text="ID" />
+            <TableColumn fx:id="Subject_Exam_Column" prefWidth="161.0" resizable="false" text="Subject" />
+            <TableColumn fx:id="DateTime_Exam_Column" prefWidth="190.0" resizable="false" text="Date Time" />
+            <TableColumn fx:id="Time_Exam_Column" prefWidth="136.0" resizable="false" text="Time" />
+            <TableColumn fx:id="Name_Exam_Column" prefWidth="325.0" text="Name" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <ComboBox fx:id="subject_Exam" layoutX="483.0" layoutY="50.0" prefHeight="35.0" prefWidth="100.0" promptText="Subject">
+         <styleClass>
+            <String fx:value="transparent" />
+            <String fx:value="round-layout" />
+         </styleClass>
+      </ComboBox>
+      <Button fx:id="picktoTest" layoutX="945.0" layoutY="747.0" mnemonicParsing="false" onAction="#button_PickToTest" prefHeight="35.0" prefWidth="120.0" text="Pick to test" textFill="WHITE" visible="false" AnchorPane.bottomAnchor="48.0" AnchorPane.rightAnchor="30.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button layoutX="979.0" layoutY="48.0" mnemonicParsing="false" onAction="#Exam_Tranfer_ExamAdd_Quizz" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50; -fx-background-color: #ff6d97;" styleClass="transparent" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="48.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../imgs/add.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="viewExam_Exam" layoutX="929.0" layoutY="48.0" mnemonicParsing="false" onAction="#Exam_Tranfer_ExamView_Quizz" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50; -fx-background-color: #ff6d97;" styleClass="transparent" visible="false" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="48.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../imgs/view.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="deleteExam_Exam" layoutX="880.0" layoutY="49.0" mnemonicParsing="false" onAction="#Delete_Exam_Exam" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50; -fx-background-color: #ff6d97;" styleClass="transparent" visible="false" AnchorPane.rightAnchor="129.0" AnchorPane.topAnchor="48.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../imgs/delete.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <DatePicker fx:id="DatePicker_Exam" layoutX="592.0" layoutY="50.0" prefHeight="35.0" prefWidth="100.0" />
+      <Spinner fx:id="spinner_Exam" editable="true" layoutX="703.0" layoutY="50.0" prefHeight="35.0" prefWidth="66.0" />
+   </children>
+</AnchorPane>
