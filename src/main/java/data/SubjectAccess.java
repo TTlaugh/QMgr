@@ -57,23 +57,34 @@ public class SubjectAccess implements DataAccess<Subject> {
 	public Subject get(String... primaryKeyValues) throws SQLException {
 		return get(Subject.class,
 				"SELECT * FROM Subjects"
-				+ " INNER JOIN Teachers ON Subjects.TeacherID = Teachers.TeacherID",
+						+ " INNER JOIN Teachers ON Subjects.TeacherID = Teachers.TeacherID",
 				"Subjects.SubjectID", primaryKeyValues[0]);
 	}
 
 	public List<Subject> getAll(String teacherID) throws SQLException {
-		return getList(Subject.class,
+		return getList(Subject.class, // truyen vao doi tuong the hien thong tin cua class Subject
 				"SELECT * FROM Subjects"
-				+ " INNER JOIN Teachers ON Subjects.TeacherID = Teachers.TeacherID",
+						+ " INNER JOIN Teachers ON Subjects.TeacherID = Teachers.TeacherID",
 				"Teachers.TeacherID", teacherID);
 	}
 
 	public void getTeacher(Subject subject) throws SQLException {
 		subject.setTeacher(get(Teacher.class,
 				"SELECT Teachers.TeacherID, Person.* FROM Subjects"
-				+ " INNER JOIN Teachers ON Subjects.TeacherID = Teachers.TeacherID"
-				+ " INNER JOIN Person ON Teachers.PersonID = Person.PersonID",
+						+ " INNER JOIN Teachers ON Subjects.TeacherID = Teachers.TeacherID"
+						+ " INNER JOIN Person ON Teachers.PersonID = Person.PersonID",
 				"Subjects.SubjectID", subject.getSubjectID()));
 	}
 
+}
+public boolean update(Subject subject) throws SQLException{
+	connection=SQLUtils.getConnection();
+	PreparedStatement pStatement= connection.prepareStatement(
+		"UPDATE Subject SET"+"SubjectID=?,"+"TeacherID=?,"+"SubjectName=?"+"Where SubjectID=?");
+		pStatement.setString(subject.getSubjectID);
+		pStatement.setString(subject.getTeachers.getTeacherID);
+		pStatement.setString(subject.getSubjectName);
+		boolean i=pStatement.executeUpdate()>=1;
+		SQLUtils.closeConncetion(connection);
+		return i;
 }
