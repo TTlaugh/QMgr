@@ -2,11 +2,9 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import business.model.Exam;
-import business.model.Group;
 import business.model.SelectedQuestion;
 import business.model.Student;
 import business.model.Subject;
@@ -36,7 +34,7 @@ import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
-import utils.DisplayDialog_Notification;
+import utils.Notification;
 
 public class SubmissionController implements Initializable {
 	private Scene scene = null;
@@ -44,7 +42,7 @@ public class SubmissionController implements Initializable {
 	private AnchorPane anchor;
 
 	private ObservableList<Submission> observableList;
-	
+
 	private List<Submission> listSubmission;
 	@FXML
 	private VBox vBox_Submissview = new VBox();
@@ -61,12 +59,12 @@ public class SubmissionController implements Initializable {
 	@FXML
 	private TableColumn<Submission, Integer> TTaken_Submission = new TableColumn<Submission, Integer>();
 
-    @FXML
-    private TableColumn<Submission, String> Subjects_Submission=new TableColumn<Submission,String>();
+	@FXML
+	private TableColumn<Submission, String> Subjects_Submission = new TableColumn<Submission, String>();
 
 	@FXML
 	private Button view_Submission = new Button();
-	
+
 	@FXML
 	private Button delete_Submission = new Button();
 
@@ -81,17 +79,17 @@ public class SubmissionController implements Initializable {
 	@FXML
 	private Label studentID_SubmissView = new Label();
 
-    @FXML
-    private TextField examID_textFiled=new TextField();
+	@FXML
+	private TextField examID_textFiled = new TextField();
 
-    @FXML
-    private Button search_Submiss=new Button();
+	@FXML
+	private Button search_Submiss = new Button();
 
-    @FXML
-    private TextField student_ID_textField=new TextField();
+	@FXML
+	private TextField student_ID_textField = new TextField();
 
-    @FXML
-    private ComboBox<Subject> subjectt_ComboBox=new ComboBox<Subject>();
+	@FXML
+	private ComboBox<Subject> subjectt_ComboBox = new ComboBox<Subject>();
 
 	private static SubmissionManager submissionManager = new SubmissionManager();
 
@@ -99,13 +97,12 @@ public class SubmissionController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		if (submission_Current != null && listSubmission!=null) {
-			
+
+		if (submission_Current != null && listSubmission != null) {
 			delete_Submission.setVisible(true);
 			view_Submission.setVisible(true);
 		}
-		for(Subject sub:new QuestionManager().getSubjects(LoginController.teacher_Current)) {
+		for (Subject sub : new QuestionManager().getSubjects(LoginController.teacher_Current)) {
 			subjectt_ComboBox.getItems().add(sub);
 		}
 		subjectt_ComboBox.setConverter(new StringConverter<Subject>() {
@@ -131,32 +128,33 @@ public class SubmissionController implements Initializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		loadData_Submission();
-		if(submission_Current!=null)
-		load_SubmissView();
+		if (submission_Current != null)
+			load_SubmissView();
 	}
-    @FXML
-    void button_Search_Submiss(ActionEvent event) {
-    	String subject_ID=String.valueOf(subjectt_ComboBox.getValue().getSubjectID()); 
-    	String exam_ID =examID_textFiled.getText() ;
-    	String student_ID=	student_ID_textField.getText();
-    	
-    	if(submissionManager.searchSubmissions(subject_ID, exam_ID, student_ID)==null)
-    		DisplayDialog_Notification.Dialog_Infomation("null", "Hong tim thay", student_ID);
-    	else {
-    		tableView_Submission.getItems().clear();
-    		List<Submission> list=submissionManager.searchSubmissions(subject_ID, exam_ID, student_ID);
-    		tableView_Submission.setItems(loadStudent_tableView(list));
-    	}
-    }
+
+	@FXML
+	void button_Search_Submiss(ActionEvent event) {
+		String subject_ID = String.valueOf(subjectt_ComboBox.getValue().getSubjectID());
+		String exam_ID = examID_textFiled.getText();
+		String student_ID = student_ID_textField.getText();
+
+		List<Submission> list_Submiss = submissionManager.searchSubmissions(subject_ID, exam_ID, student_ID);
+		if (list_Submiss == null) {
+			Notification.Infomation(Notification.Default, "Danh sách rỗng");
+			return;
+		}
+		tableView_Submission.getItems().clear();
+		tableView_Submission.setItems(loadStudent_tableView(list_Submiss));
+	}
 
 	private void load_SubmissView() {
 		studentID_SubmissView.setText(submission_Current.getStudent().getStudentID());
 		ExamID_SubmissView.setText(submission_Current.getExam().getExamID().toString());
 		score_SubmissView.setText(String.valueOf(submission_Current.getScore()));
 		List<SelectedQuestion> list = submissionManager.getSelectedQuestions(submission_Current);
-		
+
 		for (SelectedQuestion submissSelect : list) {
 			Separator separator = new Separator();
 			Label labelQues = new Label(submissSelect.getContent());
@@ -201,16 +199,17 @@ public class SubmissionController implements Initializable {
 		listSubmission = submissionManager.getSubmissions(LoginController.teacher_Current);
 		tableView_Submission.setItems(loadStudent_tableView(listSubmission));
 	}
-	
+
 	public StringProperty getStudentID(Student student) {
 		StringProperty id = new SimpleStringProperty(student.getStudentID());
 		return id;
 	}
-	
+
 	public StringProperty getExamID(Exam exam) {
 		StringProperty exam_ID = new SimpleStringProperty(exam.getExamID().toString());
 		return exam_ID;
 	}
+
 	public StringProperty getSubjectName(Subject subject) {
 		StringProperty subject_Name = new SimpleStringProperty(subject.getSubjectName());
 		return subject_Name;
@@ -224,21 +223,22 @@ public class SubmissionController implements Initializable {
 		ExamID_Submission.setCellValueFactory(cellData -> getExamID(cellData.getValue().getExam()));
 		StudentID_Submission.setCellValueFactory(cellData -> getStudentID(cellData.getValue().getStudent()));
 		Subjects_Submission.setCellValueFactory(cellData -> getSubjectName(cellData.getValue().getExam().getSubject()));
-		
+
 		return observableList;
 	}
 
 	@FXML
 	void button_Delete_Submission(ActionEvent event) {
 		Submission sub_Delete = tableView_Submission.getSelectionModel().getSelectedItem();
-		if (!submissionManager.deleteSubmission(sub_Delete)) {
-			DisplayDialog_Notification.Dialog_Error("Unsuccessful notification!", "Submission wasn't delete!",
-					"Unsuccessful!");
-		} else {
-			tableView_Submission.getItems().remove(sub_Delete);
-			DisplayDialog_Notification.Dialog_Infomation("Successful notification!", "Submission was deleted!",
-					"Successful!");
+
+		Boolean check_DeleteSubmiss = submissionManager.deleteSubmission(sub_Delete);
+		if (!check_DeleteSubmiss) {
+			Notification.Error(Notification.Unsuccessfully, "Bài nộp chưa được xóa");
+			return;
 		}
+		tableView_Submission.getItems().remove(sub_Delete);
+		Notification.Infomation(Notification.Successfully, "Bài nộp đã được xóa");
+
 	}
 
 	@FXML

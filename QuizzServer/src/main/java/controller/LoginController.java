@@ -9,14 +9,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import utils.DisplayDialog_Notification;
+
+import utils.Notification;
 
 public class LoginController {
 	private Parent root = null;
@@ -62,53 +60,74 @@ public class LoginController {
 		(Anchor_SignIn).setVisible(true);
 	}
 
-	public void Sign_In(ActionEvent event) throws IOException {	
-			if (textField_User_Login.getText() == null || textField_User_Login.getText() == ""
-					|| textField_Password_Login.getText() == null || textField_Password_Login.getText() == "") {
-				DisplayDialog_Notification.Dialog_Error("Error", " Please enter complete information", " Error");
-			} else {
-				try {
-					teacher_Current = welcom_Login.signIn(textField_User_Login.getText(),
-							textField_Password_Login.getText());
-					
-					if (teacher_Current != null  ) {
-						root = (Parent) FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
-						((Node) event.getSource()).getScene().setRoot(root);
-					} else {
-						DisplayDialog_Notification.Dialog_Error(" Error", "Username or password is incorrect", " Error");
-					}
-					
-				}catch(Exception e) {
-					DisplayDialog_Notification.Dialog_Error("Error", "Tai khoan khong co trong du lieu", null);
-				}
-			}
+	public boolean checkInfomationLogin() {
+		return textField_User_Login.getText() == null || textField_User_Login.getText() == ""
+				|| textField_Password_Login.getText() == null || textField_Password_Login.getText() == "";
 	}
 
 	@FXML
-	void SignUp_Login(ActionEvent event) throws IOException {
-		if (textField_Email_SignUp_Login.getText() != null && textField_Email_SignUp_Login.getText() != ""
+	public void Sign_In(ActionEvent event) throws IOException {
+		if (checkInfomationLogin()) {
+			Notification.Error(Notification.Error, " Nhập đầy đủ thông tin");
+			return;
+		}
+
+		try {
+			teacher_Current = welcom_Login.signIn(textField_User_Login.getText(),
+					textField_Password_Login.getText());
+			if (teacher_Current == null) {
+				Notification.Error(Notification.Error, "Tài khoản hoặc mật khẩu không đúng");
+				return;
+			}
+			root = (Parent) FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
+			((Node) event.getSource()).getScene().setRoot(root);
+
+		} catch (Exception e) {
+			Notification.Error(Notification.Error, "Tài khoản chưa được tạo");
+		}
+
+	}
+
+	public boolean checkInfomationSignUp() {
+		return textField_Email_SignUp_Login.getText() != null && textField_Email_SignUp_Login.getText() != ""
 				&& textField_FirstName_SignUp_Login.getText() != null
 				&& textField_FirstName_SignUp_Login.getText() != "" && textField_LastName_SignUp_Login.getText() != null
 				&& textField_LastName_SignUp_Login.getText() != "" && textField_Phone_SignUp_Login.getText() != null
 				&& textField_Phone_SignUp_Login.getText() != "" && textField_USer_SignUp_Login.getText() != null
 				&& textField_USer_SignUp_Login.getText() != "" && textField_Password_SignUp_Login.getText() != null
-				&& textField_Password_SignUp_Login.getText() != "") {
-			Teacher teacher_SignUp = new Teacher(
-					textField_USer_SignUp_Login.getText(), 
-					textField_FirstName_SignUp_Login.getText(), 
-					textField_LastName_SignUp_Login.getText(),
-					textField_Phone_SignUp_Login.getText(),
-					textField_Email_SignUp_Login.getText());
-			if (welcom_Login.signUp(teacher_SignUp, textField_Password_SignUp_Login.getText())
-					&& DisplayDialog_Notification
-							.Dialog_Comfrim("Notification", "Congratulations, you have successfully registered",
-									"Do you want to switch to the login page now?")
-							.getResult() == ButtonType.YES) 
-				Sign_In_Tranfer(event);
-		} else {
-			DisplayDialog_Notification.Dialog_Error(" Notice filled in completely", "Please enter complete information",
-					"Error");
+				&& textField_Password_SignUp_Login.getText() != "";
+	}
+
+	@FXML
+	void SignUp_Login(ActionEvent event) throws IOException {
+
+		if (!checkInfomationSignUp()) {
+			Notification.Error(Notification.Error, "Nhập đầy đủ thông tin");
+			return;
 		}
+
+		Teacher teacher_SignUp = new Teacher(
+				textField_USer_SignUp_Login.getText(),
+				textField_FirstName_SignUp_Login.getText(),
+				textField_LastName_SignUp_Login.getText(),
+				textField_Phone_SignUp_Login.getText(),
+				textField_Email_SignUp_Login.getText());
+
+		Boolean create_Account = welcom_Login.signUp(teacher_SignUp, textField_Password_SignUp_Login.getText());
+
+		if (!create_Account) {
+			Notification.Error(Notification.Error, "Tạo tài khoản thất bại do");
+			return;
+		}
+		Boolean signIn_Account = Notification
+				.Comfrim(Notification.Default,
+						"Chúc mừng, bạn đã tạo tài khoản thành công \n"
+								+ "Bạn có muốn đăng nhập ngay bây giờ?")
+				.getResult() == ButtonType.YES;
+
+		if (signIn_Account)
+			Sign_In_Tranfer(event);
+
 	}
 
 }

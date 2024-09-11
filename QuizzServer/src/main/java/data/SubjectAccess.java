@@ -77,14 +77,3 @@ public class SubjectAccess implements DataAccess<Subject> {
 	}
 
 }
-public boolean update(Subject subject) throws SQLException{
-	connection=SQLUtils.getConnection();
-	PreparedStatement pStatement= connection.prepareStatement(
-		"UPDATE Subject SET"+"SubjectID=?,"+"TeacherID=?,"+"SubjectName=?"+"Where SubjectID=?");
-		pStatement.setString(subject.getSubjectID);
-		pStatement.setString(subject.getTeachers.getTeacherID);
-		pStatement.setString(subject.getSubjectName);
-		boolean i=pStatement.executeUpdate()>=1;
-		SQLUtils.closeConncetion(connection);
-		return i;
-}

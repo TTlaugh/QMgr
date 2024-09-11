@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import business.model.Question;
@@ -39,15 +40,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.util.StringConverter;
-import utils.DisplayDialog_Notification;
+import utils.Notification;
 import utils.OpenFileExplorer;
 
 public class QuestionController implements Initializable {
 	private Scene scene = null;
 
 	private AnchorPane anchor;
-	
-	public static List<Subject> subjects ;
+
+	public static List<Subject> subjects;
 
 	private QuestionManager quesManager = new QuestionManager();
 
@@ -71,20 +72,20 @@ public class QuestionController implements Initializable {
 
 	private static File file_Current;
 	@FXML
-    private HBox hBox_Question=new HBox();
-    @FXML
-    private TextField chapter_Question=new TextField();
-    @FXML
-    private ComboBox<String> dificult_Question=new ComboBox<String>();
-
-    @FXML
-    private TextField searchQuestion=new TextField();
+	private HBox hBox_Question = new HBox();
+	@FXML
+	private TextField chapter_Question = new TextField();
+	@FXML
+	private ComboBox<String> dificult_Question = new ComboBox<String>();
 
 	@FXML
-	private Button Export_Question_Disable=new Button();
+	private TextField searchQuestion = new TextField();
 
 	@FXML
-	private Button Import_Question_Disable=new Button();
+	private Button Export_Question_Disable = new Button();
+
+	@FXML
+	private Button Import_Question_Disable = new Button();
 
 	@FXML
 	private AnchorPane anchor_CreateSubject_Question = new AnchorPane();
@@ -108,16 +109,16 @@ public class QuestionController implements Initializable {
 	private TableView<Question> tableView_Question = new TableView<Question>();
 
 	@FXML
-	private TableColumn<Question, Integer> Question_Chapter_Column=new TableColumn<Question, Integer>();
+	private TableColumn<Question, Integer> Question_Chapter_Column = new TableColumn<Question, Integer>();
 
 	@FXML
-	private TableColumn<Question,String> Question_Difficulty_Column=new TableColumn<Question, String>();
+	private TableColumn<Question, String> Question_Difficulty_Column = new TableColumn<Question, String>();
 
 	@FXML
-	private TableColumn<Question, String> Question_Content_Column=new TableColumn<Question, String>();
+	private TableColumn<Question, String> Question_Content_Column = new TableColumn<Question, String>();
 
 	@FXML
-	private TableColumn<Question, String> Question_ID_Column=new TableColumn<Question, String>();
+	private TableColumn<Question, String> Question_ID_Column = new TableColumn<Question, String>();
 	@FXML
 	private Button button_Add_Question = new Button();
 
@@ -214,42 +215,45 @@ public class QuestionController implements Initializable {
 	@FXML
 	private RadioButton radioMedium_QuestionAdd = new RadioButton();
 
+	public void process_SubjectCurrent() {
+		button_Add_Question.setVisible(true);
+		dificult_Question.setVisible(true);
+		chapter_Question.setVisible(true);
+		hBox_Question.setVisible(true);
+		choose_Subject_Question.setValue(subject_Current);
+		question_ListOfSubject = quesManager.getQuestionsForSubject(subject_Current);
+		tableView_Question.setItems(loadQuestion_tableView(question_ListOfSubject));
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+
 		buttonRadioGroup_Add();
 		button_Add_Question.setVisible(false);
-		if(subject_Current!=null)
-		{	
-			button_Add_Question.setVisible(true);
-			dificult_Question.setVisible(true);
-			chapter_Question.setVisible(true);
-			hBox_Question.setVisible(true);
-			choose_Subject_Question.setValue(subject_Current);
-			question_ListOfSubject = quesManager.getQuestionsForSubject(subject_Current);
-			tableView_Question.setItems(loadQuestion_tableView(question_ListOfSubject));
+		if (subject_Current != null) {
+			process_SubjectCurrent();
 		}
-		
+
 		chapter_QuestionAdd.textProperty().addListener(new ChangeListener<String>() {
-		    @Override
-		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-		        String newValue) {
-		        if (!newValue.matches("\\d*")) {
-		        	chapter_QuestionAdd.setText(newValue.replaceAll("[^\\d]", ""));
-		        }
-		    }
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue,
+					String newValue) {
+				if (!newValue.matches("\\d*")) {
+					chapter_QuestionAdd.setText(newValue.replaceAll("[^\\d]", ""));
+				}
+			}
 		});
 		chapter_QuestionView.textProperty().addListener(new ChangeListener<String>() {
-		    @Override
-		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-		        String newValue) {
-		        if (!newValue.matches("\\d*")) {
-		        	chapter_QuestionView.setText(newValue.replaceAll("[^\\d]", ""));
-		        }
-		    }
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue,
+					String newValue) {
+				if (!newValue.matches("\\d*")) {
+					chapter_QuestionView.setText(newValue.replaceAll("[^\\d]", ""));
+				}
+			}
 		});
 
-		 subjects = quesManager.getSubjects(LoginController.teacher_Current);
+		subjects = quesManager.getSubjects(LoginController.teacher_Current);
 
 		for (Subject subj : subjects) {
 			choose_Subject_Question.getItems().add(subj);
@@ -267,7 +271,6 @@ public class QuestionController implements Initializable {
 			}
 		});
 
-		
 		setVisibleButton_View_Del_Question(false);
 
 		choose_Subject_Question.setOnAction(envent -> {
@@ -279,18 +282,18 @@ public class QuestionController implements Initializable {
 
 			tableView_Question.setItems(loadQuestion_tableView(question_ListOfSubject));
 			ObservableList<String> options = FXCollections.observableArrayList("Easy", "Medium", "Hard");
-			
+
 			dificult_Question.setItems(options);
 			button_Add_Question.setVisible(true);
-			
 			dificult_Question.setVisible(true);
 			chapter_Question.setVisible(true);
-			 hBox_Question.setVisible(true);
+			hBox_Question.setVisible(true);
 		});
 
 		try {
 			SelectionModel<Question> selectionModel = tableView_Question.getSelectionModel();
 			selectionModel.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+
 				if (newValue != null) {
 					QuestionController.Question_Current = newValue;
 					setVisibleButton_View_Del_Question(true);
@@ -325,21 +328,22 @@ public class QuestionController implements Initializable {
 
 		Question_ID_Column.setCellValueFactory(new PropertyValueFactory<Question, String>("questionID"));
 		Question_Chapter_Column.setCellValueFactory(new PropertyValueFactory<Question, Integer>("chapter"));
-		Question_Difficulty_Column.setCellValueFactory(cellData ->  getSubject(cellData.getValue()));
+		Question_Difficulty_Column.setCellValueFactory(cellData -> getSubject(cellData.getValue()));
 		Question_Content_Column.setCellValueFactory(new PropertyValueFactory<Question, String>("content"));
 
 		return observableList_Question;
 	}
-	private StringProperty getSubject(Question q)
-	{	
-		StringProperty string=null;
-		if(q.getDifficulty()==1)
-			string= new SimpleStringProperty("Easy");
-		else if(q.getDifficulty()==2)
-			string =new SimpleStringProperty("Medium");
-		else 
-			string =new SimpleStringProperty("Hard");	
-		return string;
+
+	private StringProperty getSubject(Question current_Question) {
+		String level = "Easy";
+
+		if (current_Question.getDifficulty() == 2)
+			level = "Medium";
+		else if (current_Question.getDifficulty() == 3)
+			level = "Hard";
+
+		return new SimpleStringProperty(level);
+
 	}
 
 	public void Question_Tranfer_QuestionView_Quizz(ActionEvent event) throws IOException {
@@ -353,44 +357,22 @@ public class QuestionController implements Initializable {
 		}
 	}
 
-	private void loadQuestionDetail(Question q) {
-		// display questionID
-		questionID_QuestionView.setText(q.getQuestionID());
-		// display chapter
-		chapter_QuestionView.setText(String.valueOf(q.getChapter()));
-		// add radio button to list
-		listRadioButton.add(radioEasy_QuestionView);
-		listRadioButton.add(radioMedium_QuestionView);
-		listRadioButton.add(radioHard_QuestionView);
-
-		// display difficulty
+	public void displayDifficulty(Question current_Question) {
 		for (int i = 0; i < listRadioButton.size(); i++) {
-			if (i + 1 == q.getDifficulty()) {
+			if (i + 1 == current_Question.getDifficulty()) {
 				listRadioButton.get(i).setSelected(true);
 				break;
 			}
 		}
-		// displayContent
-		content_QuestionView.setText(q.getContent());
-		// add TextArea to list
-		listTextArea.add(answerA_QuestionView);
-		listTextArea.add(answerB_QuestionView);
-		listTextArea.add(answerC_QuestionView);
-		listTextArea.add(answerD_QuestionView);
+	}
 
-		// display answer
-		for (int i = 0; i < q.getAnswers().size(); i++) {
-			listTextArea.get(i).setText(q.getAnswers().get(i));
-		}
+	public void displayAnswer(Question current_Question) {
+		for (int i = 0; i < current_Question.getAnswers().size(); i++)
+			listTextArea.get(i).setText(current_Question.getAnswers().get(i));
+	}
 
-		// add checkBox to list
-		listCheckBox.add(checkBoxA_QuestionView);
-		listCheckBox.add(checkBoxB_QuestionView);
-		listCheckBox.add(checkBoxC_QuestionView);
-		listCheckBox.add(checkBoxD_QuestionView);
-
-		// display correct Answer
-		for (Integer i : q.getCorrectAnswers()) {
+	public void displayCorrectAnswer(Question current_Question) {
+		for (Integer i : current_Question.getCorrectAnswers()) {
 			for (int j = 0; j < listCheckBox.size(); j++) {
 				if (i == j + 1) {
 					listCheckBox.get(j).setSelected(true);
@@ -398,6 +380,28 @@ public class QuestionController implements Initializable {
 				}
 			}
 		}
+	}
+
+	private void loadQuestionDetail(Question current_Question) {
+		// display questionID
+		questionID_QuestionView.setText(current_Question.getQuestionID());
+		// display chapter
+		chapter_QuestionView.setText(String.valueOf(current_Question.getChapter()));
+		// add radio button to list
+		listRadioButton = List.of(radioEasy_QuestionView, radioMedium_QuestionView, radioHard_QuestionView);
+		// display difficulty
+		displayDifficulty(current_Question);
+		// displayContent
+		content_QuestionView.setText(current_Question.getContent());
+		// add TextArea to list
+		listTextArea = List.of(answerA_QuestionView, answerB_QuestionView, answerC_QuestionView, answerD_QuestionView);
+		// display answer
+		displayAnswer(current_Question);
+		// add checkBox to list
+		listCheckBox = List.of(checkBoxA_QuestionView, checkBoxB_QuestionView, checkBoxC_QuestionView,
+				checkBoxD_QuestionView);
+		// display correct Answer
+		displayCorrectAnswer(current_Question);
 	}
 
 	public void Question_Tranfer_QuestionAdd_Quizz(ActionEvent event) throws IOException {
@@ -429,15 +433,15 @@ public class QuestionController implements Initializable {
 
 	@FXML
 	void Delete_QuestionFromQuestion(ActionEvent event) {
-
-		if (!quesManager.deleteQuestion(Question_Current.getQuestionID())) {
+		Boolean isDeleteQuestion = quesManager.deleteQuestion(Question_Current.getQuestionID());
+		if (!isDeleteQuestion) {
 			tableView_Question.getSelectionModel().clearSelection();
-			DisplayDialog_Notification.Dialog_Error("Notification failed", "\r\n" + "Questions cannot be deleted",
-					"Unsuccessfully");
+			Notification.Error(Notification.Error, "Câu hỏi không thể xóa ");
 		} else {
-			DisplayDialog_Notification.Dialog_Infomation("Successful notification",  "Questions deleted",  null);
 			tableView_Question.getItems().remove(Question_Current);
+			Notification.Infomation(Notification.Successfully, "Câu hỏi đã được xoá");
 		}
+
 	}
 
 	@FXML
@@ -466,25 +470,25 @@ public class QuestionController implements Initializable {
 
 	@FXML
 	private void buttonSave_DataChange_QuestionView(ActionEvent event) {
-		if(checkSelectCheckBox(listCheckBox) && checkTextArea(listTextArea) )
-		{
-			try {
-				if (!quesManager.editQuestion(new Question(questionID_QuestionView.getText(), subject_Current,
-						Integer.parseInt(chapter_QuestionView.getText()), radioSelect_Question(listRadioButton),
-						content_QuestionView.getText(), listAnswer_Question(listTextArea),
-						listCorrectAnswer_Question(listCheckBox)))) {
-					DisplayDialog_Notification.Dialog_Error("Unsuccessful notification!", "Question editing failed",
-							"Unsuccessful");
-				} else {
-					DisplayDialog_Notification.Dialog_Infomation("Successful notification!",
-							"Question editing successfully", "Successful");
-				}
-			} catch (Exception e) {
-				DisplayDialog_Notification.Dialog_Error("Error Notification", "\r\n" + "Unsucessful", "Error");
-			}			
+
+		Boolean check_FillFull = checkSelectCheckBox(listCheckBox) && checkTextArea(listTextArea);
+		if (!check_FillFull) {
+			Notification.Error(Notification.Error, Notification.FullFill);
+			return;
 		}
-		else {
-			DisplayDialog_Notification.Dialog_Error("Error", "Dien day du thong tin", null);
+		try {
+			Boolean check_EditQuestion = quesManager
+					.editQuestion(new Question(questionID_QuestionView.getText(), subject_Current,
+							Integer.parseInt(chapter_QuestionView.getText()), radioSelect_Question(listRadioButton),
+							content_QuestionView.getText(), listAnswer_Question(listTextArea),
+							listCorrectAnswer_Question(listCheckBox)));
+			if (!check_EditQuestion) {
+				Notification.Error(Notification.Unsuccessfully, "Câu hỏi không được thây đổi");
+				return;
+			}
+			Notification.Infomation(Notification.Successfully, "Câu hỏi đã được thay đổi");
+		} catch (Exception e) {
+			Notification.Error(Notification.Error, "Lỗi chỉnh sửa câu hỏi");
 		}
 	}
 
@@ -514,123 +518,134 @@ public class QuestionController implements Initializable {
 		}
 		return listCorrectAnswer;
 	}
-	private boolean checkSelectCheckBox(List<CheckBox> listCheckBox)
-	{
-		boolean check_BoxSelectedAll=false;
-		for(CheckBox b :  listCheckBox) {
-			if(b.isSelected())
-				check_BoxSelectedAll = true ;
+
+	private boolean checkSelectCheckBox(List<CheckBox> listCheckBox) {
+		boolean check_BoxSelectedAll = false;
+		for (CheckBox b : listCheckBox) {
+			if (b.isSelected())
+				check_BoxSelectedAll = true;
 		}
 		return check_BoxSelectedAll;
 	}
-	private boolean checkTextArea(List<TextArea> listTextArea)
-	{
-		boolean check_AreaAll=true;
-		for(TextArea a: listTextArea)
-		{	
-			if(a.getText()==null || a.getText()=="") 
-				check_AreaAll=false; 
-		}	
+
+	private boolean checkTextArea(List<TextArea> listTextArea) {
+		boolean check_AreaAll = true;
+		for (TextArea a : listTextArea) {
+			if (a.getText() == null || a.getText() == "")
+				check_AreaAll = false;
+		}
 		return check_AreaAll;
 	}
 
 	@FXML
 	void save_DataAdd_QuestionAdd(ActionEvent event) {
-		List<RadioButton> listRadioButton = new ArrayList<RadioButton>();
-		listRadioButton.add(radioEasy_QuestionAdd);
-		listRadioButton.add(radioMedium_QuestionAdd);
-		listRadioButton.add(radioHard_QuestionAdd);
+		List<RadioButton> listRadioButton = List.of(radioEasy_QuestionAdd, radioMedium_QuestionAdd,
+				radioHard_QuestionAdd);
 
-		List<TextArea> listTextArea = new ArrayList<TextArea>();
-		listTextArea.add(answerA_QuestionAdd);
-		listTextArea.add(answerB_QuestionAdd);
-		listTextArea.add(answerC_QuestionAdd);
-		listTextArea.add(answerD_QuestionAdd);
+		List<TextArea> listTextArea = List.of(answerA_QuestionAdd, answerB_QuestionAdd, answerC_QuestionAdd,
+				answerD_QuestionAdd);
 
-		List<CheckBox> listCheckBox = new ArrayList<CheckBox>();
-		listCheckBox.add(checkBoxA_QuestionAdd);
-		listCheckBox.add(checkBoxB_QuestionAdd);
-		listCheckBox.add(checkBoxC_QuestionAdd);
-		listCheckBox.add(checkBoxD_QuestionAdd);
-		
-		String content =content_QuestionAdd.getText();
-		if(checkSelectCheckBox(listCheckBox) && checkTextArea(listTextArea) && content!=null && content!="")
-		{
-			try {
-				if (!quesManager
-						.addQuestion(new Question(null, subject_Current, Integer.parseInt(chapter_QuestionAdd.getText()),
-								radioSelect_Question(listRadioButton), content_QuestionAdd.getText(),
-								listAnswer_Question(listTextArea), listCorrectAnswer_Question(listCheckBox)))) {
-					DisplayDialog_Notification.Dialog_Error("Unsuccessful notification!", "Question add failed",
-							"Unsuccessful");
-				} else {
-					DisplayDialog_Notification.Dialog_Infomation("Successful notification!",
-							"Question editing successfully", "Successful");
-				}
-			}catch (Exception e) {
-				DisplayDialog_Notification.Dialog_Error("Error Notification", "\r\n" + "Unsucessful", "Error");
-			}			
+		List<CheckBox> listCheckBox = List.of(checkBoxA_QuestionAdd, checkBoxB_QuestionAdd, checkBoxC_QuestionAdd,
+				checkBoxD_QuestionAdd);
+
+		String content = content_QuestionAdd.getText();
+		Boolean isFull = checkSelectCheckBox(listCheckBox) && checkTextArea(listTextArea) && content != null
+				&& content != "";
+
+		if (!isFull) {
+			Notification.Error(Notification.Error, Notification.FullFill);
+			return;
 		}
-		else 
-			DisplayDialog_Notification.Dialog_Error("Error", "Nhaap day du thong tin", null);
+		try {
+			Boolean check_AddQuestion = quesManager
+					.addQuestion(
+							new Question(null, subject_Current, Integer.parseInt(chapter_QuestionAdd.getText()),
+									radioSelect_Question(listRadioButton), content_QuestionAdd.getText(),
+									listAnswer_Question(listTextArea), listCorrectAnswer_Question(listCheckBox)));
+			if (!check_AddQuestion) {
+				Notification.Error(Notification.Unsuccessfully, "Thêm câu hỏi thất bại");
+				return;
+			}
+			Notification.Infomation(Notification.Successfully,
+					"Thêm câu hỏi thành công");
+
+		} catch (Exception e) {
+			Notification.Error(Notification.Error, "Thêm câu hỏi bị lỗi");
+		}
+
+	}
+
+	public boolean checkInfomationSubject() {
+		return subject_ID_Question.getText() == null || subject_ID_Question.getText() != "" &&
+				subject_Name_Question.getText() == null || subject_Name_Question.getText() == "";
 	}
 
 	@FXML
 	void button_Create_Subject_Question(ActionEvent event) {
-		if(subject_ID_Question.getText()==null || subject_ID_Question.getText()!="" &&
-				subject_Name_Question.getText()==null || subject_Name_Question.getText()=="") {
-			DisplayDialog_Notification.Dialog_Infomation("Notification", "SubjectID null or Name is null", null);			
+
+		if (checkInfomationSubject()) {
+			Notification.Infomation(Notification.Default, "SubjectID hoặc tên rỗng");
+			return;
 		}
+		try {
+			Boolean check_AddSubject = quesManager
+					.addSubject(new Subject(subject_ID_Question.getText(), LoginController.teacher_Current,
+							subject_Name_Question.getText()));
+			if (!check_AddSubject) {
+				Notification.Error(Notification.Unsuccessfully, "Thêm môn thất bại");
+				return;
+			}
+			Notification.Infomation(Notification.Successfully,
+					"Thêm môn thành công");
+			choose_Subject_Question.getItems().add(new Subject(subject_ID_Question.getText(),
+					LoginController.teacher_Current, subject_Name_Question.getText()));
+		} catch (SQLException e) {
+			Notification.Error(Notification.Unsuccessfully,
+					"The subject added failed because it already exists!");
+		}
+
+	}
+
+	@FXML
+	void buttonSearchQuestion(ActionEvent event) {
+		String content = searchQuestion.getText();
+		String chapter = chapter_Question.getText();
+		String difficulty = dificult_Question.getValue();
+		switch (difficulty) {
+			case "Hard":
+				difficulty = "3";
+				break;
+			case "Medium":
+				difficulty = "2";
+				break;
+			case "Easy":
+				difficulty = "1";
+				break;
+			default:
+				difficulty = "1";
+		}
+
+		List<Question> list_SearchQuestionInSubject = quesManager.searchQuestionInSubject(subject_Current, content,
+				chapter,
+				difficulty);
+		if (list_SearchQuestionInSubject.isEmpty() || list_SearchQuestionInSubject == null)
+			Notification.Infomation(Notification.Default, "Không có dữ liệu");
 		else {
-			try {
-				if (!quesManager.addSubject(new Subject(subject_ID_Question.getText(), LoginController.teacher_Current,
-						subject_Name_Question.getText()))) {
-					DisplayDialog_Notification.Dialog_Error("Unsuccessful notification!", "The subject added failed!",
-							"Unsuccessful");
-				} else {
-					DisplayDialog_Notification.Dialog_Infomation("Successful notification!",
-							"The subject added successfully!", "Successful");
-					choose_Subject_Question.getItems().add(new Subject(subject_ID_Question.getText(),
-							LoginController.teacher_Current, subject_Name_Question.getText()));
-				}
-			} catch (SQLException e) {
-				DisplayDialog_Notification.Dialog_Error("Unsuccessful notification!",
-						"The subject added failed because it already exists!", "Unsuccessful")	;
-			}			
+			tableView_Question.getItems().clear();
+			tableView_Question.setItems(loadQuestion_tableView(list_SearchQuestionInSubject));
 		}
 	}
-    @FXML
-    void buttonSearchQuestion(ActionEvent event) {
-    	String  content= searchQuestion.getText();
-    	String chapter= chapter_Question.getText();
-    	String difficulty= dificult_Question.getValue();
-    	if (difficulty.equals("Hard"))
-    		difficulty="3";
-    	else if(difficulty.equals("Medium"))
-    		difficulty="2";
-    	else 
-    		difficulty="1";
-    	
-    	difficulty= difficulty==null ? "1" : difficulty; 
-    	if(quesManager.searchQuestionInSubject(subject_Current,content , chapter, difficulty) == null)
-    		DisplayDialog_Notification.Dialog_Infomation("Null", "Khong co du lieu", difficulty);
-    	else {
-    		tableView_Question.getItems().clear();
-    		List<Question> list= quesManager.searchQuestionInSubject(subject_Current,content , chapter, difficulty);
-    		tableView_Question.setItems(loadQuestion_tableView(list));
-    	}
-    }
 
 	@FXML
 	void button_Delete_Subject_Question(ActionEvent event) {
-		if (!quesManager.deleteSubject(subject_Current.getSubjectID())) {
-			DisplayDialog_Notification.Dialog_Error("Unsuccessful notification!", "The subject added failed!",
-					"Unsuccessful");
-		} else {
-			DisplayDialog_Notification.Dialog_Infomation("Successful notification!", "The subject added successfully!",
-					"Successful");
-			choose_Subject_Question.getItems().remove(subject_Current);
+		Boolean check_DeleteSubject = quesManager.deleteSubject(subject_Current.getSubjectID());
+		if (!check_DeleteSubject) {
+			Notification.Error(Notification.Unsuccessfully, "Xóa môn thất bại");
+			return;
 		}
+		Notification.Infomation(Notification.Successfully, "Xóa môn thành công");
+		choose_Subject_Question.getItems().remove(subject_Current);
+
 	}
 
 	@FXML
@@ -639,29 +654,23 @@ public class QuestionController implements Initializable {
 		if (file_Current != null) {
 			String check_xlsx = file_Current.getPath().substring(file_Current.getPath().lastIndexOf(".") + 1);
 			try {
-
-				if ((check_xlsx.equalsIgnoreCase("xlsx") || check_xlsx.equalsIgnoreCase("xls"))
-						&& quesManager.importQuestions(subject_Current, file_Current.getPath())) {
-					tableView_Question.getItems().clear();
-
-					DisplayDialog_Notification.Dialog_Infomation("Successful notification", "Import Successful",
-							"Successful");
-				} else {
-					file_Current = null;
-					DisplayDialog_Notification.Dialog_Error("Notification Error", "You have not selected a file exel",
-							"Error");
+				Boolean check_FormatExel = check_xlsx.equalsIgnoreCase("xlsx") || check_xlsx.equalsIgnoreCase("xls");
+				Boolean selectFile = quesManager.importQuestions(subject_Current, file_Current.getPath());
+				if (!check_FormatExel && !selectFile) {
+					Notification.Error(Notification.Unsuccessfully, "Tệp không hợp lệ hoặc chưa chọn");
+					return false;
 				}
+				tableView_Question.getItems().clear();
+				Notification.Infomation(Notification.Successfully, "Nhập tệp thành công");
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-
 		question_ListOfSubject = quesManager.getQuestionsForSubject(subject_Current);
 
 		tableView_Question.setItems(loadQuestion_tableView(question_ListOfSubject));
 
-		return file_Current == null ? false : true;
+		return true;
 	}
 
 	@FXML
@@ -669,28 +678,26 @@ public class QuestionController implements Initializable {
 
 		file_Current = OpenFileExplorer.Save(event);
 		String fileNameExel = file_Current.getPath();
-		if (!quesManager.exportQuestions(subject_Current, fileNameExel)) {
-			DisplayDialog_Notification.Dialog_Infomation("Unsuccessful notification", "Creat file exel failed",
-					"Error");
-		} else {
-			if (DisplayDialog_Notification.Dialog_Comfrim("Successful notification",
-					"Creat file exel successfully and open file?", "Successful").getResult() == ButtonType.YES) {
-				OpenFileExeml_Export(new File(fileNameExel));
-			}
+		Boolean check_ExportExel = quesManager.exportQuestions(subject_Current, fileNameExel);
+		if (!check_ExportExel) {
+			Notification.Infomation(Notification.Unsuccessfully, "Xuất tệp exel thất bại");
+			return;
 		}
+		if (Notification.Comfrim(Notification.Successfully,
+				"Xuất tệp thành công và mở tệp").getResult() == ButtonType.YES)
+			OpenFileExel_Export(new File(fileNameExel));
 	}
 
-	private void OpenFileExeml_Export(File fileOpen) {
-		if (fileOpen != null) {
-			try {
-				Desktop.getDesktop().open(fileOpen);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} else {
-			DisplayDialog_Notification.Dialog_Error("Notification Error", "\r\n" + "You have not imported the file",
-					"Error");
+	private void OpenFileExel_Export(File fileOpen) {
+
+		if (file_Current == null) {
+			Notification.Error(Notification.Error, "Không đọc được tệp");
+			return;
+		}
+		try {
+			Desktop.getDesktop().open(fileOpen);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

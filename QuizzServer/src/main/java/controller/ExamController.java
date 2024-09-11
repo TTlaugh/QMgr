@@ -46,7 +46,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 import utils.DateTime;
-import utils.DisplayDialog_Notification;
+import utils.Notification;
 import utils.uiUtils;
 
 public class ExamController implements Initializable {
@@ -67,26 +67,26 @@ public class ExamController implements Initializable {
 	public static Question question_Current;
 
 	public static Exam exam_Current;
-	
-	private ObservableList<Question> selectedItems ;
-	
+
+	private ObservableList<Question> selectedItems;
+
 	private ObservableList<Exam> observableList;
 
 	private ObservableList<Question> observableList_Question;
-    @FXML
-    private DatePicker DatePicker_Exam=new DatePicker();
 	@FXML
-	private TextField textFile_Exam=new TextField()	;
-	   
+	private DatePicker DatePicker_Exam = new DatePicker();
 	@FXML
-	private ComboBox<Subject> subject_Exam=new ComboBox<Subject>();
-	
+	private TextField textFile_Exam = new TextField();
+
+	@FXML
+	private ComboBox<Subject> subject_Exam = new ComboBox<Subject>();
+
 	@FXML
 	private Button picktoTest = new Button();
 
 	@FXML
-	private CheckBox shuffe_Question=new CheckBox();
-	
+	private CheckBox shuffe_Question = new CheckBox();
+
 	@FXML
 	private Label Date_ExamView = new Label();
 
@@ -189,22 +189,27 @@ public class ExamController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		listQuestion_Selected = new ArrayList<Question>();
+
 		Score_ExamAdd.textProperty().addListener(new ChangeListener<String>() {
-		    @Override
-		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-		        String newValue) {
-		        if (!newValue.matches("\\d*")) {
-		        	Score_ExamAdd.setText(newValue.replaceAll("[^\\d]", ""));
-		        }
-		    }
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue,
+					String newValue) {
+				if (!newValue.matches("\\d*")) {
+					Score_ExamAdd.setText(newValue.replaceAll("[^\\d]", ""));
+				}
+			}
 		});
+
 		loadSpinner();
 		loadExam();
 		loadComboBoxInExamAdd();
-		for(Subject sub: new QuestionManager().getSubjects(LoginController.teacher_Current))
-		{
+
+		List<Subject> listSubjects = new QuestionManager().getSubjects(LoginController.teacher_Current);
+
+		for (Subject sub : listSubjects) {
 			subject_Exam.getItems().add(sub);
 		}
+
 		subject_Exam.setConverter(new StringConverter<Subject>() {
 			@Override
 			public String toString(Subject sub) {
@@ -217,7 +222,6 @@ public class ExamController implements Initializable {
 			}
 		});
 	}
-	   
 
 	private void loadComboBoxInExamAdd() {
 		List<Subject> subjects = quesManager.getSubjects(LoginController.teacher_Current);
@@ -257,11 +261,9 @@ public class ExamController implements Initializable {
 
 			selectedItems = tableView_ExamAdd.getSelectionModel().getSelectedItems();
 			selectionModel.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-				if (newValue != null) {
-					if (selectedItems.size() == 1) 
-						ExamController.question_Current = newValue;
-						
-				}
+				if (newValue != null && selectedItems.size() == 1)
+					ExamController.question_Current = newValue;
+
 			});
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -269,6 +271,7 @@ public class ExamController implements Initializable {
 
 		try {
 			SelectionModel<Exam> selectionModel = tableView_Exam.getSelectionModel();
+
 			selectionModel.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 				if (newValue != null) {
 					ExamController.exam_Current = newValue;
@@ -285,33 +288,38 @@ public class ExamController implements Initializable {
 			Load_Exam_ExamView();
 		}
 	}
+
 	@FXML
-    private void search_Exam(ActionEvent event) {
-		String exam=textFile_Exam.getText();
+	private void search_Exam(ActionEvent event) {
+
+		String exam = textFile_Exam.getText();
 		String subject = subject_Exam.getValue().getSubjectID();
-		String date =DatePicker_Exam.getValue().toString();
-		String pinner=String.valueOf(spinner_Exam.getValue());
-		
-		if(examManager.searchExams(exam, subject, date, pinner)==null)
-			DisplayDialog_Notification.Dialog_Infomation("Null", "KH tim thAY", pinner);
-		else {
-			tableView_Exam.getItems().clear();
-			List<Exam> list_Exam=examManager.searchExams(exam, subject, date, pinner);
-			tableView_Exam.setItems(loadStudent_tableView(list_Exam));
+		String date = DatePicker_Exam.getValue().toString();
+		String pinner = String.valueOf(spinner_Exam.getValue());
+
+		List<Exam> current_Exam = examManager.searchExams(exam, subject, date, pinner);
+		if (current_Exam == null) {
+			Notification.Infomation(Notification.Default, Notification.notFound);
+			return;
 		}
+		tableView_Exam.getItems().clear();
+		tableView_Exam.setItems(loadStudent_tableView(current_Exam));
+
 	}
+
 	@FXML
-	void button_PickToTest(ActionEvent event) {
-		if(examManager.getQuestions(exam_Current))
-		{			
-			new MainController().receiveExam(exam_Current);
-			new Start_TestController().receiveExam(exam_Current);
-			DisplayDialog_Notification.Dialog_Infomation("Successfully",
-					"Ban da chon exam nay hay nhan start test de bat dau bai kiem tra", getCurrentTime());
+	public void button_PickToTest(ActionEvent event) {
+		Boolean piskExam = examManager.getQuestions(exam_Current);
+		if (!piskExam) {
+			Notification.Error(Notification.Default, Notification.notQuestion);
+			return;
 		}
-		else {
-			DisplayDialog_Notification.Dialog_Error("Null", "Khong co cau hoi", getCurrentTime());
-		}
+
+		new MainController().receiveExam(exam_Current);
+		new Start_TestController().receiveExam(exam_Current);
+		Notification.Infomation(Notification.Successfully,
+				Notification.piskToTest);
+
 	}
 
 	private ObservableList<Question> loadQuestion_tableView_ExamAdd(List<Question> list) {
@@ -401,38 +409,41 @@ public class ExamController implements Initializable {
 
 	@FXML
 	private void choice_QuestionForExam_ExamAdd(ActionEvent event) {
-		boolean checkList_Select=true;
-		if(selectedItems.size()>1)
-		{
-				for(Question q: selectedItems)
-				{
-					if(listQuestion_Selected.contains(q))
-						DisplayDialog_Notification.Dialog_Infomation("Notification", "Cau hoi da duoc chon", "cau hoi trung");					
-					break;
-				}		
-			listQuestion_Selected.addAll(selectedItems);			
+		boolean checkList_Select = true;
+
+		int selectListSize = selectedItems.size();
+		if (selectListSize == 0)
+			checkList_Select = false;
+		else if (selectListSize == 1) {
+			Boolean check_SameQuestion = listQuestion_Selected.contains(question_Current);
+			if (check_SameQuestion)
+				Notification.Infomation(Notification.Default, Notification.sameQuestion);
+			listQuestion_Selected.add(question_Current);
+		} else {
+			for (Question q : selectedItems) {
+				if (listQuestion_Selected.contains(q)) {
+					Notification.Infomation(Notification.Default, Notification.sameQuestion);
+				}
+				break;
+			}
+			listQuestion_Selected.addAll(selectedItems);
 		}
-		else if(selectedItems.size()==1)
-		{
-			if (listQuestion_Selected.contains(question_Current))
-				DisplayDialog_Notification.Dialog_Infomation("Notification", "Cau hoi da duoc chon", "cau hoi trung");
-			listQuestion_Selected.add(question_Current);			
-		}
-		else 
-			checkList_Select=false;
-		
-		if(checkList_Select)
-		{
-			ObservableList<Question> observableListView_Question = FXCollections.observableArrayList(listQuestion_Selected);
-			
+
+		if (!checkList_Select)
+			Notification.Infomation(Notification.Default, Notification.selectQuestion);
+		else {
+			ObservableList<Question> observableListView_Question = FXCollections
+					.observableArrayList(listQuestion_Selected);
+
 			listViewQuestion_Selected_ExamAdd.getItems().clear();
-			
+
 			listViewQuestion_Selected_ExamAdd.setItems(observableListView_Question);
-			
+
 			listViewQuestion_Selected_ExamAdd.setCellFactory(param -> new ListCell<Question>() {
 				@Override
 				protected void updateItem(Question item, boolean empty) {
 					super.updateItem(item, empty);
+
 					if (item != null && !empty) {
 						setText("ID: " + item.getQuestionID() + ", " + "Chapter: " + item.getChapter() + ", "
 								+ "Difficulty: " + item.getDifficulty() + ", " + "Correct Answers: "
@@ -443,58 +454,55 @@ public class ExamController implements Initializable {
 				}
 			});
 			listViewQuestion_Selected_ExamAdd.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-			
+
 			CreateExam_ExamAdd.setDisable(!checkListView());
-			
+
 			tableView_ExamAdd.getSelectionModel().clearSelection();
 		}
-		else 
-			DisplayDialog_Notification.Dialog_Infomation("heheh","chon cau hoi di fen", getCurrentTime());
-			
+
 	}
 
 	@FXML
 	private void Delete_QuestionForExam_ExamAdd(ActionEvent event) {
-		
-		observableList_Question=listViewQuestion_Selected_ExamAdd.getItems();
-		
-		if(observableList_Question.size()==1)
-		{
-			int index = listViewQuestion_Selected_ExamAdd.getSelectionModel().getSelectedIndex();
-			listViewQuestion_Selected_ExamAdd.getItems().remove(index);
-			listQuestion_Selected.remove(index);
-		}
-		else if(observableList_Question.size()>1) {
-			
-			ObservableList<Integer> indices =
-					listViewQuestion_Selected_ExamAdd.getSelectionModel().getSelectedIndices().sorted();
 
-	            for (int k = indices.size() - 1; k >= 0; k--) {
-	            	listViewQuestion_Selected_ExamAdd.getItems().remove(
-	                        (int) indices.get(k));
-	            	listQuestion_Selected.remove(k);
-	            }
+		observableList_Question = listViewQuestion_Selected_ExamAdd.getItems();
 
-		}
-		else {
-			DisplayDialog_Notification.Dialog_Infomation("hehes", "Chon cau hoi de xoa di ba", getCurrentTime());
+		if (observableList_Question.size() == 1) {
+			int index_Selected = listViewQuestion_Selected_ExamAdd.getSelectionModel().getSelectedIndex();
+			listViewQuestion_Selected_ExamAdd.getItems().remove(index_Selected);
+			listQuestion_Selected.remove(index_Selected);
+		} else if (observableList_Question.size() > 1) {
+
+			ObservableList<Integer> indices = listViewQuestion_Selected_ExamAdd.getSelectionModel().getSelectedIndices()
+					.sorted();
+
+			for (int k = indices.size() - 1; k >= 0; k--) {
+				listViewQuestion_Selected_ExamAdd.getItems().remove(
+						(int) indices.get(k));
+				listQuestion_Selected.remove(k);
+			}
+
+		} else {
+			Notification.Infomation(Notification.Default, Notification.selectQuestion_Delete);
 		}
 		listViewQuestion_Selected_ExamAdd.getSelectionModel().clearSelection();
-		
+
 		CreateExam_ExamAdd.setDisable(!checkListView());
 	}
 
 	@FXML
 	private void Delete_Exam_Exam(ActionEvent event) {
-		if (!examManager.deleteExam(String.valueOf(exam_Current.getExamID()))) {
-			DisplayDialog_Notification.Dialog_Error("Unsuccessful notification!", "Exam wasn't delete!",
-					"Unsuccessful!");
-		} else {
+
+		Boolean check_deleteExam = examManager.deleteExam(String.valueOf(exam_Current.getExamID()));
+
+		if (!check_deleteExam)
+			Notification.Error(Notification.Unsuccessfully, Notification.Unsuccess_DeleteExam);
+		else {
 			Exam exam_Delete = tableView_Exam.getSelectionModel().getSelectedItem();
 			tableView_Exam.getItems().remove(exam_Delete);
-			DisplayDialog_Notification.Dialog_Infomation("Successful notification!", "Exam was deleted!",
-					"Successful!");
+			Notification.Infomation(Notification.Successfully, Notification.Success_DeleteExam);
 		}
+
 		CreateExam_ExamAdd.setDisable(!checkListView());
 	}
 
@@ -509,6 +517,7 @@ public class ExamController implements Initializable {
 
 		// Format the current date and time
 		String formattedDateTime = now.format(formatter);
+
 		return formattedDateTime;
 	}
 
@@ -520,7 +529,7 @@ public class ExamController implements Initializable {
 			String nameExam = Name_ExamAdd.getText();
 			String desctiption = Desctiption_ExamAdd.getText();
 			DateTime dateTimeID = new DateTime(getCurrentTime());
-			boolean shuffed =shuffe_Question.isSelected() ? true:false;
+			boolean shuffed = shuffe_Question.isSelected() ? true : false;
 
 			String year = String.valueOf(Date_Exam_Add.getValue().getYear());
 			String month = String.valueOf(Date_Exam_Add.getValue().getMonthValue());
@@ -534,19 +543,21 @@ public class ExamController implements Initializable {
 					: "0" + String.valueOf(Spinner_Minutes_ExamAdd.getValue());
 
 			DateTime dateTimeStart_Time = new DateTime(year, month, day, hours, minutes);
+
 			try {
-				if (!examManager.addExam(new Exam(dateTimeID, subject_Current, dateTimeStart_Time, timeLimit, MaxScore,
-						nameExam, desctiption, shuffed, listQuestion_Selected))) {
-					DisplayDialog_Notification.Dialog_Error("Notification Error", "Exam wasn't created", "Error");
-				} else
-					DisplayDialog_Notification.Dialog_Infomation("Notification Successfully", "Exam was created",
-							"Successful");
+
+				Boolean check_addExam = examManager
+						.addExam(new Exam(dateTimeID, subject_Current, dateTimeStart_Time, timeLimit, MaxScore,
+								nameExam, desctiption, shuffed, listQuestion_Selected));
+				if (!check_addExam)
+					Notification.Error(Notification.Unsuccessfully, "Tạo bài kiểm tra thất bại");
+				else
+					Notification.Infomation(Notification.Successfully, "Tạo bài kiểm tra thành công");
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				DisplayDialog_Notification.Dialog_Error("Notification Error", "Exam wasn't created", "Error");
+				Notification.Error(Notification.Error, "Bài kiểm tra chưa được tạo");
 			}
 		} catch (NumberFormatException e) {
-			DisplayDialog_Notification.Dialog_Error("Error", "Time or timeStart or MaxScore must be number", "Error");
+			Notification.Error(Notification.Error, "Thời gian hoặc thời gian bắt đầu hoặc điểm là số nguyên");
 		}
 	}
 
@@ -557,11 +568,18 @@ public class ExamController implements Initializable {
 	@FXML
 	private void checkDateTime_StartTest() {
 		Date_Exam_Add.valueProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue.isBefore(LocalDate.now())) {
-				Date_Exam_Add.setValue(LocalDate.now());
-				DisplayDialog_Notification.Dialog_Error("Notification", "Invalid date", "Time error");
-			} else {
-				Date_Exam_Add.setValue(newValue);
+
+			Boolean check_dateTime = newValue.isBefore(LocalDate.now());
+			LocalDate current_date = check_dateTime ? newValue : LocalDate.now();
+
+			if (!check_dateTime) {
+				Date_Exam_Add.setValue(current_date);
+				return;
+			}
+			if (check_dateTime) {
+				Notification.Error(Notification.Error, "Ngày không hợp lệ");
+				Date_Exam_Add.setValue(current_date);
+				return;
 			}
 		});
 	}
@@ -588,6 +606,7 @@ public class ExamController implements Initializable {
 		Desc_ExamView.setText(desc);
 
 		examManager.getQuestions(exam_Current);
+
 		if (exam_Current.getQuestions() != null) {
 			List<Question> questions = exam_Current.getQuestions();
 			int questions_size = questions.size();
@@ -614,7 +633,6 @@ public class ExamController implements Initializable {
 					VBox_DisplayQuestion.getChildren().add(answerLabel);
 				}
 			}
-
 		}
 
 	}

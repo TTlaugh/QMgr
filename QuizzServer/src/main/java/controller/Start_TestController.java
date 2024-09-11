@@ -21,10 +21,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import utils.DisplayDialog_Notification;
+import utils.Notification;
 
 public class Start_TestController implements Initializable {
-	
+
 	private Parent root = null;
 
 	private static Exam exam_StartTest;
@@ -37,18 +37,19 @@ public class Start_TestController implements Initializable {
 
 	@FXML
 	private TextField port_StartTest = new TextField();
-	
+
 	@FXML
 	private VBox vBox_StartTest;
 
 	private StartServer startServer;
-	
-	private boolean check_Shutdown=false;
+
+	private boolean check_Shutdown = false;
 
 	public void Back_Test(ActionEvent event) throws IOException {
 		root = (Parent) FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
 		((Node) event.getSource()).getScene().setRoot(root);
-		if (!check_Shutdown) shutdownServer(event);
+		if (!check_Shutdown)
+			shutdownServer(event);
 	}
 
 	public void receiveExam(Exam exam) {
@@ -71,39 +72,43 @@ public class Start_TestController implements Initializable {
 
 	}
 
+	public boolean check_Port() {
+		return port_StartTest.getText() != null && port_StartTest.getText() != "";
+	}
+
 	@FXML
 	void button_StartTest(ActionEvent event) throws IOException {
-		if (port_StartTest.getText() != null && port_StartTest.getText() != "") {
-			int port = Integer.parseInt(port_StartTest.getText());
-			try {
-				startServer = new StartServer(exam_StartTest, port);
-				DisplayDialog_Notification.Dialog_Infomation("Conection Successful", "ket noi duoc r kia", null);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				DisplayDialog_Notification.Dialog_Error("Error", e.getMessage(), "Error");
-			}
-		} else {
-			DisplayDialog_Notification.Dialog_Error("Error", "Port is null", "Error");
+		if (!check_Port()) {
+			Notification.Error(Notification.Error, "Port rỗng");
+			return;
 		}
+		int portServer = Integer.parseInt(port_StartTest.getText());
+		try {
+			startServer = new StartServer(exam_StartTest, portServer);
+			Notification.Infomation(Notification.Successfully, "Kết nối thàh công");
+		} catch (IOException e) {
+			Notification.Error(Notification.Error, e.getMessage());
+		}
+
 	}
 
 	@FXML
 	void reloadServer(ActionEvent event) {
 		List<String> listStudent = startServer.getConnectedClients();
-	
+
 		vBox_StartTest.getChildren().clear();
 		for (String s : listStudent) {
-			Label label = new Label();		
+			Label label = new Label();
 			Image img = new Image("/imgs/person.png");
 			ImageView imageView = new ImageView(img);
 			imageView.setFitHeight(50);
 			imageView.setFitWidth(50);
-			
+
 			Platform.runLater(() -> {
 				label.setFont(new Font(20));
 				label.setText(s);
 				label.setGraphic(imageView);
-				});
+			});
 			vBox_StartTest.getChildren().add(label);
 		}
 	}
@@ -112,11 +117,10 @@ public class Start_TestController implements Initializable {
 	void shutdownServer(ActionEvent event) {
 		try {
 			startServer.shutdownServer();
-			check_Shutdown=true;
-			DisplayDialog_Notification.Dialog_Infomation("Connection ", "shutdown server",  null);
+			check_Shutdown = true;
+			Notification.Infomation(Notification.Default, "shutdown server");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			DisplayDialog_Notification.Dialog_Error("Error", e.getMessage(), "Error");
+			Notification.Error(Notification.Error, e.getMessage());
 		}
 	}
 }
