@@ -73,7 +73,7 @@ Thiết kết giao diện theo thứ tự các form dưới đây:
 > - #### Quá trình:
 >
 >     - **Thành Trọng-Tình** liên hệ với **Team GUI** để viết các *Controller* tương ứng với tiến trình hiện tại (các form đã hoàn thành).
->     - Dựa vào bảng thiết kế database, **Thái** viết tập hợp Class DTO thô để chứa dữ liệu từ DAL đổ vào. Sau đó bắt đầu viết các Class DAL. Để phối hợp với team GUI và BUS **Thái-Triển** hãy viết Class theo thứ tự của bảng phân công GUI ở trên. Viết những Class lớn trước rồi đến những Class liên quan.
+>     - Dựa vào bảng thiết kế database, **Thái** viết tập hợp Class DTO thô để chứa dữ liệu từ DAL đổ vào (**Triển** sẽ bổ sung cho phù hợp với BUS sau này). Sau đó bắt đầu viết các Class DAL. Để phối hợp với team GUI và BUS **Thái-Triển** hãy viết Class theo thứ tự của bảng phân công GUI ở trên. Viết những Class lớn trước rồi đến những Class liên quan.
 >     - **Triển** sẽ dựa theo tiến độ của **Thái** và **Thành Trọng-Tình** để xây dựng các Class chức năng nghiệp vụ (mong mọi người báo cáo thường xuyên).
 
 ### 2.3 Doc Team
