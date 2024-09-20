@@ -1,4 +1,4 @@
-# Project Member and tasks
+# Project Members and their tasks
 
 <img src="_resources/00f1a1074fd15b1c84447c1ebe5cf0b7.png" alt="00f1a1074fd15b1c84447c1ebe5cf0b7.png" width="360" height="454" class="jop-noMdConv">
 
@@ -6,7 +6,7 @@
 
 ## 1\. The begin
 
-### 1.1 check for starting
+### 1.1 Check for starting
 
 - Bản thiết kế database sơ bộ đã có, **Team Test** thực hiện kiểm tra bản thiết kế này dựa trên kỹ năng và kiến thức đã học
 
@@ -50,7 +50,7 @@ Thiết kết giao diện theo thứ tự các form dưới đây:
     - Làm bài kiểm tra
         - Nộp bài thành công/thất bại
 
-> - **Thực hiện:** anh Tuấn, Quốc Trọng
+> - **Thực hiện:** anh Tuấn, Quốc Trọng, Trâm
 > - **Công cụ:** JavaFX Scene Builder
 > - **Yêu cầu kỹ thuật:** thiết kế tối ưu, bắt buộc modular các form (bao gồm cả css), tối thiểu elements với tối đa công dụng, định nghĩa hiệu quả các elements (id, class)
 > - **Yêu cầu nghiệp vụ:** bố cục hợp lí, hiệu quả, thân thiện người dùng, tối ưu tương tác với người dùng để giảm thiểu sai sót phần mềm
@@ -80,7 +80,7 @@ Thiết kết giao diện theo thứ tự các form dưới đây:
 
 <img src="_resources/85fd21a7d45e5ac2ad67d4850cf0afda.png" alt="85fd21a7d45e5ac2ad67d4850cf0afda.png" width="583" height="466">
 
-> - **Thực hiện:** anh Tuấn (cố vấn), Triển (diễn giải), Trí (công thức), Trâm (định dạng)
+> - **Thực hiện:** anh Tuấn (cố vấn), Triển (diễn giải), Trí (phân tích sơ đồ), Trâm (viết-định dạng)
 > - **Quá trình:** Liên tục tìm tài nguyên để hoàn thiện tài liệu, liên hệ với tất cả các team khác để có thông tin mong muốn
 > - **Yêu cầu:** bám sát dự án, chính xác và đúng định dạng, cấu trúc của một bản báo cáo phần mềm (Viết có tâm nhé mọi người)
 
