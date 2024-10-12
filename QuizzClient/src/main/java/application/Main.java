@@ -1,5 +1,5 @@
 package application;
-	
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +17,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			primaryStage.getIcons().add(new Image("/imgs/icon.png"));
-			primaryStage.setTitle("Quizz Client - HEHE");
+			primaryStage.setTitle("Quizz Client");
 			primaryStage.show();
 
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student_Start.fxml"));
@@ -28,9 +28,6 @@ public class Main extends Application {
 			primaryStage.setMinHeight(900);
 			primaryStage.setScene(scene);
 			primaryStage.setMaximized(true);
-			primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-
-			scene.setOnKeyPressed(KeyEventFunction.toggleFullScreen(primaryStage));
 
 			primaryStage.setOnCloseRequest(event -> {
 				Platform.exit();

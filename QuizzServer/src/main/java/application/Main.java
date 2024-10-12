@@ -17,7 +17,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		try {
 			primaryStage.getIcons().add(new Image("/imgs/icon.png"));
-			primaryStage.setTitle("Quizz Server - HEHE");
+			primaryStage.setTitle("Quizz Server");
 			primaryStage.show();
 
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
@@ -28,9 +28,6 @@ public class Main extends Application {
 			primaryStage.setMinHeight(900);
 			primaryStage.setScene(scene);
 			primaryStage.setMaximized(true);
-			primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-
-			scene.setOnKeyPressed(KeyEventFunction.toggleFullScreen(primaryStage));
 
 			primaryStage.setOnCloseRequest(event -> {
 				Platform.exit();
