@@ -7,7 +7,7 @@ CREATE TABLE Workspaces (
     WorkspaceID BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     Name VARCHAR(30) NOT NULL,
     Pin VARCHAR(8) NOT NULL,
-    Archived BOOLEAN DEFAULT FALSE,
+    Archived BOOLEAN DEFAULT FALSE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE Students (
@@ -18,7 +18,7 @@ CREATE TABLE Students (
     Phone VARCHAR(15) NOT NULL,
     Email VARCHAR(70),
     INDEX FIRSTNAME (FirstName ASC),
-    INDEX LASTNAME (LastName ASC),
+    INDEX LASTNAME (LastName ASC)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE SGroups (
@@ -26,7 +26,7 @@ CREATE TABLE SGroups (
     SGroupName VARCHAR(50) NOT NULL,
     DateCreated DATETIME NOT NULL,
     Archived BOOLEAN DEFAULT FALSE,
-    WorkspaceID BIGINT NOT NULL,
+    WorkspaceID BIGINT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE SGroupStudents (
@@ -43,7 +43,7 @@ CREATE TABLE Subjects (
     DateCreated DATETIME NOT NULL,
     Archived BOOLEAN DEFAULT FALSE,
     WorkspaceID BIGINT NOT NULL,
-    CONSTRAINT FK_Subject_Workspace FOREIGN KEY (StudentID) REFERENCES Students(StudentID) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT FK_Subject_Workspace FOREIGN KEY (WorkspaceID) REFERENCES Workspaces(WorkspaceID) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE Questions (
@@ -79,7 +79,7 @@ CREATE TABLE HostExams (
     ExamQuestions JSON NOT NULL,
     ExamID BIGINT NOT NULL,
     SGroupID VARCHAR(30) NOT NULL,
-    CONSTRAINT FK_HostExams_ExamID FOREIGN KEY (ExamID) REFERENCES Exams(ExamID) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT FK_HostExams_ExamID FOREIGN KEY (ExamID) REFERENCES Exams(ExamID) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT FK_HostExams_SGroupID FOREIGN KEY (SGroupID) REFERENCES SGroups(SGroupID) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -89,7 +89,7 @@ CREATE TABLE Submissions (
     TimeTaken INT NOT NULL,
     Score DECIMAL(5, 2) NOT NULL,
     AnswerSelecteds JSON NOT NULL,
-    PRIMARY KEY(ExamID, StudentID),
+    PRIMARY KEY(HostExamID, StudentID),
     CONSTRAINT FK_Submissions_HostExamID FOREIGN KEY (HostExamID) REFERENCES HostExams(HostExamID) ON DELETE CASCADE,
     CONSTRAINT FK_Submissions_StudentID FOREIGN KEY (StudentID) REFERENCES Students(StudentID) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -119,16 +119,16 @@ INSERT INTO SGroups VALUES
 ('5', 'Nhom 5 Co so lap trin', '2023-09-30 15:03:08', false, '3');
 
 INSERT INTO SGroupStudents VALUES
-('1', '1'),
-('2', '1'),
-('3', '3'),
-('4', '5'),
-('5', '5'),
-('6', '4'),
-('7', '4'),
-('8', '4'),
-('9', '2'),
-('10','1');
+('1', '1' ),
+('1', '2' ),
+('3', '3' ),
+('5', '4' ),
+('5', '5' ),
+('4', '6' ),
+('4', '7' ),
+('4', '8' ),
+('2', '9' ),
+('1', '10');
 
 INSERT INTO Subjects VALUES
 ('1', 'Văn'    , '2024-05-08 09:00:00', false, '1'),
@@ -140,50 +140,50 @@ INSERT INTO Questions VALUES
     '{"A": "Văn chính luận",
       "B": "Miêu tả",
       "C": "Truyện",
-      "D": "thơ"}', '[2]'),
+      "D": "thơ"}', '[2]', false),
 (2,  '1', 1, 2, 'Tuyên ngôn độc lập của Hồ Chí Minh được viết theo thể loại nào sau đây:',
     '{"A": "Văn chính luận",
       "B": "kí",
       "C": "thơ",
-      "D": "Truyện dài"}', '[1]'),
+      "D": "Truyện dài"}', '[1]', false),
 (3,  '1', 2, 2, 'Thể loại nào trong các thể loại văn học sau đây ra đời trong giai đoạn kháng chiến chống Pháp (1946 - 1954)?',
     '{"A": "Truyện ngắn",
       "B": "kí",
       "C": "Tho",
-      "D": "Truyện dai"}', '[1]'),
+      "D": "Truyện dai"}', '[1]', false),
 (4,  '3', 2, 3, 'Quê hương của Quang Dũng ở:',
     '{"A": "1915",
       "B": "1921",
       "C": "1922",
-      "D": "1925"}', '[3]'),
+      "D": "1925"}', '[3]', false),
 (5,  '1', 3, 4, 'Quang Dũng sinh năm nào?',
     '{"A": "1946",
       "B": "1847",
       "C": "1945",
-      "D": "1948"}', '[2]'),
+      "D": "1948"}', '[2]', false),
 (6,  '2', 3, 1, 'Đoàn quân Tây tiến được thành lập năm nào sau đây:',
     '{"A": "Bi",
       "B": "Hùng(Hào Hùng)",
       "C": "Bi hùng",
-      "D": "truyền cảm"}', '[4]'),
+      "D": "truyền cảm"}', '[4]', false),
 (7,  '1', 4, 5, 'Cảm hứng chung của bài thơ Tây tiến là:',
     '{"A": "Hiện thực",
       "B": "Lãng Mạn",
       "C": "hiện thực XHCN",
-      "D": "trào lộng"}', '[4]'),
+      "D": "trào lộng"}', '[4]', false),
 (8,  '1', 1, 3, 'Bút pháp tiêu biểu của bài thơ Tây Tiến là:',
     '{"A": "viết văn",
       "B": "Làm thơ",
       "C": "Soạn nhạc",
-      "D": "viết phê bình"}', '[2]'),
+      "D": "viết phê bình"}', '[2]', false),
 (9,  '1', 2, 5, 'Hoạt động nghệ thuật của Nguyễn Đình Thi nổi bật nhất ở lĩnh vực nào?',
     '{"A": "Bài thơ Hắc Hải",
       "B": "Dòng sông trong xanh",
       "C": "Tia nắng",
-      "D": "người chiến sỹ"}', '[1]'),
+      "D": "người chiến sỹ"}', '[1]', false),
 (10, '1', 3, 1, 'Bài thơ Đất nước được in ở tập thơ nào?',
     '{"A": "Truyện kí",
       "B": "Thơ ca",
       "C": "Hò vè",
-      "D": "tiểu thuyết"}', '[3]');
+      "D": "tiểu thuyết"}', '[3]', false);
 
