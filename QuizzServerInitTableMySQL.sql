@@ -22,7 +22,7 @@ CREATE TABLE Students (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE SGroups (
-    SGroupID VARCHAR(30) PRIMARY KEY NOT NULL,
+    SGroupID BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     SGroupName VARCHAR(50) NOT NULL,
     DateCreated DATETIME NOT NULL,
     Archived BOOLEAN DEFAULT FALSE,
@@ -30,7 +30,7 @@ CREATE TABLE SGroups (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE SGroupStudents (
-    SGroupID VARCHAR(30) NOT NULL,
+    SGroupID BIGINT NOT NULL,
     StudentID VARCHAR(30) NOT NULL,
     PRIMARY KEY(SGroupID, StudentID),
     CONSTRAINT FK_SGroupStudents_SGroupID FOREIGN KEY (SGroupID) REFERENCES SGroups(SGroupID) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -38,7 +38,7 @@ CREATE TABLE SGroupStudents (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE Subjects (
-    SubjectID VARCHAR(30) PRIMARY KEY NOT NULL,
+    SubjectID BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     SubjectName VARCHAR(100) NOT NULL,
     DateCreated DATETIME NOT NULL,
     Archived BOOLEAN DEFAULT FALSE,
@@ -48,7 +48,7 @@ CREATE TABLE Subjects (
 
 CREATE TABLE Questions (
     QuestionID BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    SubjectID VARCHAR(30) NOT NULL,
+    SubjectID BIGINT NOT NULL,
     Chapter INT NOT NULL,
     Difficulty INT NOT NULL,
     Content VARCHAR(1000) NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE Questions (
 
 CREATE TABLE Exams (
     ExamID BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    SubjectID VARCHAR(30) NOT NULL,
+    SubjectID BIGINT NOT NULL,
     Name VARCHAR(100),
     Description VARCHAR(500),
     QuestionIDs JSON NOT NULL,
@@ -78,7 +78,7 @@ CREATE TABLE HostExams (
     isShuffled BOOLEAN DEFAULT FALSE,
     ExamQuestions JSON NOT NULL,
     ExamID BIGINT NOT NULL,
-    SGroupID VARCHAR(30) NOT NULL,
+    SGroupID BIGINT NOT NULL,
     CONSTRAINT FK_HostExams_ExamID FOREIGN KEY (ExamID) REFERENCES Exams(ExamID) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT FK_HostExams_SGroupID FOREIGN KEY (SGroupID) REFERENCES SGroups(SGroupID) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -112,28 +112,28 @@ INSERT INTO Students VALUES
 ('10','ST010', 'Lê Thị Bích'   , 'Tuyền' , '0399999999', 'tuyen@gmail.com'  );
 
 INSERT INTO SGroups VALUES
-('1', 'Nhom 1 - DSTT'        , '2024-05-08 09:00:00', false, '1'),
-('2', 'Nhom 9 Python'        , '2024-01-01 18:00:00', false, '2'),
-('3', 'Nhom 3 - Giai Tich'   , '2024-01-02 22:30:00', false, '3'),
-('4', 'Nhom 7 - XSTK'        , '2024-03-02 21:30:00', false, '1'),
-('5', 'Nhom 5 Co so lap trin', '2023-09-30 15:03:08', false, '3');
+(1, 'Nhom 1 - DSTT'        , '2024-05-08 09:00:00', false, '1'),
+(2, 'Nhom 9 Python'        , '2024-01-01 18:00:00', false, '2'),
+(3, 'Nhom 3 - Giai Tich'   , '2024-01-02 22:30:00', false, '3'),
+(4, 'Nhom 7 - XSTK'        , '2024-03-02 21:30:00', false, '1'),
+(5, 'Nhom 5 Co so lap trin', '2023-09-30 15:03:08', false, '3');
 
 INSERT INTO SGroupStudents VALUES
-('1', '1' ),
-('1', '2' ),
-('3', '3' ),
-('5', '4' ),
-('5', '5' ),
-('4', '6' ),
-('4', '7' ),
-('4', '8' ),
-('2', '9' ),
-('1', '10');
+(1, '1' ),
+(1, '2' ),
+(3, '3' ),
+(5, '4' ),
+(5, '5' ),
+(4, '6' ),
+(4, '7' ),
+(4, '8' ),
+(2, '9' ),
+(1, '10');
 
 INSERT INTO Subjects VALUES
-('1', 'Văn'    , '2024-05-08 09:00:00', false, '1'),
-('2', 'Sử'     , '2024-01-01 18:00:00', false, '2'),
-('3', 'Địa Lí' , '2024-01-02 22:30:00', false, '3');
+(1, 'Văn'    , '2024-05-08 09:00:00', false, 1),
+(2, 'Sử'     , '2024-01-01 18:00:00', false, 2),
+(3, 'Địa Lí' , '2024-01-02 22:30:00', false, 3);
 
 INSERT INTO Questions VALUES
 (1,  '1', 1, 1, 'Sáng tác của Nguyễn Ái Quốc, Hồ Chí Minh không bao gồm những thể loại nào trong các thể loại sau đây:',
