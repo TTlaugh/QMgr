@@ -2,13 +2,17 @@ package DTO;
 
 import java.util.ArrayList;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class HostExam {
     private int hostExamId;
     private int examId;

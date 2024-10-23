@@ -47,10 +47,8 @@ CREATE TABLE Questions (
     Chapter VARCHAR(255) NOT NULL,
     Difficulty INT NOT NULL,
     Content VARCHAR(1000) NOT NULL,
-    Answers JSON NOT NULL,
+    Answers VARCHAR(1000) NOT NULL,
     Archived BOOLEAN DEFAULT FALSE,
-    INDEX CHAPTER (Chapter ASC),
-    INDEX DIFFICULTY (Difficulty ASC),
     CONSTRAINT FK_Questions_Subjects FOREIGN KEY (SubjectID) REFERENCES Subjects(SubjectID) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

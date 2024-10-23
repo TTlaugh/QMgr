@@ -23,10 +23,10 @@ public class SQLUtils {
 		Connection connection = null;
 		try {
 			connection = getDataSource().getConnection();
-			// System.out.println("Connect database successfully");
+			System.out.println("Connect database successfully");
 		} catch (SQLException e) {
 			printSQLException(e);
-			// System.out.println("Connect database failed");
+			System.out.println("Connect database failed");
 		}
 		return connection;
 	}
