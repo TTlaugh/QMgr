@@ -15,7 +15,7 @@ public class SQLUtils {
 		mysqlDS.setURL(Constant.MySQLProperties.URL);
 		mysqlDS.setUser(Constant.MySQLProperties.USERNAME);
 		mysqlDS.setPassword(Constant.MySQLProperties.PASSWORD);
-		mysqlDS.setDatabaseName("QuizzServer");
+		mysqlDS.setDatabaseName("QuizzDB");
 		return mysqlDS;
 	}
 
