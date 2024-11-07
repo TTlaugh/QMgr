@@ -2,22 +2,28 @@ package app;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import utils.Constant;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 
 public class Main extends Application {
+	@FXML
+	private AnchorPane mainbody;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		try {
+
 			primaryStage.setTitle("Quizz Server");
 			primaryStage.show();
 
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/Group_List.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/workspace-management.fxml"));
 			Parent root = (Parent) loader.load();
+
 			Scene scene = new Scene(root, Constant.ScreenSize.WIDTH, Constant.ScreenSize.HEIGHT);
 
 			primaryStage.setMinWidth(1300);

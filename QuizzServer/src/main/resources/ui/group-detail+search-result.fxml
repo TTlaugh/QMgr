@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
@@ -16,87 +15,15 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="540.0" minWidth="760.0" prefHeight="540.0" prefWidth="760.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Separator layoutX="10.0" layoutY="67.0" prefHeight="1.0" prefWidth="960.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
-      <Separator layoutX="213.0" maxWidth="1.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="0.0" />
-      <Label layoutX="260.0" layoutY="17.0" prefHeight="26.0" prefWidth="168.0" text="Student management" AnchorPane.leftAnchor="256.0" AnchorPane.topAnchor="13.0">
+      <Label layoutX="260.0" layoutY="17.0" prefHeight="26.0" prefWidth="168.0" text="Student management" AnchorPane.leftAnchor="56.0" AnchorPane.topAnchor="13.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Separator layoutX="-23.0" layoutY="178.0" prefWidth="200.0" AnchorPane.bottomAnchor="127.0" AnchorPane.leftAnchor="0.0" />
-      <ComboBox layoutX="17.0" layoutY="86.0" prefHeight="38.0" prefWidth="176.0" promptText="Sgu University" styleClass="round-layout" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="12.0">
-         <padding>
-            <Insets left="10.0" right="10.0" />
-         </padding>
-      </ComboBox>
-      <Label layoutX="31.0" layoutY="10.0" prefHeight="19.0" prefWidth="63.0" text="Workspace" AnchorPane.bottomAnchor="96.0" AnchorPane.leftAnchor="78.5" />
-      <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="10.0" layoutY="11.0" pickOnBounds="true" AnchorPane.bottomAnchor="98.0" AnchorPane.leftAnchor="58.5">
-         <image>
-            <Image url="@../imgs/icons8-bag-32.png" />
-         </image>
-      </ImageView>
-      <Button layoutX="10.0" layoutY="151.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="176.0" styleClass="button-in-main" text="Student" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="64.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../imgs/Screenshot_2024-10-30_172053-removebg-preview.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <padding>
-            <Insets left="16.0" />
-         </padding>
-      </Button>
-      <Button layoutX="10.0" layoutY="196.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="176.0" styleClass="button-in-main" text="Subject" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="106.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../imgs/Screenshot_2024-10-30_172306-removebg-preview.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <padding>
-            <Insets left="16.0" />
-         </padding>
-      </Button>
-      <Button layoutX="10.0" layoutY="323.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="176.0" styleClass="button-in-main" text="Exam" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="148.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../imgs/Screenshot_2024-10-30_172455-removebg-preview.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <padding>
-            <Insets left="16.0" />
-         </padding>
-      </Button>
-      <Label layoutX="68.0" layoutY="10.0" minHeight="32.0" minWidth="57.0" prefHeight="32.0" prefWidth="57.0" text="Quizz" textFill="#1d2939" AnchorPane.leftAnchor="86.5" AnchorPane.topAnchor="10.0">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="43.0" layoutY="14.0" pickOnBounds="true" AnchorPane.leftAnchor="57.5" AnchorPane.topAnchor="14.0">
-         <image>
-            <Image url="@../imgs/Screenshot_2024-10-30_172645-removebg-preview.png" />
-         </image></ImageView>
-      <Button alignment="CENTER" layoutX="12.0" layoutY="486.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="176.0" styleClass="button-do" text="Lock workspace" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <Button layoutX="422.0" layoutY="12.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="12.0">
+      <Button layoutX="422.0" layoutY="12.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="12.0">
          <graphic>
             <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" smooth="false">
                <image>
@@ -105,12 +32,12 @@
             </ImageView>
          </graphic>
       </Button>
-      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="424.0" layoutY="16.0" pickOnBounds="true" AnchorPane.leftAnchor="424.0" AnchorPane.topAnchor="16.0">
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="424.0" layoutY="16.0" pickOnBounds="true" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="16.0">
          <image>
             <Image url="@../imgs/icons8-arrow-24.png" />
          </image>
       </ImageView>
-      <Label layoutX="444.0" layoutY="13.0" prefHeight="26.0" prefWidth="102.0" text="Group details" textFill="#667085">
+      <Label layoutX="240.0" layoutY="13.0" prefHeight="26.0" prefWidth="102.0" text="Group details" textFill="#667085" AnchorPane.leftAnchor="240.0" AnchorPane.topAnchor="13.0">
          <font>
             <Font size="16.0" />
          </font>
@@ -135,7 +62,7 @@
             <Insets left="16.0" />
          </padding>
       </HBox>
-      <AnchorPane layoutX="454.0" layoutY="167.0" prefHeight="488.0" prefWidth="760.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
+      <AnchorPane layoutX="454.0" layoutY="167.0" prefHeight="488.0" prefWidth="760.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
          <children>
             <Label layoutX="44.0" layoutY="23.0" text="All students" textFill="#101828" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
                <font>
@@ -275,9 +202,9 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <StackPane layoutX="181.0" layoutY="53.0" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="112.0">
+      <StackPane layoutX="181.0" layoutY="53.0" visible="false" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="112.0">
          <children>
-            <AnchorPane maxHeight="316.0" maxWidth="480.0" prefHeight="316.0" prefWidth="480.0" styleClass="popup" visible="false">
+            <AnchorPane maxHeight="316.0" maxWidth="480.0" prefHeight="316.0" prefWidth="480.0" styleClass="popup">
                <children>
                   <Separator layoutX="113.0" layoutY="98.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0" />
                   <Label layoutX="14.0" prefHeight="44.0" prefWidth="152.0" text="Rename group" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0">
@@ -337,9 +264,9 @@
             </AnchorPane>
          </children>
       </StackPane>
-      <StackPane layoutX="271.3999938964844" layoutY="-48.599998474121094" AnchorPane.leftAnchor="330.0" AnchorPane.rightAnchor="330.0" AnchorPane.topAnchor="10.0">
+      <StackPane layoutX="271.3999938964844" layoutY="-48.599998474121094" visible="false" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="330.0" AnchorPane.topAnchor="10.0">
          <children>
-            <AnchorPane maxHeight="506.0" maxWidth="300.0" prefHeight="506.0" prefWidth="300.0" styleClass="popup" visible="false">
+            <AnchorPane maxHeight="506.0" maxWidth="300.0" prefHeight="506.0" prefWidth="300.0" styleClass="popup">
                <children>
                   <Separator layoutX="113.0" layoutY="98.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0" />
                   <Label layoutX="14.0" prefHeight="44.0" prefWidth="152.0" text="Add student" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0">
@@ -420,9 +347,9 @@
             </AnchorPane>
          </children>
       </StackPane>
-      <StackPane layoutX="271.3999938964844" layoutY="-48.599998474121094" AnchorPane.leftAnchor="330.0" AnchorPane.rightAnchor="330.0" AnchorPane.topAnchor="10.0">
+      <StackPane layoutX="271.3999938964844" layoutY="-48.599998474121094" visible="false" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="330.0" AnchorPane.topAnchor="10.0">
          <children>
-            <AnchorPane maxHeight="506.0" maxWidth="300.0" prefHeight="506.0" prefWidth="300.0" styleClass="popup" visible="false">
+            <AnchorPane maxHeight="506.0" maxWidth="300.0" prefHeight="506.0" prefWidth="300.0" styleClass="popup">
                <children>
                   <Separator layoutX="113.0" layoutY="98.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0" />
                   <Label layoutX="14.0" prefHeight="44.0" prefWidth="152.0" text="Student details" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0">
@@ -503,9 +430,9 @@
             </AnchorPane>
          </children>
       </StackPane>
-      <StackPane layoutX="181.0" layoutY="53.0" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="112.0">
+      <StackPane layoutX="181.0" layoutY="53.0" visible="false" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="112.0">
          <children>
-            <AnchorPane maxHeight="327.0" maxWidth="480.0" prefHeight="327.0" prefWidth="480.0" styleClass="popup" visible="false">
+            <AnchorPane maxHeight="327.0" maxWidth="480.0" prefHeight="327.0" prefWidth="480.0" styleClass="popup">
                <children>
                   <Separator layoutX="113.0" layoutY="98.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0" />
                   <Label layoutX="14.0" prefHeight="44.0" prefWidth="288.0" text="Student ID #ST01 already exists" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0">
@@ -566,9 +493,9 @@
             </AnchorPane>
          </children>
       </StackPane>
-      <StackPane layoutX="181.0" layoutY="53.0" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="112.0">
+      <StackPane layoutX="181.0" layoutY="53.0" visible="false" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="112.0">
          <children>
-            <AnchorPane maxHeight="286.0" maxWidth="480.0" prefHeight="286.0" prefWidth="480.0" styleClass="popup" visible="false">
+            <AnchorPane maxHeight="286.0" maxWidth="480.0" prefHeight="286.0" prefWidth="480.0" styleClass="popup">
                <children>
                   <Separator layoutX="113.0" layoutY="98.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0" />
                   <Label layoutX="14.0" prefHeight="44.0" prefWidth="288.0" text="Add student #ST01 failed" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0">
@@ -635,9 +562,9 @@
             </AnchorPane>
          </children>
       </StackPane>
-      <StackPane layoutX="181.0" layoutY="53.0" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="112.0">
+      <StackPane layoutX="181.0" layoutY="53.0" visible="false" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="112.0">
          <children>
-            <AnchorPane maxHeight="306.0" maxWidth="480.0" prefHeight="306.0" prefWidth="480.0" styleClass="popup" visible="false">
+            <AnchorPane maxHeight="306.0" maxWidth="480.0" prefHeight="306.0" prefWidth="480.0" styleClass="popup">
                <children>
                   <Separator layoutX="113.0" layoutY="98.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0" />
                   <Label layoutX="14.0" prefHeight="44.0" prefWidth="288.0" text="Add student #ST01 failed" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0">
@@ -716,7 +643,7 @@
             </AnchorPane>
          </children>
       </StackPane>
-      <AnchorPane prefHeight="488.0" prefWidth="760.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
+      <AnchorPane prefHeight="488.0" prefWidth="760.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
          <children>
             <Label layoutX="44.0" layoutY="23.0" text="Search results for “Nguyễn”" textFill="#101828" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
                <font>
