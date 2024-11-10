@@ -70,7 +70,20 @@ public class Workspace_controller {
 
     @FXML
     void btn_archive_WorkSpace(ActionEvent event) {
+        // String workSpace_Name_Archive = Workspace_BUS.getWorkPaceName();
 
+        // String workSpace_Name_Archive_Comfirm = tf_WorkSpace_Name_Archive.getText();
+
+        // if(!workSpace_Name_Archive_Comfirm.equalsIgnoreCase(workSpace_Name_Archive)){
+        // Notification.Error("Error", "Workspace name does not match!");
+        // return;
+        // }
+
+        // Func Archive workspace here
+        // Workspace_BUS.archive_WorkSpace(workSpace_Name_Archive);
+
+        Notification.Infomation("Success", "Archive workspace successfully!");
+        archive_WorkSpace.setVisible(false);
     }
 
     // Function Set Up
@@ -131,7 +144,7 @@ public class Workspace_controller {
 
         Notification.Infomation("Success", "Create new workspace successfully!");
 
-        btn_exit_createNewWorkSpace(event);
+        btn_cancel_NewWorkSpace(event);
     }
 
     @FXML
@@ -163,6 +176,11 @@ public class Workspace_controller {
             return;
         }
 
+        // Func Rename workspace here
+
+        Notification.Infomation("Success", "Rename workspace successfully!");
+        btn_cancel_NewWorkSpace(event);
+
     }
 
     // Function Continue
@@ -179,14 +197,6 @@ public class Workspace_controller {
     }
 
     // Function shared
-
-    @FXML
-    void btn_exit_createNewWorkSpace(ActionEvent event) {
-        create_new_WorkSpace.setVisible(false);
-        archive_WorkSpace.setVisible(false);
-        rename_WorkSpace.setVisible(false);
-    }
-
     @FXML
     void btn_cancel_NewWorkSpace(ActionEvent event) {
         create_new_WorkSpace.setVisible(false);

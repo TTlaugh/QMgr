@@ -12,26 +12,30 @@ import javafx.scene.layout.AnchorPane;
 
 public class Screencontainer_controller {
 
-    private static Parent root = null;
+    private Parent root = null;
 
     @FXML
-    private Button student_screen_id;
+    private Button student_screen_id = new Button();
 
     @FXML
-    private Button subject_screen_id;
+    private Button subject_screen_id = new Button();
 
     @FXML
-    private Button exam_screen_id;
+    private Button exam_screen_id = new Button();
 
     @FXML
-    private Button lockworkspace_screen_id;
+    private Button lockworkspace_screen_id = new Button();
 
     @FXML
-    private AnchorPane mainbody;
+    public AnchorPane mainbody = new AnchorPane();
 
     private String hover_btn = "-fx-background-color: #dbe8ff; -fx-text-fill:#2970ff";
 
     private String unhover_btn = "-fx-background-color: #ffffff; -fx-text-fill:#667085";
+
+    public AnchorPane getMainbody() {
+        return mainbody;
+    }
 
     void setBackGround_Button(Button button_isHover, Button... button_notHover) {
         button_isHover.setStyle(hover_btn);
@@ -42,49 +46,22 @@ public class Screencontainer_controller {
     @FXML
     void btn_exam_screen(ActionEvent event) {
         setBackGround_Button(exam_screen_id, subject_screen_id, student_screen_id);
-
-        AnchorPane insidePane;
-        try {
-            insidePane = new FXMLLoader(getClass().getResource("/ui/exam-management.fxml")).load();
-            setAnchor(insidePane);
-            mainbody.getChildren().clear();
-            mainbody.getChildren().add(insidePane);
-        } catch (IOException e) {
-            System.out.println("Error in loading screencontainer_controller btn_exam_screen");
-            e.printStackTrace();
-        }
-
+        String url_ui = "/ui/exam-management.fxml";
+        load_Scene_AnchorPane(url_ui);
     }
 
     @FXML
     void btn_student_screen(ActionEvent event) {
         setBackGround_Button(student_screen_id, subject_screen_id, exam_screen_id);
-
-        AnchorPane insidePane;
-        try {
-            insidePane = new FXMLLoader(getClass().getResource("/ui/student-management.fxml")).load();
-            setAnchor(insidePane);
-            mainbody.getChildren().clear();
-            mainbody.getChildren().add(insidePane);
-        } catch (IOException e) {
-            System.out.println("Error in loading screencontainer_controller btn_student_screen");
-            e.printStackTrace();
-        }
+        String url_ui = "/ui/student-management.fxml";
+        load_Scene_AnchorPane(url_ui);
     }
 
     @FXML
     void btn_subject_screen(ActionEvent event) {
         setBackGround_Button(subject_screen_id, exam_screen_id, student_screen_id);
-        AnchorPane insidePane;
-        try {
-            insidePane = new FXMLLoader(getClass().getResource("/ui/subject-management.fxml")).load();
-            setAnchor(insidePane);
-            mainbody.getChildren().clear();
-            mainbody.getChildren().add(insidePane);
-        } catch (IOException e) {
-            System.out.println("Error in loading screencontainer_controller btn_subject_screen");
-            e.printStackTrace();
-        }
+        String url_ui = "/ui/subject-management.fxml";
+        load_Scene_AnchorPane(url_ui);
     }
 
     @FXML
@@ -98,11 +75,24 @@ public class Screencontainer_controller {
         }
     }
 
-    private void setAnchor(AnchorPane insidePane) {
+    public void setAnchor(AnchorPane insidePane) {
         AnchorPane.setTopAnchor(insidePane, 0.0);
         AnchorPane.setBottomAnchor(insidePane, 0.0);
         AnchorPane.setRightAnchor(insidePane, 0.0);
         AnchorPane.setLeftAnchor(insidePane, 0.0);
+    }
+
+    public void load_Scene_AnchorPane(String url_ui) {
+        AnchorPane insidePane;
+        try {
+            insidePane = new FXMLLoader(getClass().getResource(url_ui)).load();
+            setAnchor(insidePane);
+            mainbody.getChildren().clear();
+            mainbody.getChildren().add(insidePane);
+        } catch (IOException e) {
+            System.out.println("Error in loading screencontainer_controller load_Scene_AnchorPane");
+            e.printStackTrace();
+        }
     }
 
 }

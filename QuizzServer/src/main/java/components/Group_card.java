@@ -1,10 +1,13 @@
 package components;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.transform.Rotate;
 
 public class Group_card {
@@ -14,7 +17,7 @@ public class Group_card {
         Label date_created_label = new Label("Date created");
         Label date_created = new Label();
         Button archive_btn = new Button();
-        Button details_btn = new Button("Details");
+        private Button details_btn = new Button("Details");
         Image image = new Image(url);
         ImageView image_view = new ImageView(image);
 
@@ -161,6 +164,19 @@ public class Group_card {
                 this.details_btn.setContentDisplay(javafx.scene.control.ContentDisplay.LEFT);
                 this.details_btn.setAlignment(javafx.geometry.Pos.CENTER);
                 this.details_btn.setNodeOrientation(javafx.geometry.NodeOrientation.INHERIT);
+        }
+
+        public Button getDetails_btn() {
+                return details_btn;
+        }
+
+        public void click_Button_Archive(StackPane stackPane) {
+                archive_btn.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                                stackPane.setVisible(true);
+                        }
+                });
         }
 
 }
