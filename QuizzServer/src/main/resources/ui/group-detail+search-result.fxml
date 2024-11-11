@@ -44,7 +44,7 @@
       </Label>
       <HBox alignment="CENTER_LEFT" layoutX="703.0" layoutY="6.0" maxHeight="38.0" maxWidth="215.0" prefHeight="100.0" prefWidth="215.0" spacing="13.0" styleClass="round-layout" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="7.0">
          <children>
-            <TextField maxWidth="151.0" promptText="Search student..." style="-fx-background-color: transparent;">
+            <TextField maxWidth="151.0" onAction="#tf_SearchStudent_StudentManagement" promptText="Search student..." style="-fx-background-color: transparent;">
                <font>
                   <Font size="14.0" />
                </font>
@@ -70,7 +70,7 @@
                </font>
             </Label>
             <Label layoutX="46.0" layoutY="49.0" text="Total 4 students" textFill="#475467" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="46.0" />
-            <TableView fixedCellSize="0.0" layoutX="91.0" layoutY="91.0" prefHeight="347.0" prefWidth="476.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="77.0">
+            <TableView fx:id="table_Student_StudentManagement" fixedCellSize="0.0" layoutX="91.0" layoutY="91.0" prefHeight="347.0" prefWidth="476.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="77.0">
               <columns>
                 <TableColumn prefWidth="144.80003356933594" text="ID" />
                 <TableColumn minWidth="5.5999755859375" prefWidth="278.4000244140625" resizable="false" text="FullName" />
@@ -81,7 +81,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Button alignment="CENTER" layoutX="42.0" layoutY="429.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="136.0" styleClass="button-donhat" text="Delete student" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+            <Button alignment="CENTER" layoutX="42.0" layoutY="429.0" mnemonicParsing="false" onAction="#btn_DeleteStudent_StudentManagement" prefHeight="32.0" prefWidth="136.0" styleClass="button-donhat" text="Delete student" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -93,7 +93,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="CENTER" layoutX="165.0" layoutY="436.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="136.0" styleClass="button-xanhnhat" text="Student detail" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="164.0">
+            <Button alignment="CENTER" layoutX="165.0" layoutY="436.0" mnemonicParsing="false" onAction="#btn_StudentDetail_StudentManagement" prefHeight="32.0" prefWidth="136.0" styleClass="button-xanhnhat" text="Student detail" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="164.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -105,7 +105,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="CENTER" layoutX="360.0" layoutY="30.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="143.0" styleClass="button-trang" text="Export students" textFill="WHITE" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="33.0">
+            <Button alignment="CENTER" layoutX="360.0" layoutY="30.0" mnemonicParsing="false" onAction="#btn_ExportStudent_StudentManagement" prefHeight="32.0" prefWidth="143.0" styleClass="button-trang" text="Export students" textFill="WHITE" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="33.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -117,7 +117,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="CENTER" layoutX="196.0" layoutY="33.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="143.0" styleClass="button-trang" text="Import students" textFill="WHITE" AnchorPane.rightAnchor="415.0" AnchorPane.topAnchor="33.0">
+            <Button alignment="CENTER" layoutX="196.0" layoutY="33.0" mnemonicParsing="false" onAction="#btn_ImportStudent_StudentManagement" prefHeight="32.0" prefWidth="143.0" styleClass="button-trang" text="Import students" textFill="WHITE" AnchorPane.rightAnchor="415.0" AnchorPane.topAnchor="33.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -136,12 +136,12 @@
                         <Image url="@../imgs/Screenshot_2024-10-30_172802-removebg-preview.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="71.0" layoutY="70.0" text="Dai so tuyen tinh" textFill="#101828" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+                  <Label fx:id="lb_GroupName_StudentManagement" alignment="CENTER" layoutX="71.0" layoutY="70.0" text="Dai so tuyen tinh" textFill="#101828" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="70.0" layoutY="86.0" prefHeight="26.0" prefWidth="90.0" style="-fx-background-radius: 10; -fx-background-color: #eaecf0;" text="ID: #GR01" AnchorPane.leftAnchor="71.0" AnchorPane.topAnchor="90.0">
+                  <Label fx:id="lb_GroupID_StudentManagement" alignment="CENTER" layoutX="70.0" layoutY="86.0" prefHeight="26.0" prefWidth="90.0" style="-fx-background-radius: 10; -fx-background-color: #eaecf0;" text="ID: #GR01" AnchorPane.leftAnchor="71.0" AnchorPane.topAnchor="90.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -155,14 +155,14 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" layoutX="162.0" layoutY="149.0" text="12/09/2023" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="140.0" />
+                  <Label fx:id="lb_DateCreate_StudentManagement" alignment="CENTER_RIGHT" layoutX="162.0" layoutY="149.0" text="12/09/2023" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="140.0" />
                   <Label layoutX="12.0" layoutY="158.0" text="Quantity" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="159.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" layoutX="158.0" layoutY="159.0" text="12 students" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="159.0" />
-                  <Button alignment="CENTER" layoutX="12.0" layoutY="186.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="98.0" styleClass="button-trang" text="Rename" textFill="WHITE" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="190.0">
+                  <Label fx:id="lb_Quantity_StudentManagement" alignment="CENTER_RIGHT" layoutX="158.0" layoutY="159.0" text="12 students" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="159.0" />
+                  <Button alignment="CENTER" layoutX="12.0" layoutY="186.0" mnemonicParsing="false" onAction="#btn_Rename_StudentManagement" prefHeight="32.0" prefWidth="98.0" styleClass="button-trang" text="Rename" textFill="WHITE" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="190.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -174,7 +174,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button alignment="CENTER" layoutX="121.0" layoutY="190.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="98.0" styleClass="button-donhat" text="Archived" textFill="WHITE" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="190.0">
+                  <Button alignment="CENTER" layoutX="121.0" layoutY="190.0" mnemonicParsing="false" onAction="#btn_Archive_StudentManagement" prefHeight="32.0" prefWidth="98.0" styleClass="button-donhat" text="Archived" textFill="WHITE" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="190.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -186,7 +186,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button alignment="CENTER" layoutX="17.0" layoutY="402.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="208.0" styleClass="button-xanhdam" text="Add student" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
+                  <Button alignment="CENTER" layoutX="17.0" layoutY="402.0" mnemonicParsing="false" onAction="#btn_addStudent_Management" prefHeight="32.0" prefWidth="208.0" styleClass="button-xanhdam" text="Add student" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -430,9 +430,9 @@
             </AnchorPane>
          </children>
       </StackPane>
-      <StackPane layoutX="181.0" layoutY="53.0" visible="false" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="112.0">
+      <StackPane layoutX="181.0" layoutY="53.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="112.0">
          <children>
-            <AnchorPane maxHeight="327.0" maxWidth="480.0" prefHeight="327.0" prefWidth="480.0" styleClass="popup">
+            <AnchorPane maxHeight="327.0" maxWidth="480.0" prefHeight="327.0" prefWidth="480.0" styleClass="popup" visible="false">
                <children>
                   <Separator layoutX="113.0" layoutY="98.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0" />
                   <Label layoutX="14.0" prefHeight="44.0" prefWidth="288.0" text="Student ID #ST01 already exists" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0">

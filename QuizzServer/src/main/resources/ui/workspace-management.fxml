@@ -233,11 +233,6 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tf_WorkSpaceName_SetUp" layoutX="20.0" layoutY="210.0" maxHeight="38.0" maxWidth="440.0" prefHeight="38.0" prefWidth="440.0" promptText="Sgu University" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="94.0">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </TextField>
                   <Button alignment="CENTER" layoutX="20.0" layoutY="257.0" mnemonicParsing="false" onAction="#btn_cancel_NewWorkSpace" prefHeight="32.0" prefWidth="214.0" styleClass="button-trang" text="Cancel" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
                      <font>
                         <Font name="System Bold" size="13.0" />
@@ -253,6 +248,11 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
+                  <TextField fx:id="tf_WorkSpaceName_SetUp" layoutX="20.0" layoutY="210.0" maxHeight="38.0" maxWidth="440.0" prefHeight="38.0" prefWidth="440.0" promptText="Sgu University" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="94.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
                   <TextField fx:id="tf_PIN_SetUp" layoutX="30.0" layoutY="220.0" maxHeight="38.0" maxWidth="440.0" prefHeight="38.0" prefWidth="440.0" promptText="******" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="172.0">
                      <font>
                         <Font size="16.0" />

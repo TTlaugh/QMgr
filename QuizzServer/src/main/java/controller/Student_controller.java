@@ -23,9 +23,6 @@ import utils.Notification;
 
 public class Student_controller implements Initializable {
 
-    // Scence
-    private Scene scene = null;
-
     // FlowPane
     @FXML
     private FlowPane flowpane_mainbody = new FlowPane();
@@ -99,15 +96,11 @@ public class Student_controller implements Initializable {
         Notification.Infomation("Success", "Create new group successfully");
         Group_card group = new Group_card(groupName, "ID", "Date created");
         this.flowpane_mainbody.getChildren().add(group.getGroup_Instance());
-        this.create_NewGroup.setVisible(false);
+
+        btn_cancel_Group(event);
     }
 
     // Func Archive Group
-
-    @FXML
-    void btn_archive_Hidden(ActionEvent event) {
-
-    }
 
     @FXML
     void btn_archive_NewGroup(ActionEvent event) {
@@ -127,7 +120,7 @@ public class Student_controller implements Initializable {
         // Func Archive Group
 
         Notification.Infomation("Success", "Archive group successfully");
-        this.archive_NewGroup.setVisible(false);
+        btn_cancel_Group(event);
     }
 
     // Func detail Group
@@ -172,15 +165,6 @@ public class Student_controller implements Initializable {
         }
     }
 
-    // Initialize
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        // LoadListGroup & Set button details & button archive
-        LoadListGroup(group_list, archive_NewGroup);
-
-    }
-
     // Load List Group
     void LoadListGroup(List<Group_card> list, StackPane archive_NewGroup) {
         for (Group_card group : list) {
@@ -200,5 +184,15 @@ public class Student_controller implements Initializable {
 
     // Load List Student
     void LoadListStudent(List<Student_Model> list) {
+    }
+
+    /*-------------------------------------------------------*/
+    // Initialize
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // LoadListGroup & Set button details & button archive
+        LoadListGroup(group_list, archive_NewGroup);
+
     }
 }

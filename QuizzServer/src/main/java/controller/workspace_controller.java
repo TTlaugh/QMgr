@@ -1,20 +1,23 @@
 package controller;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.AnchorPane;
 import utils.CheckTextField;
 import utils.Notification;
 
-public class Workspace_controller {
+public class Workspace_controller implements Initializable {
     // StackPane
     @FXML
     private TextField tf_PIN_StackPane;
@@ -90,21 +93,7 @@ public class Workspace_controller {
     @FXML
     void btn_create_WorkSpace(ActionEvent event) {
 
-        // Limit length
-        int maxLength_PIN = 6;
-        tf_PIN_SetUp.setTextFormatter(new TextFormatter<String>(change -> {
-            if (change.getControlNewText().length() > maxLength_PIN) {
-                return null; // Không cho phép thay đổi
-            }
-            return change;
-        }));
-        tf_Comfirm_PIN_SetUp.setTextFormatter(new TextFormatter<String>(change -> {
-            if (change.getControlNewText().length() > maxLength_PIN) {
-                return null; // Không cho phép thay đổi
-            }
-            return change;
-        }));
-
+        //
         String workSpace_Name = tf_WorkSpaceName_SetUp.getText();
         String workSpace_PIN = tf_PIN_SetUp.getText();
         String comfrimWorkSpace_PIN = tf_Comfirm_PIN_SetUp.getText();
@@ -122,18 +111,18 @@ public class Workspace_controller {
             Notification.Error("Error", "Please enter workspace PIN!");
             return;
         }
-        if (comfrimWorkSpace_PIN.length() == 0 || comfrimWorkSpace_PIN == null || comfrimWorkSpace_PIN == "") {
-            Notification.Error("Error", "Please enter confirm workspace PIN!");
+        if (workSpace_PIN.length() < 6) {
+            Notification.Error("Error", "Workspace PIN is 6 characters!");
             return;
         }
-        if (!CheckTextField.check_String_Number(workSpace_PIN)) {
-            Notification.Error("Error", "Workspace PIN must be number!");
-            return;
-        }
-        if (!CheckTextField.check_String_Number(comfrimWorkSpace_PIN)) {
-            Notification.Error("Error", "Workspace PIN must be number!");
-            return;
-        }
+        // if (!CheckTextField.check_String_Number(workSpace_PIN)) {
+        // Notification.Error("Error", "Workspace PIN must be number!");
+        // return;
+        // }
+        // if (!CheckTextField.check_String_Number(comfrimWorkSpace_PIN)) {
+        // Notification.Error("Error", "Workspace PIN must be number!");
+        // return;
+        // }
         if (!workSpace_PIN.equals(comfrimWorkSpace_PIN)) {
             Notification.Error("Error", "Workspace PIN does not match!");
             return;
@@ -205,10 +194,17 @@ public class Workspace_controller {
     }
     /*------------------------------------------------------------ */
 
-    // @Override
-    // public void initialize(URL location, ResourceBundle resources) {
-
-    // throw new UnsupportedOperationException("Unimplemented method 'initialize'");
-    // }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // Limit length
+        int maxLength_PIN = 6;
+        CheckTextField.limitCharTextField(tf_PIN_SetUp, maxLength_PIN);
+        CheckTextField.limitCharTextField(tf_Comfirm_PIN_SetUp, maxLength_PIN);
+        CheckTextField.limitCharTextField(tf_PIN_StackPane, maxLength_PIN);
+        // set PIN not char
+        CheckTextField.notCharTextField(tf_PIN_SetUp);
+        CheckTextField.notCharTextField(tf_Comfirm_PIN_SetUp);
+        CheckTextField.notCharTextField(tf_PIN_StackPane);
+    }
 
 }
