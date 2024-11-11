@@ -15,7 +15,7 @@ public class SQLUtils {
 		mysqlDS.setURL(Constant.MySQLProperties.URL);
 		mysqlDS.setUser(Constant.MySQLProperties.USERNAME);
 		mysqlDS.setPassword(Constant.MySQLProperties.PASSWORD);
-		mysqlDS.setDatabaseName("QuizzServer");
+		mysqlDS.setDatabaseName("QuizzDB");
 		return mysqlDS;
 	}
 
@@ -23,8 +23,10 @@ public class SQLUtils {
 		Connection connection = null;
 		try {
 			connection = getDataSource().getConnection();
+			System.out.println("Connect database successfully");
 		} catch (SQLException e) {
 			printSQLException(e);
+			System.out.println("Connect database failed");
 		}
 		return connection;
 	}

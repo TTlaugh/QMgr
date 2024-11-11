@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import DTO.Student;
 import components.Group_card;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,7 +20,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
-import model.Student_Model;
 import utils.Notification;
 
 public class Student_controller implements Initializable {
@@ -69,11 +70,11 @@ public class Student_controller implements Initializable {
 
     List<Group_card> group_list = List.of(group, group2, group3);
 
-    Student_Model student = new Student_Model();
-    Student_Model student2 = new Student_Model();
-    Student_Model student3 = new Student_Model();
+    Student student = new Student();
+    Student student2 = new Student();
+    Student student3 = new Student();
 
-    List<Student_Model> student_list = List.of(student, student2, student3);
+    List<Student> student_list = List.of(student, student2, student3);
 
     // Func Create New Group
     @FXML
@@ -183,7 +184,7 @@ public class Student_controller implements Initializable {
     }
 
     // Load List Student
-    void LoadListStudent(List<Student_Model> list) {
+    void LoadListStudent(List<Student> list) {
     }
 
     /*-------------------------------------------------------*/
