@@ -2,8 +2,11 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import org.apache.poi.hpsf.Array;
 
 import DTO.Student;
 import components.Group_card;
@@ -12,6 +15,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
@@ -64,17 +68,59 @@ public class Student_controller implements Initializable {
     // private AnchorPane Group_DeTail_Student_Hidden;
 
     // Data_test
-    Group_card group = new Group_card("Group name", "GR0011", "2020-01-01");
-    Group_card group2 = new Group_card("Group name", "GR0012", "2020-01-02");
-    Group_card group3 = new Group_card("Group name", "GR0013", "2020-01-03");
+    // Group_card group = new Group_card("Group name", "GR0011", "2020-01-01");
+    // Group_card group2 = new Group_card("Group name", "GR0012", "2020-01-02");
+    // Group_card group3 = new Group_card("Group name", "GR0013", "2020-01-03");
 
-    List<Group_card> group_list = List.of(group, group2, group3);
+    List<Group_card> group_list = new ArrayList<Group_card>();
 
-    Student student = new Student();
-    Student student2 = new Student();
-    Student student3 = new Student();
+    Student student = new Student(1, 1, "ID", "First name", "Last name", "Email", "Phone");
+    Student student2 = new Student(2, 2, "ID", "First name", "Last name", "Email", "Phone");
+    Student student3 = new Student(3, 3, "ID", "First name", "Last name", "Email", "Phone");
 
     List<Student> student_list = List.of(student, student2, student3);
+
+    // Import
+    @FXML
+    void btn_ImportStudent_StudentManagement(ActionEvent event) {
+
+    }
+
+    // Export
+    @FXML
+    void btn_ExportStudent_StudentManagement(ActionEvent event) {
+
+    }
+
+    // Delete
+    @FXML
+    void btn_DeleteStudent_StudentManagement(ActionEvent event) {
+
+    }
+
+    // Rename
+    @FXML
+    void btn_Rename_StudentManagement(ActionEvent event) {
+
+    }
+    // Detail
+
+    @FXML
+    void btn_StudentDetail_StudentManagement(ActionEvent event) {
+
+    }
+    // AddStudent
+
+    @FXML
+    void btn_addStudent_Management(ActionEvent event) {
+
+    }
+
+    // Archive
+    @FXML
+    void btn_Archive_StudentManagement(ActionEvent event) {
+
+    }
 
     // Func Create New Group
     @FXML
@@ -95,8 +141,12 @@ public class Student_controller implements Initializable {
         }
         // Func Create New Group
         Notification.Infomation("Success", "Create new group successfully");
-        Group_card group = new Group_card(groupName, "ID", "Date created");
-        this.flowpane_mainbody.getChildren().add(group.getGroup_Instance());
+
+        Group_card group = new Group_card(groupName, "ID", "12/8/2024");
+
+        group_list.add(group);
+
+        add_Group_FlowPane(group);
 
         btn_cancel_Group(event);
     }
@@ -166,20 +216,29 @@ public class Student_controller implements Initializable {
         }
     }
 
+    // Add group for flowpane
+    public void add_Group_FlowPane(Group_card group) {
+        Insets margin = new Insets(12, 12, 0, 0);
+
+        FlowPane.setMargin(group.getGroup_Instance(), margin);
+
+        this.flowpane_mainbody.getChildren().add(group.getGroup_Instance());
+
+        // Doing
+        group.getDetails_btn().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                btn_details_Group(event);
+            }
+        });
+
+        group.click_Button_Archive(archive_NewGroup);
+    }
+
     // Load List Group
-    void LoadListGroup(List<Group_card> list, StackPane archive_NewGroup) {
+    public void LoadListGroup(List<Group_card> list, StackPane archive_NewGroup) {
         for (Group_card group : list) {
-            this.flowpane_mainbody.getChildren().add(group.getGroup_Instance());
-
-            // Doing
-            group.getDetails_btn().setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    btn_details_Group(event);
-                }
-            });
-
-            group.click_Button_Archive(archive_NewGroup);
+            add_Group_FlowPane(group);
         }
     }
 

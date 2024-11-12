@@ -11,15 +11,14 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.transform.Rotate;
 
 public class Group_card {
-        final String url = "file:src/main/resources/imgs/icons8-archive-24.png";
+        final String url = "/imgs/icons8-archive-24.png";
+
         Label group_name = new Label();
         Label group_id = new Label();
         Label date_created_label = new Label("Date created");
         Label date_created = new Label();
         Button archive_btn = new Button();
         private Button details_btn = new Button("Details");
-        Image image = new Image(url);
-        ImageView image_view = new ImageView(image);
 
         AnchorPane group_content = new AnchorPane();
 
@@ -33,6 +32,10 @@ public class Group_card {
                 this.group_name.setText(group_name);
                 this.group_id.setText(group_id);
                 this.date_created.setText(date_created);
+
+                Image image = new Image(url);
+                ImageView image_view = new ImageView(image);
+
                 image_view.setFitWidth(20);
                 image_view.setFitHeight(20);
 
@@ -103,7 +106,7 @@ public class Group_card {
 
                 // Set Date Created Label
                 this.date_created_label.setStyle(
-                                "-fx-margin:0 0 31px 12px; -fx-font:System 15px; -fx-color:#eaecf0;");
+                                " -fx-font:System 15px; -fx-color:#eaecf0;");
                 this.date_created_label.setScaleX(1);
                 this.date_created_label.setScaleY(1);
                 this.date_created_label.setScaleZ(1);
@@ -138,6 +141,7 @@ public class Group_card {
                 this.date_created.setNodeOrientation(javafx.geometry.NodeOrientation.INHERIT);
 
                 // Set Archive Button
+                this.archive_btn.getStyleClass().add("button-donhat");
                 this.archive_btn.setStyle(
                                 "-fx-font:System 15px; -fx-text-fill: #f04438;");
                 this.archive_btn.setScaleX(1);

@@ -8,10 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import DTO.Answer;
 import DTO.Exam;
-import DTO.Question;
 import utils.SQLUtils;
 
 public class ExamDAO implements interfaceDAO<Exam> {

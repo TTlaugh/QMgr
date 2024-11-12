@@ -2,15 +2,16 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import components.Group_card;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -51,7 +52,7 @@ public class Subject_controller implements Initializable {
     Group_card group2 = new Group_card("Group name", "GR0012", "2020-01-02");
     Group_card group3 = new Group_card("Group name", "GR0013", "2020-01-03");
 
-    List<Group_card> group_list = List.of(group, group2, group3);
+    List<Group_card> group_list = new ArrayList<Group_card>();
 
     // func create new subject
     @FXML
@@ -68,9 +69,29 @@ public class Subject_controller implements Initializable {
         // Func Create New Group
         Notification.Infomation("Success", "Create new subject successfully");
         Group_card group = new Group_card(subjectName, "ID", "Date created");
-        this.flowpane_mainbody.getChildren().add(group.getGroup_Instance());
+
+        add_Group_FlowPane(group);
 
         btn_cancel_Subject(event);
+    }
+
+    // Add group for flowpane
+    public void add_Group_FlowPane(Group_card group) {
+        Insets margin = new Insets(12, 12, 0, 0);
+
+        FlowPane.setMargin(group.getGroup_Instance(), margin);
+
+        this.flowpane_mainbody.getChildren().add(group.getGroup_Instance());
+
+        // Doing
+        group.getDetails_btn().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                btn_details_Group(event);
+            }
+        });
+
+        group.click_Button_Archive(archive_NewSubject);
     }
 
     @FXML
@@ -140,16 +161,7 @@ public class Subject_controller implements Initializable {
     // Load List Group
     void LoadListGroup(List<Group_card> list, StackPane archive_NewGroup) {
         for (Group_card group : list) {
-            this.flowpane_mainbody.getChildren().add(group.getGroup_Instance());
-
-            group.getDetails_btn().setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    btn_details_Group(event);
-                }
-            });
-
-            group.click_Button_Archive(archive_NewGroup);
+            add_Group_FlowPane(group);
         }
     }
 

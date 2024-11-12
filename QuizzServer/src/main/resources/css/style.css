@@ -79,6 +79,11 @@
 	-fx-text-fill:#F04438;
 	-fx-cursor: hand;
 }
+.button-donhat:hover {
+	-fx-background-color: #ffffff ;
+	-fx-text-fill:   #F04438;
+	-fx-border-color: #F04438;
+}
 
 .popup {
 	-fx-background-color: #ffffff;

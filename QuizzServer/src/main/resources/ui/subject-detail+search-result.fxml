@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="540.0" minWidth="760.0" prefHeight="540.0" prefWidth="760.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="540.0" minWidth="760.0" prefHeight="540.0" prefWidth="760.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Subject_controller">
    <children>
       <Separator layoutX="10.0" layoutY="67.0" prefHeight="1.0" prefWidth="960.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
       <Label layoutX="260.0" layoutY="17.0" prefHeight="26.0" prefWidth="168.0" text="Subject management" AnchorPane.leftAnchor="56.0" AnchorPane.topAnchor="13.0">
@@ -23,7 +23,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Button layoutX="422.0" layoutY="12.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="12.0">
+      <Button layoutX="422.0" layoutY="12.0" mnemonicParsing="false" onAction="#btm_back_SubjectManagement" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="12.0">
          <graphic>
             <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" smooth="false">
                <image>
@@ -44,7 +44,7 @@
       </Label>
       <HBox alignment="CENTER_LEFT" layoutX="703.0" layoutY="6.0" maxHeight="38.0" maxWidth="215.0" prefHeight="100.0" prefWidth="215.0" spacing="13.0" styleClass="round-layout" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="7.0">
          <children>
-            <TextField maxWidth="151.0" promptText="Search question" style="-fx-background-color: transparent;">
+            <TextField fx:id="tf_SearchQuestion_SubjectManagement" maxWidth="151.0" promptText="Search question" style="-fx-background-color: transparent;">
                <font>
                   <Font size="14.0" />
                </font>
@@ -70,7 +70,7 @@
                </font>
             </Label>
             <Label layoutX="46.0" layoutY="49.0" text="Total 12 questions" textFill="#475467" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="46.0" />
-            <TableView fixedCellSize="0.0" layoutX="91.0" layoutY="91.0" prefHeight="347.0" prefWidth="476.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="77.0">
+            <TableView fx:id="table_Question_SubjectManagement" fixedCellSize="0.0" layoutX="91.0" layoutY="91.0" onSort="#lb_SubjectName_SubjectManagement" prefHeight="347.0" prefWidth="476.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="77.0">
                <columns>
                   <TableColumn editable="false" prefWidth="44.00001525878906" text="#ID" />
                   <TableColumn editable="false" minWidth="5.5999755859375" prefWidth="221.60003662109375" text="Question" />
@@ -81,7 +81,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Button alignment="CENTER" layoutX="42.0" layoutY="429.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="149.0" styleClass="button-donhat" text="Archive question" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+            <Button alignment="CENTER" layoutX="42.0" layoutY="429.0" mnemonicParsing="false" onAction="#btn_ArchiveQuestion_SubjectManagement" prefHeight="32.0" prefWidth="149.0" styleClass="button-donhat" text="Archive question" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -93,7 +93,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="CENTER" layoutX="165.0" layoutY="436.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="149.0" styleClass="button-xanhnhat" text="Question detail" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="177.0">
+            <Button alignment="CENTER" layoutX="165.0" layoutY="436.0" mnemonicParsing="false" onAction="#btn_QuestionDetail_SubjectManagement" prefHeight="32.0" prefWidth="149.0" styleClass="button-xanhnhat" text="Question detail" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="177.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -105,7 +105,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="CENTER" layoutX="360.0" layoutY="30.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="149.0" styleClass="button-trang" text="Export questions" textFill="WHITE" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="33.0">
+            <Button alignment="CENTER" layoutX="360.0" layoutY="30.0" mnemonicParsing="false" onAction="#btn_ExportQuestion_SubjectManagement" prefHeight="32.0" prefWidth="149.0" styleClass="button-trang" text="Export questions" textFill="WHITE" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="33.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -117,7 +117,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="CENTER" layoutX="196.0" layoutY="33.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="149.0" styleClass="button-trang" text="Import questions" textFill="WHITE" AnchorPane.rightAnchor="421.0" AnchorPane.topAnchor="33.0">
+            <Button alignment="CENTER" layoutX="196.0" layoutY="33.0" mnemonicParsing="false" onAction="#btn_ImportQuestion_SubjectManagement" prefHeight="32.0" prefWidth="149.0" styleClass="button-trang" text="Import questions" textFill="WHITE" AnchorPane.rightAnchor="421.0" AnchorPane.topAnchor="33.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -136,12 +136,12 @@
                         <Image url="@../imgs/Screenshot_2024-10-30_172802-removebg-preview.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="71.0" layoutY="70.0" text="Dai so tuyen tinh" textFill="#101828" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+                  <Label fx:id="lb_SubjectName_SubjectManagement" alignment="CENTER" layoutX="71.0" layoutY="70.0" text="Dai so tuyen tinh" textFill="#101828" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="70.0" layoutY="86.0" prefHeight="26.0" prefWidth="90.0" style="-fx-background-radius: 10; -fx-background-color: #eaecf0;" text="ID: #GR01" AnchorPane.leftAnchor="71.0" AnchorPane.topAnchor="90.0">
+                  <Label fx:id="lb_SubjectID_SubjectManagement" alignment="CENTER" layoutX="70.0" layoutY="86.0" prefHeight="26.0" prefWidth="90.0" style="-fx-background-radius: 10; -fx-background-color: #eaecf0;" text="ID: #GR01" AnchorPane.leftAnchor="71.0" AnchorPane.topAnchor="90.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -155,7 +155,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" layoutX="162.0" layoutY="149.0" text="12/09/2023" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="140.0" />
+                  <Label fx:id="lb_DateCreate_SubjectManagemennt" alignment="CENTER_RIGHT" layoutX="162.0" layoutY="149.0" text="12/09/2023" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="140.0" />
                   <Label layoutX="12.0" layoutY="158.0" text="Quantity" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="159.0">
                      <font>
                         <Font name="System Bold" size="12.0" />

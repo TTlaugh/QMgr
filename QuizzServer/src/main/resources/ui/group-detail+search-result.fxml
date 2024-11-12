@@ -44,7 +44,7 @@
       </Label>
       <HBox alignment="CENTER_LEFT" layoutX="703.0" layoutY="6.0" maxHeight="38.0" maxWidth="215.0" prefHeight="100.0" prefWidth="215.0" spacing="13.0" styleClass="round-layout" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="7.0">
          <children>
-            <TextField maxWidth="151.0" onAction="#tf_SearchStudent_StudentManagement" promptText="Search student..." style="-fx-background-color: transparent;">
+            <TextField fx:id="tf_SearchStudent_StudentManagement" maxWidth="151.0" promptText="Search student..." style="-fx-background-color: transparent;">
                <font>
                   <Font size="14.0" />
                </font>

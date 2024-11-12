@@ -5,10 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import com.google.gson.Gson;
-
-import DTO.Question;
 import DTO.Student;
 import utils.SQLUtils;
 
