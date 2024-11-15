@@ -44,7 +44,7 @@
       </Label>
       <HBox alignment="CENTER_LEFT" layoutX="703.0" layoutY="6.0" maxHeight="38.0" maxWidth="215.0" prefHeight="100.0" prefWidth="215.0" spacing="13.0" styleClass="round-layout" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="7.0">
          <children>
-            <TextField fx:id="tf_SearchStudent_StudentManagement" maxWidth="151.0" promptText="Search student..." style="-fx-background-color: transparent;">
+            <TextField fx:id="tf_SearchStudent_StudentManagement" maxWidth="151.0" onAction="#btn_SearchStudent_StudentManagement" promptText="Search student..." style="-fx-background-color: transparent;">
                <font>
                   <Font size="14.0" />
                </font>
@@ -62,7 +62,7 @@
             <Insets left="16.0" />
          </padding>
       </HBox>
-      <AnchorPane layoutX="454.0" layoutY="167.0" prefHeight="488.0" prefWidth="760.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
+      <AnchorPane fx:id="AnchorPane_GroupDetailStudent_StudentManagement" layoutX="454.0" layoutY="167.0" prefHeight="488.0" prefWidth="760.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
          <children>
             <Label layoutX="44.0" layoutY="23.0" text="All students" textFill="#101828" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
                <font>
@@ -93,7 +93,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="CENTER" layoutX="165.0" layoutY="436.0" mnemonicParsing="false" onAction="#btn_StudentDetail_StudentManagement" prefHeight="32.0" prefWidth="136.0" styleClass="button-xanhnhat" text="Student detail" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="164.0">
+            <Button alignment="CENTER" layoutX="165.0" layoutY="436.0" mnemonicParsing="false" onAction="#btn_StudentDetail_Hidden_StudentManagement" prefHeight="32.0" prefWidth="136.0" styleClass="button-xanhnhat" text="Student detail" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="164.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -162,7 +162,7 @@
                      </font>
                   </Label>
                   <Label fx:id="lb_Quantity_StudentManagement" alignment="CENTER_RIGHT" layoutX="158.0" layoutY="159.0" text="12 students" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="159.0" />
-                  <Button alignment="CENTER" layoutX="12.0" layoutY="186.0" mnemonicParsing="false" onAction="#btn_Rename_StudentManagement" prefHeight="32.0" prefWidth="98.0" styleClass="button-trang" text="Rename" textFill="WHITE" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="190.0">
+                  <Button alignment="CENTER" layoutX="12.0" layoutY="186.0" mnemonicParsing="false" onAction="#btn_Rename_Hidden_StudentManagement" prefHeight="32.0" prefWidth="98.0" styleClass="button-trang" text="Rename" textFill="WHITE" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="190.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -174,7 +174,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button alignment="CENTER" layoutX="121.0" layoutY="190.0" mnemonicParsing="false" onAction="#btn_Archive_StudentManagement" prefHeight="32.0" prefWidth="98.0" styleClass="button-donhat" text="Archived" textFill="WHITE" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="190.0">
+                  <Button alignment="CENTER" layoutX="121.0" layoutY="190.0" mnemonicParsing="false" onAction="#btn_Archive_Hidden_StudentManagement" prefHeight="32.0" prefWidth="98.0" styleClass="button-donhat" text="Archived" textFill="WHITE" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="190.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -186,7 +186,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button alignment="CENTER" layoutX="17.0" layoutY="402.0" mnemonicParsing="false" onAction="#btn_addStudent_Management" prefHeight="32.0" prefWidth="208.0" styleClass="button-xanhdam" text="Add student" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
+                  <Button alignment="CENTER" layoutX="17.0" layoutY="402.0" mnemonicParsing="false" onAction="#btn_addStudent_Hidden_StudentManagement" prefHeight="32.0" prefWidth="208.0" styleClass="button-xanhdam" text="Add student" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -202,7 +202,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <StackPane layoutX="181.0" layoutY="53.0" visible="false" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="112.0">
+      <StackPane fx:id="renameGroup_StudentManagement" layoutX="181.0" layoutY="53.0" visible="false" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="112.0">
          <children>
             <AnchorPane maxHeight="316.0" maxWidth="480.0" prefHeight="316.0" prefWidth="480.0" styleClass="popup">
                <children>
@@ -212,7 +212,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Button layoutX="405.0" layoutY="6.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="7.0">
+                  <Button layoutX="405.0" layoutY="6.0" mnemonicParsing="false" onAction="#btn_cancel_GroupDetail" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="7.0">
                      <graphic>
                         <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" smooth="false">
                            <image>
@@ -227,12 +227,12 @@
                         <Image url="@../imgs/Screenshot_2024-10-30_172053-removebg-preview.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="126.0" layoutY="87.0" prefHeight="24.0" prefWidth="480.0" text="Dai so tuyen tinh" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="96.0">
+                  <Label fx:id="lb_GroupName_Rename_StudentManagement" alignment="CENTER" layoutX="126.0" layoutY="87.0" prefHeight="24.0" prefWidth="480.0" text="Dai so tuyen tinh" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="96.0">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="194.0" layoutY="131.0" prefHeight="26.0" prefWidth="92.0" style="-fx-background-radius: 10; -fx-background-color: #eaecf0;" text="ID: #GR01" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="193.0" AnchorPane.topAnchor="124.0">
+                  <Label fx:id="lb_GroupID_Rename_StudentManagement" alignment="CENTER" layoutX="194.0" layoutY="131.0" prefHeight="26.0" prefWidth="92.0" style="-fx-background-radius: 10; -fx-background-color: #eaecf0;" text="ID: #GR01" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="193.0" AnchorPane.topAnchor="124.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -245,17 +245,17 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="20.0" layoutY="210.0" maxHeight="38.0" maxWidth="440.0" prefHeight="38.0" prefWidth="440.0" styleClass="round-layout" text="Nhom 1 - Dai so tuyen tinh" AnchorPane.bottomAnchor="62.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                  <TextField fx:id="tf_Rename_StudentManagement" layoutX="20.0" layoutY="210.0" maxHeight="38.0" maxWidth="440.0" prefHeight="38.0" prefWidth="440.0" promptText="Nhom 1 - Dai so tuyen tinh" styleClass="round-layout" AnchorPane.bottomAnchor="62.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <Button alignment="CENTER" layoutX="20.0" layoutY="257.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="214.0" styleClass="button-trang" text="Cancel" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+                  <Button alignment="CENTER" layoutX="20.0" layoutY="257.0" mnemonicParsing="false" onAction="#btn_cancel_GroupDetail" prefHeight="32.0" prefWidth="214.0" styleClass="button-trang" text="Cancel" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" layoutX="231.0" layoutY="257.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="214.0" styleClass="button-xanhdam" text="Rename" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                  <Button alignment="CENTER" layoutX="231.0" layoutY="257.0" mnemonicParsing="false" onAction="#btn_Rename_StudentManagement" prefHeight="32.0" prefWidth="214.0" styleClass="button-xanhdam" text="Rename" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -264,7 +264,7 @@
             </AnchorPane>
          </children>
       </StackPane>
-      <StackPane layoutX="271.3999938964844" layoutY="-48.599998474121094" visible="false" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="330.0" AnchorPane.topAnchor="10.0">
+      <StackPane fx:id="addStudent_StudentManagement" layoutX="271.3999938964844" layoutY="-48.599998474121094" visible="false" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="330.0" AnchorPane.topAnchor="10.0">
          <children>
             <AnchorPane maxHeight="506.0" maxWidth="300.0" prefHeight="506.0" prefWidth="300.0" styleClass="popup">
                <children>
@@ -274,7 +274,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Button layoutX="405.0" layoutY="6.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="7.0">
+                  <Button layoutX="405.0" layoutY="6.0" mnemonicParsing="false" onAction="#btn_cancel_GroupDetail" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="7.0">
                      <graphic>
                         <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" smooth="false">
                            <image>
@@ -283,12 +283,12 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button alignment="CENTER" layoutX="20.0" layoutY="257.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="124.0" styleClass="button-trang" text="Cancel" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+                  <Button alignment="CENTER" layoutX="20.0" layoutY="257.0" mnemonicParsing="false" onAction="#btn_cancel_GroupDetail" prefHeight="32.0" prefWidth="124.0" styleClass="button-trang" text="Cancel" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" layoutX="20.0" layoutY="318.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="124.0" styleClass="button-xanhdam" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                  <Button alignment="CENTER" layoutX="20.0" layoutY="318.0" mnemonicParsing="false" onAction="#btn_AddStudent_Add_StudentManagement" prefHeight="32.0" prefWidth="124.0" styleClass="button-xanhdam" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -298,7 +298,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="22.0" layoutY="91.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="94.0">
+                  <TextField fx:id="tf_FirstName_Add_StudentManagement" layoutX="22.0" layoutY="91.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="94.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -308,7 +308,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="14.0" layoutY="167.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="172.0">
+                  <TextField fx:id="tf_LastName_Add_StudentManagement" layoutX="14.0" layoutY="167.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="172.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -318,7 +318,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="14.0" layoutY="238.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="250.0">
+                  <TextField fx:id="tf_StudentID_Add_StudentManagement" layoutX="14.0" layoutY="238.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="250.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -328,7 +328,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="14.0" layoutY="311.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="328.0">
+                  <TextField fx:id="tf_Email_Add_StudentManagement" layoutX="14.0" layoutY="311.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="328.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -338,7 +338,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="14.0" layoutY="379.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="406.0">
+                  <TextField fx:id="tf_Phone_Add_StudentManagement" layoutX="14.0" layoutY="379.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="406.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -347,7 +347,7 @@
             </AnchorPane>
          </children>
       </StackPane>
-      <StackPane layoutX="271.3999938964844" layoutY="-48.599998474121094" visible="false" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="330.0" AnchorPane.topAnchor="10.0">
+      <StackPane fx:id="detailStudent_StudentManagement" layoutX="271.3999938964844" layoutY="-48.599998474121094" visible="false" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="330.0" AnchorPane.topAnchor="10.0">
          <children>
             <AnchorPane maxHeight="506.0" maxWidth="300.0" prefHeight="506.0" prefWidth="300.0" styleClass="popup">
                <children>
@@ -357,7 +357,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Button layoutX="405.0" layoutY="6.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="7.0">
+                  <Button layoutX="405.0" layoutY="6.0" mnemonicParsing="false" onAction="#btn_cancel_GroupDetail" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="7.0">
                      <graphic>
                         <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" smooth="false">
                            <image>
@@ -366,12 +366,12 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button alignment="CENTER" layoutX="20.0" layoutY="257.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="124.0" styleClass="button-trang" text="Cancel" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+                  <Button alignment="CENTER" layoutX="20.0" layoutY="257.0" mnemonicParsing="false" onAction="#btn_cancel_GroupDetail" prefHeight="32.0" prefWidth="124.0" styleClass="button-trang" text="Cancel" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" layoutX="20.0" layoutY="318.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="124.0" styleClass="button-xanhdam" text="Save change" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                  <Button alignment="CENTER" layoutX="20.0" layoutY="318.0" mnemonicParsing="false" onAction="#btn_SaveChange_Detail_StudentManagement" prefHeight="32.0" prefWidth="124.0" styleClass="button-xanhdam" text="Save change" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -381,7 +381,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="22.0" layoutY="91.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" text="Phuong Tram" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="94.0">
+                  <TextField fx:id="tf_FirstName_Detail_StudentManagement" layoutX="22.0" layoutY="91.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="94.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -391,7 +391,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="14.0" layoutY="167.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" text="Nguyen" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="172.0">
+                  <TextField fx:id="tf_LastName_Detail_StudentManagement" layoutX="14.0" layoutY="167.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="172.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -401,7 +401,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="14.0" layoutY="238.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" text="ST01" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="250.0">
+                  <TextField fx:id="tf_StudentID_Detail_StudentManagement" layoutX="14.0" layoutY="238.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="250.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -411,7 +411,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="14.0" layoutY="311.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" text="tramnguyen@gmail.com" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="328.0">
+                  <TextField fx:id="tf_Email_Detail_StudentManagement" layoutX="14.0" layoutY="311.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="328.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -421,7 +421,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="14.0" layoutY="379.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" text="0909888999" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="406.0">
+                  <TextField fx:id="tf_Phone_Detail_StudentManagement" layoutX="14.0" layoutY="379.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="406.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -430,9 +430,9 @@
             </AnchorPane>
          </children>
       </StackPane>
-      <StackPane layoutX="181.0" layoutY="53.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="112.0">
+      <StackPane fx:id="existsStudent_StudentManagement" layoutX="181.0" layoutY="53.0" visible="false" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="112.0">
          <children>
-            <AnchorPane maxHeight="327.0" maxWidth="480.0" prefHeight="327.0" prefWidth="480.0" styleClass="popup" visible="false">
+            <AnchorPane maxHeight="327.0" maxWidth="480.0" prefHeight="327.0" prefWidth="480.0" styleClass="popup">
                <children>
                   <Separator layoutX="113.0" layoutY="98.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0" />
                   <Label layoutX="14.0" prefHeight="44.0" prefWidth="288.0" text="Student ID #ST01 already exists" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0">
@@ -440,7 +440,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Button layoutX="405.0" layoutY="6.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="7.0">
+                  <Button layoutX="405.0" layoutY="6.0" mnemonicParsing="false" onAction="#btn_cancel_GroupDetail" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="7.0">
                      <graphic>
                         <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" smooth="false">
                            <image>
@@ -493,7 +493,7 @@
             </AnchorPane>
          </children>
       </StackPane>
-      <StackPane layoutX="181.0" layoutY="53.0" visible="false" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="112.0">
+      <StackPane fx:id="addStudentFail_Email_StudentManagemennt" layoutX="181.0" layoutY="53.0" visible="false" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="112.0">
          <children>
             <AnchorPane maxHeight="286.0" maxWidth="480.0" prefHeight="286.0" prefWidth="480.0" styleClass="popup">
                <children>
@@ -503,7 +503,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Button layoutX="405.0" layoutY="6.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="7.0">
+                  <Button layoutX="405.0" layoutY="6.0" mnemonicParsing="false" onAction="#btn_cancel_GroupDetail" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="7.0">
                      <graphic>
                         <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" smooth="false">
                            <image>
@@ -562,7 +562,7 @@
             </AnchorPane>
          </children>
       </StackPane>
-      <StackPane layoutX="181.0" layoutY="53.0" visible="false" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="112.0">
+      <StackPane fx:id="addStudentFail_PhoneNumber_StudentManagement" layoutX="181.0" layoutY="53.0" visible="false" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="112.0">
          <children>
             <AnchorPane maxHeight="306.0" maxWidth="480.0" prefHeight="306.0" prefWidth="480.0" styleClass="popup">
                <children>
@@ -572,7 +572,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Button layoutX="405.0" layoutY="6.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="7.0">
+                  <Button layoutX="405.0" layoutY="6.0" mnemonicParsing="false" onAction="#btn_cancel_GroupDetail" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="7.0">
                      <graphic>
                         <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" smooth="false">
                            <image>
@@ -643,7 +643,7 @@
             </AnchorPane>
          </children>
       </StackPane>
-      <AnchorPane prefHeight="488.0" prefWidth="760.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
+      <AnchorPane fx:id="AnchorPane_ReultSearch_StudentManagement" prefHeight="488.0" prefWidth="760.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
          <children>
             <Label layoutX="44.0" layoutY="23.0" text="Search results for “Nguyễn”" textFill="#101828" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
                <font>

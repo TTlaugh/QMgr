@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="540.0" minWidth="760.0" prefHeight="540.0" prefWidth="760.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="540.0" minWidth="760.0" prefHeight="540.0" prefWidth="760.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Exam_controller">
    <children>
       <Separator layoutX="10.0" layoutY="67.0" prefHeight="1.0" prefWidth="960.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
       <Label layoutX="260.0" layoutY="17.0" prefHeight="26.0" prefWidth="168.0" text="Exam management" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="13.0">
@@ -38,129 +38,6 @@
       </Label>
       <FlowPane layoutX="10.0" layoutY="10.0" prefHeight="440.0" prefWidth="760.0" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="117.0">
          <children>
-            <AnchorPane prefHeight="123.0" prefWidth="232.0" styleClass="small-pane">
-               <children>
-                  <Label layoutX="16.0" layoutY="90.0" text="Date created" textFill="#656f7e" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="12.0" />
-                  <Label layoutX="17.0" layoutY="109.0" text="12/08/2024" textFill="#344054" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Button alignment="CENTER" layoutX="171.0" layoutY="91.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="65.0" styleClass="button-xanhnhat" text="Details" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="12.0">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button alignment="CENTER" layoutX="126.0" layoutY="85.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="button-donhat" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="85.0">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true">
-                           <image>
-                              <Image url="@../imgs/Screenshot_2024-10-30_173046-removebg-preview.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="43.0" layoutY="26.0" pickOnBounds="true" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="13.0">
-                     <image>
-                        <Image url="@../imgs/Screenshot_2024-11-04_091448-removebg-preview.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="53.0" layoutY="15.0" prefWidth="170.0" text="Kiem tra 15 phut - De 1" AnchorPane.leftAnchor="52.0" AnchorPane.topAnchor="12.0">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="53.0" layoutY="33.0" prefWidth="170.0" text="Dai so tuyen tinh 2024" AnchorPane.leftAnchor="52.0" AnchorPane.topAnchor="34.0" />
-               </children>
-               <FlowPane.margin>
-                  <Insets right="12.0" top="12.0" />
-               </FlowPane.margin>
-            </AnchorPane>
-            <AnchorPane prefHeight="123.0" prefWidth="232.0" styleClass="small-pane">
-               <children>
-                  <Label layoutX="16.0" layoutY="90.0" text="Date created" textFill="#656f7e" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="12.0" />
-                  <Label layoutX="17.0" layoutY="109.0" text="12/08/2024" textFill="#344054" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Button alignment="CENTER" layoutX="171.0" layoutY="91.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="65.0" styleClass="button-xanhnhat" text="Details" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="12.0">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button alignment="CENTER" layoutX="126.0" layoutY="85.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="button-donhat" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="85.0">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true">
-                           <image>
-                              <Image url="@../imgs/Screenshot_2024-10-30_173046-removebg-preview.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="43.0" layoutY="26.0" pickOnBounds="true" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="13.0">
-                     <image>
-                        <Image url="@../imgs/Screenshot_2024-11-04_091448-removebg-preview.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="53.0" layoutY="15.0" prefWidth="170.0" text="Kiem tra 15 phut - De 1" AnchorPane.leftAnchor="52.0" AnchorPane.topAnchor="12.0">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="53.0" layoutY="33.0" prefWidth="170.0" text="Dai so tuyen tinh 2024" AnchorPane.leftAnchor="52.0" AnchorPane.topAnchor="34.0" />
-               </children>
-               <FlowPane.margin>
-                  <Insets right="12.0" top="12.0" />
-               </FlowPane.margin>
-            </AnchorPane>
-            <AnchorPane prefHeight="123.0" prefWidth="232.0" styleClass="small-pane">
-               <children>
-                  <Label layoutX="16.0" layoutY="90.0" text="Date created" textFill="#656f7e" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="12.0" />
-                  <Label layoutX="17.0" layoutY="109.0" text="12/08/2024" textFill="#344054" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Button alignment="CENTER" layoutX="171.0" layoutY="91.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="65.0" styleClass="button-xanhnhat" text="Details" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="12.0">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button alignment="CENTER" layoutX="126.0" layoutY="85.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="button-donhat" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="85.0">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true">
-                           <image>
-                              <Image url="@../imgs/Screenshot_2024-10-30_173046-removebg-preview.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="43.0" layoutY="26.0" pickOnBounds="true" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="13.0">
-                     <image>
-                        <Image url="@../imgs/Screenshot_2024-11-04_091448-removebg-preview.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="53.0" layoutY="15.0" prefWidth="170.0" text="Kiem tra 15 phut - De 1" AnchorPane.leftAnchor="52.0" AnchorPane.topAnchor="12.0">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="53.0" layoutY="33.0" prefWidth="170.0" text="Dai so tuyen tinh 2024" AnchorPane.leftAnchor="52.0" AnchorPane.topAnchor="34.0" />
-               </children>
-               <FlowPane.margin>
-                  <Insets right="12.0" top="12.0" />
-               </FlowPane.margin>
-            </AnchorPane>
             <AnchorPane prefHeight="123.0" prefWidth="232.0" styleClass="small-pane">
                <children>
                   <Label layoutX="16.0" layoutY="90.0" text="Date created" textFill="#656f7e" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="12.0" />

@@ -11,8 +11,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.transform.Rotate;
 
 public class Exam_card {
-    final String url_archive = "file:src/main/resources/imgs/icons8-archive-24.png";
-    final String url_exam = "file:src/main/resources/imgs/icons8-exam-24.png";
+    final String url_archive = "/ui/imgs/icons8-archive-24.png";
     Label Exam_name = new Label();
     Label Subject_name = new Label();
     Label date_created_label = new Label("Date created");
@@ -23,7 +22,7 @@ public class Exam_card {
     Image image_archive = new Image(url_archive);
     ImageView image_view_archive = new ImageView(image_archive);
 
-    Image image_exam = new Image(url_exam);
+    Image image_exam = new Image(url_archive);
     ImageView image_view_exam = new ImageView(image_exam);
 
     AnchorPane exam_content = new AnchorPane();
