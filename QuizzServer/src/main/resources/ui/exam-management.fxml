@@ -26,7 +26,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Button alignment="CENTER" layoutX="1183.0" layoutY="8.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="115.0" styleClass="button-xanhdam" text="New exam" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+      <Button alignment="CENTER" layoutX="1183.0" layoutY="8.0" mnemonicParsing="false" onAction="#btn_newExam_Hidden_ExamManagement" prefHeight="32.0" prefWidth="115.0" styleClass="button-xanhdam" text="New exam" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -36,50 +36,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <FlowPane layoutX="10.0" layoutY="10.0" prefHeight="440.0" prefWidth="760.0" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="117.0">
-         <children>
-            <AnchorPane prefHeight="123.0" prefWidth="232.0" styleClass="small-pane">
-               <children>
-                  <Label layoutX="16.0" layoutY="90.0" text="Date created" textFill="#656f7e" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="12.0" />
-                  <Label layoutX="17.0" layoutY="109.0" text="12/08/2024" textFill="#344054" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Button alignment="CENTER" layoutX="171.0" layoutY="91.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="65.0" styleClass="button-xanhnhat" text="Details" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="12.0">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button alignment="CENTER" layoutX="126.0" layoutY="85.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="button-donhat" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="85.0">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true">
-                           <image>
-                              <Image url="@../imgs/Screenshot_2024-10-30_173046-removebg-preview.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="43.0" layoutY="26.0" pickOnBounds="true" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="13.0">
-                     <image>
-                        <Image url="@../imgs/Screenshot_2024-11-04_091448-removebg-preview.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="53.0" layoutY="15.0" prefWidth="170.0" text="Kiem tra 15 phut - De 1" AnchorPane.leftAnchor="52.0" AnchorPane.topAnchor="12.0">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="53.0" layoutY="33.0" prefWidth="170.0" text="Dai so tuyen tinh 2024" AnchorPane.leftAnchor="52.0" AnchorPane.topAnchor="34.0" />
-               </children>
-               <FlowPane.margin>
-                  <Insets right="12.0" top="12.0" />
-               </FlowPane.margin>
-            </AnchorPane>
-         </children>
+      <FlowPane fx:id="flowpane_mainbody" layoutX="10.0" layoutY="10.0" prefHeight="440.0" prefWidth="760.0" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="117.0">
          <padding>
             <Insets left="20.0" right="8.0" />
          </padding>
@@ -95,7 +52,7 @@
             <Insets left="3.0" right="3.0" />
          </padding>
       </ComboBox>
-      <StackPane layoutX="181.0" layoutY="53.0" visible="false" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="112.0">
+      <StackPane fx:id="archive_NewExam" layoutX="181.0" layoutY="53.0" visible="false" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="112.0">
          <children>
             <AnchorPane maxHeight="316.0" maxWidth="480.0" prefHeight="316.0" prefWidth="480.0" styleClass="popup">
                <children>
@@ -105,7 +62,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Button layoutX="405.0" layoutY="6.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="7.0">
+                  <Button layoutX="405.0" layoutY="6.0" mnemonicParsing="false" onAction="#btn_cancel_ExamManagement" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="7.0">
                      <graphic>
                         <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" smooth="false">
                            <image>
@@ -120,12 +77,12 @@
                         <Image url="@../imgs/Screenshot_2024-10-30_172455-removebg-preview.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="126.0" layoutY="87.0" prefHeight="24.0" prefWidth="480.0" text="Kiem tra 15 phut - De 1" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="96.0">
+                  <Label fx:id="lb_ExamName_ExamManagement" alignment="CENTER" layoutX="126.0" layoutY="87.0" prefHeight="24.0" prefWidth="480.0" text="Kiem tra 15 phut - De 1" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="96.0">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="194.0" layoutY="131.0" prefHeight="26.0" prefWidth="92.0" style="-fx-background-radius: 10; -fx-background-color: #eaecf0;" text="ID: #EX01" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="193.0" AnchorPane.topAnchor="124.0">
+                  <Label fx:id="lb_ExamID_ExamManagement" alignment="CENTER" layoutX="194.0" layoutY="131.0" prefHeight="26.0" prefWidth="92.0" style="-fx-background-radius: 10; -fx-background-color: #eaecf0;" text="ID: #EX01" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="193.0" AnchorPane.topAnchor="124.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -138,17 +95,17 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="20.0" layoutY="210.0" maxHeight="38.0" maxWidth="440.0" prefHeight="38.0" prefWidth="440.0" styleClass="round-layout" text="Kiem tra 15 phut -De 1" AnchorPane.bottomAnchor="62.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                  <TextField fx:id="tf_ExanName_Comfirm_ExamManagement" layoutX="20.0" layoutY="210.0" maxHeight="38.0" maxWidth="440.0" prefHeight="38.0" prefWidth="440.0" promptText="Kiem tra 15 phut -De 1" styleClass="round-layout" AnchorPane.bottomAnchor="62.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <Button alignment="CENTER" layoutX="20.0" layoutY="257.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="214.0" styleClass="button-trang" text="Cancel" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+                  <Button alignment="CENTER" layoutX="20.0" layoutY="257.0" mnemonicParsing="false" onAction="#btn_cancel_ExamManagement" prefHeight="32.0" prefWidth="214.0" styleClass="button-trang" text="Cancel" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" layoutX="231.0" layoutY="257.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="214.0" styleClass="button-do" text="Archive this exam" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                  <Button alignment="CENTER" layoutX="231.0" layoutY="257.0" mnemonicParsing="false" onAction="#btn_ArchiveExam_ExamManagement" prefHeight="32.0" prefWidth="214.0" styleClass="button-do" text="Archive this exam" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -157,7 +114,7 @@
             </AnchorPane>
          </children>
       </StackPane>
-      <AnchorPane layoutX="10.0" layoutY="210.0" prefHeight="200.0" prefWidth="200.0" styleClass="background" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="AnchorPane_newExam_ExamManagement" layoutX="10.0" layoutY="210.0" prefHeight="200.0" prefWidth="200.0" styleClass="background" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Separator layoutX="58.0" layoutY="72.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
             <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="198.0" layoutY="16.0" pickOnBounds="true" AnchorPane.leftAnchor="198.0" AnchorPane.topAnchor="16.0">
@@ -165,7 +122,7 @@
                   <Image url="@../imgs/icons8-arrow-24.png" />
                </image>
             </ImageView>
-            <Button layoutX="140.0" layoutY="124.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="12.0">
+            <Button layoutX="140.0" layoutY="124.0" mnemonicParsing="false" onAction="#btn_back_newExam_ExamManagement" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="12.0">
                <graphic>
                   <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" smooth="false">
                      <image>
@@ -223,7 +180,7 @@
                      </font>
                   </Label>
                   <Separator layoutX="16.0" layoutY="187.0" prefWidth="208.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="98.0" />
-                  <Button alignment="CENTER" layoutX="17.0" layoutY="402.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="208.0" styleClass="button-xanhdam" text="Create exam" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
+                  <Button alignment="CENTER" layoutX="17.0" layoutY="402.0" mnemonicParsing="false" onAction="#btn_CreateExam_newExam_ExamManagement" prefHeight="32.0" prefWidth="208.0" styleClass="button-xanhdam" text="Create exam" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -240,7 +197,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="50.0" layoutY="149.0" prefHeight="38.0" prefWidth="208.0" styleClass="round-layout" text="Kiem tra 15 phut" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="140.0">
+                  <TextField fx:id="tf_ExamName_newExam_ExamManagement" layoutX="50.0" layoutY="149.0" prefHeight="38.0" prefWidth="208.0" styleClass="round-layout" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="140.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -250,7 +207,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <ComboBox layoutX="12.0" layoutY="224.0" prefHeight="38.0" prefWidth="208.0" promptText="-Subject-" styleClass="round-layout" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="220.0">
+                  <ComboBox fx:id="ComboBox_SubejctName_newExam_ExamManagement" layoutX="12.0" layoutY="224.0" prefHeight="38.0" prefWidth="208.0" promptText="-Subject-" styleClass="round-layout" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="220.0">
                      <padding>
                         <Insets left="10.0" right="10.0" />
                      </padding>

@@ -4,7 +4,6 @@ import java.io.File;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import DTO.Student;
@@ -184,9 +183,9 @@ public class Student_controller implements Initializable {
                 return false;
             }
 
-            Boolean is_SameData = Notification.Comfrim("Error",
-                    "Trung data")
-                    .getResult() == ButtonType.YES;
+            // Boolean is_SameData = Notification.Comfrim("Error",
+            // "Trung data")
+            // .getResult() == ButtonType.YES;
 
             // gr.importStudent(group_Current_Layout, file_Current.getPath(), is_SameData);
 
@@ -306,6 +305,12 @@ public class Student_controller implements Initializable {
         this.detailStudent_StudentManagement.setVisible(true);
     }
 
+    @FXML
+    void btn_StudentDetail_ResultSearch_Hidden_StudentManagement(ActionEvent event) {
+        this.detailStudent_StudentManagement.toFront();
+        this.detailStudent_StudentManagement.setVisible(true);
+    }
+
     // AddStudent Group Detail
     @FXML
     void btn_addStudent_Hidden_StudentManagement(ActionEvent event) {
@@ -422,6 +427,11 @@ public class Student_controller implements Initializable {
     // Back Group
     @FXML
     void btn_back_StudentManagement(ActionEvent event) {
+        if (!AnchorPane_GroupDetailStudent_StudentManagement.isVisible()) {
+            AnchorPane_ReultSearch_StudentManagement.setVisible(false);
+            AnchorPane_GroupDetailStudent_StudentManagement.setVisible(true);
+            return;
+        }
         String url = "/ui/student-management.fxml";
         load_Scene_AnchorPane(event, url);
     }

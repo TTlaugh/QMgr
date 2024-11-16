@@ -674,7 +674,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="CENTER" layoutX="165.0" layoutY="436.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="136.0" styleClass="button-xanhdam" text="Student detail" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="164.0">
+            <Button alignment="CENTER" layoutX="165.0" layoutY="436.0" mnemonicParsing="false" onAction="#btn_StudentDetail_ResultSearch_Hidden_StudentManagement" prefHeight="32.0" prefWidth="136.0" styleClass="button-xanhdam" text="Student detail" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="164.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

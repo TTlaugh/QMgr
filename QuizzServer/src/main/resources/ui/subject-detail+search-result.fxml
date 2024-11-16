@@ -267,7 +267,7 @@
             </AnchorPane>
          </children>
       </StackPane>
-            <StackPane fx:id="addNewQuestion_SubjectManagement" layoutX="-19.0" layoutY="-39.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="20.0">
+            <StackPane fx:id="addNewQuestion_SubjectManagement" layoutX="-19.0" layoutY="-39.0" visible="false" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="20.0">
          <children>
             <AnchorPane maxHeight="500.0" maxWidth="480.0" prefHeight="500.0" prefWidth="480.0" styleClass="popup">
                <children>
@@ -329,29 +329,7 @@
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Button>
-                              <VBox layoutX="20.0" layoutY="234.0" prefWidth="438.0" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="230.0">
-                                 <children>
-                                    <HBox prefHeight="38.0" prefWidth="438.0" spacing="15.0">
-                                       <children>
-                                          <CheckBox alignment="TOP_CENTER" minHeight="38.0" mnemonicParsing="false" prefHeight="38.0" selected="true">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </CheckBox>
-                                          <TextField minHeight="38.0" prefHeight="38.0" prefWidth="347.0" styleClass="round-layout" text="akshdsalhdksa" />
-                                          <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="38.0" styleClass="button-donhat">
-                                             <graphic>
-                                                <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true">
-                                                   <image>
-                                                      <Image url="@../imgs/Screenshot_2024-10-30_173217-removebg-preview.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </Button>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
+                              <VBox fx:id="VBox_addQuestion_SubjectManagement" layoutX="20.0" layoutY="234.0" prefWidth="438.0" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="230.0" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -412,29 +390,7 @@
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Button>
-                              <VBox layoutX="20.0" layoutY="234.0" prefWidth="438.0" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="230.0">
-                                 <children>
-                                    <HBox prefHeight="38.0" prefWidth="438.0" spacing="15.0">
-                                       <children>
-                                          <CheckBox alignment="TOP_CENTER" minHeight="38.0" mnemonicParsing="false" prefHeight="38.0" selected="true">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </CheckBox>
-                                          <TextField minHeight="38.0" prefHeight="38.0" prefWidth="347.0" styleClass="round-layout" text="akshdsalhdksa" />
-                                          <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="38.0" styleClass="button-donhat">
-                                             <graphic>
-                                                <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true">
-                                                   <image>
-                                                      <Image url="@../imgs/Screenshot_2024-10-30_173217-removebg-preview.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </Button>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
+                              <VBox fx:id="VBox_detailQuestion_SubjectManagement" layoutX="20.0" layoutY="234.0" prefWidth="438.0" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="230.0" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -472,7 +428,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Button alignment="CENTER" layoutX="42.0" layoutY="429.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="149.0" styleClass="button-donhat" text="Archive question" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+            <Button alignment="CENTER" layoutX="42.0" layoutY="429.0" mnemonicParsing="false" onAction="#btn_ArchiveQuestion_ResultSearch_SubjectManagement" prefHeight="32.0" prefWidth="149.0" styleClass="button-donhat" text="Archive question" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -484,7 +440,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="CENTER" layoutX="165.0" layoutY="436.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="149.0" styleClass="button-xanhdam" text="Question details" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="177.0">
+            <Button alignment="CENTER" layoutX="165.0" layoutY="436.0" mnemonicParsing="false" onAction="#btn_QuestionDetail_ResultSearch_Hidden_SubjectManagement" prefHeight="32.0" prefWidth="149.0" styleClass="button-xanhdam" text="Question details" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="177.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

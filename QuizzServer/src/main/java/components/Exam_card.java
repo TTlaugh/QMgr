@@ -11,23 +11,25 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.transform.Rotate;
 
 public class Exam_card {
-    final String url_archive = "/ui/imgs/icons8-archive-24.png";
+    final String url_archive = "/imgs/icons8-archive-24.png";
+    final String url_test = "/imgs/Screenshot_2024-11-04_091448-removebg-preview.png";
+
     Label Exam_name = new Label();
     Label Subject_name = new Label();
     Label date_created_label = new Label("Date created");
     Label date_created = new Label();
     Button archive_btn = new Button();
 
-    private Button details_btn = new Button("Details");
+    Button details_btn = new Button("Details");
     Image image_archive = new Image(url_archive);
     ImageView image_view_archive = new ImageView(image_archive);
 
-    Image image_exam = new Image(url_archive);
+    Image image_exam = new Image(url_test);
     ImageView image_view_exam = new ImageView(image_exam);
 
     AnchorPane exam_content = new AnchorPane();
 
-    public AnchorPane getGroup_Instance() {
+    public AnchorPane getExam_Instance() {
         return this.exam_content;
     }
 
@@ -48,6 +50,7 @@ public class Exam_card {
         this.exam_content.getChildren().addAll(
                 this.Exam_name,
                 this.Subject_name,
+                this.image_view_exam,
                 this.date_created_label,
                 this.date_created,
                 this.archive_btn,
@@ -58,6 +61,7 @@ public class Exam_card {
 
     public void setUp() {
         // Set Anchor
+
         this.exam_content.setPrefWidth(232);
         this.exam_content.setPrefHeight(123);
         this.exam_content.setScaleX(1);
@@ -65,17 +69,22 @@ public class Exam_card {
         this.exam_content.setScaleZ(1);
         this.exam_content.getStyleClass().add("small-pane");
 
-        // Set Group Name
+        // img test
+        this.image_view_exam.setLayoutX(13);
+        this.image_view_exam.setLayoutY(12);
+        this.image_view_exam.setNodeOrientation(javafx.geometry.NodeOrientation.LEFT_TO_RIGHT);
+
+        // Set Exam Name
         this.Exam_name.setStyle(
-                " -fx-font-size: 14px; -fx-font-weight: bold; -fx-font-family:System; -fx-margin-top:12px; -fx-margin-right:12px;");
+                " -fx-font-size: 14px; -fx-font-weight: bold; -fx-font-family:System; ");
         this.Exam_name.setTextFill(javafx.scene.paint.Color.BLACK);
         this.Exam_name.setScaleX(1);
         this.Exam_name.setScaleY(1);
         this.Exam_name.setScaleZ(1);
-        this.Exam_name.prefWidth(130);
-        this.Exam_name.prefHeight(61);
-        this.Exam_name.setLayoutX(17);
-        this.Exam_name.setLayoutY(14);
+        this.Exam_name.prefWidth(170);
+        this.Exam_name.prefHeight(20);
+        this.Exam_name.setLayoutX(53);
+        this.Exam_name.setLayoutY(15);
         this.Exam_name.setWrapText(true);
         this.Exam_name.setPrefSize(150, 61);
         this.Exam_name.setTextOverrun(javafx.scene.control.OverrunStyle.ELLIPSIS);
@@ -87,16 +96,17 @@ public class Exam_card {
         this.Exam_name.setRotationAxis(Rotate.Z_AXIS);
         this.Exam_name.setRotate(1);
 
-        // set Group ID
+        // set Subject Name
         this.Subject_name.setStyle(
-                "-fx-margin: 102px 12px 0px 0px; -fx-font-size: 12px;  -fx-font-family:System; -fx-background-radius: 10; -fx-background-color: #eaecf0; -fx-padding:3 7 3 7;  -fx-margin-top:12px; -fx-margin-right:12px;");
+                " -fx-font-size: 12px;  -fx-font-family:System;");
+        this.Subject_name.setTextFill(javafx.scene.paint.Color.BLACK);
         this.Subject_name.setScaleX(1);
         this.Subject_name.setScaleY(1);
         this.Subject_name.setScaleZ(1);
-        this.Subject_name.setLayoutX(142);
-        this.Subject_name.setLayoutY(12);
-        this.Subject_name.prefWidth(81);
-        this.Subject_name.prefHeight(27);
+        this.Subject_name.setLayoutX(53);
+        this.Subject_name.setLayoutY(33);
+        this.Subject_name.prefWidth(170);
+        this.Subject_name.prefHeight(21);
         this.Subject_name.setTextOverrun(javafx.scene.control.OverrunStyle.ELLIPSIS);
         this.Subject_name.setGraphicTextGap(4);
         this.Subject_name.setWrapText(true);
@@ -147,6 +157,7 @@ public class Exam_card {
         // Set Archive Button
         this.archive_btn.setStyle(
                 "-fx-font:System 15px; -fx-text-fill: #f04438;");
+        this.archive_btn.getStyleClass().add("button-donhat");
         this.archive_btn.setScaleX(1);
         this.archive_btn.setScaleY(1);
         this.archive_btn.setScaleZ(1);

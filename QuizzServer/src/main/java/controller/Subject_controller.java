@@ -4,10 +4,10 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import components.Answer_card;
 import components.Group_card;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,7 +25,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import utils.Notification;
 import utils.OpenFileExplorer;
 
@@ -97,6 +99,9 @@ public class Subject_controller implements Initializable {
     @FXML
     private CheckBox checkbox_MultipleAnswers_addQuestion_SubjectManagement;
 
+    @FXML
+    private VBox VBox_addQuestion_SubjectManagement;
+
     // StackPane detail question
     @FXML
     private StackPane detailQuestion_SubjectManagement;
@@ -107,6 +112,8 @@ public class Subject_controller implements Initializable {
     @FXML
     private CheckBox checkbox_MultipleAnswers_detailQuestion_SubjectManagement;
 
+    @FXML
+    private VBox VBox_detailQuestion_SubjectManagement;
     // Anchor Result Search
     @FXML
     private AnchorPane AnchorPane_ResultSearchQuestion_SubjectManagement;
@@ -123,6 +130,9 @@ public class Subject_controller implements Initializable {
     Group_card group3 = new Group_card("Group name", "GR0013", "2020-01-03");
 
     List<Group_card> group_list = List.of(group, group2, group3);
+
+    // Load List HBOx
+    List<HBox> listHBox = new java.util.ArrayList<>();
 
     // func create new subject
     @FXML
@@ -189,6 +199,11 @@ public class Subject_controller implements Initializable {
 
     }
 
+    @FXML
+    void btn_ArchiveQuestion_ResultSearch_SubjectManagement(ActionEvent event) {
+
+    }
+
     // func shared
     @FXML
     void btn_cancel_Subject(ActionEvent event) {
@@ -198,6 +213,11 @@ public class Subject_controller implements Initializable {
 
     @FXML
     void btn_back_SubjectManagement(ActionEvent event) {
+        if (!AnchorPane_SubjectDetailQuestion_SubjectManagement.isVisible()) {
+            AnchorPane_ResultSearchQuestion_SubjectManagement.setVisible(false);
+            AnchorPane_SubjectDetailQuestion_SubjectManagement.setVisible(true);
+            return;
+        }
         String url = "/ui/subject-management.fxml";
         load_Scene_AnchorPane(event, url);
     }
@@ -213,17 +233,26 @@ public class Subject_controller implements Initializable {
     // Func Question detail
     @FXML
     void btn_QuestionDetail_Hidden_SubjectManagement(ActionEvent event) {
+        this.VBox_detailQuestion_SubjectManagement.getChildren().clear();
         this.detailQuestion_SubjectManagement.setVisible(true);
     }
 
     @FXML
     void btn_addAnswer_detailQuestion_SubjectManagement(ActionEvent event) {
-
+        Answer_card answer_card = new Answer_card();
+        setEventButtonDelete(answer_card);
+        VBox_detailQuestion_SubjectManagement.getChildren().add(answer_card.getHBox());
     }
 
     @FXML
     void btn_SaveChange_detailQuestion_SubjectManagement(ActionEvent event) {
 
+    }
+
+    @FXML
+    void btn_QuestionDetail_ResultSearch_Hidden_SubjectManagement(ActionEvent event) {
+        this.detailQuestion_SubjectManagement.toFront();
+        this.detailQuestion_SubjectManagement.setVisible(true);
     }
 
     // Func Rename
@@ -256,6 +285,7 @@ public class Subject_controller implements Initializable {
     // Func Add Question
     @FXML
     void btn_AddQuestion_Hidden_SubjectManagement(ActionEvent event) {
+        VBox_addQuestion_SubjectManagement.getChildren().clear();
         this.addNewQuestion_SubjectManagement.setVisible(true);
     }
 
@@ -266,7 +296,29 @@ public class Subject_controller implements Initializable {
 
     @FXML
     void btn_addAnswer_addQuestion_SubjectManagement(ActionEvent event) {
+        Answer_card answer_card = new Answer_card();
+        setEventButtonDelete(answer_card);
+        VBox_addQuestion_SubjectManagement.getChildren().add(answer_card.getHBox());
 
+    }
+
+    void setEventButtonDelete(Answer_card answer_card) {
+        answer_card.getButton().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                // System.out.println(VBox_addQuestion_SubjectManagement.isVisible() + " " +
+                // "ADD");
+                // System.out.println(VBox_detailQuestion_SubjectManagement.isVisible() + " " +
+                // "DETAIL");
+                if (addNewQuestion_SubjectManagement.isVisible()) {
+                    VBox_addQuestion_SubjectManagement.getChildren().remove(answer_card.getHBox());
+                    return;
+                }
+
+                VBox_detailQuestion_SubjectManagement.getChildren().remove(answer_card.getHBox());
+            }
+        });
     }
 
     // Func search subject
