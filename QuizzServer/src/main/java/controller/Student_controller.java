@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import DTO.Student;
+
 import components.Group_card;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -24,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
+import model.Student;
 import utils.Notification;
 import utils.OpenFileExplorer;
 

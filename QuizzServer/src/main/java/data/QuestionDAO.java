@@ -1,4 +1,4 @@
-package DAO;
+package data;
 
 import java.lang.reflect.Type;
 import java.sql.Connection;
@@ -6,10 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import DTO.*;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import model.*;
 import utils.SQLUtils;
 
 public class QuestionDAO implements interfaceDAO<Question> {

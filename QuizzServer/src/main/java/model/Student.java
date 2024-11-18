@@ -1,4 +1,4 @@
-package DTO;
+package model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,6 @@
-package DTO;
+package model;
+
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,9 +13,11 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Workspace {
-    private int workspaceId;
-    private int pin;
-    private String workspaceName;
+public class Exam {
+    private int examId;
+    private int subjectId;
+    private String name;
+    private String desc;
+    private List<Integer> questionsIds;
     private boolean archive;
 }

@@ -1,4 +1,4 @@
-package DAO;
+package data;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,9 +10,11 @@ import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import model.Submission;
+
 import java.lang.reflect.Type;
 
-import DTO.Submission;
 import utils.SQLUtils;
 
 public class SubmissionDAO implements interfaceDAO<Submission> {

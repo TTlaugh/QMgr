@@ -1,4 +1,4 @@
-package DAO;
+package data;
 
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import DTO.HostExam;
-import DTO.Question;
+import model.HostExam;
+import model.Question;
 import utils.SQLUtils;
 
 public class HostExamDAO implements interfaceDAO<HostExam> {

@@ -1,12 +1,9 @@
 package controller;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import components.Exam_card;
-import components.Group_card;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -47,9 +44,25 @@ public class Exam_controller implements Initializable {
 
     @FXML
     private ComboBox<?> ComboBox_SubejctName_newExam_ExamManagement;
-    // Data test
 
-    List<Exam_card> list = new ArrayList<Exam_card>();
+    // AnchorPane Detail Exam
+    @FXML
+    private AnchorPane AnchorPane_detailExam_ExamManagement;
+
+    @FXML
+    private AnchorPane AnchorPane_viewAllSubmission_detailExam_ExamManagement;
+
+    @FXML
+    private AnchorPane AnchorPane_editExam_detailExam_ExamManagement;
+
+    @FXML
+    private AnchorPane AnchorPane_hostExam_detailExam_ExamManagement;
+
+    // Data test
+    Exam_card exam_card = new Exam_card("Cnpm", "Cnpm", "21/12/2004");
+    Exam_card exam_card2 = new Exam_card("Cnpm", "Cnpm", "21/12/2004");
+
+    List<Exam_card> listExamCards = List.of(exam_card, exam_card2);
 
     // Func Create New Exam
     @FXML
@@ -75,7 +88,7 @@ public class Exam_controller implements Initializable {
 
         Exam_card exam_card = new Exam_card(examName, "Cnpm", "21/12/2004");
 
-        list.add(exam_card);
+        listExamCards.add(exam_card);
 
         add_Exam_FlowPane(exam_card);
     }
@@ -88,13 +101,19 @@ public class Exam_controller implements Initializable {
 
         this.flowpane_mainbody.getChildren().add(exam_card.getExam_Instance());
         exam_card.getDetails_btn().setOnAction(new EventHandler<ActionEvent>() {
+
             @Override
             public void handle(ActionEvent event) {
-                // btn_details_Exam(event);
+                btn_details_Exam(event);
             }
         });
 
         exam_card.click_Button_Archive(archive_NewExam);
+    }
+
+    // Func detail Exam
+    void btn_details_Exam(ActionEvent event) {
+        AnchorPane_detailExam_ExamManagement.setVisible(true);
     }
 
     // Func Archive Exam
@@ -119,15 +138,78 @@ public class Exam_controller implements Initializable {
         this.archive_NewExam.setVisible(false);
     }
 
+    // ===============================================//
+    // Exam Detail FUNCTION
+    @FXML
+    void btn_detailQuestion_detailExam_ExamManagement(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btn_duplicateExam_detailExam_ExamManagement(ActionEvent event) {
+
+    }
+
+    // Edit Exam
+    @FXML
+    void btn_editExam_detailExam_ExamManagement(ActionEvent event) {
+        AnchorPane_editExam_detailExam_ExamManagement.setVisible(true);
+    }
+
+    @FXML
+    void btn_back_editExam_ExamManagement(ActionEvent event) {
+        AnchorPane_editExam_detailExam_ExamManagement.setVisible(false);
+    }
+
+    // Host Exam
+    @FXML
+    void btn_hostExam_detailExam_ExamManagement(ActionEvent event) {
+        AnchorPane_hostExam_detailExam_ExamManagement.setVisible(true);
+    }
+
+    @FXML
+    void btn_back_hostExam_ExamManagement(ActionEvent event) {
+        AnchorPane_hostExam_detailExam_ExamManagement.setVisible(false);
+    }
+
+    // View All Submission
+    @FXML
+    void btn_viewAllSubmission_detailExam_ExamManagement(ActionEvent event) {
+        AnchorPane_viewAllSubmission_detailExam_ExamManagement.setVisible(true);
+    }
+
+    @FXML
+    void btn_back_allSubmission_ExamManagement(ActionEvent event) {
+        AnchorPane_viewAllSubmission_detailExam_ExamManagement.setVisible(false);
+    }
+
+    // ===============================================﻿//
+
     // Func back
+
+    // Back Create New Exam
     @FXML
     void btn_back_newExam_ExamManagement(ActionEvent event) {
         this.AnchorPane_newExam_ExamManagement.setVisible(false);
     }
 
+    // Back Detail Exam
+    @FXML
+    void btn_back_detailExam_ExamManagement(ActionEvent event) {
+        AnchorPane_detailExam_ExamManagement.setVisible(false);
+    }
+
+    public void LoadListExan(List<Exam_card> list, StackPane archive_NewExam) {
+        for (Exam_card exam : list) {
+            add_Exam_FlowPane(exam);
+        }
+    }
+
     /* =============================================== */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        // LoadListGroup & Set button details & button archive
+        LoadListExan(listExamCards, archive_NewExam);
     }
+
 }

@@ -1,4 +1,4 @@
-package DAO;
+package data;
 
 import java.lang.reflect.Type;
 import java.sql.Connection;
@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import DTO.Exam;
+
+import model.Exam;
 import utils.SQLUtils;
 
 public class ExamDAO implements interfaceDAO<Exam> {

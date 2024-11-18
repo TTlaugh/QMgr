@@ -1,36 +1,34 @@
-package DAO;
+package data;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import DTO.Subject;
+import model.Workspace;
 import utils.SQLUtils;
 
-public class SubjectDAO implements interfaceDAO<Subject> {
-    private ArrayList<Subject> list;
-    private Subject subject;
+public class WorkspaceDAO implements interfaceDAO<Workspace> {
+    private ArrayList<Workspace> list;
+    private Workspace workspace;
     Connection con;
 
     @Override
-    public ArrayList<Subject> getAll() {
+    public ArrayList<Workspace> getAll() {
         list = null;
         con = SQLUtils.getConnection();
         if (con != null) {
             try {
-                String query = "SELECT * FROM Subjects WHERE Archived = 0";
+                String query = "SELECT * FROM Workspaces WHERE Archived = 0";
                 PreparedStatement ps = con.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
-                    Subject subject = new Subject();
-                    subject.setSubjectId(rs.getInt("SubjectID"));
-                    subject.setWorkspaceId(rs.getInt("WorkspaceID"));
-                    subject.setSubjectName(rs.getString("SubjectName"));
-                    subject.setCreateDate(rs.getTimestamp("DateCreated").toLocalDateTime());
-                    subject.setArchive(rs.getBoolean("Archived"));
-                    list.add(subject);
+                    Workspace workspace = new Workspace();
+                    workspace.setWorkspaceId(rs.getInt("WorkspaceID"));
+                    workspace.setPin(rs.getInt("Pin"));
+                    workspace.setWorkspaceName(rs.getString("Name"));
+                    workspace.setArchive(rs.getBoolean("Archived"));
+                    list.add(workspace);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -42,17 +40,16 @@ public class SubjectDAO implements interfaceDAO<Subject> {
     }
 
     @Override
-    public boolean create(Subject t) {
+    public boolean create(Workspace t) {
         boolean b = false;
         con = SQLUtils.getConnection();
         if (con != null) {
             try {
-                String query = "INSERT INTO Subjects (WorkspaceID, SubjectName, DateCreated, Archived) VALUES (?, ?, ?, ?)";
+                String query = "INSERT INTO Workspaces (Name, Pin, Archived) VALUES (?, ?, ?)";
                 PreparedStatement ps = con.prepareStatement(query);
-                ps.setInt(1, subject.getWorkspaceId());
-                ps.setString(2, subject.getSubjectName());
-                ps.setTimestamp(3, Timestamp.valueOf(subject.getCreateDate()));
-                ps.setBoolean(4, subject.isArchive());
+                ps.setString(1, workspace.getWorkspaceName());
+                ps.setInt(2, workspace.getPin());
+                ps.setBoolean(3, workspace.isArchive());
                 b = ps.executeUpdate() > 0;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -64,21 +61,20 @@ public class SubjectDAO implements interfaceDAO<Subject> {
     }
 
     @Override
-    public Subject getByID(int t) {
+    public Workspace getByID(int t) {
         con = SQLUtils.getConnection();
         if (con != null) {
             try {
-                String query = "SELECT * FROM Subjects WHERE SubjectID = ?";
+                String query = "SELECT * FROM Workspaces WHERE WorkspaceID = ?";
                 PreparedStatement ps = con.prepareStatement(query);
                 ps.setInt(1, t);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
-                    subject = new Subject();
-                    subject.setSubjectId(rs.getInt("SubjectID"));
-                    subject.setWorkspaceId(rs.getInt("WorkspaceID"));
-                    subject.setSubjectName(rs.getString("SubjectName"));
-                    subject.setCreateDate(rs.getTimestamp("DateCreated").toLocalDateTime());
-                    subject.setArchive(rs.getBoolean("Archived"));
+                    workspace = new Workspace();
+                    workspace.setWorkspaceId(rs.getInt("WorkspaceID"));
+                    workspace.setPin(rs.getInt("Pin"));
+                    workspace.setWorkspaceName(rs.getString("Name"));
+                    workspace.setArchive(rs.getBoolean("Archived"));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -86,22 +82,21 @@ public class SubjectDAO implements interfaceDAO<Subject> {
                 SQLUtils.closeConnection(con);
             }
         }
-        return subject;
+        return workspace;
     }
 
     @Override
-    public boolean update(Subject t) {
+    public boolean update(Workspace t) {
         boolean b = false;
         con = SQLUtils.getConnection();
         if (con != null) {
             try {
-                String query = "UPDATE Subjects SET WorkspaceID = ?, SubjectName = ?, DateCreated = ?, Archived = ? WHERE SubjectID = ?";
+                String query = "UPDATE Workspaces SET Name = ?, Pin = ?, Archived = ? WHERE WorkspaceID = ?";
                 PreparedStatement ps = con.prepareStatement(query);
-                ps.setInt(1, subject.getWorkspaceId());
-                ps.setString(2, subject.getSubjectName());
-                ps.setTimestamp(3, Timestamp.valueOf(subject.getCreateDate()));
-                ps.setBoolean(4, subject.isArchive());
-                ps.setInt(5, subject.getSubjectId());
+                ps.setString(1, workspace.getWorkspaceName());
+                ps.setInt(2, workspace.getPin());
+                ps.setBoolean(3, workspace.isArchive());
+                ps.setInt(4, workspace.getWorkspaceId());
                 b = ps.executeUpdate() > 0;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -118,7 +113,7 @@ public class SubjectDAO implements interfaceDAO<Subject> {
         con = SQLUtils.getConnection();
         if (con != null) {
             try {
-                String query = "UPDATE Subjects SET Archived = 1 WHERE SubjectID = ?";
+                String query = "UPDATE Workspaces SET Archived = 1 WHERE WorkspaceID = ?";
                 PreparedStatement ps = con.prepareStatement(query);
                 ps.setInt(1, t);
                 b = ps.executeUpdate() > 0;

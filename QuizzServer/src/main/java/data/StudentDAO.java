@@ -1,11 +1,12 @@
-package DAO;
+package data;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import DTO.Student;
+
+import model.Student;
 import utils.SQLUtils;
 
 public class StudentDAO implements interfaceDAO<Student> {

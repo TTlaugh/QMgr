@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -14,6 +15,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.StringConverter;
+import model.Workspace;
+import services.WorkspaceManager;
 import utils.CheckTextField;
 import utils.Notification;
 
@@ -23,7 +27,7 @@ public class Workspace_controller implements Initializable {
     private TextField tf_PIN_StackPane;
 
     @FXML
-    private ComboBox<?> ComboBox_WorkSpace_StackPane;
+    private ComboBox<Workspace> ComboBox_WorkSpace_StackPane;
 
     // Anchor Archive
     @FXML
@@ -63,6 +67,9 @@ public class Workspace_controller implements Initializable {
 
     @FXML
     private TextField tf_Comfirm_PIN_SetUp;
+
+    // Manager Workspace
+    public static WorkspaceManager workspaceManager = WorkspaceManager.getInstance();
 
     // Function Archive
 
@@ -115,21 +122,14 @@ public class Workspace_controller implements Initializable {
             Notification.Error("Error", "Workspace PIN is 6 characters!");
             return;
         }
-        // if (!CheckTextField.check_String_Number(workSpace_PIN)) {
-        // Notification.Error("Error", "Workspace PIN must be number!");
-        // return;
-        // }
-        // if (!CheckTextField.check_String_Number(comfrimWorkSpace_PIN)) {
-        // Notification.Error("Error", "Workspace PIN must be number!");
-        // return;
-        // }
+
         if (!workSpace_PIN.equals(comfrimWorkSpace_PIN)) {
             Notification.Error("Error", "Workspace PIN does not match!");
             return;
         }
 
         // Func Create new workspace here
-        // Workspace_BUS.create_new_WorkSpace(workSpace_Name, workSpace_PIN);
+        workspaceManager.setUpWorkspace(new Workspace(0, Integer.parseInt(workSpace_PIN), workSpace_Name, false));
 
         Notification.Infomation("Success", "Create new workspace successfully!");
 
@@ -196,6 +196,12 @@ public class Workspace_controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setTextField();
+        loadComboBox_WorkSpace();
+    }
+
+    // set Up TextField
+    void setTextField() {
         // Limit length
         int maxLength_PIN = 6;
         CheckTextField.limitCharTextField(tf_PIN_SetUp, maxLength_PIN);
@@ -205,6 +211,26 @@ public class Workspace_controller implements Initializable {
         CheckTextField.notCharTextField(tf_PIN_SetUp);
         CheckTextField.notCharTextField(tf_Comfirm_PIN_SetUp);
         CheckTextField.notCharTextField(tf_PIN_StackPane);
+    }
+
+    void loadComboBox_WorkSpace() {
+        List<Workspace> allListWorkspaces = workspaceManager.getAllWorkspace();
+        for (Workspace workspace : allListWorkspaces) {
+            ComboBox_WorkSpace_StackPane.getItems().add(workspace);
+        }
+
+        // Convert Display
+        ComboBox_WorkSpace_StackPane.setConverter(new StringConverter<Workspace>() {
+            @Override
+            public String toString(Workspace workspace) {
+                return workspace == null ? "" : workspace.getWorkspaceName();
+            }
+
+            @Override
+            public Workspace fromString(String workspace) {
+                return null;
+            }
+        });
     }
 
 }

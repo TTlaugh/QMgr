@@ -1,15 +1,15 @@
-package DAO;
+package data;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import model.Group;
+
 import java.sql.Timestamp;
 
-// import com.google.protobuf.Timestamp;
-
-import DTO.Group;
 import utils.SQLUtils;
 
 public class GroupDAO implements interfaceDAO<Group> {
