@@ -13,7 +13,7 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Workspace {
     private int workspaceId;
-    private int pin;
+    private String pin;
     private String workspaceName;
     private boolean archive;
 }

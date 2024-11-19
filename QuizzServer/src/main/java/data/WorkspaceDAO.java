@@ -15,18 +15,26 @@ public class WorkspaceDAO implements interfaceDAO<Workspace> {
 
     @Override
     public ArrayList<Workspace> getAll() {
-        list = null;
+        list = new ArrayList<Workspace>();
         con = SQLUtils.getConnection();
         if (con != null) {
             try {
                 String query = "SELECT * FROM Workspaces WHERE Archived = 0";
+
                 PreparedStatement ps = con.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
+
+                    // System.out.println(rs.getInt("WorkspaceID"));
+                    // System.out.println(rs.getString("Name"));
+                    // System.out.println(rs.getString("Pin"));
+                    // System.out.println(rs.getBoolean("Archived"));
+                    // System.out.println("-------------------");
+
                     Workspace workspace = new Workspace();
                     workspace.setWorkspaceId(rs.getInt("WorkspaceID"));
-                    workspace.setPin(rs.getInt("Pin"));
                     workspace.setWorkspaceName(rs.getString("Name"));
+                    workspace.setPin(rs.getString("Pin"));
                     workspace.setArchive(rs.getBoolean("Archived"));
                     list.add(workspace);
                 }
@@ -40,7 +48,7 @@ public class WorkspaceDAO implements interfaceDAO<Workspace> {
     }
 
     @Override
-    public boolean create(Workspace t) {
+    public boolean create(Workspace workspace) {
         boolean b = false;
         con = SQLUtils.getConnection();
         if (con != null) {
@@ -48,7 +56,7 @@ public class WorkspaceDAO implements interfaceDAO<Workspace> {
                 String query = "INSERT INTO Workspaces (Name, Pin, Archived) VALUES (?, ?, ?)";
                 PreparedStatement ps = con.prepareStatement(query);
                 ps.setString(1, workspace.getWorkspaceName());
-                ps.setInt(2, workspace.getPin());
+                ps.setString(2, workspace.getPin());
                 ps.setBoolean(3, workspace.isArchive());
                 b = ps.executeUpdate() > 0;
             } catch (Exception e) {
@@ -72,7 +80,7 @@ public class WorkspaceDAO implements interfaceDAO<Workspace> {
                 if (rs.next()) {
                     workspace = new Workspace();
                     workspace.setWorkspaceId(rs.getInt("WorkspaceID"));
-                    workspace.setPin(rs.getInt("Pin"));
+                    workspace.setPin(rs.getString("Pin"));
                     workspace.setWorkspaceName(rs.getString("Name"));
                     workspace.setArchive(rs.getBoolean("Archived"));
                 }
@@ -86,7 +94,7 @@ public class WorkspaceDAO implements interfaceDAO<Workspace> {
     }
 
     @Override
-    public boolean update(Workspace t) {
+    public boolean update(Workspace workspace) {
         boolean b = false;
         con = SQLUtils.getConnection();
         if (con != null) {
@@ -94,7 +102,7 @@ public class WorkspaceDAO implements interfaceDAO<Workspace> {
                 String query = "UPDATE Workspaces SET Name = ?, Pin = ?, Archived = ? WHERE WorkspaceID = ?";
                 PreparedStatement ps = con.prepareStatement(query);
                 ps.setString(1, workspace.getWorkspaceName());
-                ps.setInt(2, workspace.getPin());
+                ps.setString(2, workspace.getPin());
                 ps.setBoolean(3, workspace.isArchive());
                 ps.setInt(4, workspace.getWorkspaceId());
                 b = ps.executeUpdate() > 0;

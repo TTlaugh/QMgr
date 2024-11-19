@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import data.WorkspaceDAO;
@@ -16,6 +17,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.StringConverter;
 import model.Workspace;
 import services.WorkspaceManager;
 import utils.CheckTextField;
@@ -71,28 +73,64 @@ public class Workspace_controller implements Initializable {
     // Manager Workspace
     public static WorkspaceManager workspaceManager = WorkspaceManager.getInstance();
 
+    private List<Workspace> allListWorkspaces = workspaceManager.getAllWorkspace();
+
+    private static int indexComboBox = 0;
+
     // Function Archive
 
     @FXML
     void btn_archive_WorkSpace_Hidden(ActionEvent event) {
+
+        Workspace workspace_comboBox = ComboBox_WorkSpace_StackPane.getValue();
+
+        if (workspace_comboBox == null) {
+            Notification.Error("Error", "Please select workspace!");
+            return;
+        }
         archive_WorkSpace.setVisible(true);
+
+        tf_WorkSpace_Name_Archive.clear();
+
+        Workspace workspace_Archive = workspaceManager.getWorkspace(workspace_comboBox.getWorkspaceId());
+
+        String workSpaceID = String.valueOf(workspace_comboBox.getWorkspaceId());
+        String workSpace_Name = workspace_Archive.getWorkspaceName();
+
+        lb_WorkSpace_Name_Archive.setText(workSpace_Name);
+        lb_WorkSpaceID_Archive.setText("ID : " + workSpaceID);
+
     }
 
     @FXML
     void btn_archive_WorkSpace(ActionEvent event) {
-        // String workSpace_Name_Archive = Workspace_BUS.getWorkPaceName();
+        Workspace workspace_comboBox = ComboBox_WorkSpace_StackPane.getValue();
 
-        // String workSpace_Name_Archive_Comfirm = tf_WorkSpace_Name_Archive.getText();
+        if (workspace_comboBox == null) {
+            Notification.Error("Error", "Please select workspace!");
+            return;
+        }
 
-        // if(!workSpace_Name_Archive_Comfirm.equalsIgnoreCase(workSpace_Name_Archive)){
-        // Notification.Error("Error", "Workspace name does not match!");
-        // return;
-        // }
+        Workspace workSpace_Name_Archive = workspaceManager.getWorkspace(workspace_comboBox.getWorkspaceId());
+
+        String workSpace_Name_Archive_String = workSpace_Name_Archive.getWorkspaceName();
+        String workSpace_Name_Archive_Comfirm = tf_WorkSpace_Name_Archive.getText();
+
+        if (!workSpace_Name_Archive_Comfirm.equalsIgnoreCase(workSpace_Name_Archive_String)) {
+            Notification.Error("Error", "Workspace name does not match!");
+            return;
+        }
 
         // Func Archive workspace here
-        // Workspace_BUS.archive_WorkSpace(workSpace_Name_Archive);
+        Boolean isSuccess = workspaceManager.archiveWorkspace(workSpace_Name_Archive);
+
+        if (!isSuccess) {
+            Notification.Error("Error", "Archive workspace failed!");
+            return;
+        }
 
         Notification.Infomation("Success", "Archive workspace successfully!");
+
         archive_WorkSpace.setVisible(false);
     }
 
@@ -128,13 +166,20 @@ public class Workspace_controller implements Initializable {
             return;
         }
 
+        Workspace workspace = new Workspace(0, workSpace_PIN, workSpace_Name, false);
         // Func Create new workspace here
         Boolean isSuccess = workspaceManager
-                .setUpWorkspace(new Workspace(0, Integer.parseInt(workSpace_PIN), workSpace_Name, false));
+                .setUpWorkspace(workspace);
         if (!isSuccess) {
             Notification.Error("Error", "Workspace name already exists!");
             return;
         }
+        allListWorkspaces.add(workspace);
+
+        Workspace workspace_add_ComboBox = workspaceManager.getWorkspace(allListWorkspaces.size());
+
+        ComboBox_WorkSpace_StackPane.getItems().add(workspace_add_ComboBox);
+
         Notification.Infomation("Success", "Create new workspace successfully!");
 
         btn_cancel_NewWorkSpace(event);
@@ -148,18 +193,41 @@ public class Workspace_controller implements Initializable {
     // Function Rename
     @FXML
     void btn_rename_WorkSpace_Hidden(ActionEvent event) {
+
+        Workspace workspace_comboBox = ComboBox_WorkSpace_StackPane.getValue();
+
+        if (workspace_comboBox == null) {
+            Notification.Error("Error", "Please select workspace!");
+            return;
+        }
         rename_WorkSpace.setVisible(true);
+
+        tf_WorkSpace_Name_Rename.clear();
+
+        Workspace workspace_Rename = workspaceManager.getWorkspace(workspace_comboBox.getWorkspaceId());
+
+        String workSpaceID = String.valueOf(workspace_comboBox.getWorkspaceId());
+        String workSpace_Name = workspace_Rename.getWorkspaceName();
+
+        lb_WorkSpace_Name_Rename.setText(workSpace_Name);
+        lb_WorkSpaceID_Rename.setText("ID : " + workSpaceID);
+
     }
 
     @FXML
     void btn_rename_WorkSpace(ActionEvent event) {
-        // Func Rename workspace here
-        // String workSpaceID = Workspace_BUS.getWorkPaceID();
-        // String workSpace_Name = Workspace_BUS.getWorkPaceName();
-        // lb_WorkSpace_Name_Rename.setText(workSpaceID);
-        // lb_WorkSpaceID_Rename.setText(workSpace_Name);
+
+        Workspace workspace_comboBox = ComboBox_WorkSpace_StackPane.getValue();
+
+        if (workspace_comboBox == null) {
+            Notification.Error("Error", "Please select workspace!");
+            return;
+        }
+
+        Workspace workspace_Rename = workspaceManager.getWorkspace(workspace_comboBox.getWorkspaceId());
 
         String workSpace_Name_Replace = tf_WorkSpace_Name_Rename.getText();
+
         if (workSpace_Name_Replace.length() == 0 || workSpace_Name_Replace == null || workSpace_Name_Replace == "") {
             Notification.Error("Error", "Please enter workspace name!");
             return;
@@ -168,10 +236,20 @@ public class Workspace_controller implements Initializable {
             Notification.Error("Error", "Workspace name is too long!");
             return;
         }
+        workspace_Rename.setWorkspaceName(workSpace_Name_Replace);
 
         // Func Rename workspace here
+        Boolean isSuccess = workspaceManager.renameWorkspace(workspace_Rename);
+
+        if (!isSuccess) {
+            Notification.Error("Error", "Workspace name already exists!");
+            return;
+        }
+
+        ComboBox_WorkSpace_StackPane.getItems().set(indexComboBox, workspace_Rename);
 
         Notification.Infomation("Success", "Rename workspace successfully!");
+
         btn_cancel_NewWorkSpace(event);
 
     }
@@ -179,6 +257,25 @@ public class Workspace_controller implements Initializable {
     // Function Continue
     @FXML
     void btn_continue_WorkSpace(ActionEvent event) {
+        Workspace workspace_comboBox = ComboBox_WorkSpace_StackPane.getValue();
+
+        if (workspace_comboBox == null) {
+            Notification.Error("Error", "Please select workspace!");
+            return;
+        }
+        Workspace workspace_Continue = workspaceManager.getWorkspace(workspace_comboBox.getWorkspaceId());
+
+        if (tf_PIN_StackPane.getText().length() == 0 || tf_PIN_StackPane.getText() == null
+                || tf_PIN_StackPane.getText() == "") {
+            Notification.Error("Error", "Please enter PIN!");
+            return;
+        }
+
+        if (!tf_PIN_StackPane.getText().equals(workspace_Continue.getPin())) {
+            Notification.Error("Error", "Workspace PIN does not match!");
+            return;
+        }
+
         Parent root;
         try {
             root = (Parent) FXMLLoader.load(getClass().getResource("/ui/Screencontainer.fxml"));
@@ -187,6 +284,7 @@ public class Workspace_controller implements Initializable {
             e.printStackTrace();
             System.out.println("Error in loading workspace_controller");
         }
+
     }
 
     // Function shared
@@ -218,30 +316,31 @@ public class Workspace_controller implements Initializable {
     }
 
     void loadComboBox_WorkSpace() {
-        ArrayList<Workspace> allListWorkspaces = new WorkspaceDAO().getAll();
-        for (Workspace workspace : allListWorkspaces) {
-            System.out.println(workspace.getWorkspaceName());
+
+        if (allListWorkspaces == null) {
+            return;
         }
-        // List<Workspace> allListWorkspaces = new WorkspaceDAO().getAll();
-        // if (allListWorkspaces == null) {
-        // return;
-        // }
-        // for (Workspace workspace : allListWorkspaces) {
-        // ComboBox_WorkSpace_StackPane.getItems().add(workspace);
-        // }
+        for (Workspace workspace : allListWorkspaces) {
+            ComboBox_WorkSpace_StackPane.getItems().add(workspace);
+        }
 
-        // // Convert Display
-        // ComboBox_WorkSpace_StackPane.setConverter(new StringConverter<Workspace>() {
-        // @Override
-        // public String toString(Workspace workspace) {
-        // return workspace == null ? "" : workspace.getWorkspaceName();
-        // }
+        // Convert Display
+        ComboBox_WorkSpace_StackPane.setConverter(new StringConverter<Workspace>() {
+            @Override
+            public String toString(Workspace workspace) {
+                return workspace == null ? "" : workspace.getWorkspaceName();
+            }
 
-        // @Override
-        // public Workspace fromString(String workspace) {
-        // return null;
-        // }
-        // });
+            @Override
+            public Workspace fromString(String workspace) {
+                return null;
+            }
+        });
+
+        // set OnAction
+        ComboBox_WorkSpace_StackPane.setOnAction(event -> {
+            indexComboBox = ComboBox_WorkSpace_StackPane.getSelectionModel().getSelectedIndex();
+        });
     }
 
 }
