@@ -2,9 +2,10 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import data.WorkspaceDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +16,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.StringConverter;
 import model.Workspace;
 import services.WorkspaceManager;
 import utils.CheckTextField;
@@ -129,8 +129,12 @@ public class Workspace_controller implements Initializable {
         }
 
         // Func Create new workspace here
-        workspaceManager.setUpWorkspace(new Workspace(0, Integer.parseInt(workSpace_PIN), workSpace_Name, false));
-
+        Boolean isSuccess = workspaceManager
+                .setUpWorkspace(new Workspace(0, Integer.parseInt(workSpace_PIN), workSpace_Name, false));
+        if (!isSuccess) {
+            Notification.Error("Error", "Workspace name already exists!");
+            return;
+        }
         Notification.Infomation("Success", "Create new workspace successfully!");
 
         btn_cancel_NewWorkSpace(event);
@@ -214,23 +218,30 @@ public class Workspace_controller implements Initializable {
     }
 
     void loadComboBox_WorkSpace() {
-        List<Workspace> allListWorkspaces = workspaceManager.getAllWorkspace();
+        ArrayList<Workspace> allListWorkspaces = new WorkspaceDAO().getAll();
         for (Workspace workspace : allListWorkspaces) {
-            ComboBox_WorkSpace_StackPane.getItems().add(workspace);
+            System.out.println(workspace.getWorkspaceName());
         }
+        // List<Workspace> allListWorkspaces = new WorkspaceDAO().getAll();
+        // if (allListWorkspaces == null) {
+        // return;
+        // }
+        // for (Workspace workspace : allListWorkspaces) {
+        // ComboBox_WorkSpace_StackPane.getItems().add(workspace);
+        // }
 
-        // Convert Display
-        ComboBox_WorkSpace_StackPane.setConverter(new StringConverter<Workspace>() {
-            @Override
-            public String toString(Workspace workspace) {
-                return workspace == null ? "" : workspace.getWorkspaceName();
-            }
+        // // Convert Display
+        // ComboBox_WorkSpace_StackPane.setConverter(new StringConverter<Workspace>() {
+        // @Override
+        // public String toString(Workspace workspace) {
+        // return workspace == null ? "" : workspace.getWorkspaceName();
+        // }
 
-            @Override
-            public Workspace fromString(String workspace) {
-                return null;
-            }
-        });
+        // @Override
+        // public Workspace fromString(String workspace) {
+        // return null;
+        // }
+        // });
     }
 
 }

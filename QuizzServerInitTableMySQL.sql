@@ -13,9 +13,9 @@ CREATE TABLE Workspaces (
     Archived BOOLEAN DEFAULT FALSE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
-drop table if EXISTS Groups;
+drop table if EXISTS SGroups;
 
-CREATE TABLE Groups (
+CREATE TABLE SGroups (
     GroupID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     GroupName VARCHAR(100) NOT NULL,
     DateCreated DATETIME NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE Students (
     GroupID INT NOT NULL,
     INDEX FIRSTNAME (FirstName ASC),
     INDEX LASTNAME (LastName ASC),
-    CONSTRAINT FK_Students_Groups FOREIGN KEY (GroupID) REFERENCES Groups (GroupID) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT FK_Students_Groups FOREIGN KEY (GroupID) REFERENCES SGroups (GroupID) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 CREATE TABLE Subjects (
@@ -77,7 +77,7 @@ CREATE TABLE HostExams (
     ExamID INT NOT NULL,
     GroupID INT NOT NULL,
     CONSTRAINT FK_HostExams_Exams FOREIGN KEY (ExamID) REFERENCES Exams (ExamID) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT FK_HostExams_Groups FOREIGN KEY (GroupID) REFERENCES Groups (GroupID) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT FK_HostExams_Groups FOREIGN KEY (GroupID) REFERENCES SGroups (GroupID) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 CREATE TABLE Submissions (
@@ -98,7 +98,7 @@ VALUES (1, 'DHSG', '111111', false),
     (3, 'DHBK', '111111', false);
 
 INSERT INTO
-    Groups
+    SGroups
 VALUES (
         1,
         'Nhom 1 - DSTT',

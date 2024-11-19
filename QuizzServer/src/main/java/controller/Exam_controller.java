@@ -1,6 +1,7 @@
 package controller;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import components.Exam_card;
@@ -62,7 +63,7 @@ public class Exam_controller implements Initializable {
     Exam_card exam_card = new Exam_card("Cnpm", "Cnpm", "21/12/2004");
     Exam_card exam_card2 = new Exam_card("Cnpm", "Cnpm", "21/12/2004");
 
-    List<Exam_card> listExamCards = List.of(exam_card, exam_card2);
+    List<Exam_card> listExamCards = new ArrayList<Exam_card>();
 
     // Func Create New Exam
     @FXML
