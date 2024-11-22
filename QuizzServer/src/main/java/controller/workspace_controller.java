@@ -2,11 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import data.WorkspaceDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,6 +40,9 @@ public class Workspace_controller implements Initializable {
 
     @FXML
     private TextField tf_WorkSpace_Name_Archive;
+
+    @FXML
+    private Label lb_Workspace_ConfirmName_Archive;
 
     // Anchor Rename
     @FXML
@@ -99,6 +99,7 @@ public class Workspace_controller implements Initializable {
 
         lb_WorkSpace_Name_Archive.setText(workSpace_Name);
         lb_WorkSpaceID_Archive.setText("ID : " + workSpaceID);
+        lb_Workspace_ConfirmName_Archive.setText("To confirm, type \" " + workSpace_Name + " \" in the box below");
 
     }
 

@@ -4,10 +4,16 @@ import java.io.File;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import components.Group_card;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -19,12 +25,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
+import model.Group;
 import model.Student;
+import services.GroupManager;
+import services.StudentManager;
+import utils.CheckStringFormat;
 import utils.Notification;
 import utils.OpenFileExplorer;
 
@@ -53,6 +67,9 @@ public class Student_controller implements Initializable {
     private Label lb_Group_ID_Archive;
 
     @FXML
+    private Label lb_GroupConfirm_Archive_StudentManagement;
+
+    @FXML
     private TextField tf_Group_ConfirmName_Archive;
 
     // StackPane Change Group
@@ -70,22 +87,18 @@ public class Student_controller implements Initializable {
     @FXML
     private TextField tf_SearchStudent_StudentManagement;
 
-    // Table Detail Group
-    @FXML
-    private TableView<?> table_Student_StudentManagement;
-
     // Label Detail Group
     @FXML
-    private Label lb_GroupName_StudentManagement;
+    private Label lb_GroupName_StudentManagement = new Label();
 
     @FXML
-    private Label lb_GroupID_StudentManagement;
+    private Label lb_GroupID_StudentManagement = new Label();
 
     @FXML
-    private Label lb_DateCreate_StudentManagement;
+    private Label lb_DateCreate_StudentManagement = new Label();
 
     @FXML
-    private Label lb_Quantity_StudentManagement;
+    private Label lb_Quantity_StudentManagement = new Label();
 
     // StackPane Detail Group
     // Rename Student
@@ -140,8 +153,6 @@ public class Student_controller implements Initializable {
     private TextField tf_Phone_Detail_StudentManagement;
 
     //
-    @FXML
-    private StackPane existsStudent_StudentManagement;
 
     @FXML
     private StackPane addStudentFail_Email_StudentManagemennt;
@@ -155,19 +166,88 @@ public class Student_controller implements Initializable {
 
     @FXML
     private AnchorPane AnchorPane_ReultSearch_StudentManagement;
+
+    // TableView Detail Group
+
+    @FXML
+    public TableView<Student> table_Student_StudentManagement = new TableView<Student>();
+
+    @FXML
+    private TableColumn<Student, String> ID_TableColumn_groupDetail = new TableColumn<Student, String>();
+
+    @FXML
+    private TableColumn<Student, String> Fullname_TableColumn_groupDetail = new TableColumn<Student, String>();
+
+    @FXML
+    private TableColumn<Student, String> Phone_TableColumn_groupDetail = new TableColumn<Student, String>();
+
+    @FXML
+    private TableColumn<Student, String> Email_TableColumn_groupDetail = new TableColumn<Student, String>();
     /*------------------------------------------------------- */
-    // Data for test
-    Group_card group = new Group_card("Group name", "GR0011", "2020-01-01");
-    Group_card group2 = new Group_card("Group name", "GR0012", "2020-01-02");
-    Group_card group3 = new Group_card("Group name", "GR0013", "2020-01-03");
+    private StudentManager studentManager = StudentManager.getInstance();
 
-    List<Group_card> group_list = List.of(group, group2, group3);
+    public static List<Student> student_list;
 
-    Student student = new Student(1, 1, "ID", "First name", "Last name", "Email", "Phone");
-    Student student2 = new Student(2, 2, "ID", "First name", "Last name", "Email", "Phone");
-    Student student3 = new Student(3, 3, "ID", "First name", "Last name", "Email", "Phone");
+    private Student studentSelected;
 
-    List<Student> student_list = List.of(student, student2, student3);
+    private GroupManager groupManager = GroupManager.getInstance();
+
+    private List<Group> group_list = groupManager.getAllGroup();
+
+    public static Group group_Current_StudentManagement = new Group();
+
+    private int CountGroupID_Current_StudentManagement = group_list.get(group_list.size() - 1).getGroupId() + 1;
+
+    private int indexSelected_AnchorPane_in_FlowPane = 0;
+
+    private int indexSelected_Student_in_TableView = 0;
+
+    // TableView
+    public ObservableList<Student> observableList;
+
+    // StackPane Notification Add Student
+
+    @FXML
+    private StackPane existsStudent_StudentManagement;
+
+    @FXML
+    private Label lb_Notification_StudentManagement;
+
+    @FXML
+    private RadioButton RadioButton_UpdateInfo_StudentManagement;
+
+    @FXML
+    private Label lb_UpdateInfo_StudentManagement;
+
+    @FXML
+    private RadioButton RadioButton_CreateStudent_StudentManagement;
+
+    @FXML
+    private RadioButton RadioButton_DontCreate_StudentManagement;
+
+    @FXML
+    private Label lb_DonotAdd_StudentManagement;
+
+    private ToggleGroup group_RadioButton_addStudent = new ToggleGroup();
+
+    // TableView search
+    @FXML
+    private Label lb_totalStudent_Search_StudentManagement;
+
+    @FXML
+    private TableView<Student> table_Search_StudentManagement = new TableView<Student>();
+
+    @FXML
+    private TableColumn<Student, String> ID_Column_searchDetail = new TableColumn<Student, String>();
+
+    @FXML
+    private TableColumn<Student, String> Fullname_Column_searchDetail = new TableColumn<Student, String>();
+
+    @FXML
+    private TableColumn<Student, String> Phone_Column_searchDetail = new TableColumn<Student, String>();
+
+    @FXML
+    private TableColumn<Student, String> Email_Column_searchDetail = new TableColumn<Student, String>();
 
     // Import Group Detail
     @FXML
@@ -241,13 +321,33 @@ public class Student_controller implements Initializable {
     // Delete Group Detail
     @FXML
     void btn_DeleteStudent_StudentManagement(ActionEvent event) {
+        studentSelected = table_Student_StudentManagement.getSelectionModel().getSelectedItem();
 
+        indexSelected_Student_in_TableView = table_Student_StudentManagement.getSelectionModel().getSelectedIndex();
+
+        if (studentSelected == null) {
+            Notification.Error("Error", "Please choose student");
+            return;
+        }
+
+        if (!studentManager.deleteStudent(studentSelected)) {
+            Notification.Error("Error", "Delete student failed");
+            return;
+        }
+        Notification.Infomation("Success", "Delete student successfully");
+
+        table_Student_StudentManagement.getItems().remove(indexSelected_Student_in_TableView);
     }
 
     // Rename Group Detail
     @FXML
     void btn_Rename_Hidden_StudentManagement(ActionEvent event) {
         this.renameGroup_StudentManagement.setVisible(true);
+
+        lb_GroupName_Rename_StudentManagement.setText(group_Current_StudentManagement.getGroupName());
+        lb_GroupID_Rename_StudentManagement.setText("ID : #"
+                + (group_Current_StudentManagement.getGroupId() >= 10 ? group_Current_StudentManagement.getGroupId()
+                        : "0" + group_Current_StudentManagement.getGroupId()));
     }
 
     @FXML
@@ -283,6 +383,23 @@ public class Student_controller implements Initializable {
         // func check phone here
 
         // Func Save Change
+
+        studentSelected.setFirstName(firstName);
+        studentSelected.setLastName(lastName);
+        studentSelected.setPhone(phone);
+        studentSelected.setEmail(email);
+
+        if (!studentManager.updateStudent(studentSelected)) {
+            Notification.Error("Error", "Save change student failed");
+            return;
+        }
+
+        Notification.Infomation("Success", "Save change studennt successfully");
+
+        table_Student_StudentManagement.getItems().set(indexSelected_Student_in_TableView, studentSelected);
+
+        btn_cancel_GroupDetail(event);
+
     }
 
     @FXML
@@ -296,14 +413,42 @@ public class Student_controller implements Initializable {
             Notification.Error("Error", "Group name is too long");
             return;
         }
-        // Func Rename Group here
 
+        group_Current_StudentManagement.setGroupName(groupName);
+
+        if (!groupManager.updateGroup(group_Current_StudentManagement)) {
+            Notification.Error("Error", "Rename group failed");
+            return;
+        }
+
+        Notification.Infomation("Success", "Rename group success");
+
+        lb_GroupName_StudentManagement.setText(groupName);
+
+        btn_cancel_GroupDetail(event);
     }
 
     // Detail Group Detail
     @FXML
     void btn_StudentDetail_Hidden_StudentManagement(ActionEvent event) {
+
+        studentSelected = table_Student_StudentManagement.getSelectionModel().getSelectedItem();
+
+        indexSelected_Student_in_TableView = table_Student_StudentManagement.getSelectionModel().getSelectedIndex();
+
+        if (studentSelected == null) {
+            Notification.Error("Error", "Please choose student");
+            return;
+        }
+
         this.detailStudent_StudentManagement.setVisible(true);
+
+        tf_FirstName_Detail_StudentManagement.setText(studentSelected.getFirstName());
+        tf_LastName_Detail_StudentManagement.setText(studentSelected.getLastName());
+        tf_StudentID_Detail_StudentManagement.setText(studentSelected.getStudentId());
+        tf_Email_Detail_StudentManagement.setText(studentSelected.getEmail());
+        tf_Phone_Detail_StudentManagement.setText(studentSelected.getPhone());
+
     }
 
     @FXML
@@ -315,7 +460,17 @@ public class Student_controller implements Initializable {
     // AddStudent Group Detail
     @FXML
     void btn_addStudent_Hidden_StudentManagement(ActionEvent event) {
+        clearAll_tf_AddStudent();
         this.addStudent_StudentManagement.setVisible(true);
+
+    }
+
+    void clearAll_tf_AddStudent() {
+        tf_Email_Add_StudentManagement.clear();
+        tf_FirstName_Add_StudentManagement.clear();
+        tf_LastName_Add_StudentManagement.clear();
+        tf_Phone_Add_StudentManagement.clear();
+        tf_StudentID_Add_StudentManagement.clear();
     }
 
     @FXML
@@ -346,11 +501,119 @@ public class Student_controller implements Initializable {
             Notification.Error("Error", "Please enter phone");
             return;
         }
-        // func check email here
+        if (!CheckStringFormat.isCorrectFormat(studentID)) {
+            Notification.Error("Error", "Student ID is not correct format");
+            return;
+        }
+        studentSelected = new Student(0,
+                group_Current_StudentManagement.getGroupId(), studentID, firstName, lastName,
+                phone, email);
 
-        // func check phone here
+        if (studentManager.getStudentbyId(studentID) == null && studentManager.createStudent(studentSelected)) {
 
-        // Func Add Student
+            Student isSuccessAdd = studentManager.getStudentbyId(studentID);
+
+            table_Student_StudentManagement.getItems().add(isSuccessAdd);
+
+            Notification.Infomation("Success", "Add student successfully");
+
+            btn_cancel_GroupDetail(event);
+
+            return;
+        }
+        existsStudent_StudentManagement.setVisible(true);
+
+        setDataforExistsStudent(studentID);
+
+        setToggleforRadioButtonAddStudent();
+
+    }
+
+    void setDataforExistsStudent(String studentID) {
+        lb_Notification_StudentManagement.setText("Student ID #" + studentID + " already exists");
+
+        RadioButton_UpdateInfo_StudentManagement.setText("Update #" + studentID + " info");
+        lb_UpdateInfo_StudentManagement
+                .setText("Information of student with StudentID #" + studentID + " in the system will be updated.");
+
+        lb_DonotAdd_StudentManagement.setText("Do not add student #" + studentID + " to the system.");
+    }
+
+    void setToggleforRadioButtonAddStudent() {
+        RadioButton_UpdateInfo_StudentManagement.setToggleGroup(group_RadioButton_addStudent);
+
+        RadioButton_CreateStudent_StudentManagement.setToggleGroup(group_RadioButton_addStudent);
+
+        RadioButton_DontCreate_StudentManagement.setToggleGroup(group_RadioButton_addStudent);
+    }
+
+    @FXML
+    void btn_cancel_Noti_Add_StudentManagement(ActionEvent event) {
+        this.existsStudent_StudentManagement.setVisible(false);
+    }
+
+    public int findIndexByUid(String studentId) {
+        ObservableList<Student> items = table_Student_StudentManagement.getItems();
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).getStudentId().equals(studentId)) {
+                return i;
+            }
+        }
+        return -1; // Không tìm thấy
+    }
+
+    @FXML
+    void btn_Continue_StudentManagement(ActionEvent event) {
+        if (RadioButton_UpdateInfo_StudentManagement.isSelected()) {
+
+            if (!studentManager.updateStudent(studentSelected)) {
+                Notification.Error("Error", "Update student failed");
+                return;
+            }
+
+            Student isUpdate = studentManager.getStudentbyId(studentSelected.getStudentId());
+
+            int index = findIndexByUid(isUpdate.getStudentId());
+
+            table_Student_StudentManagement.getItems().set(index, isUpdate);
+
+            Notification.Infomation("Success", "Update student successfully");
+
+            existsStudent_StudentManagement.setVisible(false);
+
+        } else if (RadioButton_CreateStudent_StudentManagement.isSelected()) {
+
+            System.out.println(studentManager.getMaxUid());
+            int sizeAllStudent = studentManager.getMaxUid() + 1;
+
+            String idStudent;
+
+            if (sizeAllStudent > 99) {
+                idStudent = "ST" + (sizeAllStudent);
+            } else {
+                idStudent = (sizeAllStudent) < 10 ? "ST00" + (sizeAllStudent) : "ST0" + (sizeAllStudent);
+            }
+
+            studentSelected.setStudentId(idStudent);
+
+            if (!studentManager.createStudent(studentSelected)) {
+                Notification.Error("Error", "Create student failed");
+                return;
+            }
+            Student isSuccessAdd = studentManager.getStudentbyId(idStudent);
+
+            table_Student_StudentManagement.getItems().add(isSuccessAdd);
+
+            Notification.Infomation("Success", "Create student successfully");
+
+            existsStudent_StudentManagement.setVisible(false);
+
+        } else if (RadioButton_DontCreate_StudentManagement.isSelected()) {
+
+            Notification.Infomation("Unsuccess", "Student is not added to the system");
+
+            existsStudent_StudentManagement.setVisible(false);
+        }
     }
 
     // Archive Group Detail
@@ -362,6 +625,7 @@ public class Student_controller implements Initializable {
     // Func Create New Group
     @FXML
     void btn_newGroup_Hidden(ActionEvent event) {
+        tf_GroupName_CreateGroup.clear();
         this.create_NewGroup.setVisible(true);
     }
 
@@ -376,14 +640,27 @@ public class Student_controller implements Initializable {
             Notification.Error("Error", "Group name is too long");
             return;
         }
+
+        Group group_current = new Group(CountGroupID_Current_StudentManagement, 1, groupName, LocalDateTime.now(),
+                false);
+
+        group_list.add(group_current);
+
+        CountGroupID_Current_StudentManagement++;
+
         // Func Create New Group
+        boolean is_CreateSuccess = groupManager.createGroup(group_current);
+
+        if (!is_CreateSuccess) {
+            Notification.Error("Error", "Create group failed");
+            return;
+        }
+
         Notification.Infomation("Success", "Create new group successfully");
 
-        Group_card group = new Group_card(groupName, "ID", "12/8/2024");
+        Group_card group_card_current = new Group_card(group_current);
 
-        group_list.add(group);
-
-        add_Group_FlowPane(group);
+        add_Group_FlowPane(group_card_current);
 
         btn_cancel_Group(event);
     }
@@ -401,20 +678,32 @@ public class Student_controller implements Initializable {
             Notification.Error("Error", "Group name is too long");
             return;
         }
-        if (!groupName.equalsIgnoreCase(lb_Group_Name_Archive.getText())) {
+        if (!(groupName.trim()).equalsIgnoreCase(lb_Group_Name_Archive.getText())) {
             Notification.Error("Error", "Group name does not match");
             return;
         }
-        // Func Archive Group
 
+        // Func Archive Group
+        if (!groupManager.deleteGroup(group_Current_StudentManagement.getGroupId())) {
+            Notification.Error("Error", "Archive group failed");
+            return;
+        }
         Notification.Infomation("Success", "Archive group successfully");
+
+        this.flowpane_mainbody.getChildren().remove(indexSelected_AnchorPane_in_FlowPane);
+
+        group_list.remove(group_Current_StudentManagement);
+
         btn_cancel_Group(event);
     }
 
     // Func detail Group
     void btn_details_Group(ActionEvent event) {
-        String url = "/ui/group-detail+search-result.fxml";
-        load_Scene_AnchorPane(event, url);
+        if (student_list != null) {
+            String url = "/ui/group-detail+search-result.fxml";
+            load_Scene_AnchorPane(event, url);
+        }
+
     }
 
     // Search Student in Group
@@ -423,6 +712,29 @@ public class Student_controller implements Initializable {
     void btn_SearchStudent_StudentManagement(ActionEvent event) {
         AnchorPane_GroupDetailStudent_StudentManagement.setVisible(false);
         AnchorPane_ReultSearch_StudentManagement.setVisible(true);
+
+        String keyword = tf_SearchStudent_StudentManagement.getText();
+
+        if (keyword.length() == 0 || keyword == null || keyword == "") {
+            Notification.Error("Error", "Please enter keyword");
+            return;
+        }
+        if (keyword.length() > 191) {
+            Notification.Error("Error", "Keyword is too long");
+            return;
+        }
+
+        // Func Search Student
+        ArrayList<Student> listStudent = studentManager.searchStudent(group_Current_StudentManagement.getGroupId(),
+                keyword);
+
+        if (listStudent == null || listStudent.size() == 0) {
+            Notification.Error("Error", "No student found");
+            return;
+        }
+
+        table_Search_StudentManagement.getItems().clear();
+        table_Search_StudentManagement.setItems(loadStudent_tableViewSearch_StudentManagement(listStudent));
     }
 
     // Back Group
@@ -484,25 +796,98 @@ public class Student_controller implements Initializable {
         FlowPane.setMargin(group.getGroup_Instance(), margin);
 
         this.flowpane_mainbody.getChildren().add(group.getGroup_Instance());
-        group.getDetails_btn().setOnAction(new EventHandler<ActionEvent>() {
+
+        group.getArchive_btn().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                btn_details_Group(event);
+                archive_NewGroup.setVisible(true);
+
+                tf_Group_ConfirmName_Archive.clear();
+
+                group_Current_StudentManagement = group.getGroup();
+
+                indexSelected_AnchorPane_in_FlowPane = flowpane_mainbody.getChildren()
+                        .indexOf(group.getGroup_Instance());
+
+                if (archive_NewGroup.isVisible()) {
+                    lb_Group_ID_Archive.setText("Group ID :" + group_Current_StudentManagement.getGroupId() + "");
+                    lb_Group_Name_Archive.setText(group_Current_StudentManagement.getGroupName());
+                    lb_GroupConfirm_Archive_StudentManagement.setText(
+                            "To confirm, type \"" + group_Current_StudentManagement.getGroupName()
+                                    + "\" in the box below");
+                }
             }
         });
 
-        group.click_Button_Archive(archive_NewGroup);
-    }
+        group.getDetails_btn().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
 
-    // Load List Group
-    public void LoadListGroup(List<Group_card> list, StackPane archive_NewGroup) {
-        for (Group_card group : list) {
-            add_Group_FlowPane(group);
-        }
+                group_Current_StudentManagement = group.getGroup();
+
+                Student_controller.student_list = studentManager
+                        .getAllStudentInGroup(group_Current_StudentManagement.getGroupId());
+
+                btn_details_Group(event);
+
+            }
+        });
     }
 
     // Load List Student
-    void LoadListStudent(List<Student> list) {
+    public void LoadListStudent() {
+        table_Student_StudentManagement
+                .setItems(loadStudent_tableViewStudent_StudentManagement(Student_controller.student_list));
+
+        lb_GroupName_StudentManagement.setText(group_Current_StudentManagement.getGroupName());
+        lb_GroupID_StudentManagement.setText("ID : #"
+                + (group_Current_StudentManagement.getGroupId() >= 10 ? group_Current_StudentManagement.getGroupId()
+                        : "0" + group_Current_StudentManagement.getGroupId()));
+        lb_DateCreate_StudentManagement.setText(
+                group_Current_StudentManagement.getCreateDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+        lb_Quantity_StudentManagement.setText(student_list.size() + " students");
+    }
+
+    // Load List Group
+    public void LoadListGroup() {
+        for (Group group : group_list) {
+
+            Group_card group_card = new Group_card(group);
+
+            add_Group_FlowPane(group_card);
+        }
+
+    }
+
+    public ObservableList<Student> loadStudent_tableViewStudent_StudentManagement(List<Student> list) {
+
+        observableList = FXCollections.observableArrayList(list);
+
+        ID_TableColumn_groupDetail.setCellValueFactory(new PropertyValueFactory<Student, String>("studentId"));
+        Fullname_TableColumn_groupDetail.setCellValueFactory(cellData -> getFullName(cellData.getValue()));
+        Phone_TableColumn_groupDetail.setCellValueFactory(new PropertyValueFactory<Student, String>("phone"));
+        Email_TableColumn_groupDetail.setCellValueFactory(new PropertyValueFactory<Student, String>("email"));
+
+        return observableList;
+    }
+
+    public ObservableList<Student> loadStudent_tableViewSearch_StudentManagement(List<Student> list) {
+
+        observableList = FXCollections.observableArrayList(list);
+
+        ID_Column_searchDetail.setCellValueFactory(new PropertyValueFactory<Student, String>("studentId"));
+        Fullname_Column_searchDetail.setCellValueFactory(cellData -> getFullName(cellData.getValue()));
+        Phone_Column_searchDetail.setCellValueFactory(new PropertyValueFactory<Student, String>("phone"));
+        Email_Column_searchDetail.setCellValueFactory(new PropertyValueFactory<Student, String>("email"));
+
+        return observableList;
+    }
+
+    // Get Full Name
+    public StringProperty getFullName(Student stu) {
+        StringProperty fullName = new SimpleStringProperty(stu.getFirstName() + " " + stu.getLastName());
+        return fullName;
     }
 
     // Open File
@@ -525,8 +910,11 @@ public class Student_controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // LoadListGroup & Set button details & button archive
-        LoadListGroup(group_list, archive_NewGroup);
+        LoadListGroup();
 
+        if (student_list != null) {
+            LoadListStudent();
+        }
     }
 
 }

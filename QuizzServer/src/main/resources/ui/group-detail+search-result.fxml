@@ -70,12 +70,12 @@
                </font>
             </Label>
             <Label layoutX="46.0" layoutY="49.0" text="Total 4 students" textFill="#475467" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="46.0" />
-            <TableView fx:id="table_Student_StudentManagement" fixedCellSize="0.0" layoutX="91.0" layoutY="91.0" prefHeight="347.0" prefWidth="476.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="77.0">
+            <TableView fx:id="table_Student_StudentManagement" editable="true" fixedCellSize="0.0" layoutX="32.0" layoutY="77.0" prefHeight="347.0" prefWidth="476.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="252.0" AnchorPane.topAnchor="77.0">
               <columns>
-                <TableColumn prefWidth="144.80003356933594" text="ID" />
-                <TableColumn minWidth="5.5999755859375" prefWidth="278.4000244140625" resizable="false" text="FullName" />
-                  <TableColumn prefWidth="144.80003356933594" text="Phone" />
-                  <TableColumn prefWidth="144.80003356933594" text="Email" />
+                <TableColumn fx:id="ID_TableColumn_groupDetail" prefWidth="144.80003356933594" text="ID" />
+                <TableColumn fx:id="Fullname_TableColumn_groupDetail" minWidth="5.5999755859375" prefWidth="278.4000244140625" resizable="false" text="FullName" />
+                  <TableColumn fx:id="Phone_TableColumn_groupDetail" prefWidth="144.80003356933594" text="Phone" />
+                  <TableColumn fx:id="Email_TableColumn_groupDetail" prefWidth="144.80003356933594" text="Email" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -318,7 +318,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tf_StudentID_Add_StudentManagement" layoutX="14.0" layoutY="238.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="250.0">
+                  <TextField fx:id="tf_StudentID_Add_StudentManagement" layoutX="14.0" layoutY="238.0" prefHeight="38.0" prefWidth="260.0" promptText="ST001" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="250.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -401,7 +401,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tf_StudentID_Detail_StudentManagement" layoutX="14.0" layoutY="238.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="250.0">
+                  <TextField fx:id="tf_StudentID_Detail_StudentManagement" disable="true" layoutX="14.0" layoutY="238.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="250.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -435,7 +435,7 @@
             <AnchorPane maxHeight="327.0" maxWidth="480.0" prefHeight="327.0" prefWidth="480.0" styleClass="popup">
                <children>
                   <Separator layoutX="113.0" layoutY="98.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0" />
-                  <Label layoutX="14.0" prefHeight="44.0" prefWidth="288.0" text="Student ID #ST01 already exists" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0">
+                  <Label fx:id="lb_Notification_StudentManagement" layoutX="14.0" prefHeight="44.0" prefWidth="288.0" text="Student ID #ST01 already exists" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -449,7 +449,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button alignment="CENTER" layoutX="231.0" layoutY="257.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="440.0" styleClass="button-xanhdam" text="Continue" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                  <Button alignment="CENTER" layoutX="231.0" layoutY="257.0" mnemonicParsing="false" onAction="#btn_Continue_StudentManagement" prefHeight="32.0" prefWidth="440.0" styleClass="button-xanhdam" text="Continue" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -459,17 +459,17 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <RadioButton layoutX="20.0" layoutY="106.0" mnemonicParsing="false" text="Update #ST01 info" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="90.0">
+                  <RadioButton fx:id="RadioButton_UpdateInfo_StudentManagement" layoutX="20.0" layoutY="106.0" mnemonicParsing="false" text="Update #ST01 info" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="90.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </RadioButton>
-                  <Label layoutX="46.0" layoutY="118.0" maxWidth="412.0" prefWidth="412.0" text="Information of student with StudentID #ID01 in the system will be &#10;updated." AnchorPane.leftAnchor="46.0" AnchorPane.topAnchor="114.0">
+                  <Label fx:id="lb_UpdateInfo_StudentManagement" layoutX="46.0" layoutY="118.0" maxWidth="412.0" prefWidth="412.0" text="Information of student with StudentID #ID01 in the system will be &#10;updated." AnchorPane.leftAnchor="46.0" AnchorPane.topAnchor="114.0">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <RadioButton layoutX="14.0" layoutY="164.0" mnemonicParsing="false" text="Create new student" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="156.0">
+                  <RadioButton fx:id="RadioButton_CreateStudent_StudentManagement" layoutX="14.0" layoutY="164.0" mnemonicParsing="false" text="Create new student" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="156.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -479,12 +479,12 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <RadioButton layoutX="14.0" layoutY="220.0" mnemonicParsing="false" text="Create new student" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="222.0">
+                  <RadioButton fx:id="RadioButton_DontCreate_StudentManagement" layoutX="14.0" layoutY="220.0" mnemonicParsing="false" text="Don't create student" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="222.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </RadioButton>
-                  <Label layoutX="40.0" layoutY="232.0" maxWidth="412.0" prefWidth="412.0" text="Do not add student #ST01 to the system." wrapText="true" AnchorPane.leftAnchor="46.0" AnchorPane.topAnchor="246.0">
+                  <Label fx:id="lb_DonotAdd_StudentManagement" layoutX="40.0" layoutY="232.0" maxWidth="412.0" prefWidth="412.0" text="Do not add student #ST01 to the system." wrapText="true" AnchorPane.leftAnchor="46.0" AnchorPane.topAnchor="246.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -645,18 +645,18 @@
       </StackPane>
       <AnchorPane fx:id="AnchorPane_ReultSearch_StudentManagement" prefHeight="488.0" prefWidth="760.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
          <children>
-            <Label layoutX="44.0" layoutY="23.0" text="Search results for “Nguyễn”" textFill="#101828" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <Label layoutX="44.0" layoutY="23.0" text="Search results " textFill="#101828" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="46.0" layoutY="49.0" text="Total 3 students" textFill="#475467" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="46.0" />
-            <TableView fixedCellSize="0.0" layoutX="91.0" layoutY="91.0" prefHeight="347.0" prefWidth="476.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="77.0">
+            <Label fx:id="lb_totalStudent_Search_StudentManagement" layoutX="46.0" layoutY="49.0" text="Total 3 students" textFill="#475467" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="46.0" />
+            <TableView fx:id="table_Search_StudentManagement" fixedCellSize="0.0" layoutX="91.0" layoutY="91.0" prefHeight="347.0" prefWidth="476.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="77.0">
                <columns>
-                  <TableColumn prefWidth="67.19996643066406" resizable="false" text="#ID" />
-                  <TableColumn minWidth="5.5999755859375" prefWidth="209.5999755859375" resizable="false" text="Full name" />
-                  <TableColumn prefWidth="216.800048828125" text="Email" />
-                  <TableColumn prefWidth="224.0" text="Sdt" />
+                  <TableColumn fx:id="ID_Column_searchDetail" prefWidth="67.19996643066406" resizable="false" text="ID" />
+                  <TableColumn fx:id="Fullname_Column_searchDetail" minWidth="5.5999755859375" prefWidth="209.5999755859375" resizable="false" text="Full name" />
+                  <TableColumn fx:id="Phone_Column_searchDetail" prefWidth="216.800048828125" text="Phone" />
+                  <TableColumn fx:id="Email_Column_searchDetail" prefWidth="224.0" text="Email" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -686,7 +686,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="CENTER" layoutX="360.0" layoutY="30.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="143.0" styleClass="button-trang" text="Export students" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="33.0">
+            <Button alignment="CENTER" layoutX="360.0" layoutY="30.0" mnemonicParsing="false" onAction="#btn_ExportStudent_StudentManagement" prefHeight="32.0" prefWidth="143.0" styleClass="button-trang" text="Export students" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="33.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

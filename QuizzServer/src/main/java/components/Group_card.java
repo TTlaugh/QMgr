@@ -1,18 +1,17 @@
 package components;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.transform.Rotate;
+import model.Group;
 
 public class Group_card {
         final String url = "/imgs/icons8-archive-24.png";
 
+        private Group group;
         Label group_name = new Label();
         Label group_id = new Label();
         Label date_created_label = new Label("Date created");
@@ -27,11 +26,15 @@ public class Group_card {
         }
 
         public Group_card(
-                        String group_name, String group_id,
-                        String date_created) {
-                this.group_name.setText(group_name);
-                this.group_id.setText(group_id);
-                this.date_created.setText(date_created);
+                        Group group) {
+
+                this.group = group;
+                this.group_name.setText(group.getGroupName());
+                this.group_id.setText(
+                                "GROUP_ID : " + (group.getGroupId() >= 10 ? group.getGroupId()
+                                                : "0" + group.getGroupId()));
+                this.date_created.setText(group.getCreateDate()
+                                .format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
                 Image image = new Image(url);
                 ImageView image_view = new ImageView(image);
@@ -73,7 +76,7 @@ public class Group_card {
                 this.group_name.setLayoutX(17);
                 this.group_name.setLayoutY(14);
                 this.group_name.setWrapText(true);
-                this.group_name.setPrefSize(150, 61);
+                this.group_name.setPrefSize(80, 61);
                 this.group_name.setTextOverrun(javafx.scene.control.OverrunStyle.ELLIPSIS);
                 this.group_name.setGraphicTextGap(4);
                 this.group_name.setContentDisplay(javafx.scene.control.ContentDisplay.LEFT);
@@ -85,7 +88,7 @@ public class Group_card {
 
                 // set Group ID
                 this.group_id.setStyle(
-                                "-fx-margin: 102px 12px 0px 0px; -fx-font-size: 12px;  -fx-font-family:System; -fx-background-radius: 10; -fx-background-color: #eaecf0; -fx-padding:3 7 3 7;  -fx-margin-top:12px; -fx-margin-right:12px;");
+                                " -fx-font-size: 10px;  -fx-font-family:System; -fx-background-radius: 10; -fx-background-color: #eaecf0; -fx-padding:3 7 3 7;  -fx-margin-top:12px; -fx-margin-right:12px;");
                 this.group_id.setScaleX(1);
                 this.group_id.setScaleY(1);
                 this.group_id.setScaleZ(1);
@@ -142,6 +145,7 @@ public class Group_card {
 
                 // Set Archive Button
                 this.archive_btn.getStyleClass().add("button-donhat");
+                this.archive_btn.setId("archive_btn");
                 this.archive_btn.setStyle(
                                 "-fx-font:System 15px; -fx-text-fill: #f04438;");
                 this.archive_btn.setScaleX(1);
@@ -152,9 +156,10 @@ public class Group_card {
                 this.archive_btn.prefWidth(32);
                 this.archive_btn.prefHeight(32);
                 this.archive_btn.setBlendMode(javafx.scene.effect.BlendMode.SRC_OVER);
-
+                // this.archive_btn.setDisable(true);
                 // Set Details Button
                 this.details_btn.getStyleClass().add("button-xanhnhat");
+                this.details_btn.setId("details_btn");
                 this.details_btn.setStyle(
                                 " -fx-font:System 12px; -fx-font-weight: bold; -fx-background-radius: 10;  ");
                 this.details_btn.setScaleX(1);
@@ -168,19 +173,19 @@ public class Group_card {
                 this.details_btn.setContentDisplay(javafx.scene.control.ContentDisplay.LEFT);
                 this.details_btn.setAlignment(javafx.geometry.Pos.CENTER);
                 this.details_btn.setNodeOrientation(javafx.geometry.NodeOrientation.INHERIT);
+                // this.details_btn.setDisable(true);
+        }
+
+        public Group getGroup() {
+                return group;
         }
 
         public Button getDetails_btn() {
                 return details_btn;
         }
 
-        public void click_Button_Archive(StackPane stackPane) {
-                archive_btn.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                                stackPane.setVisible(true);
-                        }
-                });
+        public Button getArchive_btn() {
+                return archive_btn;
         }
 
 }

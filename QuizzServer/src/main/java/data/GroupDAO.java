@@ -19,11 +19,11 @@ public class GroupDAO implements interfaceDAO<Group> {
 
     @Override
     public ArrayList<Group> getAll() {
-        list = null;
+        list = new ArrayList<Group>();
         con = SQLUtils.getConnection();
         if (con != null) {
             try {
-                String query = "SELECT * FROM Groups WHERE Archived = 0";
+                String query = "SELECT * FROM SGroups WHERE Archived = 0";
                 PreparedStatement ps = con.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
@@ -45,12 +45,12 @@ public class GroupDAO implements interfaceDAO<Group> {
     }
 
     @Override
-    public boolean create(Group t) {
+    public boolean create(Group group) {
         boolean b = false;
         con = SQLUtils.getConnection();
         if (con != null) {
             try {
-                String query = "INSERT INTO Groups (GroupName, DateCreated, Archived, WorkspaceID) VALUES (?, ?, ?, ?)";
+                String query = "INSERT INTO SGroups (GroupName, DateCreated, Archived, WorkspaceID) VALUES (?, ?, ?, ?)";
                 PreparedStatement ps = con.prepareStatement(query);
                 ps.setString(1, group.getGroupName());
                 ps.setTimestamp(2, Timestamp.valueOf(group.getCreateDate()));
@@ -72,7 +72,7 @@ public class GroupDAO implements interfaceDAO<Group> {
         group = null;
         if (con != null) {
             try {
-                String query = "SELECT * FROM Groups WHERE GroupID = ?";
+                String query = "SELECT * FROM SGroups WHERE GroupID = ?";
                 PreparedStatement ps = con.prepareStatement(query);
                 ps.setInt(1, t);
                 ResultSet rs = ps.executeQuery();
@@ -94,12 +94,12 @@ public class GroupDAO implements interfaceDAO<Group> {
     }
 
     @Override
-    public boolean update(Group t) {
+    public boolean update(Group group) {
         boolean b = false;
         con = SQLUtils.getConnection();
         if (con != null) {
             try {
-                String query = "UPDATE Groups SET GroupName = ?, DateCreated = ?, Archived = ?, WorkspaceID = ? WHERE GroupID = ?";
+                String query = "UPDATE SGroups SET GroupName = ?, DateCreated = ?, Archived = ?, WorkspaceID = ? WHERE GroupID = ?";
                 PreparedStatement ps = con.prepareStatement(query);
                 ps.setString(1, group.getGroupName());
                 ps.setTimestamp(2, Timestamp.valueOf(group.getCreateDate()));
@@ -122,7 +122,7 @@ public class GroupDAO implements interfaceDAO<Group> {
         con = SQLUtils.getConnection();
         if (con != null) {
             try {
-                String query = "UPDATE Groups SET Archived = TRUE WHERE GroupID = ?";
+                String query = "UPDATE SGroups SET Archived = TRUE WHERE GroupID = ?";
                 PreparedStatement ps = con.prepareStatement(query);
                 ps.setInt(1, t);
                 b = ps.executeUpdate() > 0;

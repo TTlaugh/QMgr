@@ -186,7 +186,7 @@
                         <Insets bottom="3.0" left="7.0" right="7.0" top="3.0" />
                      </padding>
                   </Label>
-                  <Label layoutX="20.0" layoutY="177.0" prefHeight="22.0" prefWidth="440.0" text="To confirm, type &quot;Sgu University&quot; in the box below" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                  <Label fx:id="lb_Workspace_ConfirmName_Archive" layoutX="20.0" layoutY="177.0" prefHeight="22.0" prefWidth="440.0" text="To confirm, type &quot;Sgu University&quot; in the box below" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
