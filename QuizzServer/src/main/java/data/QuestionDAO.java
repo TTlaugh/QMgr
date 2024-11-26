@@ -168,4 +168,16 @@ public class QuestionDAO implements interfaceDAO<Question> {
 
     }
 
+	@Override
+	public Question getByID(String t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean delete(String t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

@@ -125,11 +125,11 @@ public class Subject_controller implements Initializable {
     /* ================================================================ */
 
     // Data_test
-    // Group_card group = new Group_card("Group name", "GR0011", "2020-01-01");
-    // Group_card group2 = new Group_card("Group name", "GR0012", "2020-01-02");
-    // Group_card group3 = new Group_card("Group name", "GR0013", "2020-01-03");
+    Group_card group = new Group_card("Group name", "GR0011", "2020-01-01");
+    Group_card group2 = new Group_card("Group name", "GR0012", "2020-01-02");
+    Group_card group3 = new Group_card("Group name", "GR0013", "2020-01-03");
 
-    // List<Group_card> group_list = List.of(group, group2, group3);
+    List<Group_card> group_list = List.of(group, group2, group3);
 
     // Load List HBOx
     List<HBox> listHBox = new java.util.ArrayList<>();
@@ -148,9 +148,9 @@ public class Subject_controller implements Initializable {
         }
         // Func Create New Group
         Notification.Infomation("Success", "Create new subject successfully");
-        // Group_card group = new Group_card(subjectName, "ID", "Date created");
+        Group_card group = new Group_card(subjectName, "ID", "Date created");
 
-        // add_Group_FlowPane(group);
+        add_Group_FlowPane(group);
 
         btn_cancel_Subject(event);
     }
@@ -421,22 +421,22 @@ public class Subject_controller implements Initializable {
 
         this.flowpane_mainbody.getChildren().add(group.getGroup_Instance());
 
-        // // Doing
-        // group.getDetails_btn().setOnAction(new EventHandler<ActionEvent>() {
-        // @Override
-        // public void handle(ActionEvent event) {
-        // btn_details_Group(event);
-        // }
-        // });
+        // Doing
+        group.getDetails_btn().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                btn_details_Group(event);
+            }
+        });
 
-        // group.click_Button_Archive(archive_NewSubject);
+        group.click_Button_Archive(archive_NewSubject);
     }
 
     // initialize
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // LoadListGroup & Set button details & button archive
-        // LoadListGroup(group_list, archive_NewSubject);
+        LoadListGroup(group_list, archive_NewSubject);
     }
 
     /* ================================================================ */

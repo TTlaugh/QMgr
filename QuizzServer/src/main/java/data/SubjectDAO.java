@@ -131,4 +131,16 @@ public class SubjectDAO implements interfaceDAO<Subject> {
         return b;
     }
 
+	@Override
+	public Subject getByID(String t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean delete(String t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

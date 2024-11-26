@@ -134,4 +134,16 @@ public class WorkspaceDAO implements interfaceDAO<Workspace> {
         return b;
     }
 
+	@Override
+	public Workspace getByID(String t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean delete(String t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

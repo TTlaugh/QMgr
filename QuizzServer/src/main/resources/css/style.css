@@ -121,13 +121,6 @@
 	-fx-background-radius: 7;
 	-fx-border-color: #d0d5dd;
 }
-.small-pane:hover{
-	-fx-background-color:#d2d2d2;
-	-fx-border-radius: 7;
-	-fx-background-radius: 7;
-	-fx-border-color: #d2d2d2;
-}
-
 
 .transparent{
 	-fx-background-color: rgba(0,0,0,0);

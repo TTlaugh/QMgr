@@ -160,4 +160,16 @@ public class HostExamDAO implements interfaceDAO<HostExam> {
         return b;
     }
 
+	@Override
+	public HostExam getByID(String t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean delete(String t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

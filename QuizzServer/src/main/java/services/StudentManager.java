@@ -19,9 +19,6 @@ public class StudentManager {
         return instance;
     }
 
-    public int getMaxUid() {
-        return new StudentDAO().getMaxUid();
-    }
 
     public ArrayList<Student> getAllStudent() {
         return new StudentDAO().getAll();
@@ -36,14 +33,14 @@ public class StudentManager {
     }
 
     public boolean createStudent(Student student) {
-        if (new StudentDAO().getByStudentId(student.getStudentId()) == null)
+        if (new StudentDAO().getByID(student.getStudentId()) == null)
             return new StudentDAO().create(student);
 
         return false;
     }
 
     public Student getStudentbyId(String studentId) {
-        return new StudentDAO().getByStudentId(studentId);
+        return new StudentDAO().getByID(studentId);
     }
 
     public boolean deleteStudent(Student student) {

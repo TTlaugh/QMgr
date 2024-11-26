@@ -163,4 +163,16 @@ public class SubmissionDAO implements interfaceDAO<Submission> {
         return b;
     }
 
+	@Override
+	public Submission getByID(String t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean delete(String t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

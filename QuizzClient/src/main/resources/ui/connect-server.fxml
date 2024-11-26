@@ -18,7 +18,7 @@
       <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="14.0" />
       <StackPane alignment="TOP_CENTER" layoutY="55.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
          <children>
-            <TextField maxHeight="38.0" maxWidth="200.0" promptText="ST-01" styleClass="round-layout">
+            <TextField fx:id="tfStuID" maxHeight="38.0" maxWidth="200.0" promptText="ST-01" styleClass="round-layout">
                <StackPane.margin>
                   <Insets top="152.0" />
                </StackPane.margin>
@@ -37,7 +37,7 @@
                   <Insets top="54.0" />
                </StackPane.margin>
             </Label>
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="200.0" styleClass="button-xanhdam" text="Start Exam" textFill="WHITE">
+            <Button fx:id="btnStartEx" alignment="CENTER" mnemonicParsing="false" onAction="#btnStartClicked" prefHeight="32.0" prefWidth="200.0" styleClass="button-xanhdam" text="Start Exam" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -66,7 +66,7 @@
                   <Insets left="-80.0" top="202.0" />
                </StackPane.margin>
             </Label>
-            <TextField maxHeight="38.0" maxWidth="119.0" promptText="192.168.1.xxx" styleClass="round-layout">
+            <TextField fx:id="tfIP" maxHeight="38.0" maxWidth="119.0" promptText="192.168.1.xxx" styleClass="round-layout">
                <font>
                   <Font size="14.0" />
                </font>
@@ -85,7 +85,7 @@
                   <Insets right="-130.0" top="202.0" />
                </StackPane.margin>
             </Label>
-            <TextField maxHeight="38.0" maxWidth="69.0" promptText="9999" styleClass="round-layout">
+            <TextField fx:id="tfPort" maxHeight="38.0" maxWidth="69.0" promptText="9999" styleClass="round-layout">
                <font>
                   <Font size="14.0" />
                </font>

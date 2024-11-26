@@ -33,6 +33,33 @@
 	-fx-background-color: #EEEEEE;
 }
 
+.button-xanhnhat {
+	-fx-background-radius: 4;
+	-fx-border-radius: 4;
+	-fx-background-color:  #DBE8FF;
+	-fx-text-fill:  #154FEF;
+	-fx-border-color: #B2C9FF;
+	-fx-cursor: hand;
+}
+.button-xanhnhat:hover {
+	-fx-background-color: #ffffff ;
+	-fx-text-fill:   #154FEF;
+	-fx-border-color: #154FEF;
+}
+
+.button-xanhdam {
+	-fx-background-radius: 4;
+	-fx-border-radius: 4;
+	-fx-background-color:  #2970FF;
+	-fx-text-fill:  #ffffff;
+	-fx-cursor: hand;
+}
+.button-xanhdam:hover {
+	-fx-background-color: #ffffff ;
+	-fx-text-fill:   #2970FF;
+	-fx-border-color: #2970FF;
+}
+
 .button-in-login {
 	-fx-background-color: transparent;
 	-fx-border-radius: 0;

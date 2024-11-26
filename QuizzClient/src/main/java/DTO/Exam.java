@@ -1,4 +1,4 @@
-package model;
+package DTO;
 
 import java.util.List;
 
@@ -15,22 +15,19 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Exam {
     private int examId;
-    private int subjectId;
+    private Subject subject;
     private String name;
     private String desc;
-    private List<Integer> questionsIds;
+    private List<Question> questions;
     private boolean archive;
 	public int getExamId() {
 		return examId;
 	}
-	public void setExamId(int examId) {
-		this.examId = examId;
+	public Subject getSubject() {
+		return subject;
 	}
-	public int getSubjectId() {
-		return subjectId;
-	}
-	public void setSubjectId(int subjectId) {
-		this.subjectId = subjectId;
+	public void setSubject(Subject subject) {
+		this.subject = subject;
 	}
 	public String getName() {
 		return name;
@@ -44,11 +41,11 @@ public class Exam {
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
-	public List<Integer> getQuestionsIds() {
-		return questionsIds;
+	public List<Question> getQuestions() {
+		return questions;
 	}
-	public void setQuestionsIds(List<Integer> questionsIds) {
-		this.questionsIds = questionsIds;
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
 	}
 	public boolean isArchive() {
 		return archive;
@@ -56,4 +53,9 @@ public class Exam {
 	public void setArchive(boolean archive) {
 		this.archive = archive;
 	}
-}
+	public void setExamId(int examId) {
+		this.examId = examId;
+	}
+}  
+
+

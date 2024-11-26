@@ -155,4 +155,16 @@ public class ExamDAO implements interfaceDAO<Exam> {
         return b;
     }
 
+	@Override
+	public Exam getByID(String t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean delete(String t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
