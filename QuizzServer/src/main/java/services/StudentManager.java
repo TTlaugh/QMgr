@@ -8,7 +8,7 @@ import model.Student;
 public class StudentManager {
     private static StudentManager instance = null;
 
-    private StudentManager() {
+    StudentManager() {
     }
 
     public static StudentManager getInstance() {

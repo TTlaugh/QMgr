@@ -16,8 +16,12 @@ import data.QuestionDAO;
 import model.Answer;
 import model.Question;
 import model.Subject;
+import utils.CheckCheckBox;
 import utils.ExcelReader;
 import utils.ExcelWriter;
+import utils.Notification;
+import utils.StringNormalization;
+import utils.StringValidate;
 
 public class QuestionManager {
     private static QuestionManager instance = null;
@@ -61,8 +65,10 @@ public class QuestionManager {
 		try {
 			List<Question> questions = new QuestionExcelReader().readExcel(excelFilePath);
 			for (Question question : questions) {
-				question.setSubjectId(subject.getSubjectId());
-				createQuestion(question);
+                if (question != null) {
+                    question.setSubjectId(subject.getSubjectId());
+                    createQuestion(question);
+                }
 			}
 			return true;
 		} catch (IOException e) {
@@ -92,29 +98,62 @@ class QuestionExcelReader extends ExcelReader {
 	@Override
 	public <T> T getData(Row row) {
 		Question question = new Question();
-		for (Cell cell : row) {
-			Object cellValue = getCellValue(cell);
-			if (cellValue == null || cellValue.toString().isEmpty())
-				continue;
+		int colIndex = 0;
 
-            int colIndex = 0;
-            question.setChapter(row.getCell(colIndex++).getStringCellValue());
-            question.setDifficulty((int) row.getCell(colIndex++).getNumericCellValue());
-            question.setContent(row.getCell(colIndex++).getStringCellValue());
+        String chapter = row.getCell(colIndex++).getStringCellValue();
+        chapter = StringNormalization.removeDuplicateSpaces(chapter);
+        if (chapter.length() == 0 || chapter == null || chapter == "") {
+            Notification.Error("Error", "Import question failed because Chapter is empty.");
+            return null;
+        }
+        if (!StringValidate.CheckLengthInRange(chapter, 1, 255)) {
+            Notification.Error("Error", "Import question failed because Chapter is too long.");
+            return null;
+        }
 
-            String answersString = row.getCell(colIndex++).getStringCellValue();
-            List<Answer> answers = parseAnswers(answersString);
 
-            String correctAnswersString = row.getCell(colIndex++).getStringCellValue();
-            List<Integer> correctAnswers = parseCorrectAnswers(correctAnswersString, answers);	
-            
-            // Gắn danh sách câu trả lời và đáp án đúng vào câu hỏi
-            for (int i = 0; i < answers.size(); i++) {
-                Answer answer = answers.get(i);
-                answer.setCorrect(correctAnswers.contains(i));
-            }
-            question.setAnswers(new ArrayList<>(answers));
-		}
+        int difficulty = (int) row.getCell(colIndex++).getNumericCellValue();
+        if (difficulty > 5 || difficulty < 1) {
+            Notification.Error("Error", "Import question failed because Difficulty í out of 1-5.");
+            return null;
+        }
+
+        String content = row.getCell(colIndex++).getStringCellValue();
+        content = StringNormalization.removeDuplicateSpaces(content);
+        if (content.length() == 0 || content == null || content == "") {
+            Notification.Error("Error", "Import question failed because Content is empty.");
+            return null;
+        }
+        if (!StringValidate.CheckLengthInRange(chapter, 1, 1000)) {
+            Notification.Error("Error", "Import question failed because Content is too long.");
+            return null;
+        }
+        
+        question.setChapter(chapter);
+        question.setDifficulty(difficulty);
+        question.setContent(content);
+        
+        String answersStr = row.getCell(colIndex++).getStringCellValue();
+        if(!StringValidate.CheckMatchRegex(answersStr, "^\\[\"[^\"]*\"(,\\s*\"[^\"]*\")*\\]$")){
+            Notification.Error("Error", "Import question failed because Answers have incorrect format.");
+            return null;
+        }
+        List<Answer> answers = parseAnswers(answersStr);
+
+        String correctAnswersString = row.getCell(colIndex++).getStringCellValue();
+        if(!StringValidate.CheckMatchRegex(correctAnswersString, "^\\[\\d+(,\\s*\\d+)*\\]$")){
+            Notification.Error("Error", "Import question failed because Correct Answers have incorrect format.");
+            return null;
+        }
+        List<Integer> correctAnswers = parseCorrectAnswers(correctAnswersString, answers);	
+        
+        // Gắn danh sách câu trả lời và đáp án đúng vào câu hỏi
+        for (int i = 0; i < answers.size(); i++) {
+            Answer answer = answers.get(i);
+            answer.setCorrect(correctAnswers.contains(i));
+        }
+        question.setAnswers(new ArrayList<>(answers));
+
 		return (T) question;
 	}
 
@@ -124,6 +163,7 @@ class QuestionExcelReader extends ExcelReader {
         String[] parts = answersString.split("\", \"");
         for (String part : parts) {
             part = part.replace("\"", ""); // Loại bỏ dấu ngoặc kép
+            part = StringNormalization.removeDuplicateSpaces(part);
             Answer answer = new Answer();
             answer.setContent(part);
             answers.add(answer);
