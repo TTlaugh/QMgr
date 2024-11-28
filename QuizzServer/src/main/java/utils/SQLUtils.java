@@ -27,6 +27,7 @@ public class SQLUtils {
 		} catch (SQLException e) {
 			printSQLException(e);
 			System.out.println("Connect database failed");
+			Notification.Error("Connection failed", "Connection database failed");
 		}
 		return connection;
 	}
