@@ -38,6 +38,7 @@ import model.Group;
 import model.Student;
 import services.GroupManager;
 import services.StudentManager;
+import services.SubjectManager;
 import utils.CheckStringFormat;
 import utils.Notification;
 import utils.OpenFileExplorer;
@@ -192,7 +193,7 @@ public class Student_controller implements Initializable {
 
     private GroupManager groupManager = GroupManager.getInstance();
 
-    private List<Group> group_list = groupManager.getAllGroup();
+    private List<Group> group_list = groupManager.getAllGroupInWorkSpace(Workspace_controller.current_WorkSpaceID);
 
     public static Group group_Current_StudentManagement = new Group();
 
@@ -232,7 +233,7 @@ public class Student_controller implements Initializable {
 
     // TableView search
     @FXML
-    private Label lb_totalStudent_Search_StudentManagement;
+    private Label lb_totalStudent_Search_StudentManagement = new Label();
 
     @FXML
     private TableView<Student> table_Search_StudentManagement = new TableView<Student>();
@@ -319,11 +320,10 @@ public class Student_controller implements Initializable {
     }
 
     // Delete Group Detail
-    @FXML
-    void btn_DeleteStudent_StudentManagement(ActionEvent event) {
-        studentSelected = table_Student_StudentManagement.getSelectionModel().getSelectedItem();
+    void deleteStudent_TableViewGroupDetail(TableView<Student> tableView) {
+        studentSelected = tableView.getSelectionModel().getSelectedItem();
 
-        indexSelected_Student_in_TableView = table_Student_StudentManagement.getSelectionModel().getSelectedIndex();
+        indexSelected_Student_in_TableView = tableView.getSelectionModel().getSelectedIndex();
 
         if (studentSelected == null) {
             Notification.Error("Error", "Please choose student");
@@ -336,7 +336,18 @@ public class Student_controller implements Initializable {
         }
         Notification.Infomation("Success", "Delete student successfully");
 
-        table_Student_StudentManagement.getItems().remove(indexSelected_Student_in_TableView);
+        tableView.getItems().remove(indexSelected_Student_in_TableView);
+    }
+
+    @FXML
+    void btn_DeleteStudent_StudentManagement(ActionEvent event) {
+
+        if (AnchorPane_ReultSearch_StudentManagement.isVisible()) {
+            deleteStudent_TableViewGroupDetail(table_Student_StudentManagement);
+            return;
+        }
+        deleteStudent_TableViewGroupDetail(table_Search_StudentManagement);
+
     }
 
     // Rename Group Detail
@@ -453,8 +464,23 @@ public class Student_controller implements Initializable {
 
     @FXML
     void btn_StudentDetail_ResultSearch_Hidden_StudentManagement(ActionEvent event) {
+        studentSelected = table_Search_StudentManagement.getSelectionModel().getSelectedItem();
+
+        indexSelected_Student_in_TableView = table_Search_StudentManagement.getSelectionModel().getSelectedIndex();
+
+        if (studentSelected == null) {
+            Notification.Error("Error", "Please choose student");
+            return;
+        }
         this.detailStudent_StudentManagement.toFront();
         this.detailStudent_StudentManagement.setVisible(true);
+
+        tf_FirstName_Detail_StudentManagement.setText(studentSelected.getFirstName());
+        tf_LastName_Detail_StudentManagement.setText(studentSelected.getLastName());
+        tf_StudentID_Detail_StudentManagement.setText(studentSelected.getStudentId());
+        tf_Email_Detail_StudentManagement.setText(studentSelected.getEmail());
+        tf_Phone_Detail_StudentManagement.setText(studentSelected.getPhone());
+
     }
 
     // AddStudent Group Detail
@@ -505,27 +531,24 @@ public class Student_controller implements Initializable {
             Notification.Error("Error", "Student ID is not correct format");
             return;
         }
+
+        Student student_inGroup = studentManager.getStudentbyIdfromGroup(studentID,
+                group_Current_StudentManagement.getGroupId());
+
+        if (student_inGroup != null) {
+            Notification.Error("Error", "Student ID #" + studentID + " does not exist in the group, please try again");
+            return;
+        }
         studentSelected = new Student(0,
                 group_Current_StudentManagement.getGroupId(), studentID, firstName, lastName,
                 phone, email);
 
-        if (studentManager.getStudentbyId(studentID) == null && studentManager.createStudent(studentSelected)) {
-
-            Student isSuccessAdd = studentManager.getStudentbyId(studentID);
-
-            table_Student_StudentManagement.getItems().add(isSuccessAdd);
-
+        if (studentManager.createStudent(studentSelected)) {
             Notification.Infomation("Success", "Add student successfully");
-
-            btn_cancel_GroupDetail(event);
-
-            return;
+            clearAll_tf_AddStudent();
+            this.addStudent_StudentManagement.setVisible(false);
+            table_Student_StudentManagement.getItems().add(studentSelected);
         }
-        existsStudent_StudentManagement.setVisible(true);
-
-        setDataforExistsStudent(studentID);
-
-        setToggleforRadioButtonAddStudent();
 
     }
 
@@ -552,8 +575,8 @@ public class Student_controller implements Initializable {
         this.existsStudent_StudentManagement.setVisible(false);
     }
 
-    public int findIndexByUid(String studentId) {
-        ObservableList<Student> items = table_Student_StudentManagement.getItems();
+    public int findIndexByUid(String studentId, TableView<Student> tableViewStudent) {
+        ObservableList<Student> items = tableViewStudent.getItems();
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).getStudentId().equals(studentId)) {
                 return i;
@@ -562,58 +585,64 @@ public class Student_controller implements Initializable {
         return -1; // Không tìm thấy
     }
 
+    void Update_Info() {
+        if (!studentManager.updateStudent(studentSelected)) {
+            Notification.Error("Error", "Update student failed");
+            return;
+        }
+
+        Student isUpdate = studentManager.getStudentbyId(studentSelected.getStudentId());
+
+        int index = findIndexByUid(isUpdate.getStudentId(), table_Student_StudentManagement);
+
+        table_Student_StudentManagement.getItems().set(index, isUpdate);
+
+        Notification.Infomation("Success", "Update student successfully");
+
+        existsStudent_StudentManagement.setVisible(false);
+    }
+
+    void Create_newStudent() {
+        int sizeAllStudent = studentManager.getAllStudentInGroup(group_Current_StudentManagement.getGroupId()).size();
+
+        String idStudent;
+
+        if (sizeAllStudent > 99) {
+            idStudent = "ST" + (sizeAllStudent);
+        } else {
+            idStudent = (sizeAllStudent) < 10 ? "ST00" + (sizeAllStudent) : "ST0" + (sizeAllStudent);
+        }
+
+        studentSelected.setStudentId(idStudent);
+
+        if (!studentManager.createStudent(studentSelected)) {
+            Notification.Error("Error", "Create student failed");
+            return;
+        }
+        Student isSuccessAdd = studentManager.getStudentbyId(idStudent);
+
+        table_Student_StudentManagement.getItems().add(isSuccessAdd);
+
+        Notification.Infomation("Success", "Create student successfully");
+
+        existsStudent_StudentManagement.setVisible(false);
+    }
+
+    void DontCreateStudent() {
+
+        Notification.Infomation("Unsuccess", "Student is not added to the system");
+
+        existsStudent_StudentManagement.setVisible(false);
+    }
+
     @FXML
     void btn_Continue_StudentManagement(ActionEvent event) {
-        if (RadioButton_UpdateInfo_StudentManagement.isSelected()) {
-
-            if (!studentManager.updateStudent(studentSelected)) {
-                Notification.Error("Error", "Update student failed");
-                return;
-            }
-
-            Student isUpdate = studentManager.getStudentbyId(studentSelected.getStudentId());
-
-            int index = findIndexByUid(isUpdate.getStudentId());
-
-            table_Student_StudentManagement.getItems().set(index, isUpdate);
-
-            Notification.Infomation("Success", "Update student successfully");
-
-            existsStudent_StudentManagement.setVisible(false);
-
-        } else if (RadioButton_CreateStudent_StudentManagement.isSelected()) {
-
-            System.out.println(studentManager.getMaxUid());
-            int sizeAllStudent = studentManager.getMaxUid() + 1;
-
-            String idStudent;
-
-            if (sizeAllStudent > 99) {
-                idStudent = "ST" + (sizeAllStudent);
-            } else {
-                idStudent = (sizeAllStudent) < 10 ? "ST00" + (sizeAllStudent) : "ST0" + (sizeAllStudent);
-            }
-
-            studentSelected.setStudentId(idStudent);
-
-            if (!studentManager.createStudent(studentSelected)) {
-                Notification.Error("Error", "Create student failed");
-                return;
-            }
-            Student isSuccessAdd = studentManager.getStudentbyId(idStudent);
-
-            table_Student_StudentManagement.getItems().add(isSuccessAdd);
-
-            Notification.Infomation("Success", "Create student successfully");
-
-            existsStudent_StudentManagement.setVisible(false);
-
-        } else if (RadioButton_DontCreate_StudentManagement.isSelected()) {
-
-            Notification.Infomation("Unsuccess", "Student is not added to the system");
-
-            existsStudent_StudentManagement.setVisible(false);
-        }
+        if (RadioButton_UpdateInfo_StudentManagement.isSelected())
+            Update_Info();
+        else if (RadioButton_CreateStudent_StudentManagement.isSelected())
+            Create_newStudent();
+        else if (RadioButton_DontCreate_StudentManagement.isSelected())
+            DontCreateStudent();
     }
 
     // Archive Group Detail
@@ -644,10 +673,6 @@ public class Student_controller implements Initializable {
         Group group_current = new Group(CountGroupID_Current_StudentManagement, 1, groupName, LocalDateTime.now(),
                 false);
 
-        group_list.add(group_current);
-
-        CountGroupID_Current_StudentManagement++;
-
         // Func Create New Group
         boolean is_CreateSuccess = groupManager.createGroup(group_current);
 
@@ -655,6 +680,10 @@ public class Student_controller implements Initializable {
             Notification.Error("Error", "Create group failed");
             return;
         }
+
+        group_list.add(group_current);
+
+        CountGroupID_Current_StudentManagement++;
 
         Notification.Infomation("Success", "Create new group successfully");
 
@@ -733,6 +762,8 @@ public class Student_controller implements Initializable {
             return;
         }
 
+        lb_totalStudent_Search_StudentManagement.setText(listStudent.size() + " students");
+
         table_Search_StudentManagement.getItems().clear();
         table_Search_StudentManagement.setItems(loadStudent_tableViewSearch_StudentManagement(listStudent));
     }
@@ -789,14 +820,7 @@ public class Student_controller implements Initializable {
         }
     }
 
-    // Add group for flowpane
-    public void add_Group_FlowPane(Group_card group) {
-        Insets margin = new Insets(12, 12, 0, 0);
-
-        FlowPane.setMargin(group.getGroup_Instance(), margin);
-
-        this.flowpane_mainbody.getChildren().add(group.getGroup_Instance());
-
+    void setAction_Archive_Details(Group_card group) {
         group.getArchive_btn().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -832,6 +856,17 @@ public class Student_controller implements Initializable {
 
             }
         });
+    }
+
+    // Add group for flowpane
+    public void add_Group_FlowPane(Group_card group) {
+        Insets margin = new Insets(12, 12, 0, 0);
+
+        FlowPane.setMargin(group.getGroup_Instance(), margin);
+
+        this.flowpane_mainbody.getChildren().add(group.getGroup_Instance());
+
+        setAction_Archive_Details(group);
     }
 
     // Load List Student

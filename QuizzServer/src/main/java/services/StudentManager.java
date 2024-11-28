@@ -1,6 +1,5 @@
 package services;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import data.StudentDAO;
@@ -40,6 +39,10 @@ public class StudentManager {
             return new StudentDAO().create(student);
 
         return false;
+    }
+
+    public Student getStudentbyIdfromGroup(String studentId, int groupId) {
+        return new StudentDAO().getByStudentIdfromGroup(studentId, groupId);
     }
 
     public Student getStudentbyId(String studentId) {

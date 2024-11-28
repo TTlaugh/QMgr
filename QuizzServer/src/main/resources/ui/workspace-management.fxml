@@ -36,7 +36,7 @@
          </image></ImageView>
       <StackPane alignment="TOP_CENTER" layoutY="55.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
          <children>
-            <TextField fx:id="tf_PIN_StackPane" maxHeight="38.0" maxWidth="200.0" promptText="PIN" styleClass="round-layout">
+            <TextField fx:id="tf_PIN_StackPane" accessibleRole="PASSWORD_FIELD" maxHeight="38.0" maxWidth="200.0" promptText="PIN" styleClass="round-layout">
                <StackPane.margin>
                   <Insets top="173.0" />
                </StackPane.margin>

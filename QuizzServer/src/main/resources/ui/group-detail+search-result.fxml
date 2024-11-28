@@ -69,8 +69,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="46.0" layoutY="49.0" text="Total 4 students" textFill="#475467" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="46.0" />
-            <TableView fx:id="table_Student_StudentManagement" editable="true" fixedCellSize="0.0" layoutX="32.0" layoutY="77.0" prefHeight="347.0" prefWidth="476.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="252.0" AnchorPane.topAnchor="77.0">
+            <TableView fx:id="table_Student_StudentManagement" editable="true" fixedCellSize="0.0" layoutX="20.0" layoutY="78.0" prefHeight="347.0" prefWidth="476.0" AnchorPane.bottomAnchor="63.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="78.0">
               <columns>
                 <TableColumn fx:id="ID_TableColumn_groupDetail" prefWidth="144.80003356933594" text="ID" />
                 <TableColumn fx:id="Fullname_TableColumn_groupDetail" minWidth="5.5999755859375" prefWidth="278.4000244140625" resizable="false" text="FullName" />
@@ -464,7 +463,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </RadioButton>
-                  <Label fx:id="lb_UpdateInfo_StudentManagement" layoutX="46.0" layoutY="118.0" maxWidth="412.0" prefWidth="412.0" text="Information of student with StudentID #ID01 in the system will be &#10;updated." AnchorPane.leftAnchor="46.0" AnchorPane.topAnchor="114.0">
+                  <Label fx:id="lb_UpdateInfo_StudentManagement" layoutX="46.0" layoutY="118.0" maxWidth="412.0" prefWidth="412.0" text="Information of student with StudentID #ID01 in the system will be &#10;updated." wrapText="true" AnchorPane.leftAnchor="46.0" AnchorPane.topAnchor="114.0">
                      <font>
                         <Font size="14.0" />
                      </font>

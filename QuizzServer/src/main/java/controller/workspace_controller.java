@@ -75,6 +75,8 @@ public class Workspace_controller implements Initializable {
 
     private List<Workspace> allListWorkspaces = workspaceManager.getAllWorkspace();
 
+    public static int current_WorkSpaceID = 0;
+
     private static int indexComboBox = 0;
 
     // Function Archive
@@ -285,6 +287,7 @@ public class Workspace_controller implements Initializable {
             e.printStackTrace();
             System.out.println("Error in loading workspace_controller");
         }
+        current_WorkSpaceID = workspace_Continue.getWorkspaceId();
 
     }
 

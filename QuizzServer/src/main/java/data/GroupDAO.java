@@ -17,6 +17,33 @@ public class GroupDAO implements interfaceDAO<Group> {
     private Group group;
     Connection con;
 
+    public ArrayList<Group> getAllGroupInWorkSpace(int workspaceId) {
+        list = new ArrayList<Group>();
+        con = SQLUtils.getConnection();
+        if (con != null) {
+            try {
+                String query = "SELECT * FROM SGroups WHERE Archived = 0 and WorkspaceID = ?";
+                PreparedStatement ps = con.prepareStatement(query);
+                ps.setInt(1, workspaceId);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    group = new Group();
+                    group.setGroupId(rs.getInt("GroupID"));
+                    group.setWorkspaceId(rs.getInt("WorkspaceID"));
+                    group.setGroupName(rs.getString("GroupName"));
+                    group.setCreateDate(rs.getTimestamp("DateCreated").toLocalDateTime());
+                    group.setArchive(rs.getBoolean("Archived"));
+                    list.add(group);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                SQLUtils.closeConnection(con);
+            }
+        }
+        return list;
+    }
+
     @Override
     public ArrayList<Group> getAll() {
         list = new ArrayList<Group>();

@@ -118,6 +118,35 @@ public class StudentDAO implements interfaceDAO<Student> {
         return b;
     }
 
+    public Student getByStudentIdfromGroup(String studentId, int groupId) {
+        con = SQLUtils.getConnection();
+        if (con != null) {
+            try {
+                String query = "SELECT * FROM students WHERE StudentID = ? and GroupID = ?";
+                PreparedStatement ps = con.prepareStatement(query);
+                ps.setString(1, studentId);
+                ps.setInt(2, groupId);
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    student = new Student();
+                    student.setUid(rs.getInt("UID"));
+                    student.setStudentId(rs.getString("StudentID"));
+                    student.setFirstName(rs.getString("FirstName"));
+                    student.setLastName(rs.getString("LastName"));
+                    student.setPhone(rs.getString("Phone"));
+                    student.setEmail(rs.getString("Email"));
+                    student.setGroupId(rs.getInt("GroupID"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                SQLUtils.closeConnection(con);
+            }
+        }
+        return student;
+    }
+
     public Student getByStudentId(String studentId) {
         con = SQLUtils.getConnection();
         if (con != null) {

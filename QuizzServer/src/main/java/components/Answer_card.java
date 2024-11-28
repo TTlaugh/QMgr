@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import model.Answer;
 
 public class Answer_card {
     String url_Button = "/imgs/Screenshot_2024-10-30_173217-removebg-preview.png";
@@ -17,7 +18,10 @@ public class Answer_card {
     private TextField textField = new TextField();
     private Button button = new Button();
 
-    public Answer_card() {
+    public Answer_card(Answer answer) {
+        checkBox.setSelected(answer.isCorrect());
+        textField.setText(answer.getContent());
+
         hBox.getChildren().addAll(checkBox, textField, button);
 
         setUp();

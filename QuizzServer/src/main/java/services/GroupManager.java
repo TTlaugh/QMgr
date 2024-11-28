@@ -18,6 +18,10 @@ public class GroupManager {
     private GroupManager() {
     }
 
+    public ArrayList<Group> getAllGroupInWorkSpace(int workspaceID) {
+        return new GroupDAO().getAllGroupInWorkSpace(workspaceID);
+    }
+
     public ArrayList<Group> getAllGroup() {
         return new GroupDAO().getAll();
     }

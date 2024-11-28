@@ -14,6 +14,34 @@ public class SubjectDAO implements interfaceDAO<Subject> {
     private Subject subject;
     Connection con;
 
+    public ArrayList<Subject> getAllSubjectInWorkSpace(int workspaceId) {
+        list = new ArrayList<Subject>();
+
+        con = SQLUtils.getConnection();
+        if (con != null) {
+            try {
+                String query = "SELECT * FROM Subjects WHERE Archived = 0 and WorkspaceID = ?";
+                PreparedStatement ps = con.prepareStatement(query);
+                ps.setInt(1, workspaceId);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    Subject subject = new Subject();
+                    subject.setSubjectId(rs.getInt("SubjectID"));
+                    subject.setWorkspaceId(rs.getInt("WorkspaceID"));
+                    subject.setSubjectName(rs.getString("SubjectName"));
+                    subject.setCreateDate(rs.getTimestamp("DateCreated").toLocalDateTime());
+                    subject.setArchive(rs.getBoolean("Archived"));
+                    list.add(subject);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                SQLUtils.closeConnection(con);
+            }
+        }
+        return list;
+    }
+
     @Override
     public ArrayList<Subject> getAll() {
         list = null;
@@ -42,7 +70,7 @@ public class SubjectDAO implements interfaceDAO<Subject> {
     }
 
     @Override
-    public boolean create(Subject t) {
+    public boolean create(Subject subject) {
         boolean b = false;
         con = SQLUtils.getConnection();
         if (con != null) {
@@ -90,7 +118,7 @@ public class SubjectDAO implements interfaceDAO<Subject> {
     }
 
     @Override
-    public boolean update(Subject t) {
+    public boolean update(Subject subject) {
         boolean b = false;
         con = SQLUtils.getConnection();
         if (con != null) {

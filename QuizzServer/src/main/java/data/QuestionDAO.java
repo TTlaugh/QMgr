@@ -19,14 +19,51 @@ public class QuestionDAO implements interfaceDAO<Question> {
     private Gson gson = new Gson();
     Connection con;
 
-    @Override
-    public ArrayList<Question> getAll() {
-        list = null;
+    public ArrayList<Question> getAllBySubject(int subjectId) {
+        list = new ArrayList<Question>();
 
         con = SQLUtils.getConnection();
         if (con != null) {
             try {
-                String query = "Select * from question where archived = 0";
+                String query = "Select * from questions where archived = 0 and subjectid = ?";
+                PreparedStatement ps = con.prepareStatement(query);
+                ps.setInt(1, subjectId);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    Type answerListType = new TypeToken<List<Answer>>() {
+                    }.getType();
+                    question = new Question();
+                    question.setQuestionId(rs.getInt(1));
+                    question.setSubjectId(rs.getInt(2));
+                    question.setChapter(rs.getString(3));
+                    question.setDifficulty(rs.getInt(4));
+                    question.setContent(rs.getString(5));
+
+                    String answersJson = rs.getString(6);
+                    if (answersJson != null && !answersJson.isEmpty()) {
+                        question.setAnswers(gson.fromJson(answersJson, answerListType));
+                    }
+
+                    question.setArchive(rs.getBoolean(7));
+                    list.add(question);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                SQLUtils.closeConnection(con);
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public ArrayList<Question> getAll() {
+        list = new ArrayList<Question>();
+
+        con = SQLUtils.getConnection();
+        if (con != null) {
+            try {
+                String query = "Select * from questions ";
                 PreparedStatement ps = con.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
@@ -58,7 +95,7 @@ public class QuestionDAO implements interfaceDAO<Question> {
     }
 
     @Override
-    public boolean create(Question t) {
+    public boolean create(Question question) {
         boolean b = false;
         String answers = gson.toJson(question.getAnswers());
         con = SQLUtils.getConnection();
@@ -136,6 +173,8 @@ public class QuestionDAO implements interfaceDAO<Question> {
                 ps.setString(3, t.getContent());
                 String answerJson = gson.toJson(t.getAnswers());
                 ps.setString(4, answerJson);
+                ps.setInt(5, t.getQuestionId());
+
                 if (ps.executeUpdate() > 0)
                     b = true;
             } catch (Exception e) {
@@ -153,7 +192,7 @@ public class QuestionDAO implements interfaceDAO<Question> {
         con = SQLUtils.getConnection();
         if (con != null) {
             try {
-                String query = "UPDATE questions SET archived = false WHERE QuestionID = ?";
+                String query = "UPDATE questions SET archived = 1 WHERE QuestionID = ?";
                 PreparedStatement ps = con.prepareStatement(query);
                 ps.setInt(1, t);
                 if (ps.executeUpdate() > 0)
@@ -166,6 +205,43 @@ public class QuestionDAO implements interfaceDAO<Question> {
         }
         return b;
 
+    }
+
+    public ArrayList<Question> searchQuestions(int subjectId, String keyWord) {
+        ArrayList<Question> list = new ArrayList<Question>();
+        con = SQLUtils.getConnection();
+        if (con != null) {
+            try {
+                String query = "Select * from questions where archived = 0 and subjectid = ? and content like ? ";
+                PreparedStatement ps = con.prepareStatement(query);
+                ps.setInt(1, subjectId);
+                ps.setString(2, "%" + keyWord + "%");
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    Type answerListType = new TypeToken<List<Answer>>() {
+                    }.getType();
+                    question = new Question();
+                    question.setQuestionId(rs.getInt(1));
+                    question.setSubjectId(rs.getInt(2));
+                    question.setChapter(rs.getString(3));
+                    question.setDifficulty(rs.getInt(4));
+                    question.setContent(rs.getString(5));
+
+                    String answersJson = rs.getString(6);
+                    if (answersJson != null && !answersJson.isEmpty()) {
+                        question.setAnswers(gson.fromJson(answersJson, answerListType));
+                    }
+
+                    question.setArchive(rs.getBoolean(7));
+                    list.add(question);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                SQLUtils.closeConnection(con);
+            }
+        }
+        return list;
     }
 
 }
