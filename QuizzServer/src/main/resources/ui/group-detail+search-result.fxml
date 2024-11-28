@@ -292,32 +292,32 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Label layoutX="32.0" layoutY="67.0" text="First name" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="64.0">
+                  <Label layoutX="32.0" layoutY="67.0" text="Student ID" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="64.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tf_FirstName_Add_StudentManagement" layoutX="22.0" layoutY="91.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="94.0">
+                  <TextField fx:id="tf_FirstName_Add_StudentManagement" layoutX="22.0" layoutY="91.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="172.0">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="24.0" layoutY="143.0" text="Last name" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="142.0">
+                  <Label layoutX="24.0" layoutY="143.0" text="First name" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="142.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tf_LastName_Add_StudentManagement" layoutX="14.0" layoutY="167.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="172.0">
+                  <TextField fx:id="tf_LastName_Add_StudentManagement" layoutX="14.0" layoutY="167.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="250.0">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="24.0" layoutY="214.0" text="Student ID" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="220.0">
+                  <Label layoutX="24.0" layoutY="214.0" text="Last name" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="220.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tf_StudentID_Add_StudentManagement" layoutX="14.0" layoutY="238.0" prefHeight="38.0" prefWidth="260.0" promptText="ST001" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="250.0">
+                  <TextField fx:id="tf_StudentID_Add_StudentManagement" layoutX="14.0" layoutY="238.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="94.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -375,32 +375,32 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Label layoutX="32.0" layoutY="67.0" text="First name:" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="64.0">
+                  <Label layoutX="32.0" layoutY="67.0" text="First name:" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="142.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tf_FirstName_Detail_StudentManagement" layoutX="22.0" layoutY="91.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="94.0">
+                  <TextField fx:id="tf_FirstName_Detail_StudentManagement" layoutX="22.0" layoutY="91.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="172.0">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="24.0" layoutY="143.0" text="Last name" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="142.0">
+                  <Label layoutX="24.0" layoutY="143.0" text="Last name" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="220.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tf_LastName_Detail_StudentManagement" layoutX="14.0" layoutY="167.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="172.0">
+                  <TextField fx:id="tf_LastName_Detail_StudentManagement" layoutX="14.0" layoutY="167.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="250.0">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="24.0" layoutY="214.0" text="Student ID" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="220.0">
+                  <Label layoutX="24.0" layoutY="214.0" text="Student ID" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="64.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tf_StudentID_Detail_StudentManagement" disable="true" layoutX="14.0" layoutY="238.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="250.0">
+                  <TextField fx:id="tf_StudentID_Detail_StudentManagement" disable="true" layoutX="14.0" layoutY="238.0" prefHeight="38.0" prefWidth="260.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="92.0">
                      <font>
                         <Font size="14.0" />
                      </font>

@@ -153,8 +153,6 @@ public class Subject_controller implements Initializable {
     @FXML
     private Label lb_totalQuestion_SubjectManagement = new Label();
 
-    /* ================================================================ */
-
     // Load List HBOx
     List<HBox> listHBox = new java.util.ArrayList<>();
 
@@ -881,17 +879,20 @@ public class Subject_controller implements Initializable {
         Question_TableColumn_subjectDetail.setCellValueFactory(new PropertyValueFactory<Question, String>("content"));
 
         return observableList;
+
     }
 
     // initialize
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // LoadListGroup & Set button details & button archive
+
         LoadListGroup();
 
         if (question_list != null) {
             LoadListQuestion();
         }
+
     }
 
     /* ================================================================ */

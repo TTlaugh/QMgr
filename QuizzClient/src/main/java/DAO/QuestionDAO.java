@@ -5,10 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import DTO.*;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import model.*;
+
 import java.lang.reflect.Type;
 
 import utils.SQLUtils;

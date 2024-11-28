@@ -1,6 +1,6 @@
-package DTO;
+package model;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,9 +13,12 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Answers implements Serializable {
-    private int answerId;
+public class Question {
     private int questionId;
+    private int subjectId;
+    private String chapter;
+    private int difficulty; // 1-5
     private String content;
-    private boolean isCorrect;
+    private ArrayList<Answers> answers;
+    private boolean archive;
 }

@@ -18,6 +18,39 @@ public class ExamDAO implements interfaceDAO<Exam> {
     Connection con;
     private Gson gson = new Gson();
 
+    public ArrayList<Exam> getAllBySubject(int subjectId) {
+        list = new ArrayList<Exam>();
+        con = SQLUtils.getConnection();
+        if (con != null) {
+            try {
+                String query = "Select * from exams where archived=0 and subjectid = ?";
+                PreparedStatement ps = con.prepareStatement(query);
+                ps.setInt(1, subjectId);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    Type questionListType = new TypeToken<List<Integer>>() {
+                    }.getType();
+                    exam = new Exam();
+                    exam.setExamId(rs.getInt(1));
+                    exam.setSubjectId(rs.getInt(2));
+                    exam.setName(rs.getString(3));
+                    exam.setDesc(rs.getString(4));
+                    String questionJson = rs.getString(5);
+                    if (questionJson != null && !questionJson.isEmpty()) {
+                        exam.setQuestionsIds(gson.fromJson(questionJson, questionListType));
+                    }
+                    exam.setArchive(rs.getBoolean(6));
+                    list.add(exam);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                SQLUtils.closeConnection(con);
+            }
+        }
+        return list;
+    }
+
     @Override
     public ArrayList<Exam> getAll() {
         list = null;
@@ -53,7 +86,7 @@ public class ExamDAO implements interfaceDAO<Exam> {
 
     // asd
     @Override
-    public boolean create(Exam t) {
+    public boolean create(Exam exam) {
         boolean b = false;
         String questionID = gson.toJson(exam.getQuestionsIds());
         con = SQLUtils.getConnection();
