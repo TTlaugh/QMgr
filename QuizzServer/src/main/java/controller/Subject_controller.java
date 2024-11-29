@@ -4,6 +4,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -712,12 +713,12 @@ public class Subject_controller implements Initializable {
             return;
         }
         String fileNameExel = file_Current.getPath();
-        // Boolean check_ExportExel = quesManager.exportQuestions(subject_Current,
-        // fileNameExel);
-        // if (!check_ExportExel) {
-        // Notification.Infomation("Error", "Export file failed");
-        // return;
-        // }
+        Boolean check_ExportExel = questionManager.exportQuestions(subject_Current_SubjectManagement,fileNameExel);
+        if (!check_ExportExel) {
+        Notification.Infomation("Error", "Export file failed");
+        return;
+        }
+
         if (Notification.Comfrim("Confirm",
                 "Do you want to open file?").getResult() == ButtonType.YES)
             OpenFileExel_Export(new File(fileNameExel));
@@ -728,27 +729,26 @@ public class Subject_controller implements Initializable {
     boolean btn_ImportQuestion_SubjectManagement(ActionEvent event) {
         File file_Current = OpenFileExplorer.Open(event);
         if (file_Current != null) {
-            // String check_xlsx =
-            // file_Current.getPath().substring(file_Current.getPath().lastIndexOf(".") +
-            // 1);
-            // try {
-            // Boolean check_FormatExel = check_xlsx.equalsIgnoreCase("xlsx") ||
-            // check_xlsx.equalsIgnoreCase("xls");
-            // Boolean selectFile = quesManager.importQuestions(subject_Current,
-            // file_Current.getPath());
-            // if (!check_FormatExel && !selectFile) {
-            // Notification.Error("Error", "Please choose file excel");
-            // return false;
-            // }
-            // tableView_Question.getItems().clear();
-            Notification.Infomation("Success", "Import file successfully");
-            // } catch (SQLException e) {
-            // e.printStackTrace();
-            // }
+            String check_xlsx = file_Current.getPath().substring(file_Current.getPath().lastIndexOf(".") +
+                    1);
+            try {
+                Boolean check_FormatExel = check_xlsx.equalsIgnoreCase("xlsx") ||
+                        check_xlsx.equalsIgnoreCase("xls");
+                Boolean selectFile = questionManager.importQuestions(subject_Current_SubjectManagement,file_Current.getPath());
+                if (!check_FormatExel && !selectFile) {
+                    Notification.Error("Error", "Please choose file excel");
+                    return false;
+                }
+                table_Question_SubjectManagement.getItems().clear();
+                Notification.Infomation("Success", "Import file successfully");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-        // question_ListOfSubject = quesManager.getQuestionsForSubject(subject_Current);
-
-        // tableView_Question.setItems(loadQuestion_tableView(question_ListOfSubject));
+        ArrayList<Question> allQuestionsForCurrentSbj = questionManager.getAllQuestionsBySubject(subject_Current_SubjectManagement.getSubjectId());
+        ObservableList<Question> observableList_Question = FXCollections.observableArrayList(allQuestionsForCurrentSbj);
+        table_Question_SubjectManagement.setItems(observableList_Question);
+        lb_QuantityQuestion_SubjectManagement.setText(allQuestionsForCurrentSbj.size() + " questions");
 
         return true;
     }

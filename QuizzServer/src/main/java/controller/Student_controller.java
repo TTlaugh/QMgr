@@ -4,6 +4,7 @@ import java.io.File;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -35,12 +36,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import model.Group;
+import model.Question;
 import model.Student;
 import services.GroupManager;
 import services.StudentManager;
 import utils.CheckStringFormat;
 import utils.Notification;
 import utils.OpenFileExplorer;
+import utils.StringNormalization;
+import utils.StringValidate;
 
 public class Student_controller implements Initializable {
 
@@ -196,8 +200,7 @@ public class Student_controller implements Initializable {
 
     public static Group group_Current_StudentManagement = new Group();
 
-    private int CountGroupID_Current_StudentManagement = (group_list.size() == 0) ? 1
-            : group_list.get(group_list.size() - 1).getGroupId() + 1;
+    private int CountGroupID_Current_StudentManagement = group_list.get(group_list.size() - 1).getGroupId() + 1;
 
     private int indexSelected_AnchorPane_in_FlowPane = 0;
 
@@ -256,36 +259,26 @@ public class Student_controller implements Initializable {
         File file_Current = OpenFileExplorer.Open(event);
         if (file_Current != null) {
             String check_xlsx = file_Current.getPath().substring(file_Current.getPath().lastIndexOf(".") + 1);
-            // try {
-            Boolean check_FormatExel = check_xlsx.equalsIgnoreCase("xlsx") || check_xlsx.equalsIgnoreCase("xls");
-
-            if (!check_FormatExel) {
-                Notification.Error("Error",
-                        "Please choose file excel");
-                return false;
+            try {
+                Boolean check_FormatExel = check_xlsx.equalsIgnoreCase("xlsx") ||
+                        check_xlsx.equalsIgnoreCase("xls");
+                Boolean selectFile = groupManager.importStudents(group_Current_StudentManagement,
+                        file_Current.getPath());
+                if (!check_FormatExel && !selectFile) {
+                    Notification.Error("Error", "Please choose file excel");
+                    return false;
+                }
+                table_Student_StudentManagement.getItems().clear();
+                Notification.Infomation("Success", "Import file successfully");
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
+            ArrayList<Student> allStudentForCurrentGrp = studentManager
+                    .getAllStudentInGroup(group_Current_StudentManagement.getGroupId());
+            ObservableList<Student> observableList_Student = FXCollections.observableArrayList(allStudentForCurrentGrp);
+            table_Student_StudentManagement.setItems(observableList_Student);
+            lb_Quantity_StudentManagement.setText(allStudentForCurrentGrp.size() + " students");
 
-            // Boolean is_SameData = Notification.Comfrim("Error",
-            // "Trung data")
-            // .getResult() == ButtonType.YES;
-
-            // gr.importStudent(group_Current_Layout, file_Current.getPath(), is_SameData);
-
-            Notification.Infomation("Success",
-                    "Import file successfully");
-
-            // studentList = gr.getStudentsFromGroup(group_Current_Layout);
-
-            // studentList = gr.getStudentsFromGroup2(group_Current_Layout);
-
-            // tableView_Group.getItems().clear();
-
-            // tableView_Group.setItems(loadStudent_tableView(studentList));
-
-            // } catch (IOException e) {
-            // file_Current = null;
-            // Notification.Error("Error", "Unsuccess_ImportFile");
-            // }
         }
 
         return file_Current == null ? false : true;
@@ -294,29 +287,22 @@ public class Student_controller implements Initializable {
     // Export Group Detail
     @FXML
     void btn_ExportStudent_StudentManagement(ActionEvent event) {
-        File file_Current = null;
-        try {
-            file_Current = OpenFileExplorer.Save(event);
+        File file_Current = OpenFileExplorer.Save(event);
 
-            String fileNameExel = file_Current.getAbsolutePath();
-
-            // Boolean is_ExportSuccess = gr.exportStudent(group_Current_Layout,
-            // studentList, fileNameExel);
-            // if (!is_ExportSuccess) {
-            // Notification.Infomation("Error",
-            // "Export file failed");
-            // return;
-            // }
-
-            Boolean is_Confirm = Notification.Comfrim("Confirm",
-                    "Do you want to open file?").getResult() == ButtonType.YES;
-
-            if (is_Confirm)
-                OpenFileExel_Export(new File(fileNameExel));
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (file_Current == null) {
+            Notification.Error("Error", "Please choose file");
+            return;
         }
+        String fileNameExel = file_Current.getAbsolutePath();
+        Boolean is_ExportSuccess = groupManager.exportStudents(group_Current_StudentManagement, fileNameExel);
+        if (!is_ExportSuccess) {
+            Notification.Infomation("Error", "Export file failed");
+            return;
+        }
+        Boolean is_Confirm = Notification.Comfrim("Confirm",
+                "Do you want to open file?").getResult() == ButtonType.YES;
+        if (is_Confirm)
+            OpenFileExel_Export(new File(fileNameExel));
     }
 
     // Delete Group Detail
@@ -373,25 +359,53 @@ public class Student_controller implements Initializable {
             Notification.Error("Error", "Please enter first name");
             return;
         }
+        firstName = StringNormalization.removeDuplicateSpaces(firstName);
+        if (!StringValidate.CheckLengthInRange(firstName, 2, 50)) {
+            Notification.Error("Error", "First name in range 2 to 50 characters.");
+            return;
+        }
+
         if (lastName.length() == 0 || lastName == null || lastName == "") {
             Notification.Error("Error", "Please enter last name");
             return;
         }
+        lastName = StringNormalization.removeDuplicateSpaces(lastName);
+        if (!StringValidate.CheckLengthInRange(lastName, 2, 50)) {
+            Notification.Error("Error", "Last name in range 2 to 50 characters.");
+            return;
+        }
+
         if (studentID.length() == 0 || studentID == null || studentID == "") {
             Notification.Error("Error", "Please enter student ID");
             return;
         }
+        if (!CheckStringFormat.isCorrectFormat(studentID)) {
+            Notification.Error("Error", "Student ID is not correct format");
+            return;
+        }
+
         if (email.length() == 0 || email == null || email == "") {
             Notification.Error("Error", "Please enter email");
             return;
         }
+        if (!StringValidate.CheckEmailValid(email)) {
+            Notification.Error("Error", "Email is not valid.");
+            return;
+        }
+        if (!StringValidate.CheckLengthInRange(email, 5, 255)) {
+            Notification.Error("Error", "Email in range 5 to 255 characters.");
+            return;
+        }
+
         if (phone.length() == 0 || phone == null || phone == "") {
             Notification.Error("Error", "Please enter phone");
             return;
         }
-        // func check email here
-
-        // func check phone here
+        phone = StringNormalization.convertToPhoneNumber(phone);
+        if (!StringValidate.CheckPhoneValid(phone)) {
+            Notification.Error("Error", "Phone number is not valid.");
+            return;
+        }
 
         // Func Save Change
 
@@ -420,8 +434,9 @@ public class Student_controller implements Initializable {
             Notification.Error("Error", "Please enter group name");
             return;
         }
-        if (groupName.length() > 191) {
-            Notification.Error("Error", "Group name is too long");
+        groupName = StringNormalization.convertToTitleCase(groupName);
+        if (!StringValidate.CheckLengthInRange(groupName, 2, 100)) {
+            Notification.Error("Error", "Group name in range 2 to 100 characters.");
             return;
         }
 
@@ -501,30 +516,34 @@ public class Student_controller implements Initializable {
 
     @FXML
     void btn_AddStudent_Add_StudentManagement(ActionEvent event) {
-        String firstName = tf_FirstName_Add_StudentManagement.getText();
-        String lastName = tf_LastName_Add_StudentManagement.getText();
-        String studentID = tf_StudentID_Add_StudentManagement.getText();
-        String email = tf_Email_Add_StudentManagement.getText();
-        String phone = tf_Phone_Add_StudentManagement.getText();
+        String firstName = tf_FirstName_Add_StudentManagement.getText().trim();
+        String lastName = tf_LastName_Add_StudentManagement.getText().trim();
+        String studentID = tf_StudentID_Add_StudentManagement.getText().trim();
+        String email = tf_Email_Add_StudentManagement.getText().trim();
+        String phone = tf_Phone_Add_StudentManagement.getText().trim();
 
         if (firstName.length() == 0 || firstName == null || firstName == "") {
             Notification.Error("Error", "Please enter first name");
             return;
         }
+        firstName = StringNormalization.removeDuplicateSpaces(firstName);
+        if (!StringValidate.CheckLengthInRange(firstName, 2, 50)) {
+            Notification.Error("Error", "First name in range 2 to 50 characters.");
+            return;
+        }
+
         if (lastName.length() == 0 || lastName == null || lastName == "") {
             Notification.Error("Error", "Please enter last name");
             return;
         }
+        lastName = StringNormalization.removeDuplicateSpaces(lastName);
+        if (!StringValidate.CheckLengthInRange(lastName, 2, 50)) {
+            Notification.Error("Error", "Last name in range 2 to 50 characters.");
+            return;
+        }
+
         if (studentID.length() == 0 || studentID == null || studentID == "") {
             Notification.Error("Error", "Please enter student ID");
-            return;
-        }
-        if (email.length() == 0 || email == null || email == "") {
-            Notification.Error("Error", "Please enter email");
-            return;
-        }
-        if (phone.length() == 0 || phone == null || phone == "") {
-            Notification.Error("Error", "Please enter phone");
             return;
         }
         if (!CheckStringFormat.isCorrectFormat(studentID)) {
@@ -532,15 +551,39 @@ public class Student_controller implements Initializable {
             return;
         }
 
+        if (email.length() == 0 || email == null || email == "") {
+            Notification.Error("Error", "Please enter email");
+            return;
+        }
+        if (!StringValidate.CheckEmailValid(email)) {
+            Notification.Error("Error", "Email is not valid.");
+            return;
+        }
+        if (!StringValidate.CheckLengthInRange(email, 5, 255)) {
+            Notification.Error("Error", "Email in range 5 to 255 characters.");
+            return;
+        }
+
+        if (phone.length() == 0 || phone == null || phone == "") {
+            Notification.Error("Error", "Please enter phone");
+            return;
+        }
+        phone = StringNormalization.convertToPhoneNumber(phone);
+        if (!StringValidate.CheckPhoneValid(phone)) {
+            Notification.Error("Error", "Phone number is not valid.");
+            return;
+        }
+
         Student student_inGroup = studentManager.getStudentbyIdfromGroup(studentID,
                 group_Current_StudentManagement.getGroupId());
 
         if (student_inGroup != null) {
-            Notification.Error("Error", "Student ID #" + studentID + " does not exist in the group, please try again");
+            Notification.Error("Error", "Student ID #" + studentID + " existed in the group, please try again");
             return;
         }
         studentSelected = new Student(0,
-                group_Current_StudentManagement.getGroupId(), studentID, firstName, lastName, email, phone);
+                group_Current_StudentManagement.getGroupId(), studentID, firstName, lastName,
+                phone, email);
 
         if (studentManager.createStudent(studentSelected)) {
             Notification.Infomation("Success", "Add student successfully");
