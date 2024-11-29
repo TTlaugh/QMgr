@@ -82,7 +82,7 @@ public class Exam_card {
         this.Exam_name.setScaleX(1);
         this.Exam_name.setScaleY(1);
         this.Exam_name.setScaleZ(1);
-        this.Exam_name.prefWidth(170);
+        this.Exam_name.prefWidth(180);
         this.Exam_name.prefHeight(20);
         this.Exam_name.setLayoutX(53);
         this.Exam_name.setLayoutY(15);
@@ -105,7 +105,7 @@ public class Exam_card {
         this.Subject_name.setScaleY(1);
         this.Subject_name.setScaleZ(1);
         this.Subject_name.setLayoutX(53);
-        this.Subject_name.setLayoutY(33);
+        this.Subject_name.setLayoutY(46);
         this.Subject_name.prefWidth(170);
         this.Subject_name.prefHeight(21);
         this.Subject_name.setTextOverrun(javafx.scene.control.OverrunStyle.ELLIPSIS);

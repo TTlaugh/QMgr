@@ -6,10 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import utils.Constant;
 import utils.KeyEventFunction;
-// import utils.KeyEventFunction;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCombination;
 
 public class Main extends Application {
@@ -17,11 +15,11 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		try {
-			primaryStage.getIcons().add(new Image("/imgs/icon.png"));
-			primaryStage.setTitle("Quizz Server - HEHE");
+			// primaryStage.getIcons().add(new Image("/imgs/icon.png"));
+			primaryStage.setTitle("Quizz Client");
 			primaryStage.show();
 
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/take-the-exam+submit.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/connect-server.fxml"));
 			Parent root = (Parent) loader.load();
 			Scene scene = new Scene(root, Constant.ScreenSize.WIDTH, Constant.ScreenSize.HEIGHT);
 

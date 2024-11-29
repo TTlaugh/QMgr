@@ -3,17 +3,13 @@ package app;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import utils.Constant;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 
 public class Main extends Application {
-	@FXML
-	private AnchorPane mainbody;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {

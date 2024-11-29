@@ -357,7 +357,7 @@
             </Button>
             <AnchorPane layoutX="514.0" layoutY="129.0" prefHeight="380.0" prefWidth="232.0" style="-fx-background-color: #F8FAFC; -fx-background-radius: 8;" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="129.0">
                <children>
-                  <Button alignment="CENTER" layoutX="17.0" layoutY="402.0" mnemonicParsing="false" onAction="#btn_editExam_detailExam_ExamManagement" prefHeight="32.0" prefWidth="208.0" styleClass="button-xanhnhat" text="Edit this exam" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
+                  <Button alignment="CENTER" layoutX="17.0" layoutY="402.0" mnemonicParsing="false" onAction="#btn_editExam_detailExam_Hidden_ExamManagement" prefHeight="32.0" prefWidth="208.0" styleClass="button-xanhnhat" text="Edit this exam" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -463,8 +463,6 @@
                <columns>
                   <TableColumn editable="false" prefWidth="44.00001525878906" text="#ID" />
                   <TableColumn editable="false" minWidth="5.5999755859375" prefWidth="221.60003662109375" text="Question" />
-                  <TableColumn editable="false" prefWidth="114.4000244140625" resizable="false" text="Chapter" />
-                  <TableColumn editable="false" prefWidth="92.79998779296875" resizable="false" text="Difficult (1-5)" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -614,8 +612,6 @@
                <columns>
                   <TableColumn editable="false" prefWidth="44.00001525878906" text="#ID" />
                   <TableColumn editable="false" minWidth="5.5999755859375" prefWidth="221.60003662109375" text="Question" />
-                  <TableColumn editable="false" prefWidth="114.4000244140625" resizable="false" text="Chapter" />
-                  <TableColumn editable="false" prefWidth="92.79998779296875" resizable="false" text="Difficult (1-5)" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -667,10 +663,10 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="21.0" layoutY="98.0" text="Total 12 questions" textFill="#475467" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="98.0" />
+            <Label fx:id="lb_totalQuestionBank_EditExam" layoutX="21.0" layoutY="98.0" text="Total 12 questions" textFill="#475467" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="98.0" />
             <HBox alignment="CENTER_LEFT" layoutX="198.0" layoutY="65.0" maxHeight="38.0" maxWidth="232.0" prefHeight="38.0" prefWidth="232.0" spacing="13.0" styleClass="round-layout" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="79.0">
                <children>
-                  <TextField maxWidth="173.0" prefHeight="30.0" prefWidth="167.0" promptText="Search" style="-fx-background-color: transparent;">
+                  <TextField fx:id="tf_SearchQuestion_EditExam" maxWidth="173.0" onAction="#btn_SearchQuestion_EditExam" prefHeight="30.0" prefWidth="167.0" promptText="Search" style="-fx-background-color: transparent;">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -690,7 +686,7 @@
             </HBox>
             <AnchorPane layoutX="505.0" layoutY="72.0" prefHeight="448.0" prefWidth="232.0" style="-fx-background-color: #F8FAFC; -fx-background-radius: 8;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="72.0">
                <children>
-                  <Button alignment="CENTER" layoutX="17.0" layoutY="402.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="208.0" styleClass="button-xanhdam" text="Save change" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
+                  <Button alignment="CENTER" layoutX="17.0" layoutY="402.0" mnemonicParsing="false" onAction="#btn_SaveChangeExam_EditExam_ExamManagement" prefHeight="32.0" prefWidth="208.0" styleClass="button-xanhdam" text="Save change" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -700,7 +696,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="50.0" layoutY="149.0" prefHeight="38.0" prefWidth="208.0" styleClass="round-layout" text="Kiem tra 15 phut" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="42.0">
+                  <TextField fx:id="tf_ExamName_EditExam_ExamManagement" layoutX="50.0" layoutY="149.0" prefHeight="38.0" prefWidth="208.0" styleClass="round-layout" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="42.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -710,7 +706,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <ComboBox layoutX="12.0" layoutY="224.0" prefHeight="38.0" prefWidth="208.0" promptText="-Subject-" styleClass="round-layout" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="122.0">
+                  <ComboBox fx:id="ComboBox_Subject_EditExam_ExamMannagement" layoutX="12.0" layoutY="224.0" onAction="#setOnAction_ComboBoxSubject_EditExam" prefHeight="38.0" prefWidth="208.0" promptText="-Subject-" styleClass="round-layout" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="122.0">
                      <padding>
                         <Insets left="10.0" right="10.0" />
                      </padding>
@@ -720,19 +716,17 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextArea layoutX="12.0" layoutY="258.0" prefHeight="90.0" prefWidth="208.0" styleClass="round-layout" wrapText="true" AnchorPane.bottomAnchor="155.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="202.0">
+                  <TextArea fx:id="txtArea_Desc_EditExam_ExamManagement" layoutX="12.0" layoutY="258.0" prefHeight="90.0" prefWidth="208.0" styleClass="round-layout" wrapText="true" AnchorPane.bottomAnchor="155.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="202.0">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </TextArea>
                </children>
             </AnchorPane>
-            <TableView fixedCellSize="0.0" layoutX="20.0" layoutY="122.0" prefHeight="135.0" prefWidth="476.0" AnchorPane.bottomAnchor="276.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="129.0">
+            <TableView fx:id="tableView_QuestionBank_EditExam" fixedCellSize="0.0" layoutX="20.0" layoutY="122.0" prefHeight="135.0" prefWidth="476.0" AnchorPane.bottomAnchor="276.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="129.0">
                <columns>
-                  <TableColumn editable="false" prefWidth="44.00001525878906" text="#ID" />
-                  <TableColumn editable="false" minWidth="5.5999755859375" prefWidth="221.60003662109375" text="Question" />
-                  <TableColumn editable="false" prefWidth="114.4000244140625" resizable="false" text="Chapter" />
-                  <TableColumn editable="false" prefWidth="92.79998779296875" resizable="false" text="Difficult (1-5)" />
+                  <TableColumn fx:id="ID_Column_QuestionBank_EditExam" editable="false" prefWidth="44.00001525878906" text="#ID" />
+                  <TableColumn fx:id="Question_Column_QuestionBank_EditExam" editable="false" minWidth="5.5999755859375" prefWidth="221.60003662109375" text="Question" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -743,19 +737,17 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="20.0" layoutY="322.0" text="Total 12 questions" textFill="#475467" AnchorPane.bottomAnchor="215.0" AnchorPane.leftAnchor="20.0" />
-            <TableView fixedCellSize="0.0" layoutX="20.0" layoutY="360.0" prefHeight="135.0" prefWidth="476.0" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="264.0">
+            <Label fx:id="lb_totalQuestionExam_EditExam" layoutX="20.0" layoutY="322.0" text="Total 12 questions" textFill="#475467" AnchorPane.bottomAnchor="215.0" AnchorPane.leftAnchor="20.0" />
+            <TableView fx:id="tableView_QuestionExam_EditExam" fixedCellSize="0.0" layoutX="20.0" layoutY="360.0" prefHeight="135.0" prefWidth="476.0" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="264.0">
                <columns>
-                  <TableColumn editable="false" prefWidth="44.00001525878906" text="#ID" />
-                  <TableColumn editable="false" minWidth="5.5999755859375" prefWidth="221.60003662109375" text="Question" />
-                  <TableColumn editable="false" prefWidth="114.4000244140625" resizable="false" text="Chapter" />
-                  <TableColumn editable="false" prefWidth="92.79998779296875" resizable="false" text="Difficult (1-5)" />
+                  <TableColumn fx:id="ID_Coulmn_QuestionExam_EditExam" editable="false" prefWidth="44.00001525878906" text="#ID" />
+                  <TableColumn fx:id="Question_Coulmn_QuestonExam_EditExam" editable="false" minWidth="5.5999755859375" prefWidth="221.60003662109375" text="Question" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Button layoutX="232.0" layoutY="304.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="44.0" style="-fx-background-color: #2970FF; -fx-cursor: hand;" AnchorPane.bottomAnchor="260.0" AnchorPane.leftAnchor="236.0">
+            <Button layoutX="232.0" layoutY="304.0" mnemonicParsing="false" onAction="#btn_SelectQuestionBank_EditExam" prefHeight="32.0" prefWidth="44.0" style="-fx-background-color: #2970FF; -fx-cursor: hand;" AnchorPane.bottomAnchor="260.0" AnchorPane.leftAnchor="236.0">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true">
                      <image>
@@ -764,7 +756,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="242.0" layoutY="314.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="44.0" rotate="180.0" style="-fx-background-color: #2970FF; -fx-cursor: hand;" AnchorPane.bottomAnchor="187.0" AnchorPane.leftAnchor="236.0">
+            <Button layoutX="242.0" layoutY="314.0" mnemonicParsing="false" onAction="#btn_ReturnExamQuesFromQuesBank_EditExam" prefHeight="32.0" prefWidth="44.0" rotate="180.0" style="-fx-background-color: #2970FF; -fx-cursor: hand;" AnchorPane.bottomAnchor="187.0" AnchorPane.leftAnchor="236.0">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true">
                      <image>
@@ -773,7 +765,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="CENTER" layoutX="125.0" layoutY="482.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" styleClass="button-xanhnhat" text="Question details" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+            <Button alignment="CENTER" layoutX="125.0" layoutY="482.0" mnemonicParsing="false" onAction="#btn_QuestionDetail_Hidden_EditExam" prefHeight="32.0" prefWidth="145.0" styleClass="button-xanhnhat" text="Question details" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

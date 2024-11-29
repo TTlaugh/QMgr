@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import components.Answer_card;
 import components.Exam_card;
 import javafx.collections.FXCollections;
@@ -14,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -26,6 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
@@ -36,6 +37,7 @@ import model.Subject;
 import services.ExamManager;
 import services.QuestionManager;
 import services.SubjectManager;
+import utils.CheckCheckBox;
 import utils.Notification;
 
 public class Exam_controller implements Initializable {
@@ -160,7 +162,45 @@ public class Exam_controller implements Initializable {
 
     @FXML
     private VBox VBox_detailQuestion_ExamManagement = new VBox();
-    // /// =============================
+    // =============================
+    // EXAM EDIT
+
+    @FXML
+    private TextField tf_SearchQuestion_EditExam = new TextField();
+
+    @FXML
+    private TextField tf_ExamName_EditExam_ExamManagement = new TextField();
+
+    @FXML
+    private ComboBox<Subject> ComboBox_Subject_EditExam_ExamMannagement = new ComboBox<Subject>();
+
+    @FXML
+    private TextArea txtArea_Desc_EditExam_ExamManagement = new TextArea();
+
+    @FXML
+    private TableView<Question> tableView_QuestionBank_EditExam = new TableView<Question>();
+
+    @FXML
+    private TableColumn<Question, Integer> ID_Column_QuestionBank_EditExam = new TableColumn<Question, Integer>();
+
+    @FXML
+    private TableColumn<Question, String> Question_Column_QuestionBank_EditExam = new TableColumn<Question, String>();
+
+    @FXML
+    private TableView<Question> tableView_QuestionExam_EditExam = new TableView<Question>();
+
+    @FXML
+    private TableColumn<Question, Integer> ID_Coulmn_QuestionExam_EditExam = new TableColumn<Question, Integer>();
+
+    @FXML
+    private TableColumn<Question, String> Question_Coulmn_QuestonExam_EditExam = new TableColumn<Question, String>();
+
+    @FXML
+    private Label lb_totalQuestionBank_EditExam = new Label();
+
+    @FXML
+    private Label lb_totalQuestionExam_EditExam = new Label();
+    // =============================
 
     public static List<Question> listQuestions = new ArrayList<Question>();
 
@@ -174,7 +214,7 @@ public class Exam_controller implements Initializable {
 
     Subject subject_Current_SubjectManagement = new Subject();
 
-    Question questionSelected = new Question();
+    public static Question questionSelected = new Question();
 
     int index_QuestionSelected = 0;
 
@@ -184,7 +224,7 @@ public class Exam_controller implements Initializable {
 
     public List<Subject> listSubjects = subjectManager.getAllSubject(Workspace_controller.current_WorkSpaceID);
 
-    public static List<Question> listQuestions_ExamDetail = new ArrayList<Question>();
+    public static List<Question> listQuestions_ExamDetail;
 
     public ObservableList<Question> observableList;
 
@@ -220,7 +260,7 @@ public class Exam_controller implements Initializable {
             tableView_QuestionBank_ExamManagement
                     .setItems(loadQuestion_tableViewQuestionBank_QuestionManagement(listQuestions));
 
-            lb_totalQuestionBank_ExamManagement.setText(listQuestions.size() + " questions");
+            lb_totalQuestionBank_ExamManagement.setText("Total " + listQuestions.size() + " questions");
         }
     }
 
@@ -294,6 +334,25 @@ public class Exam_controller implements Initializable {
 
     }
 
+    public ObservableList<Question> loadQuestion_tableViewQuestionBank_EditExam(List<Question> list) {
+
+        observableList = FXCollections.observableArrayList(list);
+        ID_Column_QuestionBank_EditExam.setCellValueFactory(new PropertyValueFactory<Question, Integer>("questionId"));
+        Question_Column_QuestionBank_EditExam
+                .setCellValueFactory(new PropertyValueFactory<Question, String>("content"));
+        return observableList;
+    }
+
+    public ObservableList<Question> loadQuestion_tableViewQuestionExam_EditExam(List<Question> list) {
+
+        observableList = FXCollections.observableArrayList(list);
+        ID_Coulmn_QuestionExam_EditExam
+                .setCellValueFactory(new PropertyValueFactory<Question, Integer>("questionId"));
+        Question_Coulmn_QuestonExam_EditExam
+                .setCellValueFactory(new PropertyValueFactory<Question, String>("content"));
+        return observableList;
+    }
+
     // Func Create New Exam
     @FXML
     void btn_newExam_Hidden_ExamManagement(ActionEvent event) {
@@ -301,6 +360,8 @@ public class Exam_controller implements Initializable {
         UIAnchorCurrent = this.AnchorPane_newExam_ExamManagement;
 
         UIAnchorCurrent.setVisible(true);
+
+        lb_totalQuestionExam_EditExam.setText("Total 0 questions");
 
         LoadComboBox_newExam();
 
@@ -367,8 +428,10 @@ public class Exam_controller implements Initializable {
 
         tableView_ExamQuestion_ExamManagement
                 .getItems().removeAll(questionReturnQuestionBank);
+
         int total = listQuestions.size() - questionReturnQuestionBank.size();
-        lb_totalExamQuestion_ExamManagement.setText(total + " questions");
+
+        lb_totalExamQuestion_ExamManagement.setText("Total " + total + " questions");
     }
 
     @FXML
@@ -385,7 +448,8 @@ public class Exam_controller implements Initializable {
         tableView_ExamQuestion_ExamManagement
                 .setItems(loadQuestion_tableViewQuestionExam_QuestionManagement(questionSelectInQuestionBank));
 
-        lb_totalExamQuestion_ExamManagement.setText(questionSelectInQuestionBank.size() + " questions");
+        lb_totalExamQuestion_ExamManagement
+                .setText("Total " + tableView_ExamQuestion_ExamManagement.getItems().size() + " questions");
 
     }
 
@@ -408,9 +472,6 @@ public class Exam_controller implements Initializable {
             public void handle(ActionEvent event) {
 
                 exam_Current_SubjectManagement = examManager.getExam(exam.getExam().getExamId());
-
-                // listSubjects =
-                // subjectManager.getAllSubject(Workspace_controller.current_WorkSpaceID);
 
                 btn_details_Exam(event);
 
@@ -450,16 +511,14 @@ public class Exam_controller implements Initializable {
 
     @FXML
     void setOnActionMultiple_Detail(ActionEvent event) {
-
+        CheckCheckBox.checkMultipleCheckBox(VBox_detailQuestion_ExamManagement,
+                checkbox_MultipleAnswers_detailQuestion_ExamManagement);
     }
 
     // Func detail Exam
     void btn_details_Exam(ActionEvent event) {
-        UIAnchorCurrent.setVisible(false);
 
-        UIAnchorCurrent = this.AnchorPane_detailExam_ExamManagement;
-
-        UIAnchorCurrent.setVisible(true);
+        setUIAnchorCurrent(AnchorPane_detailExam_ExamManagement);
 
         String examName = exam_Current_SubjectManagement.getName();
 
@@ -469,7 +528,14 @@ public class Exam_controller implements Initializable {
 
         String description = exam_Current_SubjectManagement.getDesc();
 
-        listQuestions_ExamDetail = quesManager.getAllQuestionsBySubject(subjectId);
+        listQuestions_ExamDetail = new ArrayList<Question>();
+
+        for (Integer questionIds : exam_Current_SubjectManagement.getQuestionsIds()) {
+
+            Question question = quesManager.getQuestion(questionIds);
+
+            listQuestions_ExamDetail.add(question);
+        }
 
         int totalQuestion = listQuestions_ExamDetail.size();
 
@@ -482,9 +548,9 @@ public class Exam_controller implements Initializable {
         lb_totalQuestion_ExamDetail_ExamManagement.setText(" Total " + totalQuestion
                 + " questions");
 
-        if (listQuestions != null) {
+        if (listQuestions_ExamDetail != null) {
             tableView_QuestionExam_ExamDetail_ExamManagement
-                    .setItems(loadQuestion_tableViewQuestionExamDetail_QuestionManagement(listQuestions));
+                    .setItems(loadQuestion_tableViewQuestionExamDetail_QuestionManagement(listQuestions_ExamDetail));
         }
 
     }
@@ -530,6 +596,7 @@ public class Exam_controller implements Initializable {
     // Exam Detail FUNCTION
     @FXML
     void btn_detailQuestion_detailExam_ExamManagement(ActionEvent event) {
+
         questionSelected = tableView_QuestionExam_ExamDetail_ExamManagement
                 .getSelectionModel().getSelectedItem();
 
@@ -543,14 +610,22 @@ public class Exam_controller implements Initializable {
 
         detailQuestion_ExamManagement.setVisible(true);
 
-        LoadDataOnQuestionDetail(questionSelected);
+        LoadDataOnQuestionDetail(questionSelected, true);
 
     }
 
-    void LoadDataOnQuestionDetail(Question question) {
+    void LoadDataOnQuestionDetail(Question question, boolean isEdit) {
+        // false == edit
+        // true == detail
         this.VBox_detailQuestion_ExamManagement.getChildren().clear();
 
-        btn_SaveChange_ExamManagement.setDisable(true);
+        btn_SaveChange_ExamManagement.setDisable(isEdit);
+
+        btn_AddAnswer_detailQuestion_Hidden.setVisible(!isEdit);
+
+        checkbox_MultipleAnswers_detailQuestion_ExamManagement.setVisible(!isEdit);
+
+        txtArea_ContentQuestion_detailQuestion_ExamManagement.setDisable(isEdit);
 
         txtArea_ContentQuestion_detailQuestion_ExamManagement.setText(question.getContent());
 
@@ -558,45 +633,313 @@ public class Exam_controller implements Initializable {
 
             Answer_card answer_card = new Answer_card(answer);
 
-            answer_card.getCheckBox().setDisable(true);
+            setEventButtonDelete(answer_card);
 
-            answer_card.getButton().setDisable(true);
+            setEventCheckbox(answer_card, VBox_detailQuestion_ExamManagement);
 
-            answer_card.getTextField().setDisable(true);
+            answer_card.getCheckBox().setDisable(isEdit);
+
+            answer_card.getButton().setDisable(isEdit);
+
+            answer_card.getTextField().setDisable(isEdit);
 
             VBox_detailQuestion_ExamManagement.getChildren().add(answer_card.getHBox());
         }
     }
 
+    void setEventButtonDelete(Answer_card answer_card) {
+        answer_card.getButton().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                VBox_detailQuestion_ExamManagement.getChildren().remove(answer_card.getHBox());
+            }
+        });
+    }
+
+    void setEventCheckbox(Answer_card answer_card, VBox vbox) {
+        answer_card.getCheckBox().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                boolean isMultiple = checkbox_MultipleAnswers_detailQuestion_ExamManagement.isSelected();
+
+                boolean isCheckBox = CheckCheckBox.checkTextBox(vbox);
+
+                if (!isMultiple && !isCheckBox) {
+                    answer_card.getCheckBox().setSelected(false);
+
+                    Notification.Error("Error", "Only one answer is allowed");
+
+                    return;
+                }
+            }
+        });
+    }
+
     @FXML
     void btn_duplicateExam_detailExam_ExamManagement(ActionEvent event) {
+
+        System.out.println("Duplicate");
+
+        boolean isDuplicate = examManager.createExam(exam_Current_SubjectManagement);
+
+        if (!isDuplicate) {
+            Notification.Error("Error", "Duplicate exam failed");
+            return;
+        }
+        Notification.Infomation("Success", "Duplicate exam successfully");
+
+        Exam_card exam_card = new Exam_card(exam_Current_SubjectManagement, subject_Current_SubjectManagement);
+
+        add_Exam_FlowPane(exam_card);
 
     }
 
     // Edit Exam
-    @FXML
-    void btn_editExam_detailExam_ExamManagement(ActionEvent event) {
-        UIAnchorCurrent.setVisible(false);
 
-        UIAnchorCurrent = this.AnchorPane_editExam_detailExam_ExamManagement;
+    void LoadComboBox_EditExam() {
+        ComboBox_Subject_EditExam_ExamMannagement.getItems().addAll(listSubjects);
 
-        UIAnchorCurrent.setVisible(true);
+        ComboBox_Subject_EditExam_ExamMannagement.setConverter(new StringConverter<Subject>() {
+            @Override
+            public String toString(Subject subject) {
+                return subject == null ? "" : subject.getSubjectName();
+            }
+
+            @Override
+            public Subject fromString(String s) {
+                return null;
+            }
+        });
+
     }
 
     @FXML
-    void btn_back_editExam_ExamManagement(ActionEvent event) {
-        btn_backExamDetail(event);
+    void btn_editExam_detailExam_Hidden_ExamManagement(ActionEvent event) {
+
+        setUIAnchorCurrent(this.AnchorPane_editExam_detailExam_ExamManagement);
+
+        LoadComboBox_AllExams(listSubjects);
+
+        String examName = exam_Current_SubjectManagement.getName();
+
+        int subjectId = exam_Current_SubjectManagement.getSubjectId();
+
+        String description = exam_Current_SubjectManagement.getDesc();
+
+        tf_ExamName_EditExam_ExamManagement.setText(examName);
+
+        txtArea_Desc_EditExam_ExamManagement.setText(description);
+
+        ComboBox_Subject_EditExam_ExamMannagement.getItems().clear();
+
+        LoadComboBox_EditExam();
+
+        ComboBox_Subject_EditExam_ExamMannagement
+                .setValue(subjectManager.getSubject(subjectId));
+
+        listQuestions_ExamDetail = new ArrayList<Question>();
+
+        for (Integer questionIds : exam_Current_SubjectManagement.getQuestionsIds()) {
+
+            Question question = quesManager.getQuestion(questionIds);
+
+            listQuestions_ExamDetail.add(question);
+        }
+        ArrayList<Question> listQuestionsOfSubject = quesManager
+                .getAllQuestionsBySubject(subject_Current_SubjectManagement.getSubjectId());
+        int totalQuestionBank = listQuestionsOfSubject.size();
+
+        lb_totalQuestionBank_EditExam.setText("Total " + totalQuestionBank + " questions");
+
+        int totalQuestion_ExamEdit = listQuestions_ExamDetail.size();
+
+        lb_totalQuestionExam_EditExam.setText("Total " + totalQuestion_ExamEdit + " questions");
+
+        if (listQuestions_ExamDetail != null) {
+            tableView_QuestionBank_EditExam
+                    .setItems(loadQuestion_tableViewQuestionBank_EditExam(listQuestionsOfSubject));
+
+            tableView_QuestionExam_EditExam
+                    .setItems(loadQuestion_tableViewQuestionExam_QuestionManagement(listQuestions_ExamDetail));
+        }
+
+    }
+
+    @FXML
+    void setOnAction_ComboBoxSubject_EditExam(ActionEvent event) {
+        subject_Current_SubjectManagement = ComboBox_Subject_EditExam_ExamMannagement.getValue();
+
+        listQuestions_ExamDetail = quesManager
+                .getAllQuestionsBySubject(subject_Current_SubjectManagement.getSubjectId());
+
+        tableView_QuestionBank_EditExam.getItems().clear();
+
+        tableView_QuestionBank_EditExam
+                .setItems(loadQuestion_tableViewQuestionBank_EditExam(listQuestions_ExamDetail));
+
+        lb_totalQuestionBank_EditExam.setText("Total " + listQuestions_ExamDetail.size() + " questions");
+    }
+
+    @FXML
+    void btn_QuestionDetail_Hidden_EditExam(ActionEvent event) {
+
+        ObservableList<Question> questionSelectedList;
+
+        questionSelectedList = tableView_QuestionBank_EditExam.getSelectionModel().getSelectedItems();
+
+        if (questionSelectedList == null || questionSelectedList.size() == 0) {
+            Notification.Error("Error", "Please choose question");
+            return;
+        }
+        if (questionSelectedList.size() > 1) {
+            Notification.Error("Error", "Please choose only one question");
+            return;
+        }
+
+        detailQuestion_ExamManagement.setVisible(true);
+
+        questionSelected = questionSelectedList.get(0);
+
+        index_QuestionSelected = tableView_QuestionBank_EditExam
+                .getSelectionModel().getSelectedIndex();
+
+        LoadDataOnQuestionDetail(questionSelected, false);
+
+    }
+
+    @FXML
+    void btn_SelectQuestionBank_EditExam(ActionEvent event) {
+        ObservableList<Question> selectedItems = tableView_QuestionBank_EditExam
+                .getSelectionModel().getSelectedItems();
+
+        if (selectedItems == null) {
+            Notification.Error("Error", "Please choose question");
+            return;
+        }
+
+        tableView_QuestionExam_EditExam.getItems().addAll(selectedItems);
+
+        int total = tableView_QuestionExam_EditExam.getItems().size();
+        lb_totalQuestionExam_EditExam.setText("Total " + total + " questions");
+    }
+
+    @FXML
+    void btn_ReturnExamQuesFromQuesBank_EditExam(ActionEvent event) {
+        ObservableList<Question> selectedItems = tableView_QuestionExam_EditExam
+                .getSelectionModel().getSelectedItems();
+
+        if (selectedItems == null) {
+            Notification.Error("Error", "Please choose question in Question Bank");
+            return;
+        }
+
+        tableView_QuestionExam_EditExam.getItems().removeAll(selectedItems);
+
+        int total = tableView_QuestionExam_EditExam.getItems().size();
+
+        lb_totalQuestionExam_EditExam.setText("Total" + total + " questions");
+    }
+
+    @FXML
+    void btn_SaveChangeExam_EditExam_ExamManagement(ActionEvent event) {
+
+        String examName = tf_ExamName_EditExam_ExamManagement.getText();
+
+        if (examName.length() == 0 || examName == null || examName == "") {
+            Notification.Error("Error", "Please enter exam name");
+            return;
+        }
+        if (examName.length() > 191) {
+            Notification.Error("Error", "Exam name is too long");
+            return;
+        }
+
+        int subjectID = ComboBox_Subject_EditExam_ExamMannagement.getValue().getSubjectId();
+
+        String description = txtArea_Desc_EditExam_ExamManagement.getText();
+
+        if (description.length() > 191) {
+            Notification.Error("Error", "Description is too long");
+            return;
+        }
+
+        ArrayList<Integer> listQuestionIds = new ArrayList<Integer>();
+
+        for (Question question : tableView_QuestionExam_EditExam.getItems()) {
+            listQuestionIds.add(question.getQuestionId());
+        }
+
+        // Func Update Exam
+        Exam exam_Update = new Exam(exam_Current_SubjectManagement.getExamId(), subjectID, examName, description,
+                listQuestionIds, false);
+
+        boolean isUpdateSuccess = examManager.updateExam(exam_Update);
+
+        subject_Current_SubjectManagement = ComboBox_Subject_EditExam_ExamMannagement.getValue();
+
+        if (!isUpdateSuccess) {
+            Notification.Error("Error", "Update exam failed");
+            return;
+        }
+
+        Notification.Infomation("Success", "Update exam successfully");
+
+        Exam_card exam_card = new Exam_card(exam_Update, subject_Current_SubjectManagement);
+
+        Insets margin = new Insets(12, 12, 0, 0);
+
+        FlowPane.setMargin(exam_card.getExam_Instance(), margin);
+
+        this.flowpane_mainbody.getChildren().set(indexSelected_AnchorPane_in_FlowPane,
+                exam_card.getExam_Instance());
+
+        setAction_Archive(exam_card);
+        setAction_Details(exam_card);
+
+        exam_Current_SubjectManagement = examManager.getExam(exam_Update.getExamId());
+    }
+
+    @FXML
+    void btn_SearchQuestion_EditExam(ActionEvent event) {
+        // Doing
+        String keyWord = tf_SearchQuestion_EditExam.getText().trim();
+
+        if (keyWord.length() == 0 || keyWord == null || keyWord == "") {
+            Notification.Error("Error", "Please enter keyword");
+            return;
+        }
+        if (keyWord.length() > 191) {
+            Notification.Error("Error", "Keyword is too long");
+            return;
+        }
+        ArrayList<Question> resultQuestions = new ArrayList<>();
+
+        listQuestions_ExamDetail = quesManager
+                .getAllQuestionsBySubject(subject_Current_SubjectManagement.getSubjectId());
+        // Func Search Question
+        for (Question question : listQuestions_ExamDetail) {
+            if (question.getContent().contains(keyWord)) {
+                resultQuestions.add(question);
+            }
+        }
+
+        if (resultQuestions.size() == 0) {
+            Notification.Error("Error", "Not found question");
+            return;
+        }
+
+        lb_totalQuestionBank_EditExam.setText(resultQuestions.size() + " questions");
+
+        tableView_QuestionBank_EditExam.getItems().clear();
+
+        tableView_QuestionBank_EditExam
+                .setItems(loadQuestion_tableViewQuestionBank_EditExam(resultQuestions));
     }
 
     // Host Exam
     @FXML
     void btn_hostExam_detailExam_ExamManagement(ActionEvent event) {
-
-        UIAnchorCurrent.setVisible(false);
-
-        UIAnchorCurrent = this.AnchorPane_hostExam_detailExam_ExamManagement;
-
-        UIAnchorCurrent.setVisible(true);
+        setUIAnchorCurrent(this.AnchorPane_hostExam_detailExam_ExamManagement);
     }
 
     @FXML
@@ -607,11 +950,7 @@ public class Exam_controller implements Initializable {
     // View All Submission
     @FXML
     void btn_viewAllSubmission_detailExam_ExamManagement(ActionEvent event) {
-        UIAnchorCurrent.setVisible(false);
-
-        UIAnchorCurrent = this.AnchorPane_viewAllSubmission_detailExam_ExamManagement;
-
-        UIAnchorCurrent.setVisible(true);
+        setUIAnchorCurrent(this.AnchorPane_viewAllSubmission_detailExam_ExamManagement);
     }
 
     @FXML
@@ -619,10 +958,50 @@ public class Exam_controller implements Initializable {
         btn_backExamDetail(event);
     }
 
+    @FXML
+    void btn_back_editExam_ExamManagement(ActionEvent event) {
+
+        btn_backExamDetail(event);
+
+        List<Integer> listQuestionIds = exam_Current_SubjectManagement.getQuestionsIds();
+
+        List<Question> listQuestions_ExamDetail = new ArrayList<Question>();
+
+        for (Integer questionId : listQuestionIds) {
+
+            Question question = quesManager.getQuestion(questionId);
+
+            listQuestions_ExamDetail.add(question);
+        }
+
+        int totalQuestion = listQuestions_ExamDetail.size();
+
+        lb_totalQuestion_ExamDetail_ExamManagement.setText("Total " + totalQuestion + " questions");
+
+        tf_ExamName_ExamDetail_ExamManagement.setText(exam_Current_SubjectManagement.getName());
+
+        tf_SubjectName_ExamDetaiL_ExamManagement.setText(subject_Current_SubjectManagement.getSubjectName());
+
+        txtArea_Desc_ExamDetail_ExamManagement.setText(exam_Current_SubjectManagement.getDesc());
+
+        AnchorPane_editExam_detailExam_ExamManagement.setVisible(false);
+
+        tableView_QuestionExam_ExamDetail_ExamManagement.getItems().clear();
+
+        tableView_QuestionExam_ExamDetail_ExamManagement
+                .setItems(loadQuestion_tableViewQuestionExam_QuestionManagement(listQuestions_ExamDetail));
+
+    }
+
     void btn_backExamDetail(ActionEvent event) {
+
+        setUIAnchorCurrent(this.AnchorPane_detailExam_ExamManagement);
+    }
+
+    void setUIAnchorCurrent(AnchorPane anchorPane) {
         UIAnchorCurrent.setVisible(false);
 
-        UIAnchorCurrent = this.AnchorPane_detailExam_ExamManagement;
+        UIAnchorCurrent = anchorPane;
 
         UIAnchorCurrent.setVisible(true);
     }
@@ -650,21 +1029,126 @@ public class Exam_controller implements Initializable {
 
     @FXML
     void btn_addAnswer_detailQuestion_ExamManagement(ActionEvent event) {
+        Answer_card answer_card = new Answer_card(new Answer());
+
+        setEventButtonDelete(answer_card);
+
+        setEventCheckbox(answer_card, VBox_detailQuestion_ExamManagement);
+
+        VBox_detailQuestion_ExamManagement.getChildren().add(answer_card.getHBox());
+    }
+
+    public ArrayList<Answer> getAnswers(VBox vbox) {
+
+        ArrayList<Answer> answers = new ArrayList<>();
+
+        for (Node node : vbox.getChildren()) {
+            if (node instanceof HBox) {
+                HBox hBox = (HBox) node;
+                Answer answer = new Answer();
+
+                String content = ((TextField) hBox.getChildren().get(1)).getText();
+                boolean isCorrect = ((CheckBox) hBox.getChildren().get(0)).isSelected();
+
+                answer.setContent(content);
+                answer.setCorrect(isCorrect);
+
+                answers.add(answer);
+            }
+        }
+
+        return answers;
 
     }
 
     @FXML
     void btn_SaveChange_detailQuestion_ExamManagement(ActionEvent event) {
+        String contentQuestion = txtArea_ContentQuestion_detailQuestion_ExamManagement.getText();
 
+        if (contentQuestion.length() == 0 || contentQuestion == null || contentQuestion == "") {
+            Notification.Error("Error", "Please enter content question");
+            return;
+        }
+        if (contentQuestion.length() > 1000) {
+            Notification.Error("Error", "Content question is too long");
+            return;
+        }
+
+        ArrayList<Answer> answers = getAnswers(VBox_detailQuestion_ExamManagement);
+
+        if (answers == null) {
+            Notification.Error("Error", "Please enter answers");
+            return;
+        }
+
+        if (answers.size() < 2) {
+            Notification.Error("Error", "Please enter at least 2 answers");
+            return;
+        }
+
+        if (CheckCheckBox.checkChoiceNoOrOne(VBox_detailQuestion_ExamManagement)) {
+            Notification.Error("Error", "Please choose correct answer");
+            return;
+        }
+
+        questionSelected.setContent(contentQuestion);
+
+        questionSelected.setAnswers(getAnswers(VBox_detailQuestion_ExamManagement));
+
+        // questionSelected.setChapter("chapter1");
+
+        // questionSelected.setDifficulty(1);
+
+        boolean isUpdateSuccess = quesManager.updateQuestion(questionSelected);
+
+        if (!isUpdateSuccess) {
+            Notification.Error("Error", "Update question failed");
+            return;
+
+        }
+        tableView_QuestionBank_EditExam.getItems().set(index_QuestionSelected, questionSelected);
+
+        Notification.Infomation("Success", "Update question successfully");
+
+        detailQuestion_ExamManagement.setVisible(false);
     }
 
     // ===============================================
     // Search Question in Exam Detail
     @FXML
     void btn_SearchQuestion_ExamManagement(ActionEvent event) {
+        String keyWord = tf_searchQuestion_ExamManagement.getText();
+
+        if (keyWord.length() == 0 || keyWord == null || keyWord == "") {
+            Notification.Error("Error", "Please enter keyword");
+            return;
+        }
+
+        if (keyWord.length() > 191) {
+            Notification.Error("Error", "Keyword is too long");
+            return;
+        }
+
+        ArrayList<Question> listQuestion_Search = new ArrayList<Question>();
+
+        for (Question question : listQuestions_ExamDetail) {
+            if (question.getContent().contains(keyWord)) {
+                listQuestion_Search.add(question);
+            }
+        }
+
+        if (listQuestion_Search.size() == 0) {
+            Notification.Error("Error", "Keyword not found");
+            return;
+        }
+        tableView_QuestionExam_ExamDetail_ExamManagement.getItems().clear();
+
+        tableView_QuestionExam_ExamDetail_ExamManagement
+                .setItems(loadQuestion_tableViewQuestionExam_QuestionManagement(listQuestion_Search));
 
     }
 
+    // Need to fix
     public void LoadListExam() {
 
         ArrayList<Exam> listExam_Current = new ArrayList<Exam>();
@@ -675,14 +1159,15 @@ public class Exam_controller implements Initializable {
                 listExams.add(exam);
 
                 Subject subject_current = subjectManager.getSubject(exam.getSubjectId());
+
                 add_Exam_FlowPane(new Exam_card(exam, subject_current));
             }
         }
 
     }
 
-    public void LoadComboBox_AllExams() {
-        ComboBox_Subject_AllExam.getItems().addAll(listSubjects);
+    public void LoadComboBox_AllExams(List<Subject> listSubjects2) {
+        ComboBox_Subject_AllExam.getItems().addAll(listSubjects2);
 
         ComboBox_Subject_AllExam.setConverter(new StringConverter<Subject>() {
             @Override
@@ -708,12 +1193,16 @@ public class Exam_controller implements Initializable {
         // LoadListGroup & Set button details & button archive
         LoadListExam();
 
-        LoadComboBox_AllExams();
+        LoadComboBox_AllExams(listSubjects);
 
         LoadComboBox_HostExamAll();
 
         tableView_QuestionBank_ExamManagement.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tableView_ExamQuestion_ExamManagement.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        tableView_QuestionBank_EditExam.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        tableView_QuestionExam_EditExam.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
     }
 
 }

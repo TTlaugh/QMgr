@@ -157,6 +157,8 @@ public class ExamDAO implements interfaceDAO<Exam> {
                 ps.setString(3, t.getDesc());
                 String quesionIDJson = gson.toJson(t.getQuestionsIds());
                 ps.setString(4, quesionIDJson);
+                ps.setInt(5, t.getExamId());
+
                 if (ps.executeUpdate() > 0)
                     b = true;
             } catch (Exception e) {
