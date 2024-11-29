@@ -57,26 +57,26 @@ public class GroupManager {
     public Group getGroupByID(int id) {
         return new GroupDAO().getByID(id);
     }
-    
+
     public boolean exportStudents(Group grp, String excelFilePath) {
         int grpID = grp.getGroupId();
-		try {
-			new StudentExcelWriter().writeExcel(
+        try {
+            new StudentExcelWriter().writeExcel(
                     grpID + " | " + grp.getGroupName(),
-					new StudentDAO().getAllByGroupId(grpID),
-					excelFilePath);
-			return true;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
+                    new StudentDAO().getAllByGroupId(grpID),
+                    excelFilePath);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     public boolean importStudents(Group group, String excelFilePath) throws SQLException {
         StudentManager studentManager = new StudentManager();
-		try {
-			List<Student> students = new StudentExcelReader().readExcel(excelFilePath);
-			for (Student student : students) {
+        try {
+            List<Student> students = new StudentExcelReader().readExcel(excelFilePath);
+            for (Student student : students) {
                 String firstName = student.getFirstName();
                 String lastName = student.getLastName();
                 String studentID = student.getStudentId();
@@ -88,13 +88,15 @@ public class GroupManager {
                     continue;
                 }
                 if (!CheckStringFormat.isCorrectFormat(studentID)) {
-                    Notification.Error("Error", "Can import student " + studentID + " because Student ID is not correct format.");
+                    Notification.Error("Error",
+                            "Can import student " + studentID + " because Student ID is not correct format.");
                     continue;
                 }
                 Student student_inGroup = studentManager.getStudentbyIdfromGroup(studentID, group.getGroupId());
 
                 if (student_inGroup != null) {
-                    Notification.Error("Error", "Student ID #" + studentID + " existed in the group, please try again.");
+                    Notification.Error("Error",
+                            "Student ID #" + studentID + " existed in the group, please try again.");
                     continue;
                 }
 
@@ -103,8 +105,9 @@ public class GroupManager {
                     continue;
                 }
                 firstName = StringNormalization.removeDuplicateSpaces(firstName);
-                if(!StringValidate.CheckLengthInRange(firstName, 2, 50)){
-                    Notification.Error("Error", "Can import student " + studentID + " because First Name out of range 2 to 50 characters.");
+                if (!StringValidate.CheckLengthInRange(firstName, 2, 50)) {
+                    Notification.Error("Error",
+                            "Can import student " + studentID + " because First Name out of range 2 to 50 characters.");
                     continue;
                 }
 
@@ -113,8 +116,9 @@ public class GroupManager {
                     continue;
                 }
                 lastName = StringNormalization.removeDuplicateSpaces(lastName);
-                if(!StringValidate.CheckLengthInRange(lastName, 2, 50)){
-                    Notification.Error("Error", "Can import student " + studentID + " because Last Name out of range 2 to 50 characters.");
+                if (!StringValidate.CheckLengthInRange(lastName, 2, 50)) {
+                    Notification.Error("Error",
+                            "Can import student " + studentID + " because Last Name out of range 2 to 50 characters.");
                     continue;
                 }
 
@@ -122,12 +126,13 @@ public class GroupManager {
                     Notification.Error("Error", "Can import student " + studentID + " because Email is empty.");
                     continue;
                 }
-                if(!StringValidate.CheckEmailValid(email)){
+                if (!StringValidate.CheckEmailValid(email)) {
                     Notification.Error("Error", "Can import student " + studentID + " because Email is not valid.");
                     continue;
                 }
-                if(!StringValidate.CheckLengthInRange(email, 5, 255)){
-                    Notification.Error("Error", "Can import student " + studentID + " because Email out of range 5 to 255 characters.");
+                if (!StringValidate.CheckLengthInRange(email, 5, 255)) {
+                    Notification.Error("Error",
+                            "Can import student " + studentID + " because Email out of range 5 to 255 characters.");
                     continue;
                 }
 
@@ -136,8 +141,9 @@ public class GroupManager {
                     continue;
                 }
                 phone = StringNormalization.convertToPhoneNumber(phone);
-                if(!StringValidate.CheckPhoneValid(phone)){
-                    Notification.Error("Error", "Can import student " + studentID + " because Phone number is not valid.");
+                if (!StringValidate.CheckPhoneValid(phone)) {
+                    Notification.Error("Error",
+                            "Can import student " + studentID + " because Phone number is not valid.");
                     continue;
                 }
 
@@ -145,54 +151,70 @@ public class GroupManager {
                 student.setLastName(lastName);
                 student.setPhone(phone);
                 student.setEmail(email);
-				student.setGroupId(group.getGroupId());
-				new StudentDAO().create(student);
-			}
-			return true;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
+                student.setGroupId(group.getGroupId());
+                new StudentDAO().create(student);
+            }
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
 
 class StudentExcelWriter extends ExcelWriter {
-	@Override
-	public void writeHeader(Sheet sheet, int rowIndex) {
-		CellStyle cellStyle = createStyleForHeader(sheet);
-		Row row = sheet.createRow(rowIndex);
-		Cell cell = null;
-		cell = row.createCell(0); cell.setCellStyle(cellStyle); cell.setCellValue("ID");
-		cell = row.createCell(1); cell.setCellStyle(cellStyle); cell.setCellValue("First Name");
-		cell = row.createCell(2); cell.setCellStyle(cellStyle); cell.setCellValue("Last Name");
-		cell = row.createCell(3); cell.setCellStyle(cellStyle); cell.setCellValue("Phone");
-		cell = row.createCell(4); cell.setCellStyle(cellStyle); cell.setCellValue("Email");
-	}
+    @Override
+    public void writeHeader(Sheet sheet, int rowIndex) {
+        CellStyle cellStyle = createStyleForHeader(sheet);
+        Row row = sheet.createRow(rowIndex);
+        Cell cell = null;
+        cell = row.createCell(0);
+        cell.setCellStyle(cellStyle);
+        cell.setCellValue("ID");
+        cell = row.createCell(1);
+        cell.setCellStyle(cellStyle);
+        cell.setCellValue("First Name");
+        cell = row.createCell(2);
+        cell.setCellStyle(cellStyle);
+        cell.setCellValue("Last Name");
+        cell = row.createCell(3);
+        cell.setCellStyle(cellStyle);
+        cell.setCellValue("Phone");
+        cell = row.createCell(4);
+        cell.setCellStyle(cellStyle);
+        cell.setCellValue("Email");
+    }
 
-	@Override
-	public <T> void writeData(T data, Row row) {
-		Student student = (Student) data;
-		Cell cell = null; int colIndex = 0;
-		cell = row.createCell(colIndex++); cell.setCellValue(student.getStudentId());
-		cell = row.createCell(colIndex++); cell.setCellValue(student.getFirstName());
-		cell = row.createCell(colIndex++); cell.setCellValue(student.getLastName());
-		cell = row.createCell(colIndex++); cell.setCellValue(student.getPhone());
-		cell = row.createCell(colIndex++); cell.setCellValue(student.getEmail());
-	}
+    @Override
+    public <T> void writeData(T data, Row row) {
+        Student student = (Student) data;
+        Cell cell = null;
+        int colIndex = 0;
+        cell = row.createCell(colIndex++);
+        cell.setCellValue(student.getStudentId());
+        cell = row.createCell(colIndex++);
+        cell.setCellValue(student.getFirstName());
+        cell = row.createCell(colIndex++);
+        cell.setCellValue(student.getLastName());
+        cell = row.createCell(colIndex++);
+        cell.setCellValue(student.getPhone());
+        cell = row.createCell(colIndex++);
+        cell.setCellValue(student.getEmail());
+    }
 }
 
 class StudentExcelReader extends ExcelReader {
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T> T getData(Row row) {
-		Student student = new Student();
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> T getData(Row row) {
+        Student student = new Student();
         int colIndex = 0;
         student.setStudentId(row.getCell(colIndex++).getStringCellValue());
         student.setFirstName(row.getCell(colIndex++).getStringCellValue());
         student.setLastName(row.getCell(colIndex++).getStringCellValue());
         student.setPhone(row.getCell(colIndex++).getStringCellValue());
         student.setEmail(row.getCell(colIndex++).getStringCellValue());
-		return (T) student;
-	}
+        return (T) student;
+    }
 }

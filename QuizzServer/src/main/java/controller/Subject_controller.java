@@ -368,8 +368,6 @@ public class Subject_controller implements Initializable {
             return;
         }
 
-        this.VBox_detailQuestion_SubjectManagement.getChildren().clear();
-
         txtArea_ContentQuestion_detailQuestion_SubjectManagement.setText(questionSelected.getContent());
 
         this.detailQuestion_SubjectManagement.setVisible(true);
@@ -713,10 +711,10 @@ public class Subject_controller implements Initializable {
             return;
         }
         String fileNameExel = file_Current.getPath();
-        Boolean check_ExportExel = questionManager.exportQuestions(subject_Current_SubjectManagement,fileNameExel);
+        Boolean check_ExportExel = questionManager.exportQuestions(subject_Current_SubjectManagement, fileNameExel);
         if (!check_ExportExel) {
-        Notification.Infomation("Error", "Export file failed");
-        return;
+            Notification.Infomation("Error", "Export file failed");
+            return;
         }
 
         if (Notification.Comfrim("Confirm",
@@ -734,7 +732,8 @@ public class Subject_controller implements Initializable {
             try {
                 Boolean check_FormatExel = check_xlsx.equalsIgnoreCase("xlsx") ||
                         check_xlsx.equalsIgnoreCase("xls");
-                Boolean selectFile = questionManager.importQuestions(subject_Current_SubjectManagement,file_Current.getPath());
+                Boolean selectFile = questionManager.importQuestions(subject_Current_SubjectManagement,
+                        file_Current.getPath());
                 if (!check_FormatExel && !selectFile) {
                     Notification.Error("Error", "Please choose file excel");
                     return false;
@@ -745,7 +744,8 @@ public class Subject_controller implements Initializable {
                 e.printStackTrace();
             }
         }
-        ArrayList<Question> allQuestionsForCurrentSbj = questionManager.getAllQuestionsBySubject(subject_Current_SubjectManagement.getSubjectId());
+        ArrayList<Question> allQuestionsForCurrentSbj = questionManager
+                .getAllQuestionsBySubject(subject_Current_SubjectManagement.getSubjectId());
         ObservableList<Question> observableList_Question = FXCollections.observableArrayList(allQuestionsForCurrentSbj);
         table_Question_SubjectManagement.setItems(observableList_Question);
         lb_QuantityQuestion_SubjectManagement.setText(allQuestionsForCurrentSbj.size() + " questions");

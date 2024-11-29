@@ -127,7 +127,7 @@ public class Exam_card {
         this.archive_btn.setScaleY(1);
         this.archive_btn.setScaleZ(1);
         this.archive_btn.setLayoutX(126);
-        this.archive_btn.setLayoutY(91);
+        this.archive_btn.setLayoutY(88);
         this.archive_btn.prefWidth(32);
         this.archive_btn.prefHeight(32);
         this.archive_btn.setBlendMode(javafx.scene.effect.BlendMode.SRC_OVER);
@@ -140,7 +140,7 @@ public class Exam_card {
         this.details_btn.setScaleY(1);
         this.details_btn.setScaleZ(1);
         this.details_btn.setLayoutX(171);
-        this.details_btn.setLayoutY(91);
+        this.details_btn.setLayoutY(88);
         this.details_btn.prefWidth(65);
         this.details_btn.prefHeight(32);
         this.details_btn.setTextOverrun(javafx.scene.control.OverrunStyle.ELLIPSIS);

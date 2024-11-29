@@ -5,12 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import model.Group;
-import model.Student;
-
 import java.sql.Timestamp;
-
 import utils.SQLUtils;
 
 public class GroupDAO implements interfaceDAO<Group> {

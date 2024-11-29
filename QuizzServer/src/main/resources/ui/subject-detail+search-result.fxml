@@ -65,20 +65,17 @@
             <Insets left="16.0" />
          </padding>
       </HBox>
-      <AnchorPane fx:id="AnchorPane_SubjectDetailQuestion_SubjectManagement" layoutX="454.0" layoutY="167.0" prefHeight="488.0" prefWidth="760.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
+      <AnchorPane fx:id="AnchorPane_SubjectDetailQuestion_SubjectManagement" layoutX="454.0" layoutY="167.0" prefHeight="488.0" prefWidth="760.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
          <children>
             <Label layoutX="44.0" layoutY="23.0" text="Question Bank" textFill="#101828" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="46.0" layoutY="49.0" text="Total 12 questions" textFill="#475467" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="46.0" />
             <TableView fx:id="table_Question_SubjectManagement" fixedCellSize="0.0" layoutX="91.0" layoutY="91.0" prefHeight="347.0" prefWidth="476.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="77.0">
                <columns>
-                  <TableColumn editable="false" prefWidth="44.00001525878906" text="#ID" />
-                  <TableColumn editable="false" minWidth="5.5999755859375" prefWidth="221.60003662109375" text="Question" />
-                  <TableColumn editable="false" prefWidth="114.4000244140625" resizable="false" text="Chapter" />
-                  <TableColumn editable="false" prefWidth="92.79998779296875" resizable="false" text="Difficult (1-5)" />
+                  <TableColumn fx:id="ID_TableColumn_subjectDetail" editable="false" prefWidth="44.00001525878906" text="#ID" />
+                  <TableColumn fx:id="Question_TableColumn_subjectDetail" editable="false" minWidth="5.5999755859375" prefWidth="221.60003662109375" text="Question" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -319,7 +316,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <CheckBox fx:id="checkbox_MultipleAnswers_addQuestion_SubjectManagement" layoutX="328.0" layoutY="155.0" mnemonicParsing="false" selected="true" text="Multiple answers" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="155.0">
+                              <CheckBox fx:id="checkbox_MultipleAnswers_addQuestion_SubjectManagement" layoutX="328.0" layoutY="155.0" mnemonicParsing="false" onAction="#setOnActionMultiple_Add" selected="true" text="Multiple answers" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="155.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -380,7 +377,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <CheckBox fx:id="checkbox_MultipleAnswers_detailQuestion_SubjectManagement" layoutX="328.0" layoutY="155.0" mnemonicParsing="false" selected="true" text="Multiple answers" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="155.0">
+                              <CheckBox fx:id="checkbox_MultipleAnswers_detailQuestion_SubjectManagement" layoutX="328.0" layoutY="155.0" mnemonicParsing="false" onAction="#setOnActionMultiple_Detail" selected="true" text="Multiple answers" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="155.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -409,26 +406,24 @@
             </AnchorPane>
          </children>
       </StackPane>
-      <AnchorPane fx:id="AnchorPane_ResultSearchQuestion_SubjectManagement" layoutX="10.0" layoutY="10.0" prefHeight="488.0" prefWidth="760.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
+      <AnchorPane fx:id="AnchorPane_ResultSearchQuestion_SubjectManagement" layoutX="10.0" layoutY="10.0" prefHeight="488.0" prefWidth="760.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
          <children>
-            <Label layoutX="44.0" layoutY="23.0" text="Search results for “Van toc”" textFill="#101828" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <Label layoutX="44.0" layoutY="23.0" text="Search results " textFill="#101828" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="46.0" layoutY="49.0" text="Total 2 questions" textFill="#475467" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="46.0" />
-            <TableView fixedCellSize="0.0" layoutX="91.0" layoutY="91.0" prefHeight="347.0" prefWidth="476.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="77.0">
+            <Label fx:id="lb_totalQuestion_SubjectManagement" layoutX="46.0" layoutY="49.0" text="Total 2 questions" textFill="#475467" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="46.0" />
+            <TableView fx:id="table_Search_SubjectManagement" fixedCellSize="0.0" layoutX="91.0" layoutY="91.0" prefHeight="347.0" prefWidth="476.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="77.0">
                <columns>
-                  <TableColumn prefWidth="67.19996643066406" resizable="false" text="#ID" />
-                  <TableColumn minWidth="5.5999755859375" prefWidth="209.5999755859375" resizable="false" text="Question" />
-                  <TableColumn prefWidth="216.800048828125" text="Chapter" />
-                  <TableColumn prefWidth="224.0" text="Difficulty (1-5)" />
+                  <TableColumn fx:id="ID_TableColumnSearch_subjectDetail" prefWidth="102.0" text="#ID" />
+                  <TableColumn fx:id="Question_TableColumnSearch_subjectDetail" prefWidth="614.0" text="Question" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Button alignment="CENTER" layoutX="42.0" layoutY="429.0" mnemonicParsing="false" onAction="#btn_ArchiveQuestion_ResultSearch_SubjectManagement" prefHeight="32.0" prefWidth="149.0" styleClass="button-donhat" text="Archive question" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+            <Button alignment="CENTER" layoutX="42.0" layoutY="429.0" mnemonicParsing="false" onAction="#btn_ArchiveQuestion_SubjectManagement" prefHeight="32.0" prefWidth="149.0" styleClass="button-donhat" text="Archive question" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

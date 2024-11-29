@@ -19,6 +19,10 @@ public class ExamManager {
         return new ExamDAO().create(exam);
     }
 
+    public ArrayList<Exam> getAllExams() {
+        return new ExamDAO().getAll();
+    }
+
     public ArrayList<Exam> getAllExamsBySubject(int subjectId) {
         return new ExamDAO().getAllBySubject(subjectId);
     }

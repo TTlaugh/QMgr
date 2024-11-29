@@ -53,11 +53,11 @@ public class ExamDAO implements interfaceDAO<Exam> {
 
     @Override
     public ArrayList<Exam> getAll() {
-        list = null;
+        list = new ArrayList<Exam>();
         con = SQLUtils.getConnection();
         if (con != null) {
             try {
-                String query = "Select * from exams where archived=0";
+                String query = "Select * from exams";
                 PreparedStatement ps = con.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
@@ -174,7 +174,7 @@ public class ExamDAO implements interfaceDAO<Exam> {
         con = SQLUtils.getConnection();
         if (con != null) {
             try {
-                String query = "UPDATE exams SET archived = false WHERE ExamID = ?";
+                String query = "UPDATE exams SET archived = 1 WHERE ExamID = ?";
                 PreparedStatement ps = con.prepareStatement(query);
                 ps.setInt(1, t);
                 if (ps.executeUpdate() > 0)
@@ -196,8 +196,12 @@ public class ExamDAO implements interfaceDAO<Exam> {
                 String query = "SELECT e.*" +
                         "FROM Exams e" +
                         "LEFT JOIN HostExams he ON e.ExamID = he.ExamID" +
-                        "WHERE he.ExamID IS NULL AND e.Archived = 0;";
-                PreparedStatement ps = con.prepareStatement(query);
+                        "WHERE he.ExamID IS NULL AND e.Archived = 0";
+
+                String query2 = "SELECT  Exams.* " + "FROM Exams "
+                        + "LEFT JOIN HostExams ON Exams.ExamID = HostExams.ExamID"
+                        + " WHERE HostExams.ExamID IS NULL AND Exams.Archived =0";
+                PreparedStatement ps = con.prepareStatement(query2);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
                     Type questionListType = new TypeToken<List<Integer>>() {
@@ -228,8 +232,8 @@ public class ExamDAO implements interfaceDAO<Exam> {
         con = SQLUtils.getConnection();
         if (con != null) {
             try {
-                String query = "SELECT e.* " + "FROM Exams e"
-                        + "JOIN HostExams he ON e.ExamID = he.ExamID WHERE e.Archived =0;";
+                String query = "SELECT Exams.* " + "FROM Exams "
+                        + "JOIN HostExams  ON Exams.ExamID = HostExams.ExamID WHERE HostExams.Archived =0";
                 PreparedStatement ps = con.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {

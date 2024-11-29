@@ -5,6 +5,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -16,6 +17,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="540.0" minWidth="760.0" prefHeight="540.0" prefWidth="760.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Exam_controller">
@@ -299,10 +301,10 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="21.0" layoutY="98.0" text="Total 12 questions" textFill="#475467" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="98.0" />
+            <Label fx:id="lb_totalQuestion_ExamDetail_ExamManagement" layoutX="21.0" layoutY="98.0" text="Total 12 questions" textFill="#475467" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="98.0" />
             <HBox alignment="CENTER_LEFT" fillHeight="false" layoutX="198.0" layoutY="65.0" maxHeight="38.0" maxWidth="232.0" prefHeight="100.0" prefWidth="232.0" spacing="13.0" styleClass="round-layout" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="79.0">
                <children>
-                  <TextField maxWidth="173.0" prefHeight="30.0" prefWidth="167.0" promptText="Search" style="-fx-background-color: transparent;">
+                  <TextField fx:id="tf_searchQuestion_ExamManagement" maxWidth="173.0" onAction="#btn_SearchQuestion_ExamManagement" prefHeight="30.0" prefWidth="167.0" promptText="Search" style="-fx-background-color: transparent;">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -320,12 +322,10 @@
                   <Insets left="16.0" />
                </padding>
             </HBox>
-            <TableView fixedCellSize="0.0" layoutX="20.0" layoutY="122.0" prefHeight="347.0" prefWidth="476.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="129.0">
+            <TableView fx:id="tableView_QuestionExam_ExamDetail_ExamManagement" fixedCellSize="0.0" layoutX="20.0" layoutY="122.0" prefHeight="347.0" prefWidth="476.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="129.0">
                <columns>
-                  <TableColumn editable="false" prefWidth="44.00001525878906" text="#ID" />
-                  <TableColumn editable="false" minWidth="5.5999755859375" prefWidth="221.60003662109375" text="Question" />
-                  <TableColumn editable="false" prefWidth="114.4000244140625" resizable="false" text="Chapter" />
-                  <TableColumn editable="false" prefWidth="92.79998779296875" resizable="false" text="Difficult (1-5)" />
+                  <TableColumn fx:id="ID_ColumnQuestionExam" editable="false" prefWidth="44.00001525878906" text="#ID" />
+                  <TableColumn fx:id="Question_ColumnQuestionExam" editable="false" minWidth="5.5999755859375" prefWidth="221.60003662109375" text="Question" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -367,7 +367,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField disable="true" layoutX="50.0" layoutY="149.0" prefHeight="38.0" prefWidth="208.0" styleClass="round-layout" text="Kiem tra 15 phut" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="42.0">
+                  <TextField fx:id="tf_ExamName_ExamDetail_ExamManagement" disable="true" layoutX="50.0" layoutY="149.0" prefHeight="38.0" prefWidth="208.0" styleClass="round-layout" text="Kiem tra 15 phut" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="42.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -382,12 +382,12 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextArea layoutX="12.0" layoutY="258.0" prefHeight="90.0" prefWidth="208.0" styleClass="round-layout" wrapText="true" AnchorPane.bottomAnchor="155.0" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="202.0">
+                  <TextArea fx:id="txtArea_Desc_ExamDetail_ExamManagement" disable="true" layoutX="12.0" layoutY="258.0" prefHeight="90.0" prefWidth="208.0" styleClass="round-layout" wrapText="true" AnchorPane.bottomAnchor="155.0" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="202.0">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </TextArea>
-                  <TextField disable="true" layoutX="12.0" layoutY="148.0" prefHeight="38.0" prefWidth="208.0" styleClass="round-layout" text="Dai so tuyen tinh" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="122.0">
+                  <TextField fx:id="tf_SubjectName_ExamDetaiL_ExamManagement" disable="true" layoutX="12.0" layoutY="148.0" prefHeight="38.0" prefWidth="208.0" styleClass="round-layout" text="Dai so tuyen tinh" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="122.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -915,5 +915,76 @@
             </AnchorPane>
          </children>
       </AnchorPane>
+      <StackPane fx:id="detailQuestion_ExamManagement" layoutX="127.0" layoutY="20.0" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="127.0" AnchorPane.rightAnchor="153.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <AnchorPane maxHeight="500.0" maxWidth="480.0" prefHeight="500.0" prefWidth="480.0" styleClass="popup">
+               <children>
+                  <Separator layoutX="78.0" layoutY="87.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0" />
+                  <Label layoutX="20.0" layoutY="14.0" text="Question details" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="9.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="436.0" layoutY="8.0" mnemonicParsing="false" onAction="#btn_cancelQuesDetail_ExamManagement" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
+                     <graphic>
+                        <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../imgs/icons8-close-50.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Separator layoutX="95.0" layoutY="352.0" prefWidth="200.0" AnchorPane.bottomAnchor="72.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="146.0" layoutY="88.0" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="72.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
+                     <content>
+                        <AnchorPane prefHeight="382.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="80.0" layoutY="35.0" text="Question" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextArea fx:id="txtArea_ContentQuestion_detailQuestion_ExamManagement" layoutX="77.0" layoutY="67.0" maxWidth="440.0" prefHeight="90.0" prefWidth="440.0" styleClass="round-layout" wrapText="true" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="3.0" />
+                                 </padding>
+                              </TextArea>
+                              <Label layoutX="20.0" layoutY="156.0" text="Answers" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="155.0">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <CheckBox fx:id="checkbox_MultipleAnswers_detailQuestion_ExamManagement" layoutX="328.0" layoutY="155.0" mnemonicParsing="false" onAction="#setOnActionMultiple_Detail" selected="true" text="Multiple answers" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="155.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </CheckBox>
+                              <Button fx:id="btn_AddAnswer_detailQuestion_Hidden" alignment="CENTER" layoutX="87.0" layoutY="184.0" mnemonicParsing="false" onAction="#btn_addAnswer_detailQuestion_ExamManagement" prefHeight="32.0" prefWidth="214.0" styleClass="button-trang" text="Add Answer" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="185.0">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Button>
+                              <VBox fx:id="VBox_detailQuestion_ExamManagement" layoutX="20.0" layoutY="234.0" prefWidth="438.0" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="230.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#btn_cancelQuesDetail_ExamManagement" prefHeight="32.0" prefWidth="214.0" styleClass="button-trang" text="Cancel" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btn_SaveChange_ExamManagement" alignment="CENTER" layoutX="30.0" layoutY="455.0" mnemonicParsing="false" onAction="#btn_SaveChange_detailQuestion_ExamManagement" prefHeight="32.0" prefWidth="214.0" styleClass="button-xanhdam" text="Save change" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>
