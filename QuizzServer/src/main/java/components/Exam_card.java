@@ -1,23 +1,24 @@
 package components;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import java.time.LocalDate;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.transform.Rotate;
+import model.Exam;
+import model.Subject;
 
 public class Exam_card {
     final String url_archive = "/imgs/icons8-archive-24.png";
     final String url_test = "/imgs/Screenshot_2024-11-04_091448-removebg-preview.png";
 
+    Exam exam;
+    Subject subject;
+
     Label Exam_name = new Label();
     Label Subject_name = new Label();
-    Label date_created_label = new Label("Date created");
-    Label date_created = new Label();
     Button archive_btn = new Button();
 
     Button details_btn = new Button("Details");
@@ -34,11 +35,13 @@ public class Exam_card {
     }
 
     public Exam_card(
-            String Exam_name, String Subject_name,
-            String date_created) {
-        this.Exam_name.setText(Exam_name);
-        this.Subject_name.setText(Subject_name);
-        this.date_created.setText(date_created);
+            Exam exam, Subject subject) {
+
+        this.exam = exam;
+        this.subject = subject;
+        this.Exam_name.setText(this.exam.getName());
+        this.Subject_name.setText(this.subject.getSubjectName());
+
         image_view_archive.setFitWidth(20);
         image_view_archive.setFitHeight(20);
 
@@ -51,8 +54,6 @@ public class Exam_card {
                 this.Exam_name,
                 this.Subject_name,
                 this.image_view_exam,
-                this.date_created_label,
-                this.date_created,
                 this.archive_btn,
                 this.details_btn);
 
@@ -118,42 +119,6 @@ public class Exam_card {
         this.Subject_name.setDepthTest(javafx.scene.DepthTest.INHERIT);
         this.Subject_name.setPickOnBounds(true);
 
-        // Set Date Created Label
-        this.date_created_label.setStyle(
-                "-fx-margin:0 0 31px 12px; -fx-font:System 15px; -fx-color:#eaecf0;");
-        this.date_created_label.setScaleX(1);
-        this.date_created_label.setScaleY(1);
-        this.date_created_label.setScaleZ(1);
-        this.date_created_label.prefWidth(130);
-        this.date_created_label.prefHeight(61);
-        this.date_created_label.setLayoutX(16);
-        this.date_created_label.setLayoutY(91);
-        this.date_created_label.prefWidth(85);
-        this.date_created_label.prefHeight(21);
-        this.date_created_label.setTextOverrun(javafx.scene.control.OverrunStyle.ELLIPSIS);
-        this.date_created_label.setGraphicTextGap(4);
-        this.date_created_label.setContentDisplay(javafx.scene.control.ContentDisplay.LEFT);
-        this.date_created_label.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
-        this.date_created_label.setNodeOrientation(javafx.geometry.NodeOrientation.INHERIT);
-
-        // Set Date Created
-        this.date_created.setStyle(
-                "-fx-margin-bottom:12px; -fx-margin-left:12px; -fx-font-size: 12px; -fx-font-weight: bold; -fx-font-family:System;  ");
-        this.date_created.setTextFill(javafx.scene.paint.Color.BLACK);
-        this.date_created.setScaleX(1);
-        this.date_created.setScaleY(1);
-        this.date_created.setScaleZ(1);
-        this.date_created.setLayoutX(17);
-        this.date_created.setLayoutY(109);
-        this.date_created.prefWidth(17);
-        this.date_created.prefHeight(109);
-        this.date_created.setTextOverrun(javafx.scene.control.OverrunStyle.ELLIPSIS);
-        this.date_created.setGraphicTextGap(4);
-
-        this.date_created.setContentDisplay(javafx.scene.control.ContentDisplay.LEFT);
-        this.date_created.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
-        this.date_created.setNodeOrientation(javafx.geometry.NodeOrientation.INHERIT);
-
         // Set Archive Button
         this.archive_btn.setStyle(
                 "-fx-font:System 15px; -fx-text-fill: #f04438;");
@@ -188,13 +153,16 @@ public class Exam_card {
         return details_btn;
     }
 
-    public void click_Button_Archive(StackPane stackPane) {
-        archive_btn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                stackPane.setVisible(true);
-            }
-        });
+    public Button getArchive_btn() {
+        return archive_btn;
+    }
+
+    public Exam getExam() {
+        return this.exam;
+    }
+
+    public Subject getSubject() {
+        return this.subject;
     }
 
 }

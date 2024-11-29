@@ -697,6 +697,11 @@ public class Subject_controller implements Initializable {
 
     }
 
+    @FXML
+    void btn_ArchiveQuestion_ResultSearch_SubjectManagement(ActionEvent event) {
+
+    }
+
     // Export Question
     @FXML
     void btn_ExportQuestion_SubjectManagement(ActionEvent event) {

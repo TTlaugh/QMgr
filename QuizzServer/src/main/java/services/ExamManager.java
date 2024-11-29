@@ -34,4 +34,12 @@ public class ExamManager {
     public boolean deleteExam(int examId) {
         return new ExamDAO().delete(examId);
     }
+
+    public ArrayList<Exam> getAllExams_UnHosted() {
+        return new ExamDAO().getAllExamsUnHosted();
+    }
+
+    public ArrayList<Exam> getAllExams_Hosted() {
+        return new ExamDAO().getAllExamsHosted();
+    }
 }

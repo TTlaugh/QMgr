@@ -188,4 +188,72 @@ public class ExamDAO implements interfaceDAO<Exam> {
         return b;
     }
 
+    public ArrayList<Exam> getAllExamsUnHosted() {
+        list = new ArrayList<Exam>();
+        con = SQLUtils.getConnection();
+        if (con != null) {
+            try {
+                String query = "SELECT e.*" +
+                        "FROM Exams e" +
+                        "LEFT JOIN HostExams he ON e.ExamID = he.ExamID" +
+                        "WHERE he.ExamID IS NULL AND e.Archived = 0;";
+                PreparedStatement ps = con.prepareStatement(query);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    Type questionListType = new TypeToken<List<Integer>>() {
+                    }.getType();
+                    exam = new Exam();
+                    exam.setExamId(rs.getInt(1));
+                    exam.setSubjectId(rs.getInt(2));
+                    exam.setName(rs.getString(3));
+                    exam.setDesc(rs.getString(4));
+                    String questionJson = rs.getString(5);
+                    if (questionJson != null && !questionJson.isEmpty()) {
+                        exam.setQuestionsIds(gson.fromJson(questionJson, questionListType));
+                    }
+                    exam.setArchive(rs.getBoolean(6));
+                    list.add(exam);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                SQLUtils.closeConnection(con);
+            }
+        }
+        return list;
+    }
+
+    public ArrayList<Exam> getAllExamsHosted() {
+        list = new ArrayList<Exam>();
+        con = SQLUtils.getConnection();
+        if (con != null) {
+            try {
+                String query = "SELECT e.* " + "FROM Exams e"
+                        + "JOIN HostExams he ON e.ExamID = he.ExamID WHERE e.Archived =0;";
+                PreparedStatement ps = con.prepareStatement(query);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    Type questionListType = new TypeToken<List<Integer>>() {
+                    }.getType();
+                    exam = new Exam();
+                    exam.setExamId(rs.getInt(1));
+                    exam.setSubjectId(rs.getInt(2));
+                    exam.setName(rs.getString(3));
+                    exam.setDesc(rs.getString(4));
+                    String questionJson = rs.getString(5);
+                    if (questionJson != null && !questionJson.isEmpty()) {
+                        exam.setQuestionsIds(gson.fromJson(questionJson, questionListType));
+                    }
+                    exam.setArchive(rs.getBoolean(6));
+                    list.add(exam);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                SQLUtils.closeConnection(con);
+            }
+        }
+        return list;
+    }
+
 }

@@ -196,7 +196,8 @@ public class Student_controller implements Initializable {
 
     public static Group group_Current_StudentManagement = new Group();
 
-    private int CountGroupID_Current_StudentManagement = group_list.get(group_list.size() - 1).getGroupId() + 1;
+    private int CountGroupID_Current_StudentManagement = (group_list.size() == 0) ? 1
+            : group_list.get(group_list.size() - 1).getGroupId() + 1;
 
     private int indexSelected_AnchorPane_in_FlowPane = 0;
 
@@ -342,10 +343,10 @@ public class Student_controller implements Initializable {
     void btn_DeleteStudent_StudentManagement(ActionEvent event) {
 
         if (AnchorPane_ReultSearch_StudentManagement.isVisible()) {
-            deleteStudent_TableViewGroupDetail(table_Student_StudentManagement);
+            deleteStudent_TableViewGroupDetail(table_Search_StudentManagement);
             return;
         }
-        deleteStudent_TableViewGroupDetail(table_Search_StudentManagement);
+        deleteStudent_TableViewGroupDetail(table_Student_StudentManagement);
 
     }
 
@@ -539,8 +540,7 @@ public class Student_controller implements Initializable {
             return;
         }
         studentSelected = new Student(0,
-                group_Current_StudentManagement.getGroupId(), studentID, firstName, lastName,
-                phone, email);
+                group_Current_StudentManagement.getGroupId(), studentID, firstName, lastName, email, phone);
 
         if (studentManager.createStudent(studentSelected)) {
             Notification.Infomation("Success", "Add student successfully");
