@@ -342,10 +342,10 @@ public class Student_controller implements Initializable {
     void btn_DeleteStudent_StudentManagement(ActionEvent event) {
 
         if (AnchorPane_ReultSearch_StudentManagement.isVisible()) {
-            deleteStudent_TableViewGroupDetail(table_Student_StudentManagement);
+            deleteStudent_TableViewGroupDetail(table_Search_StudentManagement);
             return;
         }
-        deleteStudent_TableViewGroupDetail(table_Search_StudentManagement);
+        deleteStudent_TableViewGroupDetail(table_Student_StudentManagement);
 
     }
 
