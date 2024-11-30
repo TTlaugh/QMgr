@@ -7,35 +7,35 @@ import javafx.scene.control.Alert.AlertType;
 
 public class Notification {
 
-	public static void Error(String title, String content, String header) {
+	public static void Error(String title, String content) {
 		Alert typeAlert = new Alert(AlertType.ERROR);
 		Button okButton = new Button("Cancel");
 		okButton.setOnAction(event -> {
 			typeAlert.hide();
 		});
 		typeAlert.setContentText(content);
-		typeAlert.setHeaderText(header);
+		// typeAlert.setHeaderText(Successfully);
 		typeAlert.setTitle(title);
 		typeAlert.showAndWait();
 	}
 
-	public static Alert Comfrim(String title, String content, String header) {
+	public static Alert Comfrim(String title, String content) {
 		Alert alert = new Alert(AlertType.CONFIRMATION, content, ButtonType.YES, ButtonType.CANCEL);
 		alert.setContentText(content);
-		alert.setHeaderText(header);
+		alert.setHeaderText("Thông báo");
 		alert.setTitle(title);
 		alert.showAndWait();
 		return alert;
 	}
 
-	public static void Infomation(String title, String content, String header) {
+	public static void Infomation(String title, String content) {
 		Alert typeAlert = new Alert(AlertType.INFORMATION);
 		Button okButton = new Button("Cancel");
 		okButton.setOnAction(event -> {
 			typeAlert.hide();
 		});
 		typeAlert.setContentText(content);
-		typeAlert.setHeaderText(header);
+		// typeAlert.setHeaderText(Successfully);
 		typeAlert.setTitle(title);
 		typeAlert.showAndWait();
 	}

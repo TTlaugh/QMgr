@@ -1,10 +1,12 @@
-package controller;
+package controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.Desktop;
 import java.util.ResourceBundle;
 import components.Answer_card;
 import components.Exam_card;
@@ -17,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -38,15 +41,18 @@ import model.Group;
 import model.HostExam;
 import model.Question;
 import model.Subject;
+import model.Submission;
 import services.ExamManager;
 import services.GroupManager;
 import services.HostExamManager;
 import services.QuestionManager;
 import services.StartServer;
 import services.SubjectManager;
+import services.SubmissionManager;
 import utils.CheckCheckBox;
 import utils.CheckTextField;
 import utils.Notification;
+import utils.OpenFileExplorer;
 
 public class Exam_controller implements Initializable {
     // FlowPane Main
@@ -236,11 +242,35 @@ public class Exam_controller implements Initializable {
     @FXML
     private TextField tf_Port_HostExam = new TextField();
 
+    // ============ View All Submission ========================
+    @FXML
+    private Label lb_totalSubmission_All = new Label();
+
+    @FXML
+    private TextField tf_SearchSubmiss_All = new TextField();
+
+    @FXML
+    private TableView<Submission> tableView_AllSubmiss_All = new TableView<Submission>();
+
+    @FXML
+    private TableColumn<Submission, Integer> ID_Submiss_All = new TableColumn<Submission, Integer>();
+
+    @FXML
+    private TableColumn<Submission, Integer> Student_Submiss_All = new TableColumn<Submission, Integer>();
+
+    @FXML
+    private TableColumn<Submission, Integer> TimeTaken_Submiss_All = new TableColumn<Submission, Integer>();
+
+    @FXML
+    private TableColumn<Submission, Float> Score_Submiss_All = new TableColumn<Submission, Float>();
+
     // =============================
 
     public static List<Question> listQuestions = new ArrayList<Question>();
 
     StartServer startServer;
+
+    SubmissionManager submissionManager = SubmissionManager.getInstance();
 
     HostExamManager hostExamManager = HostExamManager.getInstance();
 
@@ -271,6 +301,8 @@ public class Exam_controller implements Initializable {
     public static List<Question> listQuestions_ExamDetail;
 
     public ObservableList<Question> observableList;
+
+    public ObservableList<Submission> observableList_Submissions;
 
     AnchorPane UIAnchorCurrent = new AnchorPane();
 
@@ -395,6 +427,18 @@ public class Exam_controller implements Initializable {
         Question_Coulmn_QuestonExam_EditExam
                 .setCellValueFactory(new PropertyValueFactory<Question, String>("content"));
         return observableList;
+    }
+
+    public ObservableList<Submission> loadQuestion_tableViewALlSubmiss_All(List<Submission> list) {
+
+        observableList_Submissions = FXCollections.observableArrayList(list);
+
+        ID_Submiss_All.setCellValueFactory(new PropertyValueFactory<Submission, Integer>("submissionId"));
+        Student_Submiss_All.setCellValueFactory(new PropertyValueFactory<Submission, Integer>("studentId"));
+        TimeTaken_Submiss_All.setCellValueFactory(new PropertyValueFactory<Submission, Integer>("timeTaken"));
+        Score_Submiss_All.setCellValueFactory(new PropertyValueFactory<Submission, Float>("score"));
+
+        return observableList_Submissions;
     }
 
     // Func Create New Exam
@@ -1113,7 +1157,17 @@ public class Exam_controller implements Initializable {
     // View All Submission
     @FXML
     void btn_viewAllSubmission_detailExam_ExamManagement(ActionEvent event) {
+        // Doing func
         setUIAnchorCurrent(this.AnchorPane_viewAllSubmission_detailExam_ExamManagement);
+
+        int examID = exam_Current_SubjectManagement.getExamId();
+
+        ArrayList<Submission> listSubmissions = hostExamManager.getListHostExamById(examID);
+
+        tableView_AllSubmiss_All.setItems(loadQuestion_tableViewALlSubmiss_All(listSubmissions));
+
+        lb_totalSubmission_All.setText("Total " + listSubmissions.size() + " submissions");
+
     }
 
     @FXML
@@ -1167,6 +1221,75 @@ public class Exam_controller implements Initializable {
         UIAnchorCurrent = anchorPane;
 
         UIAnchorCurrent.setVisible(true);
+    }
+    // =========== FUNC VIEW ALL SUBMISSION ===========
+
+    @FXML
+    void btn_ExportStranscript_All(ActionEvent event) {
+        File file_Current = OpenFileExplorer.Save(event);
+
+        if (file_Current == null) {
+            Notification.Error("Error", "Please choose file");
+            return;
+        }
+        String fileNameExel = file_Current.getAbsolutePath();
+
+        List<Submission> listSubmissions = tableView_AllSubmiss_All.getItems();
+
+        Boolean is_ExportSuccess = submissionManager.exportSubmissions("Submission", fileNameExel, listSubmissions);
+
+        if (!is_ExportSuccess) {
+            Notification.Infomation("Error", "Export file failed");
+            return;
+        }
+        Boolean is_Confirm = Notification.Comfrim("Confirm",
+                "Do you want to open file?").getResult() == ButtonType.YES;
+        if (is_Confirm)
+            OpenFileExel_Export(new File(fileNameExel));
+    }
+
+    // Open File
+    void OpenFileExel_Export(File fileOpen) {
+        if (fileOpen == null) {
+            Notification.Error("Error",
+                    "Please choose file");
+            return;
+        }
+        try {
+            Desktop.getDesktop().open(fileOpen);
+            Desktop.getDesktop().open(fileOpen);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void btn_DeleteSubmission_All(ActionEvent event) {
+        Submission submission = tableView_AllSubmiss_All.getSelectionModel().getSelectedItem();
+
+        if (submission == null) {
+            Notification.Error("Error", "Please choose submission");
+            return;
+        }
+
+        boolean isDeleteSuccess = submissionManager.deleteSubmission(submission.getSubmissionId());
+
+        if (!isDeleteSuccess) {
+            Notification.Error("Error", "Delete submission failed");
+            return;
+        }
+
+        Notification.Infomation("Success", "Delete submission successfully");
+    }
+
+    @FXML
+    void btn_SubmissDetail_All(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btn_SearchSubmiss_All(ActionEvent event) {
+
     }
 
     // ===============================================﻿//

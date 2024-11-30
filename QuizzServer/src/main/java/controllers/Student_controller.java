@@ -1,4 +1,4 @@
-package controller;
+package controllers;
 
 import java.io.File;
 import java.awt.Desktop;
@@ -36,7 +36,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import model.Group;
-import model.Question;
 import model.Student;
 import services.GroupManager;
 import services.StudentManager;

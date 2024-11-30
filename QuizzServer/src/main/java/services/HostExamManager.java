@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import data.HostExamDAO;
 import model.HostExam;
+import model.Submission;
 
 public class HostExamManager {
     private static HostExamManager instance = null;
@@ -34,4 +35,9 @@ public class HostExamManager {
     public ArrayList<HostExam> getAllHostExams() {
         return new HostExamDAO().getAll();
     }
+
+    public ArrayList<Submission> getListHostExamById(int hostExamId) {
+        return new HostExamDAO().getByHostExamID(hostExamId);
+    }
+
 }

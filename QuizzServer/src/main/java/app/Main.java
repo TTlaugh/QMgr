@@ -18,9 +18,8 @@ public class Main extends Application {
 			primaryStage.setTitle("Quizz Server");
 			primaryStage.show();
 
-			// FXMLLoader loader = new
-			// FXMLLoader(getClass().getResource("/ui/workspace-management.fxml"));
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/workspace-management.fxml"));
+
 			Parent root = (Parent) loader.load();
 
 			Scene scene = new Scene(root, Constant.ScreenSize.WIDTH, Constant.ScreenSize.HEIGHT);

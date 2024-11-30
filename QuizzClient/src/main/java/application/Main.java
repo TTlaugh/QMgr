@@ -19,7 +19,7 @@ public class Main extends Application {
 			primaryStage.setTitle("Quizz Client");
 			primaryStage.show();
 
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/connect-server.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/take-the-exam+submit.fxml"));
 			Parent root = (Parent) loader.load();
 			Scene scene = new Scene(root, Constant.ScreenSize.WIDTH, Constant.ScreenSize.HEIGHT);
 

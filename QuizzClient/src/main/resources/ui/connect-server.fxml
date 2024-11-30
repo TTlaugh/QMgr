@@ -12,13 +12,13 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Separator layoutY="57.0" prefHeight="1.0" prefWidth="1300.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
       <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="14.0" />
       <StackPane alignment="TOP_CENTER" layoutY="55.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
          <children>
-            <TextField maxHeight="38.0" maxWidth="200.0" promptText="ST-01" styleClass="round-layout">
+            <TextField fx:id="tf_StudentID_Connect" maxHeight="38.0" maxWidth="200.0" promptText="ST-01" styleClass="round-layout">
                <StackPane.margin>
                   <Insets top="152.0" />
                </StackPane.margin>
@@ -37,7 +37,7 @@
                   <Insets top="54.0" />
                </StackPane.margin>
             </Label>
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="200.0" styleClass="button-xanhdam" text="Start Exam" textFill="WHITE">
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#btn_StartExam_Connect" prefHeight="32.0" prefWidth="200.0" styleClass="button-xanhdam" text="Start Exam" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -66,7 +66,7 @@
                   <Insets left="-80.0" top="202.0" />
                </StackPane.margin>
             </Label>
-            <TextField maxHeight="38.0" maxWidth="119.0" promptText="192.168.1.xxx" styleClass="round-layout">
+            <TextField fx:id="tf_IPAdresss_Connect" maxHeight="38.0" maxWidth="119.0" promptText="192.168.1.xxx" styleClass="round-layout">
                <font>
                   <Font size="14.0" />
                </font>
@@ -85,7 +85,7 @@
                   <Insets right="-130.0" top="202.0" />
                </StackPane.margin>
             </Label>
-            <TextField maxHeight="38.0" maxWidth="69.0" promptText="9999" styleClass="round-layout">
+            <TextField fx:id="tf_Port_Connect" maxHeight="38.0" maxWidth="69.0" promptText="2000" styleClass="round-layout">
                <font>
                   <Font size="14.0" />
                </font>

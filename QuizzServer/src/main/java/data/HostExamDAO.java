@@ -5,13 +5,17 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import model.HostExam;
 import model.Question;
+import model.Submission;
 import utils.SQLUtils;
 
 public class HostExamDAO implements interfaceDAO<HostExam> {
@@ -77,6 +81,42 @@ public class HostExamDAO implements interfaceDAO<HostExam> {
             }
         }
         return b;
+    }
+
+    public ArrayList<Submission> getByHostExamID(int ExamID) {
+        ArrayList<Submission> list = new ArrayList<Submission>();
+        con = SQLUtils.getConnection();
+        if (con != null) {
+            try {
+                String query = "select * from submissions where HostExamID=?";
+                PreparedStatement ps = con.prepareStatement(query);
+                ps.setInt(1, ExamID);
+
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    Submission submission = new Submission();
+                    submission.setHostExamId(rs.getInt("HostExamID"));
+                    submission.setStudentId(rs.getInt("UID"));
+                    submission.setTimeTaken(rs.getInt("TimeTaken"));
+                    submission.setScore(rs.getFloat("Score"));
+
+                    String answerJson = rs.getString("AnswerSelecteds");
+                    if (answerJson != null && !answerJson.isEmpty()) {
+                        Type answerMapType = new TypeToken<Map<Integer, List<Integer>>>() {
+                        }.getType();
+                        Map<Integer, List<Integer>> answerMap = gson.fromJson(answerJson, answerMapType);
+                        submission.setAnswerSelectedMap(answerMap);
+                    }
+
+                    list.add(submission);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                SQLUtils.closeConnection(con);
+            }
+        }
+        return list;
     }
 
     @Override

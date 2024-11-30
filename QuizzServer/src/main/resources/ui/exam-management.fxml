@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="540.0" minWidth="760.0" prefHeight="540.0" prefWidth="760.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Exam_controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="540.0" minWidth="760.0" prefHeight="540.0" prefWidth="760.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Exam_controller">
    <children>
       <Separator layoutX="10.0" layoutY="67.0" prefHeight="1.0" prefWidth="960.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
       <Label layoutX="260.0" layoutY="17.0" prefHeight="26.0" prefWidth="168.0" text="Exam management" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="13.0">
@@ -438,10 +438,10 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="21.0" layoutY="98.0" text="Total 3 submissions" textFill="#475467" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="98.0" />
+            <Label fx:id="lb_totalSubmission_All" layoutX="21.0" layoutY="98.0" text="Total 3 submissions" textFill="#475467" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="98.0" />
             <HBox alignment="CENTER_LEFT" fillHeight="false" layoutX="198.0" layoutY="65.0" maxHeight="38.0" maxWidth="232.0" prefHeight="100.0" prefWidth="215.0" spacing="13.0" styleClass="round-layout" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="7.0">
                <children>
-                  <TextField maxWidth="173.0" prefHeight="30.0" prefWidth="167.0" promptText="Search" style="-fx-background-color: transparent;">
+                  <TextField fx:id="tf_SearchSubmiss_All" maxWidth="173.0" onAction="#btn_SearchSubmiss_All" prefHeight="30.0" prefWidth="167.0" promptText="Search" style="-fx-background-color: transparent;">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -459,16 +459,18 @@
                   <Insets left="5.0" />
                </padding>
             </HBox>
-            <TableView fixedCellSize="0.0" layoutX="20.0" layoutY="122.0" prefHeight="347.0" prefWidth="720.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="129.0">
+            <TableView fx:id="tableView_AllSubmiss_All" fixedCellSize="0.0" layoutX="20.0" layoutY="122.0" prefHeight="347.0" prefWidth="720.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="129.0">
                <columns>
-                  <TableColumn editable="false" prefWidth="44.00001525878906" text="#ID" />
-                  <TableColumn editable="false" minWidth="5.5999755859375" prefWidth="221.60003662109375" text="Question" />
+                  <TableColumn fx:id="ID_Submiss_All" editable="false" prefWidth="44.00001525878906" text="#ID" />
+                  <TableColumn fx:id="Student_Submiss_All" editable="false" minWidth="5.5999755859375" prefWidth="196.0" text="StudentID" />
+                  <TableColumn fx:id="TimeTaken_Submiss_All" editable="false" prefWidth="44.00001525878906" text="Time taken" />
+                  <TableColumn fx:id="Score_Submiss_All" editable="false" prefWidth="44.00001525878906" text="Score" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Button alignment="CENTER" layoutX="245.0" layoutY="492.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="149.0" styleClass="button-trang" text="Export transcript" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="85.0">
+            <Button alignment="CENTER" layoutX="245.0" layoutY="492.0" mnemonicParsing="false" onAction="#btn_ExportStranscript_All" prefHeight="32.0" prefWidth="149.0" styleClass="button-trang" text="Export transcript" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="85.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -480,7 +482,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="CENTER" layoutX="255.0" layoutY="502.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="160.0" styleClass="button-xanhdam" text="Submission details" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.00000000000003">
+            <Button alignment="CENTER" layoutX="255.0" layoutY="502.0" mnemonicParsing="false" onAction="#btn_SubmissDetail_All" prefHeight="32.0" prefWidth="160.0" styleClass="button-xanhdam" text="Submission details" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.00000000000003">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -492,7 +494,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="CENTER" layoutX="265.0" layoutY="512.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="160.0" styleClass="button-donhat" text="Delete submission" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="188.0">
+            <Button alignment="CENTER" layoutX="265.0" layoutY="512.0" mnemonicParsing="false" onAction="#btn_DeleteSubmission_All" prefHeight="32.0" prefWidth="160.0" styleClass="button-donhat" text="Delete submission" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="188.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Separator layoutY="57.0" prefHeight="1.0" prefWidth="1300.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
       <Label layoutX="58.0" minHeight="32.0" minWidth="57.0" prefHeight="32.0" prefWidth="57.0" text="Quizz" textFill="#1d2939" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="10.0">
@@ -226,6 +226,11 @@
                                     </TextField>
                                  </children>
                               </HBox>
+                              <Button maxHeight="24.0" maxWidth="95.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="95.0" text="Save ">
+                                 <font>
+                                    <Font size="9.0" />
+                                 </font>
+                              </Button>
                            </children>
                         </VBox>
                      </content>
