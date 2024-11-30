@@ -226,11 +226,6 @@
                                     </TextField>
                                  </children>
                               </HBox>
-                              <Button maxHeight="24.0" maxWidth="95.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="95.0" text="Save ">
-                                 <font>
-                                    <Font size="9.0" />
-                                 </font>
-                              </Button>
                            </children>
                         </VBox>
                      </content>

@@ -2,7 +2,6 @@ package controllers;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +9,7 @@ import java.awt.Desktop;
 import java.util.ResourceBundle;
 import components.Answer_card;
 import components.Exam_card;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -242,6 +242,12 @@ public class Exam_controller implements Initializable {
     @FXML
     private TextField tf_Port_HostExam = new TextField();
 
+    @FXML
+    private AnchorPane AnchorPane_StartTest_HostExam;
+
+    @FXML
+    private AnchorPane AnchorPane_Testing_HostExam;
+
     // ============ View All Submission ========================
     @FXML
     private Label lb_totalSubmission_All = new Label();
@@ -263,6 +269,53 @@ public class Exam_controller implements Initializable {
 
     @FXML
     private TableColumn<Submission, Float> Score_Submiss_All = new TableColumn<Submission, Float>();
+
+    // ============ View DEtail Submission ========================
+
+    @FXML
+    private Label lb_StudentName_SubDetail = new Label();
+
+    @FXML
+    private Label lb_StudentID_SubDetail = new Label();
+
+    @FXML
+    private Label lb_Score_SubDetail = new Label();
+
+    // Doing
+
+    // @FXML
+    // private TableView<?> tableView_SubDetail = new TableView<?>();
+
+    // @FXML
+    // private TableColumn<?, ?> ID_SubDetail = new TableColumn<?, ?>();
+
+    // @FXML
+    // private TableColumn<?, ?> Question_SubDetail = new TableColumn<?, ?>();
+
+    // @FXML
+    // private TableColumn<?, ?> Chosen_SubDetail = new TableColumn<?, ?>();
+
+    // @FXML
+    // private TableColumn<?, ?> Correct_SubDetail = new TableColumn<?, ?>();
+
+    Submission selectedSubmission = new Submission();
+
+    // ====== TESTING ===========================
+
+    @FXML
+    private Label lb_ExamName_SubjectName_HostExam_Started;
+
+    @FXML
+    private TableView<String> tableView_Testing = new TableView<String>();
+
+    @FXML
+    private TableColumn<String, String> ID_Testing = new TableColumn<String, String>();
+
+    @FXML
+    private TableColumn<String, String> TimeTaken_Testing = new TableColumn<String, String>();
+
+    @FXML
+    private TableColumn<String, String> Score_Testing = new TableColumn<String, String>();
 
     // =============================
 
@@ -991,7 +1044,7 @@ public class Exam_controller implements Initializable {
 
     @FXML
     void btn_SearchQuestion_EditExam(ActionEvent event) {
-        // Doing
+
         String keyWord = tf_SearchQuestion_EditExam.getText().trim();
 
         if (keyWord.length() == 0 || keyWord == null || keyWord == "") {
@@ -1029,7 +1082,7 @@ public class Exam_controller implements Initializable {
     // Host Exam
     @FXML
     void btn_hostExam_detailExam_ExamManagement(ActionEvent event) {
-        // Doing
+
         setUIAnchorCurrent(this.AnchorPane_hostExam_detailExam_ExamManagement);
 
         LoadDataHostExam();
@@ -1143,6 +1196,11 @@ public class Exam_controller implements Initializable {
             startServer = new StartServer(hostExam, Integer.parseInt(port));
 
             Notification.Infomation("Success", "Start host exam successfully");
+
+            AnchorPane_StartTest_HostExam.setVisible(false);
+
+            AnchorPane_Testing_HostExam.setVisible(true);
+
         } catch (IOException e) {
             Notification.Error("Error", e.getMessage());
         }
@@ -1150,19 +1208,51 @@ public class Exam_controller implements Initializable {
     }
 
     @FXML
-    void btn_back_hostExam_ExamManagement(ActionEvent event) {
+    void btn_ReloadData(ActionEvent event) {
+        List<String> infoList = startServer.getConnectedClients();
+
+        System.out.println(infoList);
+
+        Platform.runLater(() -> {
+            // ID_Testing
+        });
+    }
+
+    @FXML
+    void btn_CLoseTest(ActionEvent event) throws IOException {
+        startServer.shutdownServer();
+    }
+
+    @FXML
+    void btn_back_hostExam_ExamManagement(ActionEvent event) throws IOException {
+
+        if (AnchorPane_Testing_HostExam.isVisible()) {
+
+            AnchorPane_Testing_HostExam.setVisible(false);
+
+            AnchorPane_StartTest_HostExam.setVisible(true);
+
+            startServer.shutdownServer();
+
+            Notification.Error("Error", "Stop host exam failed");
+
+            return;
+        }
+
         btn_backExamDetail(event);
     }
 
     // View All Submission
     @FXML
     void btn_viewAllSubmission_detailExam_ExamManagement(ActionEvent event) {
-        // Doing func
+
         setUIAnchorCurrent(this.AnchorPane_viewAllSubmission_detailExam_ExamManagement);
 
         int examID = exam_Current_SubjectManagement.getExamId();
 
         ArrayList<Submission> listSubmissions = hostExamManager.getListHostExamById(examID);
+
+        tableView_AllSubmiss_All.getItems().clear();
 
         tableView_AllSubmiss_All.setItems(loadQuestion_tableViewALlSubmiss_All(listSubmissions));
 
@@ -1265,14 +1355,14 @@ public class Exam_controller implements Initializable {
 
     @FXML
     void btn_DeleteSubmission_All(ActionEvent event) {
-        Submission submission = tableView_AllSubmiss_All.getSelectionModel().getSelectedItem();
+        selectedSubmission = tableView_AllSubmiss_All.getSelectionModel().getSelectedItem();
 
-        if (submission == null) {
+        if (selectedSubmission == null) {
             Notification.Error("Error", "Please choose submission");
             return;
         }
 
-        boolean isDeleteSuccess = submissionManager.deleteSubmission(submission.getSubmissionId());
+        boolean isDeleteSuccess = submissionManager.deleteSubmission(selectedSubmission.getSubmissionId());
 
         if (!isDeleteSuccess) {
             Notification.Error("Error", "Delete submission failed");
@@ -1284,11 +1374,59 @@ public class Exam_controller implements Initializable {
 
     @FXML
     void btn_SubmissDetail_All(ActionEvent event) {
-
+        setUIAnchorCurrent(Anchor_submissionDetail_detailExam_ExamManagement);
     }
 
     @FXML
     void btn_SearchSubmiss_All(ActionEvent event) {
+
+        String keyWord = tf_SearchSubmiss_All.getText();
+
+        if (keyWord.length() == 0 || keyWord == null || keyWord == "") {
+            Notification.Error("Error", "Please enter keyword");
+            return;
+        }
+        if (keyWord.length() > 191) {
+            Notification.Error("Error", "Keyword is too long");
+            return;
+        }
+        int examId = exam_Current_SubjectManagement.getExamId();
+
+        ArrayList<Submission> listSubmissions = hostExamManager.getListHostExamById(examId);
+
+        ArrayList<Submission> listSubmissions_Filter = new ArrayList<Submission>();
+
+        for (Submission submission : listSubmissions) {
+            if (submission.getStudentId() == Integer.parseInt(keyWord))
+                listSubmissions_Filter.add(submission);
+
+        }
+
+        if (listSubmissions_Filter.size() == 0) {
+            Notification.Error("Error", "Not found submission");
+            return;
+        }
+
+        tableView_AllSubmiss_All.getItems().clear();
+
+        tableView_AllSubmiss_All.setItems(loadQuestion_tableViewALlSubmiss_All(listSubmissions_Filter));
+
+        lb_totalSubmission_All.setText("Total " + listSubmissions_Filter.size() + " submissions");
+    }
+
+    // =========== END VIEW detail SUBMISSION ===========
+    @FXML
+    void btn_ExportSubmisson(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btn_BackToExamManagement(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btn_questionDetail_SubmissDetail(ActionEvent event) {
 
     }
 
@@ -1488,7 +1626,5 @@ public class Exam_controller implements Initializable {
 
         tableView_QuestionBank_EditExam.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tableView_QuestionExam_EditExam.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
     }
-
 }

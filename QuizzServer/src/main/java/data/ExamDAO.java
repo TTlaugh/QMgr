@@ -195,15 +195,11 @@ public class ExamDAO implements interfaceDAO<Exam> {
         con = SQLUtils.getConnection();
         if (con != null) {
             try {
-                String query = "SELECT e.*" +
-                        "FROM Exams e" +
-                        "LEFT JOIN HostExams he ON e.ExamID = he.ExamID" +
-                        "WHERE he.ExamID IS NULL AND e.Archived = 0";
 
-                String query2 = "SELECT  Exams.* " + "FROM Exams "
+                String query = "SELECT  Exams.* " + "FROM Exams "
                         + "LEFT JOIN HostExams ON Exams.ExamID = HostExams.ExamID"
                         + " WHERE HostExams.ExamID IS NULL AND Exams.Archived =0";
-                PreparedStatement ps = con.prepareStatement(query2);
+                PreparedStatement ps = con.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
                     Type questionListType = new TypeToken<List<Integer>>() {

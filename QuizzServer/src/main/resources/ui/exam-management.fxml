@@ -508,7 +508,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="Anchor_submissionDetail_detailExam_ExamManagement" prefHeight="200.0" prefWidth="200.0" styleClass="background" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="Anchor_submissionDetail_detailExam_ExamManagement" prefHeight="200.0" prefWidth="200.0" styleClass="background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Separator layoutX="58.0" layoutY="72.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
             <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="198.0" layoutY="16.0" pickOnBounds="true" AnchorPane.leftAnchor="198.0" AnchorPane.topAnchor="16.0">
@@ -542,12 +542,12 @@
             </Label>
             <AnchorPane layoutX="505.0" layoutY="72.0" prefHeight="448.0" prefWidth="232.0" style="-fx-background-color: #F8FAFC; -fx-background-radius: 8;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="72.0">
                <children>
-                  <Button alignment="CENTER" layoutX="17.0" layoutY="402.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="208.0" styleClass="button-xanhdam" text="Back to Exam management" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
+                  <Button alignment="CENTER" layoutX="17.0" layoutY="402.0" mnemonicParsing="false" onAction="#btn_BackToExamManagement" prefHeight="32.0" prefWidth="208.0" styleClass="button-xanhdam" text="Back to Exam management" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Label alignment="CENTER" layoutX="53.0" layoutY="161.0" text="Nguyen Phuong Tram" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="60.0">
+                  <Label fx:id="lb_StudentName_SubDetail" alignment="CENTER" layoutX="53.0" layoutY="161.0" text="Nguyen Phuong Tram" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="60.0">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -557,7 +557,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Button alignment="CENTER" layoutY="333.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="208.0" styleClass="button-donhat" text="Delete submission" textFill="WHITE" AnchorPane.bottomAnchor="92.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
+                  <Button alignment="CENTER" layoutY="333.0" mnemonicParsing="false" onAction="#btn_DeleteSubmission_All" prefHeight="32.0" prefWidth="208.0" styleClass="button-donhat" text="Delete submission" textFill="WHITE" AnchorPane.bottomAnchor="92.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -569,7 +569,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button alignment="CENTER" layoutX="27.0" layoutY="412.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="208.0" styleClass="button-trang" text="Export submission" textFill="WHITE" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
+                  <Button alignment="CENTER" layoutX="27.0" layoutY="412.0" mnemonicParsing="false" onAction="#btn_ExportSubmisson" prefHeight="32.0" prefWidth="208.0" styleClass="button-trang" text="Export submission" textFill="WHITE" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -586,7 +586,7 @@
                         <Image url="@../imgs/Screenshot_2024-10-30_172802-removebg-preview.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" prefHeight="26.0" prefWidth="90.0" style="-fx-background-radius: 10; -fx-background-color: #eaecf0;" text="ID: #ST01" AnchorPane.leftAnchor="72.0" AnchorPane.rightAnchor="72.0" AnchorPane.topAnchor="90.0">
+                  <Label fx:id="lb_StudentID_SubDetail" alignment="CENTER" prefHeight="26.0" prefWidth="90.0" style="-fx-background-radius: 10; -fx-background-color: #eaecf0;" text="ID: #ST01" AnchorPane.leftAnchor="72.0" AnchorPane.rightAnchor="72.0" AnchorPane.topAnchor="90.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -607,19 +607,21 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" layoutX="42.0" layoutY="295.0" text="50.0/100" textFill="#099250" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="178.0" />
+                  <Label fx:id="lb_Score_SubDetail" alignment="CENTER_RIGHT" layoutX="42.0" layoutY="295.0" text="50.0/100" textFill="#099250" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="178.0" />
                </children>
             </AnchorPane>
-            <TableView fixedCellSize="0.0" layoutX="20.0" layoutY="122.0" prefHeight="366.0" prefWidth="476.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="110.0">
+            <TableView fx:id="tableView_SubDetail" fixedCellSize="0.0" layoutX="20.0" layoutY="122.0" prefHeight="366.0" prefWidth="476.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="110.0">
                <columns>
-                  <TableColumn editable="false" prefWidth="44.00001525878906" text="#ID" />
-                  <TableColumn editable="false" minWidth="5.5999755859375" prefWidth="221.60003662109375" text="Question" />
+                  <TableColumn fx:id="ID_SubDetail" editable="false" prefWidth="44.00001525878906" text="#ID" />
+                  <TableColumn fx:id="Question_SubDetail" editable="false" minWidth="5.5999755859375" prefWidth="221.60003662109375" text="Question" />
+                  <TableColumn fx:id="Chosen_SubDetail" editable="false" minWidth="5.5999755859375" prefWidth="221.60003662109375" text="Chosen" />
+                  <TableColumn fx:id="Correct_SubDetail" editable="false" minWidth="5.5999755859375" prefWidth="221.60003662109375" text="Correct" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Button alignment="CENTER" layoutX="245.0" layoutY="492.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" styleClass="button-xanhnhat" text="Question details" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+            <Button alignment="CENTER" layoutX="245.0" layoutY="492.0" mnemonicParsing="false" onAction="#btn_questionDetail_SubmissDetail" prefHeight="32.0" prefWidth="145.0" styleClass="button-xanhnhat" text="Question details" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -808,7 +810,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <AnchorPane layoutX="140.0" layoutY="59.20000076293945" prefHeight="448.0" prefWidth="232.0" styleClass="popup" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="142.0" AnchorPane.topAnchor="59.0">
+            <AnchorPane fx:id="AnchorPane_StartTest_HostExam" layoutX="140.0" layoutY="59.20000076293945" prefHeight="448.0" prefWidth="232.0" styleClass="popup" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="142.0" AnchorPane.topAnchor="59.0">
                <children>
                   <Button alignment="CENTER" layoutX="17.0" layoutY="402.0" mnemonicParsing="false" onAction="#btn_StartTest_HostExam" prefHeight="32.0" prefWidth="208.0" styleClass="button-xanhdam" text="Start test" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
                      <font>
@@ -877,29 +879,28 @@
                   </TextField>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="448.0" prefWidth="232.0" visible="false" AnchorPane.bottomAnchor="58.0" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="142.0" AnchorPane.topAnchor="76.0">
+            <AnchorPane fx:id="AnchorPane_Testing_HostExam" prefHeight="448.0" prefWidth="232.0" visible="false" AnchorPane.bottomAnchor="58.0" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="142.0" AnchorPane.topAnchor="76.0">
                <children>
-                  <Button alignment="CENTER" layoutX="17.0" layoutY="402.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="119.0" styleClass="button-trang" text="Reload data" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+                  <Button alignment="CENTER" layoutX="17.0" layoutY="402.0" mnemonicParsing="false" onAction="#btn_ReloadData" prefHeight="32.0" prefWidth="119.0" styleClass="button-trang" text="Reload data" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Label alignment="CENTER" layoutX="238.0" layoutY="43.0" text="KIỂM TRA 15 PHÚT - ĐỀ 1&#10;ĐẠI SỐ TUYẾN TÍNH" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <Label fx:id="lb_ExamName_SubjectName_HostExam_Started" alignment="CENTER" layoutX="238.0" layoutY="43.0" text="KIỂM TRA 15 PHÚT - ĐỀ 1&#10;ĐẠI SỐ TUYẾN TÍNH" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Button alignment="CENTER" layoutX="27.0" layoutY="412.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="155.0" styleClass="button-do" text="Close test (14:05)" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <Button alignment="CENTER" layoutX="27.0" layoutY="412.0" mnemonicParsing="false" onAction="#btn_CLoseTest" prefHeight="32.0" prefWidth="155.0" styleClass="button-do" text="Close test (14:05)" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <TableView fixedCellSize="0.0" prefHeight="135.0" prefWidth="476.0" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="63.0">
+                  <TableView fx:id="tableView_Testing" fixedCellSize="0.0" prefHeight="135.0" prefWidth="476.0" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="63.0">
                      <columns>
-                        <TableColumn editable="false" prefWidth="44.00001525878906" text="#ID" />
-                        <TableColumn editable="false" minWidth="5.5999755859375" prefWidth="221.60003662109375" text="Question" />
-                        <TableColumn editable="false" prefWidth="114.4000244140625" resizable="false" text="Chapter" />
-                        <TableColumn editable="false" prefWidth="92.79998779296875" resizable="false" text="Difficult (1-5)" />
+                        <TableColumn fx:id="ID_Testing" editable="false" prefWidth="44.00001525878906" text="#ID" />
+                        <TableColumn fx:id="TimeTaken_Testing" editable="false" prefWidth="114.4000244140625" resizable="false" text="Time taken" />
+                        <TableColumn fx:id="Score_Testing" editable="false" prefWidth="92.79998779296875" resizable="false" text="Score" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
