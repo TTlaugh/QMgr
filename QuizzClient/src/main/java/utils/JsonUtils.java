@@ -12,14 +12,29 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 public class JsonUtils {
 	public static Map<String, List<Integer>> jsonToMap_String_List(String jsonString) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
-		return mapper.readValue(jsonString, new TypeReference<Map<String, List<Integer>>>() {});
+		return mapper.readValue(jsonString, new TypeReference<Map<String, List<Integer>>>() {
+		});
 	}
+
+	public static Map<Integer, List<Integer>> jsonToMap_Integer_List(String jsonString) throws IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.readValue(jsonString, new TypeReference<Map<Integer, List<Integer>>>() {
+		});
+	}
+
 	public static <T> List<T> jsonToList(String jsonString, Class<T> c) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		CollectionType typeReference = TypeFactory.defaultInstance().constructCollectionType(List.class, c);
 		return mapper.readValue(jsonString, typeReference);
 	}
-	public static String mapToJson(Map<String, List<Integer>> map) throws IOException {
+
+	// public static String mapToJson(Map<String, List<Integer>> map) throws
+	// IOException {
+	// ObjectMapper mapper = new ObjectMapper();
+	// return mapper.writeValueAsString(map);
+	// }
+
+	public static String mapToJson(Map<Integer, List<Integer>> map) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.writeValueAsString(map);
 	}

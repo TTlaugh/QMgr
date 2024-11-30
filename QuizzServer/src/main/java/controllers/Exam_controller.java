@@ -10,6 +10,8 @@ import java.util.ResourceBundle;
 import components.Answer_card;
 import components.Exam_card;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,6 +42,8 @@ import model.Exam;
 import model.Group;
 import model.HostExam;
 import model.Question;
+import model.Student;
+import model.Student_Test;
 import model.Subject;
 import model.Submission;
 import services.ExamManager;
@@ -47,6 +51,7 @@ import services.GroupManager;
 import services.HostExamManager;
 import services.QuestionManager;
 import services.StartServer;
+import services.StudentManager;
 import services.SubjectManager;
 import services.SubmissionManager;
 import utils.CheckCheckBox;
@@ -281,47 +286,57 @@ public class Exam_controller implements Initializable {
     @FXML
     private Label lb_Score_SubDetail = new Label();
 
-    // Doing
+    @FXML
+    private Label lb_TimeTaken_SubDetail = new Label();
 
-    // @FXML
-    // private TableView<?> tableView_SubDetail = new TableView<?>();
+    @FXML
+    private TableView<Submission> tableView_SubDetail = new TableView<Submission>();
 
-    // @FXML
-    // private TableColumn<?, ?> ID_SubDetail = new TableColumn<?, ?>();
+    @FXML
+    private TableColumn<Submission, String> ID_SubDetail = new TableColumn<Submission, String>();
 
-    // @FXML
-    // private TableColumn<?, ?> Question_SubDetail = new TableColumn<?, ?>();
+    @FXML
+    private TableColumn<Submission, Integer> Question_SubDetail = new TableColumn<Submission, Integer>();
 
-    // @FXML
-    // private TableColumn<?, ?> Chosen_SubDetail = new TableColumn<?, ?>();
+    @FXML
+    private TableColumn<Submission, String> Chosen_SubDetail = new TableColumn<Submission, String>();
 
-    // @FXML
-    // private TableColumn<?, ?> Correct_SubDetail = new TableColumn<?, ?>();
+    @FXML
+    private TableColumn<HostExam, String> Correct_SubDetail = new TableColumn<HostExam, String>();
 
-    Submission selectedSubmission = new Submission();
+    private Submission selectedSubmission = new Submission();
+
+    ObservableList<Submission> observableList_SubmissionDetail;
 
     // ====== TESTING ===========================
 
-    @FXML
-    private Label lb_ExamName_SubjectName_HostExam_Started;
+    public ObservableList<Student_Test> observableList_Testing;
 
     @FXML
-    private TableView<String> tableView_Testing = new TableView<String>();
+    private Label lb_ExamName_SubjectName_HostExam_Started = new Label();
 
     @FXML
-    private TableColumn<String, String> ID_Testing = new TableColumn<String, String>();
+    private TableView<Student_Test> tableView_Testing = new TableView<Student_Test>();
 
     @FXML
-    private TableColumn<String, String> TimeTaken_Testing = new TableColumn<String, String>();
+    private TableColumn<Student_Test, String> ID_Testing = new TableColumn<Student_Test, String>();
 
     @FXML
-    private TableColumn<String, String> Score_Testing = new TableColumn<String, String>();
+    private TableColumn<Student_Test, String> Student_Testing = new TableColumn<Student_Test, String>();
+
+    @FXML
+    private TableColumn<Student_Test, Integer> TimeTaken_Testing = new TableColumn<Student_Test, Integer>();
+
+    @FXML
+    private TableColumn<Student_Test, Float> Score_Testing = new TableColumn<Student_Test, Float>();
 
     // =============================
 
     public static List<Question> listQuestions = new ArrayList<Question>();
 
     StartServer startServer;
+
+    StudentManager studentManager = StudentManager.getInstance();
 
     SubmissionManager submissionManager = SubmissionManager.getInstance();
 
@@ -1210,17 +1225,48 @@ public class Exam_controller implements Initializable {
     @FXML
     void btn_ReloadData(ActionEvent event) {
         List<String> infoList = startServer.getConnectedClients();
+        ArrayList<Student_Test> studentTests = new ArrayList<Student_Test>();
 
-        System.out.println(infoList);
+        for (String info : infoList) {
+            String[] infoSplit = info.split("-");
+
+            String studentId = infoSplit[0];
+
+            String fullName = infoSplit[1];
+
+            int timeTaken = Integer.parseInt(infoSplit[2]);
+
+            float score = Float.parseFloat(infoSplit[3]);
+
+            Student_Test studentTest = new Student_Test(studentId, fullName, timeTaken, score);
+
+            studentTests.add(studentTest);
+        }
 
         Platform.runLater(() -> {
-            // ID_Testing
+            tableView_Testing.setItems(loadStudent_tableViewTesting_HostExam(studentTests));
         });
+    }
+
+    ObservableList<Student_Test> loadStudent_tableViewTesting_HostExam(List<Student_Test> list) {
+
+        observableList_Testing = FXCollections.observableArrayList(list);
+
+        ID_Testing.setCellValueFactory(new PropertyValueFactory<Student_Test, String>("studentId"));
+
+        Student_Testing.setCellValueFactory(new PropertyValueFactory<Student_Test, String>("fullName"));
+
+        TimeTaken_Testing.setCellValueFactory(new PropertyValueFactory<Student_Test, Integer>("timeTaken"));
+
+        Score_Testing.setCellValueFactory(new PropertyValueFactory<Student_Test, Float>("score"));
+
+        return observableList_Testing;
+
     }
 
     @FXML
     void btn_CLoseTest(ActionEvent event) throws IOException {
-        startServer.shutdownServer();
+        btn_back_hostExam_ExamManagement(event);
     }
 
     @FXML
@@ -1234,8 +1280,7 @@ public class Exam_controller implements Initializable {
 
             startServer.shutdownServer();
 
-            Notification.Error("Error", "Stop host exam failed");
-
+            Notification.Infomation("Success", "Close host exam successfully");
             return;
         }
 
@@ -1374,7 +1419,60 @@ public class Exam_controller implements Initializable {
 
     @FXML
     void btn_SubmissDetail_All(ActionEvent event) {
+        // Doing
+        selectedSubmission = tableView_AllSubmiss_All.getSelectionModel().getSelectedItem();
+
+        if (selectedSubmission == null) {
+            Notification.Error("Error", "Please choose submission");
+            return;
+        }
+        String id = String.valueOf(selectedSubmission.getStudentId());
+
+        Student student = studentManager.getStudentbyId(id);
+
         setUIAnchorCurrent(Anchor_submissionDetail_detailExam_ExamManagement);
+
+        lb_StudentName_SubDetail.setText(student.getFirstName() + " " + student.getLastName());
+
+        lb_StudentID_SubDetail.setText(student.getStudentId());
+
+        lb_Score_SubDetail.setText(String.valueOf(selectedSubmission.getScore()));
+
+        lb_TimeTaken_SubDetail.setText(String.valueOf(selectedSubmission.getTimeTaken()));
+
+    }
+
+    public Integer getQuestionID_SubmissDetail(Submission submission) {
+        // StringProperty exam_ID = new
+        // SimpleStringProperty(exam.getExamID().toString());
+        // return exam_ID;
+        int hostExamId = submission.getHostExamId();
+
+        HostExam hostExam = hostExamManager.getHostExamById(hostExamId);
+
+        ArrayList<Question> listQuestions = hostExam.getExamQuestions();
+
+        Integer question_ID = listQuestions.get(0).getQuestionId();
+
+        return question_ID;
+    }
+
+    public ObservableList<Submission> loadQuestion_tableView_SubmissDetail(List<Submission> list) {
+
+        observableList_SubmissionDetail = FXCollections.observableArrayList(list);
+
+        ID_Submiss_All.setCellValueFactory(celldata -> getQuestionID_SubmissDetail(celldata.getValue()));
+
+        // Student_Submiss_All_SubDetail
+        // .setCellValueFactory(celldata ->
+        // String.valueOf(celldata.getValue().getStudentId()));
+        // TimeTaken_Submiss_All_SubDetail
+        // .setCellValueFactory(celldata ->
+        // String.valueOf(celldata.getValue().getTimeTaken()));
+        // Score_Submiss_All_SubDetail.setCellValueFactory(celldata ->
+        // String.valueOf(celldata.getValue().getScore()));
+
+        return observableList_SubmissionDetail;
     }
 
     @FXML
@@ -1428,6 +1526,12 @@ public class Exam_controller implements Initializable {
     @FXML
     void btn_questionDetail_SubmissDetail(ActionEvent event) {
 
+    }
+
+    @FXML
+    void btn_back_SubDetail(ActionEvent event) {
+
+        setUIAnchorCurrent(AnchorPane_viewAllSubmission_detailExam_ExamManagement);
     }
 
     // ===============================================﻿//

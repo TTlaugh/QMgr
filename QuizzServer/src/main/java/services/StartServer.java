@@ -12,8 +12,13 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.management.Notification;
+
+import data.StudentDAO;
 import data.SubmissionDAO;
 import model.HostExam;
+import model.Student;
 import model.Submission;
 
 public class StartServer {
@@ -68,6 +73,7 @@ public class StartServer {
     }
 
     public List<String> getConnectedClients() {
+        System.out.println(clients.values());
         return new ArrayList<String>(clients.values());
     }
 
@@ -88,20 +94,53 @@ class ThreadServer extends Thread {
     @Override
     public void run() {
         String studentInfo = null;
+
         Submission studentSubmission = null;
 
         try (
                 ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
+
                 ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream())) {
             while (true) {
                 Object dataReceived = inputStream.readObject();
+
                 System.out.println(dataReceived);
+
                 if (dataReceived instanceof String) {
+
                     studentInfo = (String) dataReceived;
-                    clients.put(socket, studentInfo);
+
+                    Student student = new StudentDAO().getByStudentIdfromGroup(studentInfo, HostExam.getGroupId());
+
+                    if (student == null) {
+                        System.out.println("Student not found");
+                    }
+
+                    int timeTaken = 0;
+
+                    float score = 0;
+
+                    if (studentSubmission != null) {
+
+                        timeTaken = studentSubmission.getTimeTaken();
+
+                        score = studentSubmission.getScore();
+                    }
+
+                    String studentId = student.getStudentId();
+
+                    String studentName = student.getFirstName() + " " + student.getLastName();
+
+                    clients.put(socket,
+                            studentId + "-" + studentName + "-" + String.valueOf(timeTaken) + "-"
+                                    + String.valueOf(score));
+
                     outputStream.writeObject(HostExam);
+
                 } else {
+
                     studentSubmission = (Submission) dataReceived;
+
                     throw new SocketException();
                 }
             }
@@ -109,7 +148,21 @@ class ThreadServer extends Thread {
 
             new SubmissionDAO().create(studentSubmission);
 
-            clients.put(socket, studentInfo + " [Score: " + studentSubmission.getScore() + "]");
+            Student student = new StudentDAO().getByStudentIdfromGroup(studentInfo, HostExam.getGroupId());
+
+            if (student == null) {
+                System.out.println("Student not found");
+            }
+
+            int timeTaken = studentSubmission.getTimeTaken();
+
+            float score = studentSubmission.getScore();
+
+            String studentId = student.getStudentId();
+
+            String studentName = student.getFirstName() + " " + student.getLastName();
+
+            clients.put(socket, studentId + " " + studentName + " " + timeTaken + " " + score);
 
             try {
                 socket.close();

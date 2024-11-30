@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
@@ -13,7 +14,8 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Subject {
+public class Subject implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int subjectId;
     private int workspaceId;
     private String subjectName;

@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +13,8 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Student {
+public class Student implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int uid;
     private int groupId;
     private String studentId;

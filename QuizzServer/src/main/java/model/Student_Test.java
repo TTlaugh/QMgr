@@ -1,8 +1,6 @@
 package model;
 
 import java.io.Serializable;
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,12 +12,13 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Exam implements Serializable {
+public class Student_Test implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    private int examId;
-    private int subjectId;
-    private String name;
-    private String desc;
-    private List<Integer> questionsIds;
-    private boolean archive;
+
+    private String studentId;
+    private String fullName;
+    private int timeTaken;
+    private float score;
+
 }

@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import lombok.AllArgsConstructor;
@@ -13,7 +14,8 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Question {
+public class Question implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int questionId;
     private int subjectId;
     private String chapter;

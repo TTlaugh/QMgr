@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
@@ -13,7 +14,8 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Group {
+public class Group implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int groupId;
     private int workspaceId;
     private String groupName;

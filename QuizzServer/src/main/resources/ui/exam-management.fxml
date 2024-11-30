@@ -516,7 +516,7 @@
                   <Image url="@../imgs/icons8-arrow-24.png" />
                </image>
             </ImageView>
-            <Button layoutX="140.0" layoutY="124.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="12.0">
+            <Button layoutX="140.0" layoutY="124.0" mnemonicParsing="false" onAction="#btn_back_SubDetail" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="12.0">
                <graphic>
                   <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" smooth="false">
                      <image>
@@ -601,7 +601,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" layoutX="32.0" layoutY="285.0" text="6 min" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="159.0" />
+                  <Label fx:id="lb_TimeTaken_SubDetail" alignment="CENTER_RIGHT" layoutX="32.0" layoutY="285.0" text="6 min" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="159.0" />
                   <Label layoutX="32.0" layoutY="285.0" text="Score" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="178.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -891,7 +891,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Button alignment="CENTER" layoutX="27.0" layoutY="412.0" mnemonicParsing="false" onAction="#btn_CLoseTest" prefHeight="32.0" prefWidth="155.0" styleClass="button-do" text="Close test (14:05)" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <Button alignment="CENTER" layoutX="27.0" layoutY="412.0" mnemonicParsing="false" onAction="#btn_CLoseTest" prefHeight="32.0" prefWidth="155.0" styleClass="button-do" text="Close test " textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -899,6 +899,7 @@
                   <TableView fx:id="tableView_Testing" fixedCellSize="0.0" prefHeight="135.0" prefWidth="476.0" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="63.0">
                      <columns>
                         <TableColumn fx:id="ID_Testing" editable="false" prefWidth="44.00001525878906" text="#ID" />
+                        <TableColumn fx:id="Student_Testing" editable="false" prefWidth="44.00001525878906" text="Student Name" />
                         <TableColumn fx:id="TimeTaken_Testing" editable="false" prefWidth="114.4000244140625" resizable="false" text="Time taken" />
                         <TableColumn fx:id="Score_Testing" editable="false" prefWidth="92.79998779296875" resizable="false" text="Score" />
                      </columns>

@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import lombok.AllArgsConstructor;
@@ -13,7 +14,10 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class HostExam {
+public class HostExam implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private int hostExamId;
     private int examId;
     private int groupId;

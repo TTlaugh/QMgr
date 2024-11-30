@@ -13,7 +13,8 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Answers implements Serializable {
+public class Answer implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int answerId;
     private int questionId;
     private String content;

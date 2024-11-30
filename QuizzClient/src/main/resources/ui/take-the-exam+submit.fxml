@@ -2,21 +2,18 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TestHostExam">
    <children>
       <Separator layoutY="57.0" prefHeight="1.0" prefWidth="1300.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
       <Label layoutX="58.0" minHeight="32.0" minWidth="57.0" prefHeight="32.0" prefWidth="57.0" text="Quizz" textFill="#1d2939" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="10.0">
@@ -30,9 +27,9 @@
             <Image url="@../imgs/Screenshot_2024-10-30_172645-removebg-preview.png" />
          </image>
       </ImageView>
-      <StackPane alignment="TOP_CENTER" layoutY="55.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
+      <StackPane fx:id="StackPane_DoHostExam" alignment="TOP_CENTER" layoutY="55.0" prefHeight="150.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
          <children>
-            <Label alignment="CENTER" minHeight="44.0" minWidth="200.0" text="KIỂM TRA 15 PHÚT - ĐỀ 1&#10;ĐẠI SỐ TUYẾN TÍNH&#10;" textAlignment="CENTER">
+            <Label alignment="CENTER" minHeight="44.0" minWidth="200.0" text="KIỂM TRA&#10;" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -54,96 +51,8 @@
                         </Label>
                         <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="8.0" layoutY="53.0" prefHeight="273.0" prefWidth="122.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="52.0">
                            <content>
-                              <FlowPane maxWidth="120.0" prefWidth="120.0">
+                              <FlowPane fx:id="FlowPane_Question" maxWidth="120.0" prefWidth="120.0">
                                  <children>
-                                    <Button maxHeight="24.0" maxWidth="24.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="24.0" styleClass="button-xanhnhat" text="01">
-                                       <font>
-                                          <Font size="9.0" />
-                                       </font>
-                                       <FlowPane.margin>
-                                          <Insets bottom="6.0" right="6.0" />
-                                       </FlowPane.margin>
-                                    </Button>
-                                    <Button maxHeight="24.0" maxWidth="24.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="24.0" styleClass="button-xanhnhat" text="01">
-                                       <font>
-                                          <Font size="9.0" />
-                                       </font>
-                                       <FlowPane.margin>
-                                          <Insets bottom="6.0" right="6.0" />
-                                       </FlowPane.margin>
-                                    </Button>
-                                    <Button maxHeight="24.0" maxWidth="24.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="24.0" styleClass="button-xanhnhat" text="01">
-                                       <font>
-                                          <Font size="9.0" />
-                                       </font>
-                                       <FlowPane.margin>
-                                          <Insets bottom="6.0" right="6.0" />
-                                       </FlowPane.margin>
-                                    </Button>
-                                    <Button maxHeight="24.0" maxWidth="24.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="24.0" styleClass="button-xanhnhat" text="01">
-                                       <font>
-                                          <Font size="9.0" />
-                                       </font>
-                                       <FlowPane.margin>
-                                          <Insets bottom="6.0" right="6.0" />
-                                       </FlowPane.margin>
-                                    </Button>
-                                    <Button maxHeight="24.0" maxWidth="24.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="24.0" styleClass="button-xanhnhat" text="01">
-                                       <font>
-                                          <Font size="9.0" />
-                                       </font>
-                                       <FlowPane.margin>
-                                          <Insets bottom="6.0" right="6.0" />
-                                       </FlowPane.margin>
-                                    </Button>
-                                    <Button maxHeight="24.0" maxWidth="24.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="24.0" styleClass="button-xanhnhat" text="01">
-                                       <font>
-                                          <Font size="9.0" />
-                                       </font>
-                                       <FlowPane.margin>
-                                          <Insets bottom="6.0" right="6.0" />
-                                       </FlowPane.margin>
-                                    </Button>
-                                    <Button maxHeight="24.0" maxWidth="24.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="24.0" styleClass="button-xanhnhat" text="01">
-                                       <font>
-                                          <Font size="9.0" />
-                                       </font>
-                                       <FlowPane.margin>
-                                          <Insets bottom="6.0" right="6.0" />
-                                       </FlowPane.margin>
-                                    </Button>
-                                    <Button maxHeight="24.0" maxWidth="24.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="24.0" styleClass="button-xanhnhat" text="01">
-                                       <font>
-                                          <Font size="9.0" />
-                                       </font>
-                                       <FlowPane.margin>
-                                          <Insets bottom="6.0" right="6.0" />
-                                       </FlowPane.margin>
-                                    </Button>
-                                    <Button maxHeight="24.0" maxWidth="24.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="24.0" styleClass="button-xanhnhat" text="01">
-                                       <font>
-                                          <Font size="9.0" />
-                                       </font>
-                                       <FlowPane.margin>
-                                          <Insets bottom="6.0" right="6.0" />
-                                       </FlowPane.margin>
-                                    </Button>
-                                    <Button maxHeight="24.0" maxWidth="24.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="24.0" styleClass="button-xanhnhat" text="01">
-                                       <font>
-                                          <Font size="9.0" />
-                                       </font>
-                                       <FlowPane.margin>
-                                          <Insets bottom="6.0" right="6.0" />
-                                       </FlowPane.margin>
-                                    </Button>
-                                    <Button maxHeight="24.0" maxWidth="24.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="24.0" styleClass="button-xanhnhat" text="01">
-                                       <font>
-                                          <Font size="9.0" />
-                                       </font>
-                                       <FlowPane.margin>
-                                          <Insets bottom="6.0" right="6.0" />
-                                       </FlowPane.margin>
-                                    </Button>
                                     <Button maxHeight="24.0" maxWidth="24.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="24.0" styleClass="button-xanhnhat" text="01">
                                        <font>
                                           <Font size="9.0" />
@@ -158,7 +67,7 @@
                         </ScrollPane>
                      </children>
                   </AnchorPane>
-                  <Label layoutX="209.0" layoutY="44.0" prefHeight="48.0" prefWidth="428.0" style="-fx-background-radius: 8; -fx-background-color: #101828;" text="Câu 7:  Tốc độ của ánh sáng trong vũ trụ là bao nhiêu?" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="166.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0">
+                  <Label fx:id="lb_Question" layoutX="209.0" layoutY="44.0" prefHeight="48.0" prefWidth="428.0" style="-fx-background-radius: 8; -fx-background-color: #101828;" text="Câu 7:  Tốc độ của ánh sáng trong vũ trụ là bao nhiêu?" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="166.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -168,75 +77,16 @@
                   </Label>
                   <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="167.0" layoutY="85.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="166.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="84.0">
                      <content>
-                        <VBox prefWidth="424.0" spacing="10.0">
-                           <children>
-                              <HBox prefHeight="38.0" prefWidth="424.0" spacing="15.0">
-                                 <children>
-                                    <CheckBox alignment="TOP_CENTER" minHeight="38.0" mnemonicParsing="false" prefHeight="38.0" selected="true">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </CheckBox>
-                                    <TextField minHeight="38.0" prefHeight="38.0" prefWidth="1000.0" styleClass="round-layout" text="Ngang vận tốc con bò nhà tôi">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </TextField>
-                                 </children>
-                              </HBox>
-                              <HBox prefHeight="38.0" prefWidth="424.0" spacing="15.0">
-                                 <children>
-                                    <CheckBox alignment="TOP_CENTER" minHeight="38.0" mnemonicParsing="false" prefHeight="38.0" selected="true">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </CheckBox>
-                                    <TextField minHeight="38.0" prefHeight="38.0" prefWidth="1000.0" styleClass="round-layout" text="Ngang vận tốc con bò nhà tôi">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </TextField>
-                                 </children>
-                              </HBox>
-                              <HBox prefHeight="38.0" prefWidth="424.0" spacing="15.0">
-                                 <children>
-                                    <CheckBox alignment="TOP_CENTER" minHeight="38.0" mnemonicParsing="false" prefHeight="38.0" selected="true">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </CheckBox>
-                                    <TextField minHeight="38.0" prefHeight="38.0" prefWidth="1000.0" styleClass="round-layout" text="Ngang vận tốc con bò nhà tôi">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </TextField>
-                                 </children>
-                              </HBox>
-                              <HBox prefHeight="38.0" prefWidth="424.0" spacing="15.0">
-                                 <children>
-                                    <CheckBox alignment="TOP_CENTER" minHeight="38.0" mnemonicParsing="false" prefHeight="38.0" selected="true">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </CheckBox>
-                                    <TextField minHeight="38.0" prefHeight="38.0" prefWidth="1000.0" styleClass="round-layout" text="Ngang vận tốc con bò nhà tôi">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </TextField>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
+                        <VBox fx:id="VBox_Answer" prefWidth="424.0" spacing="10.0" />
                      </content>
                   </ScrollPane>
                </children>
             </AnchorPane>
          </children>
       </StackPane>
-      <StackPane alignment="TOP_CENTER" layoutX="314.0" layoutY="221.0" prefHeight="150.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
+      <StackPane fx:id="StackPane_ResultHostExam" alignment="TOP_CENTER" layoutX="314.0" layoutY="221.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
          <children>
-            <Label alignment="TOP_CENTER" text="YOUR SCORE: 9.5" textFill="#154fef">
+            <Label fx:id="lb_ScoreStudent" alignment="TOP_CENTER" text="YOUR SCORE: 9.5" textFill="#154fef">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -244,15 +94,7 @@
                   <Insets top="150.0" />
                </StackPane.margin>
             </Label>
-            <Label text="Duration: 13m20s - Submit at 12:37 18/10/2024">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <StackPane.margin>
-                  <Insets top="180.0" />
-               </StackPane.margin>
-            </Label>
-            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="158.0" styleClass="button-xanhnhat" text="Export submission">
+            <Button mnemonicParsing="false" onAction="#btn_ExportSubmission" prefHeight="38.0" prefWidth="158.0" styleClass="button-xanhnhat" text="Export submission">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -262,5 +104,10 @@
             </Button>
          </children>
       </StackPane>
+      <Button layoutX="443.0" layoutY="14.0" maxHeight="24.0" maxWidth="75.0" mnemonicParsing="false" onAction="#btn_Submit" prefHeight="24.0" prefWidth="75.0" styleClass="button-xanhnhat" text="Submit">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
