@@ -23,6 +23,45 @@ public class SubmissionDAO implements interfaceDAO<Submission> {
     private Gson gson = new Gson();
     Connection con;
 
+    public ArrayList<Submission> getSubmissionsByHostExam(int ExamID) {
+        list = new ArrayList<Submission>();
+        con = SQLUtils.getConnection();
+        if (con != null) {
+            try {
+                String query = "select submissions.* " + "from submissions "
+                        + "join hostexams on hostexams.HostExamID = submissions.HostExamID " +
+                        "join exams on exams.ExamID = hostexams.ExamID "
+                        + "join students on students.UID = submissions.UID "
+                        + "where exams.ExamID = ?";
+                PreparedStatement ps = con.prepareStatement(query);
+                ps.setInt(1, ExamID);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    Submission submission = new Submission();
+                    submission.setHostExamId(rs.getInt("HostExamID"));
+                    submission.setStudentId(rs.getInt("UID"));
+                    submission.setTimeTaken(rs.getInt("TimeTaken"));
+                    submission.setScore(rs.getFloat("Score"));
+
+                    String answerJson = rs.getString("AnswerSelecteds");
+                    if (answerJson != null && !answerJson.isEmpty()) {
+                        Type answerMapType = new TypeToken<Map<Integer, List<Integer>>>() {
+                        }.getType();
+                        Map<Integer, List<Integer>> answerMap = gson.fromJson(answerJson, answerMapType);
+                        submission.setAnswerSelectedMap(answerMap);
+                    }
+
+                    list.add(submission);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                SQLUtils.closeConnection(con);
+            }
+        }
+        return list;
+    }
+
     @Override
     public ArrayList<Submission> getAll() {
         list = null;
@@ -59,7 +98,7 @@ public class SubmissionDAO implements interfaceDAO<Submission> {
     }
 
     @Override
-    public boolean create(Submission t) {
+    public boolean create(Submission submission) {
         boolean b = false;
         con = SQLUtils.getConnection();
         if (con != null) {
@@ -118,7 +157,7 @@ public class SubmissionDAO implements interfaceDAO<Submission> {
     }
 
     @Override
-    public boolean update(Submission t) {
+    public boolean update(Submission submission) {
         boolean b = false;
         con = SQLUtils.getConnection();
         if (con != null) {

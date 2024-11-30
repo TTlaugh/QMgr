@@ -22,11 +22,11 @@ public class HostExamDAO implements interfaceDAO<HostExam> {
 
     @Override
     public ArrayList<HostExam> getAll() {
-        list = null;
+        list = new ArrayList<HostExam>();
         con = SQLUtils.getConnection();
         if (con != null) {
             try {
-                String query = "SELECT * FROM HostExams WHERE isArchived = 0"; // Assuming you have an archived field
+                String query = "SELECT * FROM HostExams "; // Assuming you have an archived field
                 PreparedStatement ps = con.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
@@ -56,7 +56,7 @@ public class HostExamDAO implements interfaceDAO<HostExam> {
     }
 
     @Override
-    public boolean create(HostExam t) {
+    public boolean create(HostExam hostExam) {
         boolean b = false;
         con = SQLUtils.getConnection();
         if (con != null) {
@@ -117,7 +117,7 @@ public class HostExamDAO implements interfaceDAO<HostExam> {
     }
 
     @Override
-    public boolean update(HostExam t) {
+    public boolean update(HostExam hostExam) {
         boolean b = false;
         con = SQLUtils.getConnection();
         if (con != null) {

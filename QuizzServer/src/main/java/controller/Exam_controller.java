@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +34,18 @@ import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 import model.Answer;
 import model.Exam;
+import model.Group;
+import model.HostExam;
 import model.Question;
 import model.Subject;
 import services.ExamManager;
+import services.GroupManager;
+import services.HostExamManager;
 import services.QuestionManager;
+import services.StartServer;
 import services.SubjectManager;
 import utils.CheckCheckBox;
+import utils.CheckTextField;
 import utils.Notification;
 
 public class Exam_controller implements Initializable {
@@ -200,13 +208,47 @@ public class Exam_controller implements Initializable {
 
     @FXML
     private Label lb_totalQuestionExam_EditExam = new Label();
+
+    // ===== Submission Detail ========================
+    @FXML
+    private AnchorPane Anchor_submissionDetail_detailExam_ExamManagement;
+
+    // ===== Host Exam ========================
+
+    @FXML
+    private TextField tf_IPAddress_HostExam = new TextField();
+
+    @FXML
+    private ComboBox<Group> ComboBox_Group_HostExam = new ComboBox<Group>();
+
+    @FXML
+    private Label lb_ExamName_SubjectName_HostExam = new Label();
+
+    @FXML
+    private TextField tf_TimeLimit_HostExam = new TextField();
+
+    @FXML
+    private TextField tf_MaxCore_HostExam = new TextField();
+
+    @FXML
+    private CheckBox checkBox_Shuffle_HostExam = new CheckBox();
+
+    @FXML
+    private TextField tf_Port_HostExam = new TextField();
+
     // =============================
 
     public static List<Question> listQuestions = new ArrayList<Question>();
 
+    StartServer startServer;
+
+    HostExamManager hostExamManager = HostExamManager.getInstance();
+
     ExamManager examManager = ExamManager.getInstance();
 
     SubjectManager subjectManager = SubjectManager.getInstance();
+
+    GroupManager groupManager = GroupManager.getInstance();
 
     QuestionManager quesManager = QuestionManager.getInstance();
 
@@ -219,6 +261,8 @@ public class Exam_controller implements Initializable {
     int index_QuestionSelected = 0;
 
     int indexSelected_AnchorPane_in_FlowPane = 0;
+
+    int groupID_HostExam = 0;
 
     public static List<Exam> listExams = new ArrayList<Exam>();
 
@@ -525,6 +569,8 @@ public class Exam_controller implements Initializable {
         int subjectId = exam_Current_SubjectManagement.getSubjectId();
 
         String subjectName = subjectManager.getSubject(subjectId).getSubjectName();
+
+        subject_Current_SubjectManagement = subjectManager.getSubject(subjectId);
 
         String description = exam_Current_SubjectManagement.getDesc();
 
@@ -939,7 +985,124 @@ public class Exam_controller implements Initializable {
     // Host Exam
     @FXML
     void btn_hostExam_detailExam_ExamManagement(ActionEvent event) {
+        // Doing
         setUIAnchorCurrent(this.AnchorPane_hostExam_detailExam_ExamManagement);
+
+        LoadDataHostExam();
+    }
+
+    void LoadDataHostExam() {
+        List<Group> listGroups = groupManager.getAllGroupInWorkSpace(Workspace_controller.current_WorkSpaceID);
+
+        CheckTextField.notCharTextField(tf_Port_HostExam);
+
+        CheckTextField.notCharTextField(tf_MaxCore_HostExam);
+
+        CheckTextField.notCharTextField(tf_TimeLimit_HostExam);
+
+        String ipAddress = StartServer.getIPAddress();
+
+        lb_ExamName_SubjectName_HostExam.setText(exam_Current_SubjectManagement.getName() + "\n"
+                + subject_Current_SubjectManagement.getSubjectName());
+
+        tf_IPAddress_HostExam.setText(ipAddress);
+
+        setComboBoxHostExam(ComboBox_Group_HostExam, listGroups);
+
+    }
+
+    void setComboBoxHostExam(ComboBox<Group> comboBox_Group_HostExam, List<Group> listGroups) {
+
+        comboBox_Group_HostExam.getItems().clear();
+
+        comboBox_Group_HostExam.getItems().addAll(listGroups);
+
+        comboBox_Group_HostExam.setConverter(new StringConverter<Group>() {
+            @Override
+            public String toString(Group group) {
+                return group == null ? "" : group.getGroupName();
+            }
+
+            @Override
+            public Group fromString(String s) {
+                return null;
+            }
+        });
+    }
+
+    @FXML
+    void setOnAction_ComboBoxGroup_HostExam(ActionEvent event) {
+        Group group = ComboBox_Group_HostExam.getValue();
+        if (group != null) {
+            groupID_HostExam = group.getGroupId();
+            return;
+        }
+        groupID_HostExam = 0;
+    }
+
+    @FXML
+    void btn_StartTest_HostExam(ActionEvent event) {
+        String port = tf_Port_HostExam.getText();
+
+        if (port.length() == 0 || port == null || port == "") {
+            Notification.Error("Error", "Please enter port");
+            return;
+        }
+
+        int maxCore = Integer.parseInt(tf_MaxCore_HostExam.getText());
+
+        if (maxCore < 1) {
+            Notification.Error("Error", "Please enter max core");
+            return;
+        }
+
+        int timeLimit = Integer.parseInt(tf_TimeLimit_HostExam.getText());
+
+        if (timeLimit < 1) {
+            Notification.Error("Error", "Please enter time limit");
+            return;
+        }
+
+        int groupId = groupID_HostExam;
+
+        if (groupId == 0) {
+            Notification.Error("Error", "Please choose group");
+            return;
+        }
+
+        boolean isShuffle = checkBox_Shuffle_HostExam.isSelected();
+
+        ArrayList<Question> listQuestions_HostExam = new ArrayList<Question>();
+
+        for (Integer questionIds : exam_Current_SubjectManagement.getQuestionsIds()) {
+
+            Question question = quesManager.getQuestion(questionIds);
+
+            listQuestions_HostExam.add(question);
+        }
+
+        int HostExamID = hostExamManager.getAllHostExams().size() + 1;
+
+        HostExam hostExam = new HostExam(HostExamID, exam_Current_SubjectManagement.getExamId(), groupId, timeLimit,
+                maxCore,
+                isShuffle, listQuestions_HostExam);
+
+        boolean isCreateSuccess = hostExamManager.createHostExam(hostExam);
+
+        if (!isCreateSuccess) {
+            Notification.Error("Error", "Start host exam failed");
+            return;
+        }
+
+        // Start Server
+        try {
+            startServer = new StartServer(hostExam, Integer.parseInt(port));
+
+            Notification.Infomation("Success", "Start host exam successfully");
+        } catch (IOException e) {
+            Notification.Error("Error", e.getMessage());
+        }
+
     }
 
     @FXML

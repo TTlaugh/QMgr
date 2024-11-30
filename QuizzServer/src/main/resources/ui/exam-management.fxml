@@ -506,7 +506,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="background" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="Anchor_submissionDetail_detailExam_ExamManagement" prefHeight="200.0" prefWidth="200.0" styleClass="background" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Separator layoutX="58.0" layoutY="72.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
             <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="198.0" layoutY="16.0" pickOnBounds="true" AnchorPane.leftAnchor="198.0" AnchorPane.topAnchor="16.0">
@@ -808,7 +808,7 @@
             </Label>
             <AnchorPane layoutX="140.0" layoutY="59.20000076293945" prefHeight="448.0" prefWidth="232.0" styleClass="popup" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="142.0" AnchorPane.topAnchor="59.0">
                <children>
-                  <Button alignment="CENTER" layoutX="17.0" layoutY="402.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="208.0" styleClass="button-xanhdam" text="Start test" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                  <Button alignment="CENTER" layoutX="17.0" layoutY="402.0" mnemonicParsing="false" onAction="#btn_StartTest_HostExam" prefHeight="32.0" prefWidth="208.0" styleClass="button-xanhdam" text="Start test" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -818,7 +818,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField disable="true" layoutX="14.0" layoutY="226.0" prefHeight="38.0" prefWidth="340.0" styleClass="round-layout" text="192.168.xxxxxx" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="115.20000000000005" AnchorPane.topAnchor="108.0">
+                  <TextField fx:id="tf_IPAddress_HostExam" disable="true" layoutX="14.0" layoutY="226.0" prefHeight="38.0" prefWidth="340.0" promptText="192.168.xxxxxx" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="115.20000000000005" AnchorPane.topAnchor="108.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -828,7 +828,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <ComboBox layoutX="14.0" layoutY="306.0" prefHeight="38.0" prefWidth="436.0" promptText="-Group-" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="186.0">
+                  <ComboBox fx:id="ComboBox_Group_HostExam" layoutX="14.0" layoutY="306.0" onAction="#setOnAction_ComboBoxGroup_HostExam" prefHeight="38.0" prefWidth="436.0" promptText="-Group-" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="186.0">
                      <padding>
                         <Insets left="10.0" right="10.0" />
                      </padding>
@@ -838,12 +838,12 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="238.0" layoutY="43.0" text="KIỂM TRA 15 PHÚT - ĐỀ 1&#10;ĐẠI SỐ TUYẾN TÍNH" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+                  <Label fx:id="lb_ExamName_SubjectName_HostExam" alignment="CENTER" layoutX="238.0" layoutY="43.0" text="KIỂM TRA 15 PHÚT - ĐỀ 1&#10;ĐẠI SỐ TUYẾN TÍNH" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="24.0" layoutY="236.0" prefHeight="38.0" prefWidth="340.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="264.0">
+                  <TextField fx:id="tf_TimeLimit_HostExam" layoutX="24.0" layoutY="236.0" prefHeight="38.0" prefWidth="340.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="264.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -853,12 +853,12 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="34.0" layoutY="246.0" prefHeight="38.0" prefWidth="340.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="342.0">
+                  <TextField fx:id="tf_MaxCore_HostExam" layoutX="34.0" layoutY="246.0" prefHeight="38.0" prefWidth="340.0" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="342.0">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <CheckBox layoutX="22.0" layoutY="391.0" mnemonicParsing="false" text="Shuffle questions" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="390.0">
+                  <CheckBox fx:id="checkBox_Shuffle_HostExam" layoutX="22.0" layoutY="391.0" mnemonicParsing="false" text="Shuffle questions" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="390.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -868,7 +868,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="34.0" layoutY="246.0" prefHeight="38.0" prefWidth="86.0" styleClass="round-layout" text="2000" AnchorPane.rightAnchor="18.400000000000063" AnchorPane.topAnchor="108.0">
+                  <TextField fx:id="tf_Port_HostExam" layoutX="34.0" layoutY="246.0" prefHeight="38.0" prefWidth="86.0" styleClass="round-layout" AnchorPane.rightAnchor="18.400000000000063" AnchorPane.topAnchor="108.0">
                      <font>
                         <Font size="14.0" />
                      </font>
