@@ -1,14 +1,11 @@
 package services;
 
 import java.net.Socket;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 import java.util.stream.Collectors;
 
 import model.Answer;
@@ -60,8 +57,7 @@ public class StartClient {
 
     public HostExam getHostExam() {
         HostExam hostExam_Test = this.hostExam;
-        if (hostExam_Test != null && hostExam_Test.isShuffle())
-            Collections.shuffle(hostExam_Test.getExamQuestions());
+
         return hostExam_Test;
     }
 
@@ -71,10 +67,12 @@ public class StartClient {
 
     public double submit(ArrayList<Question> questionSelecteds, List<Answer_Select> answer_selects, Date start) {
 
-        // Format time
-        // SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
-        // sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-        // System.out.println(sdf.format(start));
+        for (int i = 0; i < questionSelecteds.size(); i++) {
+            System.out.println(questionSelecteds.get(i).getContent());
+            for (int j = 0; j < questionSelecteds.get(i).getAnswers().size(); j++) {
+                System.out.println(questionSelecteds.get(i).getAnswers().get(j).isCorrect());
+            }
+        }
 
         long timeTaken = 0;
 
@@ -96,12 +94,32 @@ public class StartClient {
 
         Map<Integer, List<Integer>> map = convertListMap(questionSelecteds);
 
+        for (Map.Entry<Integer, List<Integer>> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + " : " + entry.getValue());
+        }
+
         Submission submission = new Submission(0, hostExam.getHostExamId(), studentID_Sub, (int) timeTaken, score,
                 map);
 
         this.submission.send(submission);
 
-        return score;
+        return (float) (Math.round(score * 100.0) / 100.0);
+
+    }
+
+    private Map<Integer, List<Integer>> convertListMap(List<Question> list) {
+        Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>(list.size());
+        for (Question i : list) {
+            int questionId = i.getQuestionId();
+            ArrayList<Answer> selectedAnswer = i.getAnswers();
+            List<Integer> answerChosen = new ArrayList<Integer>(selectedAnswer.size());
+            for (Answer j : selectedAnswer) {
+                answerChosen.add(j.isCorrect() ? 1 : 0);
+            }
+            map.put(questionId, answerChosen);
+
+        }
+        return map;
     }
 
     private double scoreCalculator(ArrayList<Question> questionSelecteds, List<Answer_Select> answer_selects,
@@ -132,14 +150,6 @@ public class StartClient {
         return count_trueAnswers * scorePerQuestion * 1.0;
     }
 
-    private Map<Integer, List<Integer>> convertListMap(List<Question> list) {
-        Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>(list.size());
-        for (Question i : list) {
-            map.put(i.getQuestionId(),
-                    i.getAnswers().stream().map(Answer::getAnswerId).collect(Collectors.toList()));
-        }
-        return map;
-    }
 }
 
 class Data {

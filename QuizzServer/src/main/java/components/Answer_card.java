@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import model.Answer;
+import model.Answer_Select;
 
 public class Answer_card {
     String url_Button = "/imgs/Screenshot_2024-10-30_173217-removebg-preview.png";
@@ -20,11 +21,35 @@ public class Answer_card {
 
     public Answer_card(Answer answer) {
         checkBox.setSelected(answer.isCorrect());
+
         textField.setText(answer.getContent());
 
         hBox.getChildren().addAll(checkBox, textField, button);
 
         setUp();
+    }
+
+    public Answer_card(Answer_Select answer_Select) {
+
+        setUp();
+
+        String style_Blue = "-fx-background-color: lightblue; -fx-text-fill: darkblue;";
+
+        String style_Red = "-fx-background-color: lightred; -fx-text-fill: darkred;";
+
+        // Correct -> choice
+        // Choice -> correct
+
+        checkBox.setSelected(answer_Select.isCorrect() == answer_Select.isChoice() ? true : false);
+        if (answer_Select.isCorrect() != answer_Select.isChoice()) {
+            checkBox.setSelected(true);
+            checkBox.setStyle(style_Red);
+        }
+
+        textField.setText(answer_Select.getContent());
+
+        hBox.getChildren().addAll(checkBox, textField, button);
+
     }
 
     void setUp() {

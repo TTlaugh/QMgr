@@ -12,14 +12,11 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import data.HostExamDAO;
 import data.StudentDAO;
 import data.SubmissionDAO;
 import model.HostExam;
 import model.Student;
 import model.Submission;
-import utils.Notification;
 
 public class StartServer {
 

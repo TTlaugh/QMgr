@@ -2,17 +2,12 @@ package controllers;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.awt.Desktop;
 import java.util.ResourceBundle;
-
-import com.fasterxml.jackson.databind.deser.impl.PropertyValue;
-import com.google.gson.Gson;
-
 import components.Answer_card;
 import components.Exam_card;
 import javafx.application.Platform;
@@ -44,6 +39,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 import model.Answer;
+import model.Answer_Select;
 import model.Exam;
 import model.Group;
 import model.HostExam;
@@ -834,7 +830,10 @@ public class Exam_controller implements Initializable {
 
         for (Answer answer : question.getAnswers()) {
 
-            Answer_card answer_card = new Answer_card(answer);
+            Answer_Select answer_select = new Answer_Select(answer, question.getAnswerSelectedMap()
+                    .get(question.getQuestionId()).contains(answer.getAnswerId()));
+
+            Answer_card answer_card = new Answer_card(answer_select);
 
             setEventButtonDelete(answer_card);
 
@@ -869,6 +868,7 @@ public class Exam_controller implements Initializable {
                 boolean isCheckBox = CheckCheckBox.checkTextBox(vbox);
 
                 if (!isMultiple && !isCheckBox) {
+
                     answer_card.getCheckBox().setSelected(false);
 
                     Notification.Error("Error", "Only one answer is allowed");
@@ -1562,8 +1562,7 @@ public class Exam_controller implements Initializable {
 
         Question_SubDetail.setCellValueFactory(new PropertyValueFactory<Question_Submiss, String>("content"));
 
-        Chosen_SubDetail.setCellValueFactory(celldata -> getChosenAnswer(celldata.getValue().getAnswerSelectedMap(),
-                celldata.getValue().getQuestionId()));
+        Chosen_SubDetail.setCellValueFactory(celldata -> getChosenAnswer(celldata.getValue()));
 
         Correct_SubDetail.setCellValueFactory(
                 celldata -> getCorrectAnswer_SubmissDetail(celldata.getValue().getExamQuestions(),
@@ -1572,43 +1571,37 @@ public class Exam_controller implements Initializable {
         return observableList_Question;
     }
 
-    public StringProperty getChosenAnswer(Map<Integer, List<Integer>> answerSelectedMap, int questionID_Detail) {
+    public StringProperty getChosenAnswer(Question_Submiss question) {
+
+        Map<Integer, List<Integer>> answerSelectedMap = question.getAnswerSelectedMap();
 
         StringProperty chosenAnswer = new SimpleStringProperty();
 
+        int id = question.getQuestionId();
+
+        List<Question> listQuestions = question.getExamQuestions();
+
+        Question questionChosen = new Question();
+
+        for (Question questioncurrent : listQuestions) {
+            if (questioncurrent.getQuestionId() == id) {
+                questionChosen = questioncurrent;
+            }
+        }
+        List<Answer> listAnswers = questionChosen.getAnswers();
+
+        List<Integer> listAnswersChosen = answerSelectedMap.get(id);
+
         chosenAnswer.set("[ ");
 
-        for (Map.Entry<Integer, List<Integer>> entry : answerSelectedMap.entrySet()) {
+        for (int i = 0; i < listAnswersChosen.size(); i++) {
 
-            int questionId = entry.getKey();
+            if (listAnswersChosen.get(i) != 0) {
 
-            if (questionId != questionID_Detail.getQuestionId())
-                continue;
-
-            if (questionId == questionID_Detail.getQuestionId()) {
-
-                List<Integer> answerChosen = entry.getValue();
-
-                List<Answer> listAnswers = question.getAnswers();
-
-                for (int i = 0; i < answerChosen.size(); i++) {
-
-                    System.out.println(answerChosen.get(i));
-
-                    if (answerChosen.get(i) != 0) {
-
-                        chosenAnswer
-                                .set(chosenAnswer.get() + " " +
-                                        listAnswers.get(answerChosen.get(i)).getContent());
-
-                        System.out.println(listAnswers.get(i).getContent());
-                    }
-
-                }
-
+                chosenAnswer.set(chosenAnswer.get() + " " + listAnswers.get(i).getContent());
             }
-
         }
+
         chosenAnswer.set(chosenAnswer.get() + " ]");
 
         return chosenAnswer;

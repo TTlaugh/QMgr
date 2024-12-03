@@ -64,7 +64,7 @@ public class SubmissionDAO implements interfaceDAO<Submission> {
 
     @Override
     public ArrayList<Submission> getAll() {
-        list = null;
+        list = new ArrayList<Submission>();
         con = SQLUtils.getConnection();
         if (con != null) {
             try {
