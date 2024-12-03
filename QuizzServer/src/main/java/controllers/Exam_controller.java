@@ -2,11 +2,16 @@ package controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.awt.Desktop;
 import java.util.ResourceBundle;
+
+import com.fasterxml.jackson.databind.deser.impl.PropertyValue;
+
 import components.Answer_card;
 import components.Exam_card;
 import javafx.application.Platform;
@@ -290,23 +295,21 @@ public class Exam_controller implements Initializable {
     private Label lb_TimeTaken_SubDetail = new Label();
 
     @FXML
-    private TableView<Submission> tableView_SubDetail = new TableView<Submission>();
+    private TableView<Question> tableView_SubDetail = new TableView<Question>();
 
     @FXML
-    private TableColumn<Submission, String> ID_SubDetail = new TableColumn<Submission, String>();
+    private TableColumn<Question, Integer> ID_SubDetail = new TableColumn<Question, Integer>();
 
     @FXML
-    private TableColumn<Submission, Integer> Question_SubDetail = new TableColumn<Submission, Integer>();
+    private TableColumn<Question, String> Question_SubDetail = new TableColumn<Question, String>();
 
     @FXML
-    private TableColumn<Submission, String> Chosen_SubDetail = new TableColumn<Submission, String>();
+    private TableColumn<Question, String> Chosen_SubDetail = new TableColumn<Question, String>();
 
     @FXML
     private TableColumn<HostExam, String> Correct_SubDetail = new TableColumn<HostExam, String>();
 
     private Submission selectedSubmission = new Submission();
-
-    ObservableList<Submission> observableList_SubmissionDetail;
 
     // ====== TESTING ===========================
 
@@ -356,6 +359,8 @@ public class Exam_controller implements Initializable {
 
     public static Question questionSelected = new Question();
 
+    int index_SubmissionSelected = 0;
+
     int index_QuestionSelected = 0;
 
     int indexSelected_AnchorPane_in_FlowPane = 0;
@@ -368,7 +373,7 @@ public class Exam_controller implements Initializable {
 
     public static List<Question> listQuestions_ExamDetail;
 
-    public ObservableList<Question> observableList;
+    public ObservableList<Question> observableList_Question;
 
     public ObservableList<Submission> observableList_Submissions;
 
@@ -436,65 +441,65 @@ public class Exam_controller implements Initializable {
             return;
 
         for (Exam exam : list)
-            add_Exam_FlowPane(new Exam_card(exam, subject_Current_SubjectManagement));
+            add_Exam_FlowPane(new Exam_card(exam, subjectManager.getSubject(exam.getSubjectId())));
 
     }
 
     public ObservableList<Question> loadQuestion_tableViewQuestionBank_QuestionManagement(List<Question> list) {
 
-        observableList = FXCollections.observableArrayList(list);
+        observableList_Question = FXCollections.observableArrayList(list);
 
         ID_ColumnQuestion_ExamManagement.setCellValueFactory(new PropertyValueFactory<Question, Integer>("questionId"));
         Question_ColumnQuestion_ExamManagement
                 .setCellValueFactory(new PropertyValueFactory<Question, String>("content"));
 
-        return observableList;
+        return observableList_Question;
 
     }
 
     public ObservableList<Question> loadQuestion_tableViewQuestionExam_QuestionManagement(List<Question> list) {
 
-        observableList = FXCollections.observableArrayList(list);
+        observableList_Question = FXCollections.observableArrayList(list);
 
         ID_ColumnQuestionExam_ExamManagement
                 .setCellValueFactory(new PropertyValueFactory<Question, Integer>("questionId"));
         Question_ColumnQuestionExam_ExamManagement
                 .setCellValueFactory(new PropertyValueFactory<Question, String>("content"));
 
-        return observableList;
+        return observableList_Question;
 
     }
 
     public ObservableList<Question> loadQuestion_tableViewQuestionExamDetail_QuestionManagement(List<Question> list) {
 
-        observableList = FXCollections.observableArrayList(list);
+        observableList_Question = FXCollections.observableArrayList(list);
 
         ID_ColumnQuestionExam
                 .setCellValueFactory(new PropertyValueFactory<Question, Integer>("questionId"));
         Question_ColumnQuestionExam
                 .setCellValueFactory(new PropertyValueFactory<Question, String>("content"));
 
-        return observableList;
+        return observableList_Question;
 
     }
 
     public ObservableList<Question> loadQuestion_tableViewQuestionBank_EditExam(List<Question> list) {
 
-        observableList = FXCollections.observableArrayList(list);
+        observableList_Question = FXCollections.observableArrayList(list);
         ID_Column_QuestionBank_EditExam.setCellValueFactory(new PropertyValueFactory<Question, Integer>("questionId"));
         Question_Column_QuestionBank_EditExam
                 .setCellValueFactory(new PropertyValueFactory<Question, String>("content"));
-        return observableList;
+        return observableList_Question;
     }
 
     public ObservableList<Question> loadQuestion_tableViewQuestionExam_EditExam(List<Question> list) {
 
-        observableList = FXCollections.observableArrayList(list);
+        observableList_Question = FXCollections.observableArrayList(list);
         ID_Coulmn_QuestionExam_EditExam
                 .setCellValueFactory(new PropertyValueFactory<Question, Integer>("questionId"));
         Question_Coulmn_QuestonExam_EditExam
                 .setCellValueFactory(new PropertyValueFactory<Question, String>("content"));
-        return observableList;
+        return observableList_Question;
     }
 
     public ObservableList<Submission> loadQuestion_tableViewALlSubmiss_All(List<Submission> list) {
@@ -836,7 +841,7 @@ public class Exam_controller implements Initializable {
     @FXML
     void btn_duplicateExam_detailExam_ExamManagement(ActionEvent event) {
 
-        System.out.println("Duplicate");
+        // System.out.println("Duplicate");
 
         boolean isDuplicate = examManager.createExam(exam_Current_SubjectManagement);
 
@@ -1216,6 +1221,8 @@ public class Exam_controller implements Initializable {
 
             AnchorPane_Testing_HostExam.setVisible(true);
 
+            tableView_Testing.getItems().clear();
+
         } catch (IOException e) {
             Notification.Error("Error", e.getMessage());
         }
@@ -1224,19 +1231,32 @@ public class Exam_controller implements Initializable {
 
     @FXML
     void btn_ReloadData(ActionEvent event) {
+
         List<String> infoList = startServer.getConnectedClients();
+
         ArrayList<Student_Test> studentTests = new ArrayList<Student_Test>();
 
         for (String info : infoList) {
+
             String[] infoSplit = info.split("-");
+
+            // System.out.println(infoSplit);
 
             String studentId = infoSplit[0];
 
+            // System.out.println(studentId);
+
             String fullName = infoSplit[1];
+
+            // System.out.println(fullName);
 
             int timeTaken = Integer.parseInt(infoSplit[2]);
 
+            // System.out.println(timeTaken);
+
             float score = Float.parseFloat(infoSplit[3]);
+
+            // System.out.println(score);
 
             Student_Test studentTest = new Student_Test(studentId, fullName, timeTaken, score);
 
@@ -1400,14 +1420,33 @@ public class Exam_controller implements Initializable {
 
     @FXML
     void btn_DeleteSubmission_All(ActionEvent event) {
+
         selectedSubmission = tableView_AllSubmiss_All.getSelectionModel().getSelectedItem();
+
+        index_SubmissionSelected = tableView_AllSubmiss_All.getSelectionModel().getSelectedIndex();
 
         if (selectedSubmission == null) {
             Notification.Error("Error", "Please choose submission");
             return;
         }
 
-        boolean isDeleteSuccess = submissionManager.deleteSubmission(selectedSubmission.getSubmissionId());
+        boolean isDeleteSuccess = submissionManager
+                .deleteSubmission(selectedSubmission.getSubmissionId());
+
+        if (!isDeleteSuccess) {
+            Notification.Error("Error", "Delete submission failed");
+            return;
+        }
+        tableView_AllSubmiss_All.getItems().remove(index_SubmissionSelected);
+
+        Notification.Infomation("Success", "Delete submission successfully");
+    }
+
+    @FXML
+    void btn_DeleteSubmissionDetail(ActionEvent event) {
+
+        boolean isDeleteSuccess = submissionManager
+                .deleteSubmission(selectedSubmission.getSubmissionId());
 
         if (!isDeleteSuccess) {
             Notification.Error("Error", "Delete submission failed");
@@ -1426,9 +1465,14 @@ public class Exam_controller implements Initializable {
             Notification.Error("Error", "Please choose submission");
             return;
         }
-        String id = String.valueOf(selectedSubmission.getStudentId());
 
-        Student student = studentManager.getStudentbyId(id);
+        int id = selectedSubmission.getStudentId();
+
+        // System.out.println(id);
+
+        Student student = studentManager.getStudentByUid(id);
+
+        System.out.println(student.getFirstName() + " " + student.getLastName());
 
         setUIAnchorCurrent(Anchor_submissionDetail_detailExam_ExamManagement);
 
@@ -1440,12 +1484,12 @@ public class Exam_controller implements Initializable {
 
         lb_TimeTaken_SubDetail.setText(String.valueOf(selectedSubmission.getTimeTaken()));
 
+        tableView_SubDetail.setItems(loadQuestion_tableView_SubmissDetail(selectedSubmission));
+
     }
 
     public Integer getQuestionID_SubmissDetail(Submission submission) {
-        // StringProperty exam_ID = new
-        // SimpleStringProperty(exam.getExamID().toString());
-        // return exam_ID;
+
         int hostExamId = submission.getHostExamId();
 
         HostExam hostExam = hostExamManager.getHostExamById(hostExamId);
@@ -1457,23 +1501,83 @@ public class Exam_controller implements Initializable {
         return question_ID;
     }
 
-    public ObservableList<Submission> loadQuestion_tableView_SubmissDetail(List<Submission> list) {
+    public ObservableList<Question> loadQuestion_tableView_SubmissDetail(Submission submission) {
 
-        observableList_SubmissionDetail = FXCollections.observableArrayList(list);
+        ArrayList<Question> listQuestions = hostExamManager.getHostExamById(submission.getHostExamId())
+                .getExamQuestions();
 
-        ID_Submiss_All.setCellValueFactory(celldata -> getQuestionID_SubmissDetail(celldata.getValue()));
+        observableList_Question = FXCollections.observableArrayList(listQuestions);
 
-        // Student_Submiss_All_SubDetail
-        // .setCellValueFactory(celldata ->
-        // String.valueOf(celldata.getValue().getStudentId()));
-        // TimeTaken_Submiss_All_SubDetail
-        // .setCellValueFactory(celldata ->
-        // String.valueOf(celldata.getValue().getTimeTaken()));
-        // Score_Submiss_All_SubDetail.setCellValueFactory(celldata ->
-        // String.valueOf(celldata.getValue().getScore()));
+        ID_SubDetail.setCellValueFactory(new PropertyValueFactory<Question, Integer>("questionId"));
 
-        return observableList_SubmissionDetail;
+        Question_SubDetail.setCellValueFactory(new PropertyValueFactory<Question, String>("content"));
+
+        // Chosen_SubDetail.setCellValueFactory(celldata ->
+        // getChosenAnswer(celldata.getValue()));
+
+        // Correct_SubDetail.setCellValueFactory(
+        // celldata ->
+        // getCorrectAnswer_SubmissDetail(celldata.getValue().getExamQuestions()));
+
+        return observableList_Question;
     }
+
+    // public StringProperty getChosenAnswer(Question question) {
+    // Map<Integer, List<Integer>> answerSelectedMap = question.getAnswers().get;
+    // StringProperty chosenAnswer = new SimpleStringProperty();
+
+    // chosenAnswer.set("[ ");
+
+    // for (Map.Entry<Integer, List<Integer>> entry : answerSelectedMap.entrySet())
+    // {
+    // int questionId = entry.getKey();
+    // List<Integer> answerIds = entry.getValue();
+
+    // for (int i = 0; i < answerIds.size(); i++) {
+
+    // int answerId = answerIds.get(i);
+
+    // boolean isCorrect = answerId == 0 ? false : true;
+
+    // Question question = quesManager.getQuestion(questionId);
+
+    // ArrayList<Answer> listAnswers = question.getAnswers();
+
+    // for (int j = 0; j < listAnswers.size(); j++) {
+    // if (listAnswers.get(j).isCorrect() == isCorrect) {
+    // chosenAnswer.set(chosenAnswer.get() + " " +
+    // question.getAnswers().get(j).getContent());
+    // }
+    // }
+
+    // chosenAnswer.set(chosenAnswer.get() + " ");
+    // }
+    // chosenAnswer.set(chosenAnswer.get() + " ]");
+    // }
+    // return chosenAnswer;
+    // }
+
+    // public StringProperty getCorrectAnswer_SubmissDetail(ArrayList<Question>
+    // listQuestions) {
+    // StringProperty correctAnswer = new SimpleStringProperty();
+
+    // correctAnswer.set("[ ");
+
+    // for (int i = 0; i < listQuestions.size(); i++) {
+    // ArrayList<Answer> listAnswers = listQuestions.get(i).getAnswers();
+
+    // for (int j = 0; j < listAnswers.size(); j++) {
+    // if (listAnswers.get(j).isCorrect()) {
+    // char c = (char) (65 + j);
+    // correctAnswer.set(correctAnswer.get() + " " + c);
+
+    // }
+    // }
+    // correctAnswer.set(correctAnswer.get() + " ]");
+    // }
+
+    // return correctAnswer;
+    // }
 
     @FXML
     void btn_SearchSubmiss_All(ActionEvent event) {
@@ -1520,11 +1624,28 @@ public class Exam_controller implements Initializable {
 
     @FXML
     void btn_BackToExamManagement(ActionEvent event) {
+        setUIAnchorCurrent(AnchorPane_detailExam_ExamManagement);
 
+        lb_StudentName_SubDetail.setText("");
+
+        lb_StudentID_SubDetail.setText("");
+
+        lb_Score_SubDetail.setText("");
+
+        lb_TimeTaken_SubDetail.setText("");
     }
 
     @FXML
     void btn_questionDetail_SubmissDetail(ActionEvent event) {
+
+        questionSelected = tableView_SubDetail.getSelectionModel().getSelectedItem();
+
+        if (questionSelected == null) {
+            Notification.Error("Error", "Please choose question");
+            return;
+        }
+
+        LoadDataOnQuestionDetail(questionSelected, true);
 
     }
 
@@ -1532,6 +1653,27 @@ public class Exam_controller implements Initializable {
     void btn_back_SubDetail(ActionEvent event) {
 
         setUIAnchorCurrent(AnchorPane_viewAllSubmission_detailExam_ExamManagement);
+
+        lb_StudentName_SubDetail.setText("");
+
+        lb_StudentID_SubDetail.setText("");
+
+        lb_Score_SubDetail.setText("");
+
+        lb_TimeTaken_SubDetail.setText("");
+
+        tableView_AllSubmiss_All.getItems().clear();
+
+        int examID = exam_Current_SubjectManagement.getExamId();
+
+        ArrayList<Submission> listSubmissions = hostExamManager.getListHostExamById(examID);
+
+        tableView_AllSubmiss_All.getItems().clear();
+
+        tableView_AllSubmiss_All.setItems(loadQuestion_tableViewALlSubmiss_All(listSubmissions));
+
+        lb_totalSubmission_All.setText("Total " + listSubmissions.size() + " submissions");
+
     }
 
     // ===============================================﻿//

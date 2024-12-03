@@ -19,4 +19,5 @@ public class Answer implements Serializable {
     private int questionId;
     private String content;
     private boolean isCorrect;
+
 }

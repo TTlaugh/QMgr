@@ -57,4 +57,8 @@ public class StudentManager {
         return new StudentDAO().searchStudent(groupId, keyword);
     }
 
+    public Student getStudentByUid(int uid) {
+        return new StudentDAO().getByID(uid);
+    }
+
 }

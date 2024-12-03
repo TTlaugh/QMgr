@@ -27,7 +27,7 @@
             <Image url="@../imgs/Screenshot_2024-10-30_172645-removebg-preview.png" />
          </image>
       </ImageView>
-      <StackPane fx:id="StackPane_DoHostExam" alignment="TOP_CENTER" layoutY="55.0" prefHeight="150.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
+      <StackPane fx:id="StackPane_DoHostExam" alignment="TOP_CENTER" layoutY="55.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
          <children>
             <Label alignment="CENTER" minHeight="44.0" minWidth="200.0" text="KIỂM TRA&#10;" textAlignment="CENTER">
                <font>
@@ -82,9 +82,17 @@
                   </ScrollPane>
                </children>
             </AnchorPane>
+            <Button maxHeight="29.0" maxWidth="88.0" mnemonicParsing="false" onAction="#btn_Submit" prefHeight="29.0" prefWidth="88.0" styleClass="button-xanhnhat" text="Submit" StackPane.alignment="BOTTOM_RIGHT">
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <StackPane.margin>
+                  <Insets bottom="20.0" right="20.0" />
+               </StackPane.margin>
+            </Button>
          </children>
       </StackPane>
-      <StackPane fx:id="StackPane_ResultHostExam" alignment="TOP_CENTER" layoutX="314.0" layoutY="221.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
+      <StackPane fx:id="StackPane_ResultHostExam" alignment="TOP_CENTER" layoutX="314.0" layoutY="221.0" prefHeight="150.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
          <children>
             <Label fx:id="lb_ScoreStudent" alignment="TOP_CENTER" text="YOUR SCORE: 9.5" textFill="#154fef">
                <font>
@@ -104,10 +112,5 @@
             </Button>
          </children>
       </StackPane>
-      <Button layoutX="443.0" layoutY="14.0" maxHeight="24.0" maxWidth="75.0" mnemonicParsing="false" onAction="#btn_Submit" prefHeight="24.0" prefWidth="75.0" styleClass="button-xanhnhat" text="Submit">
-         <font>
-            <Font size="9.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>

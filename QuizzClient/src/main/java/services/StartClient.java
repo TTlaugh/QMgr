@@ -8,7 +8,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
+import java.util.stream.Collectors;
+
 import model.Answer;
+import model.Answer_Select;
 import model.HostExam;
 import model.Question;
 import model.Submission;
@@ -18,7 +22,6 @@ import java.io.ObjectOutputStream;
 public class StartClient {
 
     private Data submission = new Data();
-    // private Exam exam = null;
 
     private HostExam hostExam = null;
 
@@ -56,12 +59,22 @@ public class StartClient {
     }
 
     public HostExam getHostExam() {
-        if (hostExam != null && hostExam.isShuffle())
-            Collections.shuffle(hostExam.getExamQuestions());
+        HostExam hostExam_Test = this.hostExam;
+        if (hostExam_Test != null && hostExam_Test.isShuffle())
+            Collections.shuffle(hostExam_Test.getExamQuestions());
+        return hostExam_Test;
+    }
+
+    public HostExam HostExamCorrect() {
         return hostExam;
     }
 
-    public double submit(ArrayList<Question> questionsIsCorrect, ArrayList<Question> questionSelecteds, Date start) {
+    public double submit(ArrayList<Question> questionSelecteds, List<Answer_Select> answer_selects, Date start) {
+
+        // Format time
+        // SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
+        // sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+        // System.out.println(sdf.format(start));
 
         long timeTaken = 0;
 
@@ -72,31 +85,16 @@ public class StartClient {
         timeTaken /= 1000; // convert from mili sec to sec
         timeTaken /= 60; // convert from sec to min
 
-        double scorePerQuestion = hostExam.getMaxScore() / hostExam.getExamQuestions().size();
+        double scorePerQuestion = hostExam.getMaxScore() / (hostExam.getExamQuestions().size() * 1.0);
 
         if (timeTaken <= hostExam.getTimeLimit()) {
-            for (int i = 0; i < questionSelecteds.size(); i++) {
-                Question questionSelected = questionSelecteds.get(i);
-                Question questionIsCorrect = questionsIsCorrect.get(i);
-
-                ArrayList<Answer> selectedAnswers = questionSelected.getAnswers();
-                ArrayList<Answer> correctAnswers = questionIsCorrect.getAnswers();
-
-                for (int j = 0; j < selectedAnswers.size(); j++) {
-                    Answer selectedAnswer = selectedAnswers.get(j);
-                    Answer correctAnswer = correctAnswers.get(j);
-                    if (selectedAnswer.isCorrect() && correctAnswer.isCorrect()) {
-                        if (selectedAnswer.getAnswerId() == correctAnswer.getAnswerId()) {
-                            score += scorePerQuestion;
-                        }
-                    }
-                }
-            }
+            score = (float) scoreCalculator(questionSelecteds, answer_selects,
+                    scorePerQuestion);
         }
 
         int studentID_Sub = Integer.parseInt(this.studentID.substring(2));
 
-        Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>(questionSelecteds.size());
+        Map<Integer, List<Integer>> map = convertListMap(questionSelecteds);
 
         Submission submission = new Submission(0, hostExam.getHostExamId(), studentID_Sub, (int) timeTaken, score,
                 map);
@@ -106,19 +104,42 @@ public class StartClient {
         return score;
     }
 
-    // private String convertListToJsonMap(List<Question> list) {
-    // Map<Integer, List<Integer>> map = new HashMap<Integer,
-    // List<Integer>>(list.size());
-    // for (Question i : list)
-    // map.put(i.getQuestionId(),
-    // i.getAnswers().stream().map(Answer::getAnswerId).collect(Collectors.toList()));
-    // try {
-    // return JsonUtils.mapToJson(map);
-    // } catch (IOException e) {
-    // e.printStackTrace();
-    // }
-    // return null;
-    // }
+    private double scoreCalculator(ArrayList<Question> questionSelecteds, List<Answer_Select> answer_selects,
+            double scorePerQuestion) {
+
+        int count_trueAnswers = 0;
+
+        for (int i = 0; i < questionSelecteds.size(); i++) {
+
+            ArrayList<Answer> answers = questionSelecteds.get(i).getAnswers();
+
+            for (int j = 0; j < answers.size(); j++) {
+
+                if (answers.get(j).isCorrect() != answer_selects.get(j).isChoice()) {
+                    break;
+                } else {
+                    if (j == answers.size() - 1) {
+                        count_trueAnswers++;
+                        break;
+                    }
+                    continue;
+                }
+
+            }
+
+        }
+
+        return count_trueAnswers * scorePerQuestion * 1.0;
+    }
+
+    private Map<Integer, List<Integer>> convertListMap(List<Question> list) {
+        Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>(list.size());
+        for (Question i : list) {
+            map.put(i.getQuestionId(),
+                    i.getAnswers().stream().map(Answer::getAnswerId).collect(Collectors.toList()));
+        }
+        return map;
+    }
 }
 
 class Data {

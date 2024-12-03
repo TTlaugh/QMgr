@@ -230,8 +230,10 @@ public class ExamDAO implements interfaceDAO<Exam> {
         con = SQLUtils.getConnection();
         if (con != null) {
             try {
-                String query = "SELECT Exams.* " + "FROM Exams "
-                        + "JOIN HostExams  ON Exams.ExamID = HostExams.ExamID WHERE HostExams.Archived =0";
+                String query = "SELECT distinct Exams.*" + "FROM Exams "
+                        + " JOIN HostExams  ON Exams.ExamID = HostExams.ExamID"
+                        + " join Subjects ON Exams.SubjectID = Subjects.SubjectID"
+                        + " WHERE Exams.Archived =0 ";
                 PreparedStatement ps = con.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
@@ -247,6 +249,7 @@ public class ExamDAO implements interfaceDAO<Exam> {
                         exam.setQuestionsIds(gson.fromJson(questionJson, questionListType));
                     }
                     exam.setArchive(rs.getBoolean(6));
+
                     list.add(exam);
                 }
             } catch (Exception e) {

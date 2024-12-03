@@ -18,7 +18,7 @@
       <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="14.0" />
       <StackPane alignment="TOP_CENTER" layoutY="55.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
          <children>
-            <TextField fx:id="tf_StudentID_Connect" maxHeight="38.0" maxWidth="200.0" promptText="ST-01" styleClass="round-layout">
+            <TextField fx:id="tf_StudentID_Connect" maxHeight="38.0" maxWidth="200.0" promptText="ST001" styleClass="round-layout">
                <StackPane.margin>
                   <Insets top="152.0" />
                </StackPane.margin>

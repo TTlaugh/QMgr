@@ -73,6 +73,7 @@ public class SubmissionDAO implements interfaceDAO<Submission> {
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
                     Submission submission = new Submission();
+                    submission.setSubmissionId(rs.getInt("SubmissionsID"));
                     submission.setHostExamId(rs.getInt("HostExamID"));
                     submission.setStudentId(rs.getInt("UID"));
                     submission.setTimeTaken(rs.getInt("TimeTaken"));
@@ -111,6 +112,7 @@ public class SubmissionDAO implements interfaceDAO<Submission> {
                 ps.setFloat(4, submission.getScore());
 
                 String answerJson = gson.toJson(submission.getAnswerSelectedMap());
+
                 ps.setString(5, answerJson);
 
                 b = ps.executeUpdate() > 0;
@@ -189,7 +191,7 @@ public class SubmissionDAO implements interfaceDAO<Submission> {
         con = SQLUtils.getConnection();
         if (con != null) {
             try {
-                String query = "DELETE FROM Submissions WHERE UID = ?";
+                String query = "DELETE FROM Submissions WHERE SubmissionsID = ?";
                 PreparedStatement ps = con.prepareStatement(query);
                 ps.setInt(1, t);
                 b = ps.executeUpdate() > 0;

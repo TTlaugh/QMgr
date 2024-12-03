@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.management.Notification;
-
+import data.HostExamDAO;
 import data.StudentDAO;
 import data.SubmissionDAO;
 import model.HostExam;
 import model.Student;
 import model.Submission;
+import utils.Notification;
 
 public class StartServer {
 
@@ -73,7 +73,7 @@ public class StartServer {
     }
 
     public List<String> getConnectedClients() {
-        System.out.println(clients.values());
+        // System.out.println(clients.values());
         return new ArrayList<String>(clients.values());
     }
 
@@ -112,9 +112,16 @@ class ThreadServer extends Thread {
 
                     Student student = new StudentDAO().getByStudentIdfromGroup(studentInfo, HostExam.getGroupId());
 
-                    if (student == null) {
-                        System.out.println("Student not found");
+                    String studentId = "";
+
+                    String studentName = "";
+
+                    if (student != null) {
+
+                        studentId = student.getStudentId();
+                        studentName = student.getFirstName() + " " + student.getLastName();
                     }
+                    System.out.println("Student not found");
 
                     int timeTaken = 0;
 
@@ -126,10 +133,6 @@ class ThreadServer extends Thread {
 
                         score = studentSubmission.getScore();
                     }
-
-                    String studentId = student.getStudentId();
-
-                    String studentName = student.getFirstName() + " " + student.getLastName();
 
                     clients.put(socket,
                             studentId + "-" + studentName + "-" + String.valueOf(timeTaken) + "-"
@@ -146,23 +149,49 @@ class ThreadServer extends Thread {
             }
         } catch (SocketException e) {
 
-            new SubmissionDAO().create(studentSubmission);
+            int studentId_int = studentSubmission.getStudentId();
 
-            Student student = new StudentDAO().getByStudentIdfromGroup(studentInfo, HostExam.getGroupId());
+            String studentID_String = "";
 
-            if (student == null) {
-                System.out.println("Student not found");
+            if (studentId_int > 99) {
+                studentID_String = "ST" + String.valueOf(studentId_int);
+            } else {
+                studentID_String = "ST"
+                        + (studentId_int >= 10 ? "0" + String.valueOf(studentId_int)
+                                : "00" + String.valueOf(studentId_int));
+            }
+
+            int group_ID = HostExam.getGroupId();
+
+            Student student_Student = new StudentDAO().getByStudentIdfromGroup(studentID_String, group_ID);
+
+            studentSubmission.setStudentId(student_Student.getUid());
+
+            int idSubmiss = new SubmissionDAO().getAll().size() + 1;
+
+            studentSubmission.setSubmissionId(idSubmiss);
+
+            boolean isSubmit = new SubmissionDAO().create(studentSubmission);
+            if (isSubmit) {
+                System.out.println("Submission success");
+            }
+
+            String studentId = "";
+
+            String studentName = "";
+
+            if (student_Student != null) {
+
+                studentId = student_Student.getStudentId();
+
+                studentName = student_Student.getFirstName() + " " + student_Student.getLastName();
             }
 
             int timeTaken = studentSubmission.getTimeTaken();
 
             float score = studentSubmission.getScore();
 
-            String studentId = student.getStudentId();
-
-            String studentName = student.getFirstName() + " " + student.getLastName();
-
-            clients.put(socket, studentId + " " + studentName + " " + timeTaken + " " + score);
+            clients.put(socket, studentId + "-" + studentName + "-" + timeTaken + "-" + score);
 
             try {
                 socket.close();

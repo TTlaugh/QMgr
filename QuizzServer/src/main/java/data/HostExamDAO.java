@@ -95,6 +95,7 @@ public class HostExamDAO implements interfaceDAO<HostExam> {
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
                     Submission submission = new Submission();
+                    submission.setSubmissionId(rs.getInt("SubmissionsID"));
                     submission.setHostExamId(rs.getInt("HostExamID"));
                     submission.setStudentId(rs.getInt("UID"));
                     submission.setTimeTaken(rs.getInt("TimeTaken"));

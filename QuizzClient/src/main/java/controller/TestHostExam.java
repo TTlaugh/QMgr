@@ -4,8 +4,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
-import java.util.Stack;
-
 import components.Answer_card;
 import components.Button_Question;
 import javafx.event.ActionEvent;
@@ -19,6 +17,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import model.Answer;
+import model.Answer_Select;
 import model.HostExam;
 import model.Question;
 
@@ -44,9 +43,9 @@ public class TestHostExam implements Initializable {
 
     public static HostExam hostExam = Connect_Server.client.getHostExam();
 
-    public static ArrayList<Question> listQuestions_isCorrect = hostExam.getExamQuestions();
-
     public static ArrayList<Question> listQuestions = hostExam.getExamQuestions();
+
+    ArrayList<Answer_Select> answer_selects = new ArrayList<Answer_Select>();
 
     public static Button button_prev = null;
 
@@ -59,11 +58,14 @@ public class TestHostExam implements Initializable {
 
         this.FlowPane_Question.getChildren().clear();
 
-        for (int j = 0; j < listQuestions.size(); j++) {
-            ArrayList<Answer> answers = listQuestions.get(j).getAnswers();
+        for (Question question : listQuestions) {
 
-            for (int k = 0; k < answers.size(); k++) {
-                answers.get(k).setCorrect(false);
+            ArrayList<Answer> answers = question.getAnswers();
+
+            for (Answer answer : answers) {
+                Boolean isCorrect = answer.isCorrect();
+                answer.setCorrect(false);
+                answer_selects.add(new Answer_Select(answer, isCorrect));
             }
         }
 
@@ -142,7 +144,7 @@ public class TestHostExam implements Initializable {
     @FXML
     void btn_Submit(ActionEvent event) {
 
-        Double score = Connect_Server.client.submit(listQuestions_isCorrect, listQuestions, start);
+        Double score = Connect_Server.client.submit(listQuestions, answer_selects, start);
 
         StackPane_DoHostExam.setVisible(false);
 

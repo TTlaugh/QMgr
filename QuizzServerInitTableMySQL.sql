@@ -81,12 +81,13 @@ CREATE TABLE HostExams (
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 CREATE TABLE Submissions (
+    SubmissionsID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     HostExamID INT NOT NULL,
     UID INT NOT NULL,
     TimeTaken INT NOT NULL,
     Score DECIMAL(5, 2) NOT NULL,
     AnswerSelecteds JSON NOT NULL,
-    PRIMARY KEY (HostExamID, UID),
+    -- PRIMARY KEY (HostExamID, UID),
     CONSTRAINT FK_Submissions_HostExams FOREIGN KEY (HostExamID) REFERENCES HostExams (HostExamID) ON DELETE CASCADE,
     CONSTRAINT FK_Submissions_Students FOREIGN KEY (UID) REFERENCES Students (UID) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;

@@ -508,7 +508,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="Anchor_submissionDetail_detailExam_ExamManagement" prefHeight="200.0" prefWidth="200.0" styleClass="background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="Anchor_submissionDetail_detailExam_ExamManagement" prefHeight="200.0" prefWidth="200.0" styleClass="background" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Separator layoutX="58.0" layoutY="72.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
             <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="198.0" layoutY="16.0" pickOnBounds="true" AnchorPane.leftAnchor="198.0" AnchorPane.topAnchor="16.0">
@@ -557,7 +557,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Button alignment="CENTER" layoutY="333.0" mnemonicParsing="false" onAction="#btn_DeleteSubmission_All" prefHeight="32.0" prefWidth="208.0" styleClass="button-donhat" text="Delete submission" textFill="WHITE" AnchorPane.bottomAnchor="92.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
+                  <Button alignment="CENTER" layoutY="333.0" mnemonicParsing="false" onAction="#btn_DeleteSubmissionDetail" prefHeight="32.0" prefWidth="208.0" styleClass="button-donhat" text="Delete submission" textFill="WHITE" AnchorPane.bottomAnchor="92.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -862,7 +862,7 @@
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <CheckBox fx:id="checkBox_Shuffle_HostExam" layoutX="22.0" layoutY="391.0" mnemonicParsing="false" text="Shuffle questions" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="390.0">
+                  <CheckBox fx:id="checkBox_Shuffle_HostExam" layoutX="22.0" layoutY="391.0" mnemonicParsing="false" text="Shuffle questions" visible="false" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="390.0">
                      <font>
                         <Font size="14.0" />
                      </font>
