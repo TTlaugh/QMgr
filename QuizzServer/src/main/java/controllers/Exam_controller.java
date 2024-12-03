@@ -11,6 +11,7 @@ import java.awt.Desktop;
 import java.util.ResourceBundle;
 
 import com.fasterxml.jackson.databind.deser.impl.PropertyValue;
+import com.google.gson.Gson;
 
 import components.Answer_card;
 import components.Exam_card;
@@ -47,6 +48,7 @@ import model.Exam;
 import model.Group;
 import model.HostExam;
 import model.Question;
+import model.Question_Submiss;
 import model.Student;
 import model.Student_Test;
 import model.Subject;
@@ -295,19 +297,19 @@ public class Exam_controller implements Initializable {
     private Label lb_TimeTaken_SubDetail = new Label();
 
     @FXML
-    private TableView<Question> tableView_SubDetail = new TableView<Question>();
+    private TableView<Question_Submiss> tableView_SubDetail = new TableView<Question_Submiss>();
 
     @FXML
-    private TableColumn<Question, Integer> ID_SubDetail = new TableColumn<Question, Integer>();
+    private TableColumn<Question_Submiss, Integer> ID_SubDetail = new TableColumn<Question_Submiss, Integer>();
 
     @FXML
-    private TableColumn<Question, String> Question_SubDetail = new TableColumn<Question, String>();
+    private TableColumn<Question_Submiss, String> Question_SubDetail = new TableColumn<Question_Submiss, String>();
 
     @FXML
-    private TableColumn<Question, String> Chosen_SubDetail = new TableColumn<Question, String>();
+    private TableColumn<Question_Submiss, String> Chosen_SubDetail = new TableColumn<Question_Submiss, String>();
 
     @FXML
-    private TableColumn<HostExam, String> Correct_SubDetail = new TableColumn<HostExam, String>();
+    private TableColumn<Question_Submiss, String> Correct_SubDetail = new TableColumn<Question_Submiss, String>();
 
     private Submission selectedSubmission = new Submission();
 
@@ -778,8 +780,10 @@ public class Exam_controller implements Initializable {
     }
 
     void LoadDataOnQuestionDetail(Question question, boolean isEdit) {
+
         // false == edit
         // true == detail
+
         this.VBox_detailQuestion_ExamManagement.getChildren().clear();
 
         btn_SaveChange_ExamManagement.setDisable(isEdit);
@@ -808,6 +812,43 @@ public class Exam_controller implements Initializable {
 
             VBox_detailQuestion_ExamManagement.getChildren().add(answer_card.getHBox());
         }
+
+    }
+
+    void LoadDataOnQuestionDetail_SubDetail(Question_Submiss question, boolean isEdit) {
+
+        // false == edit
+        // true == detail
+
+        this.VBox_detailQuestion_ExamManagement.getChildren().clear();
+
+        btn_SaveChange_ExamManagement.setDisable(isEdit);
+
+        btn_AddAnswer_detailQuestion_Hidden.setVisible(!isEdit);
+
+        checkbox_MultipleAnswers_detailQuestion_ExamManagement.setVisible(!isEdit);
+
+        txtArea_ContentQuestion_detailQuestion_ExamManagement.setDisable(isEdit);
+
+        txtArea_ContentQuestion_detailQuestion_ExamManagement.setText(question.getContent());
+
+        for (Answer answer : question.getAnswers()) {
+
+            Answer_card answer_card = new Answer_card(answer);
+
+            setEventButtonDelete(answer_card);
+
+            setEventCheckbox(answer_card, VBox_detailQuestion_ExamManagement);
+
+            answer_card.getCheckBox().setDisable(isEdit);
+
+            answer_card.getButton().setDisable(isEdit);
+
+            answer_card.getTextField().setDisable(isEdit);
+
+            VBox_detailQuestion_ExamManagement.getChildren().add(answer_card.getHBox());
+        }
+
     }
 
     void setEventButtonDelete(Answer_card answer_card) {
@@ -1501,83 +1542,104 @@ public class Exam_controller implements Initializable {
         return question_ID;
     }
 
-    public ObservableList<Question> loadQuestion_tableView_SubmissDetail(Submission submission) {
+    public ObservableList<Question_Submiss> loadQuestion_tableView_SubmissDetail(Submission submission) {
 
         ArrayList<Question> listQuestions = hostExamManager.getHostExamById(submission.getHostExamId())
                 .getExamQuestions();
 
-        observableList_Question = FXCollections.observableArrayList(listQuestions);
+        Map<Integer, List<Integer>> answerSelectedMap = submission.getAnswerSelectedMap();
 
-        ID_SubDetail.setCellValueFactory(new PropertyValueFactory<Question, Integer>("questionId"));
+        ArrayList<Question_Submiss> listQuestion_Submiss = new ArrayList<>();
 
-        Question_SubDetail.setCellValueFactory(new PropertyValueFactory<Question, String>("content"));
+        for (Question question : listQuestions) {
+            listQuestion_Submiss.add(new Question_Submiss(question, answerSelectedMap, listQuestions));
+        }
 
-        // Chosen_SubDetail.setCellValueFactory(celldata ->
-        // getChosenAnswer(celldata.getValue()));
+        ObservableList<Question_Submiss> observableList_Question = FXCollections
+                .observableArrayList(listQuestion_Submiss);
 
-        // Correct_SubDetail.setCellValueFactory(
-        // celldata ->
-        // getCorrectAnswer_SubmissDetail(celldata.getValue().getExamQuestions()));
+        ID_SubDetail.setCellValueFactory(new PropertyValueFactory<Question_Submiss, Integer>("questionId"));
+
+        Question_SubDetail.setCellValueFactory(new PropertyValueFactory<Question_Submiss, String>("content"));
+
+        Chosen_SubDetail.setCellValueFactory(celldata -> getChosenAnswer(celldata.getValue().getAnswerSelectedMap()));
+
+        Correct_SubDetail.setCellValueFactory(
+                celldata -> getCorrectAnswer_SubmissDetail(celldata.getValue().getExamQuestions(),
+                        celldata.getValue()));
 
         return observableList_Question;
     }
 
-    // public StringProperty getChosenAnswer(Question question) {
-    // Map<Integer, List<Integer>> answerSelectedMap = question.getAnswers().get;
-    // StringProperty chosenAnswer = new SimpleStringProperty();
+    public StringProperty getChosenAnswer(Map<Integer, List<Integer>> answerSelectedMap) {
 
-    // chosenAnswer.set("[ ");
+        StringProperty chosenAnswer = new SimpleStringProperty();
 
-    // for (Map.Entry<Integer, List<Integer>> entry : answerSelectedMap.entrySet())
-    // {
-    // int questionId = entry.getKey();
-    // List<Integer> answerIds = entry.getValue();
+        chosenAnswer.set("[ ");
 
-    // for (int i = 0; i < answerIds.size(); i++) {
+        for (Map.Entry<Integer, List<Integer>> entry : answerSelectedMap.entrySet()) {
 
-    // int answerId = answerIds.get(i);
+            int questionId = entry.getKey();
 
-    // boolean isCorrect = answerId == 0 ? false : true;
+            if (questionId != question.getQuestionId())
+                continue;
 
-    // Question question = quesManager.getQuestion(questionId);
+            if (questionId == question.getQuestionId()) {
 
-    // ArrayList<Answer> listAnswers = question.getAnswers();
+                List<Integer> answerChosen = entry.getValue();
 
-    // for (int j = 0; j < listAnswers.size(); j++) {
-    // if (listAnswers.get(j).isCorrect() == isCorrect) {
-    // chosenAnswer.set(chosenAnswer.get() + " " +
-    // question.getAnswers().get(j).getContent());
-    // }
-    // }
+                List<Answer> listAnswers = question.getAnswers();
 
-    // chosenAnswer.set(chosenAnswer.get() + " ");
-    // }
-    // chosenAnswer.set(chosenAnswer.get() + " ]");
-    // }
-    // return chosenAnswer;
-    // }
+                for (int i = 0; i < answerChosen.size(); i++) {
 
-    // public StringProperty getCorrectAnswer_SubmissDetail(ArrayList<Question>
-    // listQuestions) {
-    // StringProperty correctAnswer = new SimpleStringProperty();
+                    System.out.println(answerChosen.get(i));
 
-    // correctAnswer.set("[ ");
+                    if (answerChosen.get(i) != 0) {
 
-    // for (int i = 0; i < listQuestions.size(); i++) {
-    // ArrayList<Answer> listAnswers = listQuestions.get(i).getAnswers();
+                        chosenAnswer
+                                .set(chosenAnswer.get() + " " +
+                                        listAnswers.get(answerChosen.get(i)).getContent());
 
-    // for (int j = 0; j < listAnswers.size(); j++) {
-    // if (listAnswers.get(j).isCorrect()) {
-    // char c = (char) (65 + j);
-    // correctAnswer.set(correctAnswer.get() + " " + c);
+                        System.out.println(listAnswers.get(i).getContent());
+                    }
 
-    // }
-    // }
-    // correctAnswer.set(correctAnswer.get() + " ]");
-    // }
+                }
 
-    // return correctAnswer;
-    // }
+            }
+
+        }
+        chosenAnswer.set(chosenAnswer.get() + " ]");
+
+        return chosenAnswer;
+
+    }
+
+    public StringProperty getCorrectAnswer_SubmissDetail(ArrayList<Question> listQuestions, Question_Submiss question) {
+
+        StringProperty correctAnswer = new SimpleStringProperty();
+
+        correctAnswer.set("[ ");
+
+        for (int i = 0; i < listQuestions.size(); i++) {
+
+            if (listQuestions.get(i).getQuestionId() == question.getQuestionId()) {
+
+                ArrayList<Answer> listAnswers = listQuestions.get(i).getAnswers();
+
+                for (int j = 0; j < listAnswers.size(); j++) {
+                    if (listAnswers.get(j).isCorrect()) {
+
+                        correctAnswer.set(correctAnswer.get() + " " + listAnswers.get(j).getContent());
+
+                    }
+                }
+            }
+
+        }
+        correctAnswer.set(correctAnswer.get() + " ]");
+
+        return correctAnswer;
+    }
 
     @FXML
     void btn_SearchSubmiss_All(ActionEvent event) {
@@ -1638,14 +1700,15 @@ public class Exam_controller implements Initializable {
     @FXML
     void btn_questionDetail_SubmissDetail(ActionEvent event) {
 
-        questionSelected = tableView_SubDetail.getSelectionModel().getSelectedItem();
+        Question_Submiss questionSelected = tableView_SubDetail.getSelectionModel().getSelectedItem();
 
         if (questionSelected == null) {
             Notification.Error("Error", "Please choose question");
             return;
         }
+        detailQuestion_ExamManagement.setVisible(true);
 
-        LoadDataOnQuestionDetail(questionSelected, true);
+        LoadDataOnQuestionDetail_SubDetail(questionSelected, true);
 
     }
 

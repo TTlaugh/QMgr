@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import components.Answer_card;
 import components.Button_Question;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -156,7 +157,7 @@ public class TestHostExam implements Initializable {
 
     @FXML
     void btn_ExportSubmission(ActionEvent event) {
-
+        Platform.exit();
     }
 
 }

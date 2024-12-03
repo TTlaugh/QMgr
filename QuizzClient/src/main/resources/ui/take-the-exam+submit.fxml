@@ -102,7 +102,7 @@
                   <Insets top="150.0" />
                </StackPane.margin>
             </Label>
-            <Button mnemonicParsing="false" onAction="#btn_ExportSubmission" prefHeight="38.0" prefWidth="158.0" styleClass="button-xanhnhat" text="Export submission">
+            <Button mnemonicParsing="false" onAction="#btn_ExportSubmission" prefHeight="38.0" prefWidth="158.0" styleClass="button-xanhnhat" text="Done">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
