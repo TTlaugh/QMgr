@@ -1562,7 +1562,8 @@ public class Exam_controller implements Initializable {
 
         Question_SubDetail.setCellValueFactory(new PropertyValueFactory<Question_Submiss, String>("content"));
 
-        Chosen_SubDetail.setCellValueFactory(celldata -> getChosenAnswer(celldata.getValue().getAnswerSelectedMap()));
+        Chosen_SubDetail.setCellValueFactory(celldata -> getChosenAnswer(celldata.getValue().getAnswerSelectedMap(),
+                celldata.getValue().getQuestionId()));
 
         Correct_SubDetail.setCellValueFactory(
                 celldata -> getCorrectAnswer_SubmissDetail(celldata.getValue().getExamQuestions(),
@@ -1571,7 +1572,7 @@ public class Exam_controller implements Initializable {
         return observableList_Question;
     }
 
-    public StringProperty getChosenAnswer(Map<Integer, List<Integer>> answerSelectedMap) {
+    public StringProperty getChosenAnswer(Map<Integer, List<Integer>> answerSelectedMap, int questionID_Detail) {
 
         StringProperty chosenAnswer = new SimpleStringProperty();
 
@@ -1581,10 +1582,10 @@ public class Exam_controller implements Initializable {
 
             int questionId = entry.getKey();
 
-            if (questionId != question.getQuestionId())
+            if (questionId != questionID_Detail.getQuestionId())
                 continue;
 
-            if (questionId == question.getQuestionId()) {
+            if (questionId == questionID_Detail.getQuestionId()) {
 
                 List<Integer> answerChosen = entry.getValue();
 
