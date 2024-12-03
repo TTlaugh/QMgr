@@ -1432,7 +1432,8 @@ public class Exam_controller implements Initializable {
 
         List<Submission> listSubmissions = tableView_AllSubmiss_All.getItems();
 
-        Boolean is_ExportSuccess = submissionManager.exportSubmissions("Submission", fileNameExel, listSubmissions);
+        Boolean is_ExportSuccess = submissionManager.exportSubmissions("Submission", fileNameExel,
+                listSubmissions);
 
         if (!is_ExportSuccess) {
             Notification.Infomation("Error", "Export file failed");
@@ -1452,7 +1453,6 @@ public class Exam_controller implements Initializable {
             return;
         }
         try {
-            Desktop.getDesktop().open(fileOpen);
             Desktop.getDesktop().open(fileOpen);
         } catch (IOException e) {
             e.printStackTrace();
@@ -1675,6 +1675,27 @@ public class Exam_controller implements Initializable {
     // =========== END VIEW detail SUBMISSION ===========
     @FXML
     void btn_ExportSubmisson(ActionEvent event) {
+        File file_Current = OpenFileExplorer.Save(event);
+
+        if (file_Current == null) {
+            Notification.Error("Error", "Please choose file");
+            return;
+        }
+        String fileNameExel = file_Current.getAbsolutePath();
+
+        List<Question_Submiss> listSubmissions = tableView_SubDetail.getItems();
+
+        Boolean is_ExportSuccess = submissionManager
+                .exportSubmissionsQuestionSubmit("Submission Detail", fileNameExel, listSubmissions);
+
+        if (!is_ExportSuccess) {
+            Notification.Infomation("Error", "Export file failed");
+            return;
+        }
+        Boolean is_Confirm = Notification.Comfrim("Confirm",
+                "Do you want to open file?").getResult() == ButtonType.YES;
+        if (is_Confirm)
+            OpenFileExel_Export(new File(fileNameExel));
 
     }
 

@@ -168,18 +168,23 @@ class StudentExcelWriter extends ExcelWriter {
         CellStyle cellStyle = createStyleForHeader(sheet);
         Row row = sheet.createRow(rowIndex);
         Cell cell = null;
+
         cell = row.createCell(0);
         cell.setCellStyle(cellStyle);
         cell.setCellValue("ID");
+
         cell = row.createCell(1);
         cell.setCellStyle(cellStyle);
         cell.setCellValue("First Name");
+
         cell = row.createCell(2);
         cell.setCellStyle(cellStyle);
         cell.setCellValue("Last Name");
+
         cell = row.createCell(3);
         cell.setCellStyle(cellStyle);
         cell.setCellValue("Phone");
+
         cell = row.createCell(4);
         cell.setCellStyle(cellStyle);
         cell.setCellValue("Email");
@@ -192,12 +197,16 @@ class StudentExcelWriter extends ExcelWriter {
         int colIndex = 0;
         cell = row.createCell(colIndex++);
         cell.setCellValue(student.getStudentId());
+
         cell = row.createCell(colIndex++);
         cell.setCellValue(student.getFirstName());
+
         cell = row.createCell(colIndex++);
         cell.setCellValue(student.getLastName());
+
         cell = row.createCell(colIndex++);
         cell.setCellValue(student.getPhone());
+
         cell = row.createCell(colIndex++);
         cell.setCellValue(student.getEmail());
     }

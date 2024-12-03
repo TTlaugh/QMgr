@@ -192,3 +192,6 @@
 .check-box:selected .box {
     -fx-background-color: #1e81b0;
 }
+.check-box:selected .red {
+	-fx-background-color:red;
+}

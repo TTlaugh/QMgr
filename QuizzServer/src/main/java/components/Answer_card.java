@@ -31,25 +31,37 @@ public class Answer_card {
 
     public Answer_card(Answer_Select answer_Select) {
 
-        setUp();
-
-        String style_Blue = "-fx-background-color: lightblue; -fx-text-fill: darkblue;";
-
-        String style_Red = "-fx-background-color: lightred; -fx-text-fill: darkred;";
-
         // Correct -> choice
         // Choice -> correct
 
-        checkBox.setSelected(answer_Select.isCorrect() == answer_Select.isChoice() ? true : false);
-        if (answer_Select.isCorrect() != answer_Select.isChoice()) {
+        boolean isCorrect = answer_Select.isChoice();
+
+        boolean isChoice = answer_Select.isCorrect();
+
+        if (isCorrect == isChoice) {
+
             checkBox.setSelected(true);
-            checkBox.setStyle(style_Red);
+
+            checkBox.getStyleClass().add("check-box .box");
+
+        } else if (isCorrect && !isChoice) {
+
+            checkBox.setSelected(false);
+
+            checkBox.getStyleClass().add("check-box .box");
+
+        } else if (!isCorrect && isChoice) {
+
+            checkBox.setSelected(true);
+
+            checkBox.getStyleClass().add("check-box .red");
         }
 
         textField.setText(answer_Select.getContent());
 
         hBox.getChildren().addAll(checkBox, textField, button);
 
+        setUp();
     }
 
     void setUp() {

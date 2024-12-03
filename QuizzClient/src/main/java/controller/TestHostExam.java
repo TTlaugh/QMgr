@@ -151,7 +151,7 @@ public class TestHostExam implements Initializable {
 
         StackPane_ResultHostExam.setVisible(true);
 
-        lb_ScoreStudent.setText(String.valueOf(score));
+        lb_ScoreStudent.setText("Your score : " + String.valueOf(score));
 
     }
 
