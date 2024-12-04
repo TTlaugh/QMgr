@@ -65,7 +65,7 @@ public class StartClient {
         return hostExam;
     }
 
-    public double submit(ArrayList<Question> questionSelecteds, List<Answer_Select> answer_selects, Date start) {
+    public double submit(ArrayList<Question> questionSelecteds, List<Answer_Select> answer_selects, long time) {
 
         for (int i = 0; i < questionSelecteds.size(); i++) {
             System.out.println(questionSelecteds.get(i).getContent());
@@ -74,22 +74,15 @@ public class StartClient {
             }
         }
 
-        long timeTaken = 0;
+        long timeTaken = time;
 
         float score = 0;
 
-        Date end = new Date(System.currentTimeMillis());
-        timeTaken = end.getTime() - start.getTime();
-        timeTaken /= 1000; // convert from mili sec to sec
-        timeTaken /= 60; // convert from sec to min
-
         double scorePerQuestion = hostExam.getMaxScore() / (hostExam.getExamQuestions().size() * 1.0);
-
-        if (timeTaken <= hostExam.getTimeLimit()) {
-            score = (float) scoreCalculator(questionSelecteds, answer_selects,
-                    scorePerQuestion);
-        }
-
+        System.out.println(scorePerQuestion);
+       
+        score = (float) scoreCalculator(questionSelecteds, answer_selects,scorePerQuestion);
+    
         int studentID_Sub = Integer.parseInt(this.studentID.substring(2));
 
         Map<Integer, List<Integer>> map = convertListMap(questionSelecteds);
@@ -133,19 +126,20 @@ public class StartClient {
 
             for (int j = 0; j < answers.size(); j++) {
 
-                if (answers.get(j).isCorrect() != answer_selects.get(j).isChoice()) {
+                if (answers.get(j).isCorrect() != answer_selects.get(i*answers.size()+j).isChoice()) {
+                	System.out.println("sai");
                     break;
                 } else {
-                    if (j == answers.size() - 1) {
+                    if (j == (answers.size() - 1)) {
                         count_trueAnswers++;
-                        break;
+                    System.out.println("dung");
                     }
-                    continue;
                 }
-
+                
+                continue;
             }
-
         }
+        System.out.println(count_trueAnswers);
 
         return count_trueAnswers * scorePerQuestion * 1.0;
     }

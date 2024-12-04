@@ -73,11 +73,11 @@ public class Workspace_controller implements Initializable {
     // Manager Workspace
     public static WorkspaceManager workspaceManager = WorkspaceManager.getInstance();
 
-    private List<Workspace> allListWorkspaces = workspaceManager.getAllWorkspace();
+    private static List<Workspace> allListWorkspaces = workspaceManager.getAllWorkspace();
 
     public static int current_WorkSpaceID = 0;
 
-    private static int indexComboBox = 0;
+   public static int indexComboBox = 0;
 
     // Function Archive
 

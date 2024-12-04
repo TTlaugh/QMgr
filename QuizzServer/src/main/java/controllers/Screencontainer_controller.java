@@ -1,16 +1,29 @@
 package controllers;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.StringConverter;
+import model.Answer;
+import model.Answer_Select;
+import model.Question;
+import model.Workspace;
+import services.WorkspaceManager;
 
-public class Screencontainer_controller {
+public class Screencontainer_controller implements Initializable {
 
     private Parent root = null;
 
@@ -28,7 +41,13 @@ public class Screencontainer_controller {
 
     @FXML
     public AnchorPane mainbody = new AnchorPane();
-
+    
+    @FXML
+    private ComboBox<Workspace> Change_ComboBox_Workspace;
+    
+    //Workspace management
+    private static List<Workspace> allWorkspaces = Workspace_controller.workspaceManager.getAllWorkspace();
+    
     private String hover_btn = "-fx-background-color: #dbe8ff; -fx-text-fill:#2970ff";
 
     private String unhover_btn = "-fx-background-color: #ffffff; -fx-text-fill:#667085";
@@ -94,5 +113,49 @@ public class Screencontainer_controller {
             e.printStackTrace();
         }
     }
+    
+    public void loadComboBox_WorkSpace() { 
+    	for (Workspace workspace : allWorkspaces) { 
+    		Change_ComboBox_Workspace.getItems().add(workspace); 
+    		} 
+    	// Đặt mục mặc định 
+    	Workspace defaultWorkspace = allWorkspaces.get(Workspace_controller.indexComboBox); 
+    	System.out.println(Workspace_controller.indexComboBox);
+    	Change_ComboBox_Workspace.setValue(defaultWorkspace); 
+    	// Convert Display 
+    
+    	Change_ComboBox_Workspace.setConverter(new StringConverter<Workspace>() { 
+    		@Override 
+    		public String toString(Workspace workspace) { 
+    			return workspace == null ? "" : workspace.getWorkspaceName(); 
+    		} 
+    		@Override 
+    		public Workspace fromString(String workspace) { 
+    			return null; 
+    		} }); 
+    	
+    	// set OnAction 
+    	Change_ComboBox_Workspace.setOnAction(event -> { 
+    		Workspace_controller.indexComboBox = Change_ComboBox_Workspace.getSelectionModel().getSelectedIndex();
+    		Workspace workspace_Change = Workspace_controller.workspaceManager.getWorkspace(Change_ComboBox_Workspace.getValue().getWorkspaceId());
+    		if(workspace_Change.getWorkspaceId()!=Workspace_controller.current_WorkSpaceID) {
+    			Parent root;
+    	        try {
+    	            root = (Parent) FXMLLoader.load(getClass().getResource("/ui/Screencontainer.fxml"));
+    	            ((Node) event.getSource()).getScene().setRoot(root);
+    	        } catch (IOException e) {
+    	            e.printStackTrace();
+    	            System.out.println("Error in loading workspace_controller");
+    	        }
+    	        Workspace_controller.current_WorkSpaceID = workspace_Change.getWorkspaceId();
+    		}
+    	}); 
+    }
+  
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
+    	loadComboBox_WorkSpace();
+    	
+    }
 }

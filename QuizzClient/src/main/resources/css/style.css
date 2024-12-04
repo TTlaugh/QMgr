@@ -20,7 +20,29 @@
 .combo-box {
 	-fx-font-size:14px;
 }
+.button-correct {
+	-fx-background-radius: 4;
+	-fx-border-radius: 4;
+	-fx-background-color:  #E1FBEA;
+	-fx-text-fill:  #099250;
+	-fx-border-color: #E1FBEA;
+	-fx-cursor: hand;
+}
+.button-correct:hover {
+	-fx-background-color:  #ffffff;
+}
 
+.button-wrong {
+	-fx-background-radius: 4;
+	-fx-border-radius: 4;
+	-fx-background-color:  #FFEEED;
+	-fx-text-fill:  #D92D20;
+	-fx-border-color: #FFEEED;
+	-fx-cursor: hand;
+}
+.button-wrong:hover {
+	-fx-background-color:  #ffffff;
+}
 .button-xanhnhat {
 	-fx-background-radius: 4;
 	-fx-border-radius: 4;

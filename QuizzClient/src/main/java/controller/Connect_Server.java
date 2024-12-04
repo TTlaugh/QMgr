@@ -58,7 +58,7 @@ public class Connect_Server {
                 continue;
         }
 
-        root = (Parent) FXMLLoader.load(getClass().getResource("/ui/take-the-exam+submit.fxml"));
+        root = (Parent) FXMLLoader.load(getClass().getResource("/ui/take_the_exam_submit.fxml"));
         ((Node) event.getSource()).getScene().setRoot(root);
 
     }
