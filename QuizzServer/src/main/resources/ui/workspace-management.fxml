@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Workspace_controller">
+   <children>
+      <Separator layoutY="57.0" prefHeight="1.0" prefWidth="1300.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
+      <Label layoutX="58.0" minHeight="32.0" minWidth="57.0" prefHeight="32.0" prefWidth="57.0" text="Quizz" textFill="#1d2939" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="14.0" />
+      <Button alignment="CENTER" layoutX="1111.0" layoutY="10.0" minHeight="32.0" minWidth="156.0" mnemonicParsing="false" onAction="#btn_setUpNewWorkSpace_Hidden" prefHeight="32.0" prefWidth="156.0" styleClass="button-xanhnhat" text="Set up new workspace" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <padding>
+            <Insets left="12.0" right="12.0" />
+         </padding>
+      </Button>
+      <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="20.0" layoutY="18.0" pickOnBounds="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="14.0">
+         <image>
+            <Image url="@../imgs/Screenshot_2024-10-30_172645-removebg-preview.png" />
+         </image></ImageView>
+      <StackPane alignment="TOP_CENTER" layoutY="55.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
+         <children>
+            <TextField fx:id="tf_PIN_StackPane" accessibleRole="PASSWORD_FIELD" maxHeight="38.0" maxWidth="200.0" promptText="PIN" styleClass="round-layout">
+               <StackPane.margin>
+                  <Insets top="173.0" />
+               </StackPane.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" left="16.0" right="16.0" top="8.0" />
+               </padding>
+            </TextField>
+            <Label alignment="CENTER" minHeight="44.0" minWidth="200.0" text="Chose a Workspace &#10;to continue" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <StackPane.margin>
+                  <Insets top="54.0" />
+               </StackPane.margin>
+            </Label>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#btn_continue_WorkSpace" prefHeight="32.0" prefWidth="200.0" styleClass="button-xanhdam" text="Continue with this workspace" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <StackPane.margin>
+                  <Insets top="233.0" />
+               </StackPane.margin>
+            </Button>
+            <ComboBox fx:id="ComboBox_WorkSpace_StackPane" maxHeight="38.0" prefHeight="38.0" prefWidth="200.0" promptText="-Workspace-" styleClass="round-layout">
+               <StackPane.margin>
+                  <Insets top="122.0" />
+               </StackPane.margin>
+            </ComboBox>
+            <Separator maxHeight="1.0" maxWidth="200.0" prefWidth="200.0">
+               <StackPane.margin>
+                  <Insets top="223.0" />
+               </StackPane.margin>
+            </Separator>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#btn_rename_WorkSpace_Hidden" prefHeight="32.0" prefWidth="200.0" styleClass="button-trang" text="Rename it" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <StackPane.margin>
+                  <Insets top="272.0" />
+               </StackPane.margin>
+            </Button>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#btn_archive_WorkSpace_Hidden" prefHeight="32.0" prefWidth="200.0" styleClass="button-trang" text="Archive it" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <StackPane.margin>
+                  <Insets top="311.0" />
+               </StackPane.margin>
+            </Button>
+            <AnchorPane fx:id="rename_WorkSpace" maxHeight="316.0" maxWidth="480.0" prefHeight="316.0" prefWidth="480.0" styleClass="popup" visible="false">
+               <children>
+                  <Separator layoutX="113.0" layoutY="98.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0" />
+                  <Label layoutX="14.0" prefHeight="44.0" prefWidth="152.0" text="Rename workspace" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="405.0" layoutY="6.0" mnemonicParsing="false" onAction="#btn_cancel_NewWorkSpace" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" styleClass="button_exit" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="7.0">
+                     <graphic>
+                        <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../imgs/icons8-close-50.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Separator layoutX="123.0" layoutY="108.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="166.0" />
+                  <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="225.0" layoutY="55.0" pickOnBounds="true" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="223.0" AnchorPane.topAnchor="60.0">
+                     <image>
+                        <Image url="@../imgs/icons8-bag-32.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="lb_WorkSpace_Name_Rename" alignment="CENTER" layoutX="126.0" layoutY="87.0" prefHeight="24.0" prefWidth="480.0" text="Sgu University" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="96.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lb_WorkSpaceID_Rename" alignment="CENTER" layoutX="194.0" layoutY="131.0" prefHeight="26.0" prefWidth="92.0" style="-fx-background-radius: 10; -fx-background-color: #eaecf0;" text="ID: #WS01" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="193.0" AnchorPane.topAnchor="124.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="3.0" left="7.0" right="7.0" top="3.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="20.0" layoutY="177.0" prefHeight="22.0" prefWidth="440.0" text="Rename this workspace to:" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tf_WorkSpace_Name_Rename" layoutX="20.0" layoutY="210.0" maxHeight="38.0" maxWidth="440.0" prefHeight="38.0" prefWidth="440.0" promptText="Sgu University" styleClass="round-layout" AnchorPane.bottomAnchor="62.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <Button alignment="CENTER" layoutX="20.0" layoutY="257.0" mnemonicParsing="false" onAction="#btn_cancel_NewWorkSpace" prefHeight="32.0" prefWidth="214.0" styleClass="button-trang" text="Cancel" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" layoutX="231.0" layoutY="257.0" mnemonicParsing="false" onAction="#btn_rename_WorkSpace" prefHeight="32.0" prefWidth="214.0" styleClass="button-xanhdam" text="Rename" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+               <StackPane.margin>
+                  <Insets top="68.0" />
+               </StackPane.margin>
+            </AnchorPane>
+            <AnchorPane fx:id="archive_WorkSpace" maxHeight="316.0" maxWidth="480.0" prefHeight="316.0" prefWidth="480.0" styleClass="popup" visible="false">
+               <children>
+                  <Separator layoutX="113.0" layoutY="98.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0" />
+                  <Label layoutX="14.0" prefHeight="44.0" prefWidth="152.0" text="Archive workspace" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="405.0" layoutY="6.0" mnemonicParsing="false" onAction="#btn_cancel_NewWorkSpace" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" styleClass="button_exit" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="7.0">
+                     <graphic>
+                        <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../imgs/icons8-close-50.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Separator layoutX="123.0" layoutY="108.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="166.0" />
+                  <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="225.0" layoutY="55.0" pickOnBounds="true" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="223.0" AnchorPane.topAnchor="60.0">
+                     <image>
+                        <Image url="@../imgs/icons8-bag-32.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="lb_WorkSpace_Name_Archive" alignment="CENTER" layoutX="126.0" layoutY="87.0" prefHeight="24.0" prefWidth="480.0" text="Sgu University" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="96.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lb_WorkSpaceID_Archive" alignment="CENTER" layoutX="194.0" layoutY="131.0" prefHeight="26.0" prefWidth="92.0" style="-fx-background-radius: 10; -fx-background-color: #eaecf0;" text="ID: #WS01" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="193.0" AnchorPane.topAnchor="124.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="3.0" left="7.0" right="7.0" top="3.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lb_Workspace_ConfirmName_Archive" layoutX="20.0" layoutY="177.0" prefHeight="22.0" prefWidth="440.0" text="To confirm, type &quot;Sgu University&quot; in the box below" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tf_WorkSpace_Name_Archive" layoutX="20.0" layoutY="210.0" maxHeight="38.0" maxWidth="440.0" prefHeight="38.0" prefWidth="440.0" promptText="Sgu University" styleClass="round-layout" AnchorPane.bottomAnchor="62.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <Button alignment="CENTER" layoutX="20.0" layoutY="257.0" mnemonicParsing="false" onAction="#btn_cancel_NewWorkSpace" prefHeight="32.0" prefWidth="214.0" styleClass="button-trang" text="Cancel" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" layoutX="231.0" layoutY="257.0" mnemonicParsing="false" onAction="#btn_archive_WorkSpace" prefHeight="32.0" prefWidth="214.0" styleClass="button-do" text="Archive this workspace" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+               <StackPane.margin>
+                  <Insets top="68.0" />
+               </StackPane.margin>
+            </AnchorPane>
+            <AnchorPane fx:id="create_new_WorkSpace" maxHeight="350.0" maxWidth="480.0" prefHeight="350.0" prefWidth="480.0" visible="false">
+               <children>
+                  <Separator layoutX="113.0" layoutY="98.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0" />
+                  <Label layoutX="14.0" prefHeight="44.0" prefWidth="187.0" text="Create new workspace" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="405.0" layoutY="6.0" mnemonicParsing="false" onAction="#btn_cancel_NewWorkSpace" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" styleClass="button_exit" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="7.0">
+                     <graphic>
+                        <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../imgs/icons8-close-50.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Label layoutX="20.0" layoutY="177.0" prefHeight="22.0" prefWidth="440.0" text="Workspace name" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="64.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Button alignment="CENTER" layoutX="20.0" layoutY="257.0" mnemonicParsing="false" onAction="#btn_cancel_NewWorkSpace" prefHeight="32.0" prefWidth="214.0" styleClass="button-trang" text="Cancel" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" layoutX="231.0" layoutY="257.0" mnemonicParsing="false" onAction="#btn_create_WorkSpace" prefHeight="32.0" prefWidth="214.0" styleClass="button-xanhdam" text="Create workspace" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="30.0" layoutY="187.0" prefHeight="22.0" prefWidth="440.0" text="PIN (6 digits)" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="142.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tf_WorkSpaceName_SetUp" layoutX="20.0" layoutY="210.0" maxHeight="38.0" maxWidth="440.0" prefHeight="38.0" prefWidth="440.0" promptText="Sgu University" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="94.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="tf_PIN_SetUp" layoutX="30.0" layoutY="220.0" maxHeight="38.0" maxWidth="440.0" prefHeight="38.0" prefWidth="440.0" promptText="******" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="172.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="20.0" layoutY="219.0" prefHeight="22.0" prefWidth="440.0" text="Confirm PIN" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="220.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tf_Comfirm_PIN_SetUp" layoutX="20.0" layoutY="252.0" maxHeight="38.0" maxWidth="440.0" prefHeight="38.0" prefWidth="440.0" promptText="******" styleClass="round-layout" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="250.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+               </children>
+               <StackPane.margin>
+                  <Insets top="53.0" />
+               </StackPane.margin>
+               <styleClass>
+                  <String fx:value="popup" />
+                  <String fx:value="button_exit" />
+               </styleClass>
+            </AnchorPane>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>

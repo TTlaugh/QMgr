@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="540.0" minWidth="760.0" prefHeight="540.0" prefWidth="760.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Subject_controller">
+   <children>
+      <Separator layoutX="10.0" layoutY="67.0" prefHeight="1.0" prefWidth="960.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
+      <Label layoutX="260.0" layoutY="17.0" prefHeight="26.0" prefWidth="168.0" text="Subject management" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="13.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Button alignment="CENTER" layoutX="1183.0" layoutY="8.0" mnemonicParsing="false" onAction="#btn_newSubject_Hidden" prefHeight="32.0" prefWidth="115.0" styleClass="button-xanhdam" text="New subject" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Label alignment="TOP_LEFT" layoutX="220.0" layoutY="70.0" prefWidth="720.0" text="All subjects" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="70.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <FlowPane fx:id="flowpane_mainbody" layoutX="10.0" layoutY="10.0" prefHeight="440.0" prefWidth="760.0" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+         <padding>
+            <Insets left="20.0" right="8.0" />
+         </padding>
+      </FlowPane>
+      <StackPane fx:id="archive_NewSubject" layoutX="181.0" layoutY="53.0" visible="false" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="112.0">
+         <children>
+            <AnchorPane maxHeight="316.0" maxWidth="480.0" prefHeight="316.0" prefWidth="480.0" styleClass="popup">
+               <children>
+                  <Separator layoutX="113.0" layoutY="98.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0" />
+                  <Label layoutX="14.0" prefHeight="44.0" prefWidth="152.0" text="Archive subject" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="405.0" layoutY="6.0" mnemonicParsing="false" onAction="#btn_cancel_Subject" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="7.0">
+                     <graphic>
+                        <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../imgs/icons8-close-50.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Separator layoutX="123.0" layoutY="108.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="166.0" />
+                  <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="225.0" layoutY="55.0" pickOnBounds="true" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="223.0" AnchorPane.topAnchor="60.0">
+                     <image>
+                        <Image url="@../imgs/Screenshot_2024-10-30_172306-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="lb_Subject_Name_Archive" alignment="CENTER" layoutX="126.0" layoutY="87.0" prefHeight="24.0" prefWidth="480.0" text="Dai so tuyen tinh" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="96.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lb_Subject_ID_Archive" alignment="CENTER" layoutX="194.0" layoutY="131.0" prefHeight="26.0" prefWidth="92.0" style="-fx-background-radius: 10; -fx-background-color: #eaecf0;" text="ID: #GR01" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="193.0" AnchorPane.topAnchor="124.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="3.0" left="7.0" right="7.0" top="3.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lb_SubjectConfirm_Archive_SubjectManagement" layoutX="20.0" layoutY="177.0" prefHeight="22.0" prefWidth="440.0" text="To confirm, type &quot;Dai so tuyen tinh&quot; in the box below" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tf_Subject_ConfirmName_Archive" layoutX="20.0" layoutY="210.0" maxHeight="38.0" maxWidth="440.0" prefHeight="38.0" prefWidth="440.0" promptText="Dai so tuyen tinh" styleClass="round-layout" AnchorPane.bottomAnchor="62.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <Button alignment="CENTER" layoutX="20.0" layoutY="257.0" mnemonicParsing="false" onAction="#btn_cancel_Subject" prefHeight="32.0" prefWidth="214.0" styleClass="button-trang" text="Cancel" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" layoutX="231.0" layoutY="257.0" mnemonicParsing="false" onAction="#btn_archive_NewSubject" prefHeight="32.0" prefWidth="214.0" styleClass="button-do" text="Archive this subject" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </StackPane>
+      <StackPane fx:id="create_NewSubject" layoutX="181.0" layoutY="113.80000305175781" visible="false" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="173.0">
+         <children>
+            <AnchorPane maxHeight="194.0" maxWidth="480.0" prefHeight="194.0" prefWidth="480.0" styleClass="popup">
+               <children>
+                  <Separator layoutX="113.0" layoutY="98.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0" />
+                  <Label layoutX="14.0" prefHeight="44.0" prefWidth="168.0" text="Create a new subject" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="405.0" layoutY="6.0" mnemonicParsing="false" onAction="#btn_cancel_Subject" prefHeight="28.0" prefWidth="28.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #D0D5DD; -fx-cursor: hand;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="7.0">
+                     <graphic>
+                        <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../imgs/icons8-close-50.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Label layoutX="20.0" layoutY="177.0" prefHeight="22.0" prefWidth="440.0" text="Subject name" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tf_SubjectName_CreateSubject" layoutX="20.0" layoutY="210.0" maxHeight="38.0" maxWidth="440.0" prefHeight="38.0" prefWidth="440.0" promptText="Dai so tuyen tinh" styleClass="round-layout" AnchorPane.bottomAnchor="62.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <Button alignment="CENTER" layoutX="20.0" layoutY="257.0" mnemonicParsing="false" onAction="#btn_cancel_Subject" prefHeight="32.0" prefWidth="214.0" styleClass="button-trang" text="Cancel" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" layoutX="231.0" layoutY="257.0" mnemonicParsing="false" onAction="#btn_createSubject_NewSubject" prefHeight="32.0" prefWidth="214.0" styleClass="button-xanhdam" text="Create" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>

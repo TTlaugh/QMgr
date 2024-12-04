@@ -1,0 +1,7 @@
+/QuizzServer/target/
+/QuizzServer/dependency-reduced-pom.xml
+/QuizzServer/bin/
+/QuizzClient/target/
+/QuizzClient/dependency-reduced-pom.xml
+/QuizzClient/bin/
+/.metadata/
