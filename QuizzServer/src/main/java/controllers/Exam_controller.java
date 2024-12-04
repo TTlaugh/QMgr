@@ -520,7 +520,18 @@ public class Exam_controller implements Initializable {
 
         UIAnchorCurrent.setVisible(true);
 
-        lb_totalQuestionExam_EditExam.setText("Total 0 questions");
+        lb_totalQuestionBank_ExamManagement.setText("Total 0 questions");
+
+        lb_totalExamQuestion_ExamManagement.setText("Total 0 questions");
+
+        tableView_QuestionBank_ExamManagement.getItems().clear();
+
+        tableView_ExamQuestion_ExamManagement.getItems().clear();
+
+        tableView_ExamQuestion_ExamManagement
+                .setItems(loadQuestion_tableViewQuestionExam_QuestionManagement(listQuestions));
+
+        tableView_ExamQuestion_ExamManagement.getItems().clear();
 
         LoadComboBox_newExam();
 
@@ -595,6 +606,7 @@ public class Exam_controller implements Initializable {
 
     @FXML
     void btn_SelectQuestionBankToExamQues(ActionEvent event) {
+
         ObservableList<Question> questionSelectInQuestionBank = tableView_QuestionBank_ExamManagement
                 .getSelectionModel()
                 .getSelectedItems();
@@ -604,11 +616,11 @@ public class Exam_controller implements Initializable {
             return;
         }
 
-        tableView_ExamQuestion_ExamManagement
-                .setItems(loadQuestion_tableViewQuestionExam_QuestionManagement(questionSelectInQuestionBank));
+        tableView_ExamQuestion_ExamManagement.getItems().addAll(questionSelectInQuestionBank);
+        int total = tableView_ExamQuestion_ExamManagement.getItems().size();
 
         lb_totalExamQuestion_ExamManagement
-                .setText("Total " + tableView_ExamQuestion_ExamManagement.getItems().size() + " questions");
+                .setText("Total " + total + " questions");
 
     }
 
@@ -922,6 +934,8 @@ public class Exam_controller implements Initializable {
 
         setUIAnchorCurrent(this.AnchorPane_editExam_detailExam_ExamManagement);
 
+        ComboBox_Subject_EditExam_ExamMannagement.getItems().clear();
+
         LoadComboBox_AllExams(listSubjects);
 
         String examName = exam_Current_SubjectManagement.getName();
@@ -964,7 +978,7 @@ public class Exam_controller implements Initializable {
                     .setItems(loadQuestion_tableViewQuestionBank_EditExam(listQuestionsOfSubject));
 
             tableView_QuestionExam_EditExam
-                    .setItems(loadQuestion_tableViewQuestionExam_QuestionManagement(listQuestions_ExamDetail));
+                    .setItems(loadQuestion_tableViewQuestionExamEdit_QuestionManagement(listQuestions_ExamDetail));
         }
 
     }
@@ -1023,8 +1037,22 @@ public class Exam_controller implements Initializable {
 
         tableView_QuestionExam_EditExam.getItems().addAll(selectedItems);
 
+        // tableView_QuestionExam_EditExam
+        // .setItems(loadQuestion_tableViewQuestionExamEdit_QuestionManagement(selectedItems));
+
         int total = tableView_QuestionExam_EditExam.getItems().size();
+
         lb_totalQuestionExam_EditExam.setText("Total " + total + " questions");
+    }
+
+    public ObservableList<Question> loadQuestion_tableViewQuestionExamEdit_QuestionManagement(List<Question> list) {
+
+        ObservableList<Question> observableList = FXCollections.observableArrayList(list);
+
+        ID_Coulmn_QuestionExam_EditExam.setCellValueFactory(new PropertyValueFactory<Question, Integer>("questionId"));
+        Question_Coulmn_QuestonExam_EditExam
+                .setCellValueFactory(new PropertyValueFactory<Question, String>("content"));
+        return observableList;
     }
 
     @FXML
@@ -1648,6 +1676,7 @@ public class Exam_controller implements Initializable {
             Notification.Error("Error", "Keyword is too long");
             return;
         }
+
         int examId = exam_Current_SubjectManagement.getExamId();
 
         ArrayList<Submission> listSubmissions = hostExamManager.getListHostExamById(examId);

@@ -15,13 +15,13 @@
       <Separator layoutX="10.0" layoutY="67.0" prefHeight="1.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="52.0" />
       <Separator layoutX="213.0" maxWidth="1.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="198.0" AnchorPane.topAnchor="0.0" />
       <Separator layoutX="-23.0" layoutY="178.0" prefWidth="200.0" AnchorPane.bottomAnchor="127.0" AnchorPane.leftAnchor="0.0" />
-      <ComboBox layoutX="17.0" layoutY="86.0" prefHeight="38.0" prefWidth="176.0" promptText="Sgu University" styleClass="round-layout" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="12.0">
+      <ComboBox layoutX="17.0" layoutY="86.0" prefHeight="38.0" prefWidth="176.0" promptText="Sgu University" styleClass="round-layout" visible="false" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="12.0">
          <padding>
             <Insets left="10.0" right="10.0" />
          </padding>
       </ComboBox>
-      <Label layoutX="31.0" layoutY="10.0" prefHeight="19.0" prefWidth="63.0" text="Workspace" AnchorPane.bottomAnchor="96.0" AnchorPane.leftAnchor="78.5" />
-      <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="10.0" layoutY="11.0" pickOnBounds="true" AnchorPane.bottomAnchor="98.0" AnchorPane.leftAnchor="58.5">
+      <Label layoutX="31.0" layoutY="10.0" prefHeight="19.0" prefWidth="63.0" text="Workspace" visible="false" AnchorPane.bottomAnchor="96.0" AnchorPane.leftAnchor="78.5" />
+      <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="10.0" layoutY="11.0" pickOnBounds="true" visible="false" AnchorPane.bottomAnchor="98.0" AnchorPane.leftAnchor="58.5">
          <image>
             <Image url="@../imgs/icons8-bag-32.png" />
          </image>

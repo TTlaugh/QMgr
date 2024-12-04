@@ -552,11 +552,6 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="12.0" layoutY="265.0" text="Date submit" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="140.0">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
                   <Button alignment="CENTER" layoutY="333.0" mnemonicParsing="false" onAction="#btn_DeleteSubmissionDetail" prefHeight="32.0" prefWidth="208.0" styleClass="button-donhat" text="Delete submission" textFill="WHITE" AnchorPane.bottomAnchor="92.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -595,19 +590,18 @@
                      </padding>
                   </Label>
                   <Separator layoutY="130.0" prefWidth="200.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="128.0" />
-                  <Label alignment="CENTER_RIGHT" layoutX="22.0" layoutY="275.0" text="12/09/2023" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="140.0" />
-                  <Label layoutX="22.0" layoutY="275.0" text="Time taken" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="159.0">
+                  <Label layoutX="13.0" layoutY="142.0" text="Time taken" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="142.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lb_TimeTaken_SubDetail" alignment="CENTER_RIGHT" layoutX="32.0" layoutY="285.0" text="6 min" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="159.0" />
-                  <Label layoutX="32.0" layoutY="285.0" text="Score" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="178.0">
+                  <Label fx:id="lb_TimeTaken_SubDetail" alignment="CENTER_RIGHT" layoutX="172.0" layoutY="140.0" text="6 min" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="140.0" />
+                  <Label layoutX="14.0" layoutY="170.0" text="Score" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="170.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lb_Score_SubDetail" alignment="CENTER_RIGHT" layoutX="42.0" layoutY="295.0" text="50.0/100" textFill="#099250" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="178.0" />
+                  <Label fx:id="lb_Score_SubDetail" alignment="CENTER_RIGHT" layoutX="152.0" layoutY="168.0" text="50.0/100" textFill="#099250" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="168.0" />
                </children>
             </AnchorPane>
             <TableView fx:id="tableView_SubDetail" fixedCellSize="0.0" layoutX="20.0" layoutY="122.0" prefHeight="366.0" prefWidth="476.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="110.0">

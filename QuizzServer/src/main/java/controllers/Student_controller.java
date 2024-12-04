@@ -949,6 +949,14 @@ public class Student_controller implements Initializable {
         return observableList;
     }
 
+    /************* ✨ Codeium Command ⭐ *************/
+    /**
+     * Set data for TableView Search in Student Management
+     * 
+     * @param list list of Student
+     * @return ObservableList of Student
+     */
+    /****** 4550aefc-6302-48ec-a83e-f3b671cadcf7 *******/
     public ObservableList<Student> loadStudent_tableViewSearch_StudentManagement(List<Student> list) {
 
         observableList = FXCollections.observableArrayList(list);

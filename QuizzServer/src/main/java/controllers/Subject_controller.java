@@ -665,6 +665,7 @@ public class Subject_controller implements Initializable {
     // Func search subject
     @FXML
     void btn_SearchQuestion_SubjectManagement(ActionEvent event) {
+
         this.AnchorPane_SubjectDetailQuestion_SubjectManagement.setVisible(false);
         this.AnchorPane_ResultSearchQuestion_SubjectManagement.setVisible(true);
 
@@ -692,7 +693,20 @@ public class Subject_controller implements Initializable {
 
         table_Search_SubjectManagement.getItems().clear();
 
-        table_Search_SubjectManagement.setItems(loadQuestion_tableViewQuestion_QuestionManagement(listQuestion));
+        table_Search_SubjectManagement.setItems(loadQuestion_tableViewQuestionSearch_QuestionManagement(listQuestion));
+
+    }
+
+    public ObservableList<Question> loadQuestion_tableViewQuestionSearch_QuestionManagement(List<Question> list) {
+
+        observableList = FXCollections.observableArrayList(list);
+
+        ID_TableColumnSearch_subjectDetail
+                .setCellValueFactory(new PropertyValueFactory<Question, Integer>("questionId"));
+        Question_TableColumnSearch_subjectDetail
+                .setCellValueFactory(new PropertyValueFactory<Question, String>("content"));
+
+        return observableList;
 
     }
 
