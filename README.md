@@ -39,6 +39,7 @@ Building from source requires Java-17, [Maven](https://maven.apache.org), MySQL/
 > To generate database, please run the sql script `QuizzServerInitTableMySQL.sql` via mysql-cli or mariadb-cli
 
 ## Previews
+Hover over image to view tooltip for more details
 <p align="center">
   <img align="center" width="49%" src="https://raw.githubusercontent.com/TTlaugh/QMgr/master/assets/client1.png" alt="" title="Students have to fill their ID, IP address + port of the Teacher's server" />
   <img align="center" width="49%" src="https://raw.githubusercontent.com/TTlaugh/QMgr/master/assets/client2.png" alt="" title="Students doing the exam" /> <br/> <br/>
