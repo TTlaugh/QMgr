@@ -23,11 +23,22 @@ Quizz is written in Java. It's free, open-source and cross-platform software.
   - Join the test and hope it's not too hard
 
 ## Installation
+### Dependencies
+- Java-17
+- MySQL/MariaDB
+
+> ##### Setup Database:
+> - Username: `root`
+> - Password: `123456789`
+> - URL: `localhost:3306`
+>
+> To generate database, please run the sql script `QuizzServerInitTableMySQL.sql` via mysql-cli or mariadb-cli
+
 ### Download
 See [releases](https://github.com/TTlaugh/Quizz/releases) for pre-built binaries.
 
 ### Build from source
-Building from source requires Java-17, [Maven](https://maven.apache.org), MySQL/MariaDB
+Building from source requires Java-17, [Maven](https://maven.apache.org)
 
 1. Clone this repo
 2. Then open **QuizzServer** if you want to build *Server App* or open **QuizzClient** to build *Client App* and run this command:
@@ -35,8 +46,6 @@ Building from source requires Java-17, [Maven](https://maven.apache.org), MySQL/
     mvn package
     ```
 3. The executable will be generated in **bin** folder named **QuizzServer.jar** or **QuizzClient.jar**
-
-> To generate database, please run the sql script `QuizzServerInitTableMySQL.sql` via mysql-cli or mariadb-cli
 
 ## Previews
 🔍 Hover over image to view tooltip for more details.

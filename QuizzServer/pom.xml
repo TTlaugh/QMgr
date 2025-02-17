@@ -9,8 +9,8 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <!--Variables-->
-        <class.main>application.Main</class.main>
-        <class.launcher>application.Launcher</class.launcher>
+        <class.main>app.Main</class.main>
+        <class.launcher>app.Launcher</class.launcher>
         <java.path>/usr/lib/jvm/java-1.17.0-openjdk-amd64/bin/java</java.path>
     </properties>
 
